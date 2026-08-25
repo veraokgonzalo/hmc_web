@@ -193,7 +193,70 @@
         }
       },
       "block_order": ["heading", "nav"]
+    },
+    "timer_offers_section": {
+      "type": "timer-offers",
+      "settings": {
+        "section_width": "page",
+        "gap": 16,
+        "vertical_padding": 64,
+        "horizontal_padding": 32,
+        "background_color": "transparent"
+      },
+      "blocks": {
+        "timer": {
+          "type": "timer",
+          "settings": {
+            "alignment": "center",
+            "alignment_vertical": "center",
+            "gap": 16,
+            "vertical_padding": 60,
+            "horizontal_padding": 32,
+            "background_color": "#FFFFFF",
+            "text_color": "#000000"
+          },
+          "blocks": {
+            "heading": {
+              "type": "heading",
+              "settings": {
+                "title": "Oferta por tiempo limitado",
+                "size": "h4"
+              }
+            },
+            "text": {
+              "type": "text",
+              "settings": {
+                "text": "Aprovechá antes de que termine."
+              }
+            },
+            "counter": {
+              "type": "timer-counter",
+              "settings": {
+                "background_color": "#3FAA47",
+                "text_color": "#FFFFFF"
+              }
+            },
+            "button": {
+              "type": "button",
+              "settings": {
+                "label": "Ver ofertas",
+                "link": "#",
+                "variant": "primary"
+              }
+            }
+          },
+          "block_order": ["heading", "text", "counter", "button"]
+        },
+        "products": {
+          "type": "timer-products",
+          "settings": {
+            "title": "Productos en oferta",
+            "products_source": { "kind": "collection", "id": "timer_offers" }
+          }
+        }
+      },
+      "block_order": ["timer", "products"]
     }
   },
-  "order": ["slideshow", "value_props", "featured_categories_real"]
+  "order": ["slideshow", "value_props", "featured_categories_real", "timer_offers_section"]
 }
