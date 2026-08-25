@@ -102,6 +102,8 @@
 {% elseif section_select == 'categories' %}
 
 	{#  **** Categories banners ****  #}
+	{{ component('nubesdk-slot', { type: 'before_section_banner_categories' }) }}
+
 	<section class="section-banners-home position-relative" data-store="home-banner-categories" data-transition="fade-in-up">
 		{% if show_help or (show_component_help and not has_banners) %}
 			{% include 'snipplets/defaults/home/banners_help.tpl' with { banner_name: 'category', banner_title: 'Categoría' | translate, help_text: 'Podés destacar categorías de tu tienda desde' | translate, section_name: 'Banners de categorías' | translate }  %}
@@ -109,6 +111,8 @@
 			{% include 'snipplets/home/home-banners.tpl' with {'has_banner': true} %}
 		{% endif %}
 	</section>
+
+	{{ component('nubesdk-slot', { type: 'after_section_banner_categories' }) }}
 
 {% elseif section_select == 'main_product' %}
 
@@ -145,6 +149,9 @@
 {% elseif section_select == 'promotional' %}
 
 	{#  **** Promotional banners ****  #}
+
+	{{ component('nubesdk-slot', { type: 'before_section_banner_promotional' }) }}
+
 	<section class="section-banners-home position-relative" data-store="home-banner-promotional" data-transition="fade-in-up">
 		{% if show_help or (show_component_help and not has_promotional_banners) %}
 			{% include 'snipplets/defaults/home/banners_help.tpl' with { banner_name: 'promotional', banner_title: 'Promoción' | translate, help_text: 'Podés mostrar tus promociones desde' | translate, section_name: 'Banners promocionales' | translate }  %}
@@ -153,9 +160,13 @@
 		{% endif %}
 	</section>
 
+	{{ component('nubesdk-slot', { type: 'after_section_banner_promotional' }) }}
+
 {% elseif section_select == 'news_banners' %}
 
 	{#  **** News banners ****  #}
+	{{ component('nubesdk-slot', { type: 'before_section_banner_news' }) }}
+
 	<section class="section-banners-home position-relative" data-store="home-banner-news" data-transition="fade-in-up">
 		{% if show_help or (show_component_help and not has_news_banners) %}
 			{% include 'snipplets/defaults/home/banners_help.tpl' with { banner_name: 'news', banner_title: 'Nuevo' | translate, help_text: 'Podés mostrar tus últimas novedades desde' | translate, section_name: 'Banners de novedades' | translate }  %}
@@ -163,6 +174,8 @@
 			{% include 'snipplets/home/home-banners.tpl' with {'has_banner_news': true} %}
 		{% endif %}
 	</section>
+
+	{{ component('nubesdk-slot', { type: 'after_section_banner_news' }) }}
 
 {% elseif section_select == 'modules' %}
 

@@ -1458,15 +1458,13 @@ footer {
 /* // Totals */
 
 .cart-subtotal{
-  float: right;
   clear: both;
-  margin: 0 0 10px 0;
 }
 .total-promotions-row{
   display: flex;
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  margin-bottom: 15px;
+  margin-bottom: 8px;
 }
 
 .cart-promotion-detail,
@@ -1487,6 +1485,7 @@ footer {
   width: auto;
   max-width: none;
   text-align: right;
+  color: var(--accent-color);
 }
 
 /*============================================================================

@@ -1760,6 +1760,13 @@ Carrito de compras
 	subtitle
 		subtitle = <a target='_blank' href='https://ayuda.tiendanube.com/es_AR/123159-detalle-del-producto/como-seleccionar-los-productos-relacionados-en-tiendanube' class='js-checkbox-help-link'>Más sobre productos relacionados</a>
 	title
+		title = Cupones de descuento
+	checkbox
+		name = cart_coupon
+		description = Permitir que tus clientes apliquen un cupón de descuento en el carrito
+	subtitle
+		subtitle = <a target='_blank' href='https://ayuda.tiendanube.com/es_AR/123465-cupones-y-promociones/que-son-los-cupones-de-descuento' class='js-checkbox-help-link'>Más sobre cupones de descuento</a>
+	title
 		title = Formas de entrega
 	checkbox_global
 		name = shipping_calculator_cart_page

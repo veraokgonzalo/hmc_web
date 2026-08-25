@@ -9,7 +9,7 @@
 {% set has_news_banners = settings.banner_news and settings.banner_news is not empty %}
 {% set has_featured_banners =  settings.banner_01_show or settings.banner_02_show or settings.banner_03_show or settings.banner_04_show %}
 {% set has_image_and_text_module = settings.module and settings.module is not empty %}
-{% set has_brands = true %}
+{% set has_brands = settings.brands and settings.brands is not empty %}
 {% set has_informative_banners = settings.banner_services and (settings.banner_services_01_title or settings.banner_services_02_title or settings.banner_services_03_title or settings.banner_services_01_description or settings.banner_services_02_description or settings.banner_services_03_description) %}
 {% set has_instafeed = settings.show_instafeed and store.instagram and store.hasInstagramToken() %}
 {% set has_institutional_message = settings.institutional_message or settings.institutional_text %}
@@ -36,11 +36,6 @@
         {% endif %}
 
     {% endfor %}
-
-    {# Ensure brands marquee is rendered if not explicitly ordered #}
-    {% if 'brands' not in newArray %}
-        {% include 'snipplets/home/home-brands.tpl' %}
-    {% endif %}
 
     {#  **** Hidden Sections ****  #}
     {% if show_component_help %}

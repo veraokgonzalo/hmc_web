@@ -1,6 +1,5 @@
-{# Define conditions to show shipping calculator and store branches on cart #}
+{# Define conditions to show store branches on cart #}
 
-{% set show_calculator_on_cart = settings.shipping_calculator_cart_page and store.has_shipping %}
 {% set show_cart_fulfillment = settings.shipping_calculator_cart_page and (store.has_shipping or store.branches) %}
 
 {{ component('nubesdk-slot', { type: "before_cart_shipping_options" }) }}
@@ -38,25 +37,6 @@
           {% include "snipplets/shipping/branches.tpl" with {'product_detail': false} %}
         {% endif %}
       </div>
-
-      {% if not cart_page and show_calculator_on_cart %}
-        <div id="shipping-cost-container" class="js-fulfillment-info js-visible-on-cart-filled js-shipping-cost-table h6 font-body font-weight-normal my-3 row no-gutters" {% if cart.items_count == 0 or (not cart.has_shippable_products) %}style="display:none;"{% endif %}>
-          <span class="col-auto pl-md-0">{{ 'Envío:' | translate }}</span>
-          <span id="shipping-cost" class="col text-right opacity-40 pr-md-0">
-            {{ "Calculalo para verlo" | translate }}
-          </span>
-          <span class="js-calculating-shipping-cost col text-right opacity-40 pr-md-0" style="display: none">
-            {{ "Calculando" | translate }}...
-          </span>
-          <span class="js-shipping-cost-empty col text-right opacity-40 pr-md-0" style="display: none">
-            {{ "Calculalo para verlo" | translate }}
-          </span>
-        </div>
-        <div class="js-shipping-discount-row row no-gutters mb-3 font-weight-normal text-accent" data-store="cart-shipping-discount" data-component="cart.shipping_discount" style="display:none;">
-          <span class="col-auto pl-md-0 text-uppercase">{{ "our_components.promotions.shipping_discount_row" | tt }}</span>
-          <span class="js-shipping-discount-amount col text-right pr-md-0"></span>
-        </div>
-      {% endif %}
     </div>
   </div>
 {% endif %}

@@ -4861,3 +4861,18 @@ es "Usá este texto para compartir información de tu negocio, dar la bienvenida
 pt "Use este texto para compartilhar informações da sua loja, dar boas vindas aos clientes ou para dizer o quão incrível são os seus produtos."
 en "Use this text to share information about your business, welcome your customers or tell how amazing your products are."
 es_mx "Usa este texto para compartir información de tu negocio, dar la bienvenida a tus clientes o para contar lo increíble que son tus productos."
+
+es "Cupones de descuento"
+pt "Cupons de desconto"
+en "Discount coupons"
+es_mx "Cupones de descuento"
+
+es "Permitir que tus clientes apliquen un cupón de descuento en el carrito"
+pt "Permitir que seus clientes apliquem um cupom de desconto no carrinho"
+en "Allow your customers to apply a discount coupon in the cart"
+es_mx "Permitir que tus clientes apliquen un cupón de descuento en el carrito"
+
+es "<a target='_blank' href='https://ayuda.tiendanube.com/es_AR/123465-cupones-y-promociones/que-son-los-cupones-de-descuento' class='js-checkbox-help-link'>Más sobre cupones de descuento</a>"
+pt "<a target='_blank' href='https://atendimento.nuvemshop.com.br/cupons/como-criar-cupons-de-desconto' class='js-checkbox-help-link'>Mais sobre cupons de desconto</a>"
+en "<a target='_blank' href='https://ayuda.tiendanube.com/es_AR/123465-cupones-y-promociones/que-son-los-cupones-de-descuento' class='js-checkbox-help-link'>More about discount coupons</a>"
+es_mx "<a target='_blank' href='https://ayuda.tiendanube.com/es_MX/123465-cupones-y-promociones/que-son-los-cupones-de-descuento' class='js-checkbox-help-link'>Más sobre cupones de descuento</a>"

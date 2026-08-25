@@ -55,10 +55,10 @@
             {{ component('nubesdk-slot', { type: "after_line_items" }) }}
 
             <div class="row justify-content-between mt-4">
-                <div class="col-md-3">
+                <div class="col-md-4">
                     {% include "snipplets/shipping/cart-fulfillment.tpl" with {'cart_page': true} %}
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     {% include "snipplets/cart-totals.tpl" with {'cart_page': true} %}
                 </div>
             </div>

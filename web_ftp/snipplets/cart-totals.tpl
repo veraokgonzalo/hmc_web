@@ -2,9 +2,6 @@
 
 {% set has_free_shipping = cart.free_shipping.cart_has_free_shipping or cart.free_shipping.min_price_free_shipping.min_price %}
 {% set has_free_shipping_bar = has_free_shipping and cart.free_shipping.min_price_free_shipping.min_price_raw > 0 %}
-{% set price_without_taxes_container_classes = "row opacity-50 mt-1" %}
-{% set price_without_taxes_label_classes = "col-auto" %}
-{% set price_without_taxes_price_classes = "col text-right" %}
 
 {% set gift_progress_parameters = {
   show_check: false,
@@ -19,6 +16,10 @@
     fill: 'bar-progress-active transition-soft',
   }
 } %}
+
+{% set class_col_text = "col text-right" %}
+{% set class_col_text_padding = class_col_text ~ " pr-md-0" %}
+{% set class_col_text_padding_opacity = class_col_text_padding ~ " opacity-40" %}
 
 {% if cart_page %}
   <div class="d-block d-md-none">
@@ -42,100 +43,14 @@
 
 {% endif %}
 
-{# IMPORTANT Do not remove this hidden subtotal, it is used by JS to calculate cart total #}
-<div class="js-subtotal-price subtotal-price hidden" data-priceraw="{{ cart.total }}"></div>
-
-{# Used to assign currency to total #}
-<div id="store-curr" class="hidden">{{ cart.currency }}</div>
-
 {# Define conditions to show shipping calculator and store branches on cart #}
 
 {% set show_calculator_on_cart = settings.shipping_calculator_cart_page and store.has_shipping %}
 {% set show_cart_fulfillment = settings.shipping_calculator_cart_page and (store.has_shipping or store.branches) %}
 
-{# Cart subtotals for cart popup #}
-
-{% if not cart_page %}
-
-  {# Cart popup subtotal #}
-
-  <div class="mb-3">
-    <div class="js-visible-on-cart-filled h5 row font-big font-weight-normal" {% if cart.items_count == 0 %}style="display:none;"{% endif %} data-store="cart-subtotal">
-      <span {% if not cart_page %}class="col-7"{% endif %}>
-        {{ "Subtotal" | translate }}
-        
-        <small class="js-subtotal-shipping-wording" {% if not (cart.has_shippable_products or show_calculator_on_cart) %}style="display: none"{% endif %}>{{ " (sin envío)" | translate }}</small>
-        :
-      </span>
-      <span class="js-ajax-cart-total js-cart-subtotal {% if not cart_page %}col{% endif %} text-right" data-priceraw="{{ cart.subtotal }}" data-component="cart.subtotal" data-component-value={{ cart.subtotal }}>{{ cart.subtotal | money }}</span>
-    </div>
-
-    {{ component('price-without-taxes', {
-        location: 'cart',
-        container_classes: price_without_taxes_container_classes,
-        text_classes: {
-            label: price_without_taxes_label_classes,
-            price: price_without_taxes_price_classes,
-        },
-      })
-    }}
-  </div>
-
-  {# Cart popup promos #}
-
-  <div class="js-total-promotions text-accent">
-    <span class="js-promo-discount" style="display:none;"> {{ "Descuento" | translate }}</span>
-    <span class="js-promo-in" style="display:none;">{{ "en" | translate }}</span>
-    <span class="js-promo-all" style="display:none;">{{ "todos los productos" | translate }}</span>
-    <span class="js-promo-buying" style="display:none;"> {{ "comprando" | translate }}</span>
-    <span class="js-promo-units-or-more" style="display:none;"> {{ "o más" | translate }}</span>
-    <span class="js-cart-discount-automatic" style="display:none;">{{ "Descuento" | translate }}</span>
-    <span class="js-cart-discount-with-coupon" style="display:none;">{{ "Descuento del cupón" | translate }}</span>
-    {% for promotion in cart.promotional_discount.promotions_applied %}
-      {% if not promotion.is_subscription_promotion %}
-        {% if(promotion.scope_value_id) %}
-          {% set id = promotion.scope_value_id %}
-        {% else %}
-          {% set id = 'all' %}
-        {% endif %}
-          <span class="js-total-promotions-detail-row row mb-3" id="{{ id }}">
-            <span class="col pr-3">
-              {% if promotion.discount_script_type != "custom" %}
-                {% if promotion.discount_script_type == "NAtX%off" %}
-                  {{ promotion.selected_threshold.discount_decimal_percentage * 100 }}% OFF
-                {% elseif promotion.isBuyXPayY %}
-                  {{ promotion.buy }}x{{ promotion.pay }}
-                {% elseif promotion.isCrossSelling %}
-                  {{ "Descuento" | translate }}
-                {% elseif promotion.isCartDiscount %}
-                  {% if promotion.coupon_activated %}{{ "Descuento del cupón" | translate }}{% else %}{{ "Descuento" | translate }}{% endif %}
-                  {% if promotion.cart_discount.isPercentage %}{{ promotion.cart_discount.value | round }}%{% else %}{{ promotion.total_discount_amount_short }}{% endif %}
-                {% else %}
-                  {{ promotion.discount_script_type }}
-                {% endif %}
-
-                {% if not promotion.isCartDiscount %}
-                  {{ "en" | translate }} {% if id == 'all' %}{{ "todos los productos" | translate }}{% else %}{{ promotion.scope_value_name }}{% endif %}
-                {% endif %}
-
-                {% if promotion.discount_script_type == "NAtX%off" %}
-                  <span>{{ "Comprando {1} o más" | translate(promotion.selected_threshold.quantity) }}</span>
-                {% endif %}
-              {% else %}
-                {{ promotion.scope_value_name }}
-              {% endif %}
-              :
-            </span>
-            <span class="col-auto text-right">-{{ promotion.total_discount_amount_short }}</span>
-          </span>
-      {% endif %}
-    {% endfor %}
-  </div>
-{% endif %}
-
 {% if cart_page %}
 
-  {# Cart page subtotal #}
+  {# Cart page: sticky summary wrapper #}
 
   <div id="cart-sticky-summary" class="position-sticky-md cart-page-totals">
     <div class="d-none d-md-block">
@@ -150,97 +65,6 @@
       </div>
     {% endif %}
 
-    <div class="mb-3">
-      <div class="js-visible-on-cart-filled h5 row no-gutters font-big font-weight-normal" {% if cart.items_count == 0 %}style="display:none;"{% endif %} data-store="cart-subtotal">
-        <span class="col-auto pl-md-0">
-          {{ "Subtotal" | translate }}:
-        </span>
-        <span class="js-ajax-cart-total js-cart-subtotal col text-right pr-md-0" data-priceraw="{{ cart.subtotal }}">{{ cart.subtotal | money }}</span>
-      </div>
-
-      {{ component('price-without-taxes', {
-          location: 'cart',
-          container_classes: price_without_taxes_container_classes,
-          text_classes: {
-              label: price_without_taxes_label_classes,
-              price: price_without_taxes_price_classes,
-          },
-        })
-      }}
-    </div>
-
-
-    {# Cart page promos #}
-
-    <div class="js-total-promotions text-accent">
-      <span class="js-promo-discount" style="display:none;"> {{ "Descuento" | translate }}</span>
-      <span class="js-promo-in" style="display:none;">{{ "en" | translate }}</span>
-      <span class="js-promo-all" style="display:none;">{{ "todos los productos" | translate }}</span>
-      <span class="js-promo-buying" style="display:none;"> {{ "comprando" | translate }}</span>
-      <span class="js-promo-units-or-more" style="display:none;"> {{ "o más" | translate }}</span>
-      <span class="js-cart-discount-automatic" style="display:none;">{{ "Descuento" | translate }}</span>
-      <span class="js-cart-discount-with-coupon" style="display:none;">{{ "Descuento del cupón" | translate }}</span>
-      {% for promotion in cart.promotional_discount.promotions_applied %}
-        {% if not promotion.is_subscription_promotion %}
-          {% if(promotion.scope_value_id) %}
-            {% set id = promotion.scope_value_id %}
-          {% else %}
-            {% set id = 'all' %}
-          {% endif %}
-            <span class="js-total-promotions-detail-row row no-gutters mb-3" id="{{ id }}">
-              <span class="col pr-3">
-                {% if promotion.discount_script_type != "custom" %}
-                  {% if promotion.discount_script_type == "NAtX%off" %}
-                    {{ promotion.selected_threshold.discount_decimal_percentage * 100 }}% OFF
-                  {% elseif promotion.isBuyXPayY %}
-                    {{ promotion.buy }}x{{ promotion.pay }}
-                  {% elseif promotion.isCrossSelling %}
-                    {{ "Descuento" | translate }}
-                  {% elseif promotion.isCartDiscount %}
-                    {% if promotion.coupon_activated %}{{ "Descuento del cupón" | translate }}{% else %}{{ "Descuento" | translate }}{% endif %}
-                    {% if promotion.cart_discount.isPercentage %}{{ promotion.cart_discount.value | round }}%{% else %}{{ promotion.total_discount_amount_short }}{% endif %}
-                  {% else %}
-                    {{ promotion.discount_script_type }}
-                  {% endif %}
-
-                  {% if not promotion.isCartDiscount %}
-                    {{ "en" | translate }} {% if id == 'all' %}{{ "todos los productos" | translate }}{% else %}{{ promotion.scope_value_name }}{% endif %}
-                  {% endif %}
-
-                  {% if promotion.discount_script_type == "NAtX%off" %}
-                    <span>{{ "Comprando {1} o más" | translate(promotion.selected_threshold.quantity) }}</span>
-                  {% endif %}
-                {% else %}
-                  {{ promotion.scope_value_name }}
-                {% endif %}
-                :
-              </span>
-              <span class="col-auto text-right pr-md-0">-{{ promotion.total_discount_amount_short }}</span>
-            </span>
-        {% endif %}
-      {% endfor %}
-    </div>
-
-    {# Cart page shipping costs #}
-
-    {% if show_calculator_on_cart %}
-      <div id="shipping-cost-container" class="js-fulfillment-info js-visible-on-cart-filled js-shipping-cost-table h6 font-body font-weight-normal mb-3 row no-gutters" {% if cart.items_count == 0 or (not cart.has_shippable_products) %}style="display:none;"{% endif %}>
-        <span class="col-auto pl-md-0">{{ 'Envío:' | translate }}</span>
-        <span id="shipping-cost" class="col text-right opacity-40 pr-md-0">
-          {{ "Calculalo para verlo" | translate }}
-        </span>
-        <span class="js-calculating-shipping-cost col text-right opacity-40 pr-md-0" style="display: none">
-          {{ "Calculando" | translate }}...
-        </span>
-        <span class="js-shipping-cost-empty col text-right opacity-40 pr-md-0" style="display: none">
-          {{ "Calculalo para verlo" | translate }}
-        </span>
-      </div>
-      <div class="js-shipping-discount-row row no-gutters mb-3 font-weight-normal text-accent" data-store="cart-shipping-discount" data-component="cart.shipping_discount" style="display:none;">
-        <span class="col-auto pl-md-0 text-uppercase">{{ "our_components.promotions.shipping_discount_row" | tt }}</span>
-        <span class="js-shipping-discount-amount col text-right pr-md-0"></span>
-      </div>
-    {% endif %}
 {% else %}
 
   {# Cart fulfillment #}
@@ -248,34 +72,74 @@
   {% include "snipplets/shipping/cart-fulfillment.tpl" %}
 {% endif %}
 
-    {{ component('nubesdk-slot', { type: "after_cart_summary" }) }}
-  
-    {# Cart page and popup total #}
 
-    <div class="js-cart-total-container js-visible-on-cart-filled" {% if cart.items_count == 0 %}style="display:none;"{% endif %} data-store="cart-total">
-      <div class="h2 row {% if cart_page %}no-gutters{% endif %} font-huge mb-3">
-        <span class="col-auto {% if cart_page %}pl-md-0{% endif %}">{{ "Total" | translate }}:</span>
-        <span class="js-cart-total {% if cart.free_shipping.cart_has_free_shipping %}js-free-shipping-achieved{% endif %} {% if cart.shipping_data.selected %}js-cart-saved-shipping{% endif %} col text-right {% if cart_page %}pr-md-0{% endif %}" data-component="cart.total" data-component-value={{ cart.total }}>{{ cart.total | money }}</span>
-        <span class="col-12 {% if cart_page %}pr-md-0{% endif %}">
+    {# Coupon input #}
 
-          {{ component('payment-discount-price', {
-              visibility_condition: settings.payment_discount_price,
-              location: 'cart',
-              container_classes: 'font-small mt-1 text-right',
-            }) 
-          }}
+    {% if settings.cart_coupon %}
+      <div class="js-visible-on-cart-filled mb-3" {% if cart.items_count == 0 %}style="display:none;"{% endif %}>
+        {{ component('coupon-input', {
+          label_custom_icon: include('snipplets/svg/tag.tpl', { svg_custom_class: 'icon-inline svg-icon-text mr-2 align-middle' }),
+          toggle_inactive_custom_icon: include('snipplets/svg/chevron-down.tpl', { svg_custom_class: 'icon-inline svg-icon-text' }),
+          toggle_active_custom_icon: include('snipplets/svg/chevron-up.tpl', { svg_custom_class: 'icon-inline svg-icon-text' }),
+          spinner_custom_icon: include('snipplets/svg/spinner-third.tpl', { svg_custom_class: 'icon-inline icon-spin icon-md ml-2' }),
+          container_classes: {
+            container: 'mb-3',
+            toggle: 'd-flex align-items-center justify-content-between w-100',
+            toggle_label: 'd-flex align-items-center',
+            label: 'font-small',
+            actions: 'mt-2',
+            applied_row: 'd-flex align-items-center justify-content-between',
+            applied_code: 'mr-4 font-body',
+            remove_button: 'btn btn-link font-small float-right',
+            form: 'form-group mb-0',
+            input_wrapper: 'form-control-container d-flex',
+            input: 'form-control',
+            apply_button: 'btn btn-default col-auto ml-2 px-3',
+            error: 'alert alert-danger mb-0 mt-2',
+          }
+        }) }}
 
-          {% if not settings.payment_discount_price %}
-            {{ component('installments', {'location': 'cart', 'short_wording' : true, container_classes: { installment: "font-small mt-1 text-right"}}) }}
-          {% endif %}
-        </span>
+        {# Divider between coupon input and subtotal #}
+        <div class="divider"></div>
       </div>
+    {% endif %}
 
-      {# IMPORTANT Do not remove this hidden total, it is used by JS to calculate cart total #}
-      <div class='total-price hidden'>
-        {{ "Total" | translate }}: {{ cart.total | money }}
-      </div>
-    </div>
+    {# Cart totals #}
+
+    {{ component('cart-totals', {
+        shipping_enabled: show_calculator_on_cart,
+        shipping_discount_row_enabled: true,
+        payment_discount_price_enabled: settings.payment_discount_price,
+        installments_enabled: not settings.payment_discount_price,
+        totals_divider: false,
+        text_classes: {
+          subtotal: 'h5 row font-big font-weight-normal' ~ (cart_page ? ' no-gutters'),
+          subtotal_label: cart_page ? 'col-auto pl-md-0' : 'col-7',
+          subtotal_price: cart_page ? class_col_text_padding : class_col_text,
+          price_without_taxes: 'row opacity-50 pb-2',
+          price_without_taxes_label: 'col-auto',
+          price_without_taxes_price: class_col_text,
+          promotions: 'mt-2',
+          discounts_row: 'row no-gutters mb-2',
+          discounts_label: 'col pr-3',
+          discounts_price: 'col-auto text-right text-accent',
+          shipping_costs: 'h6 font-body font-weight-normal mb-2 row no-gutters',
+          shipping_costs_label: 'col-auto pl-md-0',
+          shipping_costs_price: class_col_text_padding_opacity,
+          shipping_costs_calculating: class_col_text_padding_opacity,
+          shipping_costs_empty: class_col_text_padding_opacity,
+          shipping_discount_row: 'row no-gutters mb-3 font-weight-normal text-accent',
+          shipping_discount_label: 'col-auto pl-md-0 text-uppercase',
+          shipping_discount_price: class_col_text_padding,
+          total: 'h2 row font-huge mb-3' ~ (cart_page ? ' no-gutters'),
+          total_label: 'col-auto' ~ (cart_page ? ' pl-md-0'),
+          total_price: class_col_text ~ (cart_page ? ' pr-md-0'),
+          payment_discount_and_installments: 'h2 col-12 mb-3 px-0',
+          payment_discount_price: 'font-small mt-1 text-right',
+          installments: 'font-small mt-1 text-right',
+        },
+      })
+    }}
 
     {{ component('nubesdk-slot', { type: "before_go_to_checkout" }) }}
 
@@ -327,7 +191,7 @@
     </div>
 
     {{ component('nubesdk-slot', { type: "after_go_to_checkout" }) }}
-    
+
 {% if cart_page %}
   {# End of sticky module #}
   </div>
