@@ -6,229 +6,87 @@
         "autoplay": false
       },
       "blocks": {
-        "slide_1": {
+        "slide_offers": {
           "type": "slide",
           "settings": {
             "alignment": "center",
             "gap": 16,
             "vertical_padding": 32,
             "horizontal_padding": 32,
-            "text_color": "#FFFF00"
+            "text_color": "#FFFFFF",
+            "show_overlay": true,
+            "overlay_color": "#000000",
+            "overlay_opacity": 30
           },
           "blocks": {
             "heading": {
               "type": "heading",
               "settings": {
-                "title": "Título",
-                "size": "custom",
-                "custom_font_size": 118,
-                "custom_mobile_font_size": 90,
-                "mobile_font_size": true
-              }
-            },
-            "button": {
-              "type": "button",
-              "settings": {
-                "label": "Ver más",
-                "variant": "primary",
-                "size": "big"
-              }
-            }
-          },
-          "block_order": [
-            "heading",
-            "button"
-          ]
-        },
-        "slide_2": {
-          "type": "slide",
-          "settings": {
-            "alignment": "center",
-            "gap": 16,
-            "vertical_padding": 32,
-            "horizontal_padding": 32,
-            "text_color": "#FFFF00"
-          },
-          "blocks": {
-            "heading": {
-              "type": "heading",
-              "settings": {
-                "title": "Título",
-                "size": "custom",
-                "custom_font_size": 118,
-                "custom_mobile_font_size": 90,
-                "mobile_font_size": true
+                "title": "Ofertas de temporada",
+                "size": "h1"
               }
             },
             "text": {
               "type": "text",
               "settings": {
-                "text": "Descripción de la diapositiva",
+                "text": "Descuentos en herramientas y equipos seleccionados.",
                 "size": "paragraph_big"
               }
             },
             "button": {
               "type": "button",
               "settings": {
-                "label": "Ver más",
+                "label": "Ver ofertas",
+                "link": "#",
                 "variant": "primary",
                 "size": "big"
               }
             }
           },
-          "block_order": [
-            "heading",
-            "text",
-            "button"
-          ]
-        }
-      },
-      "block_order": [
-        "slide_1",
-        "slide_2"
-      ]
-    },
-    "featured_products_1": {
-      "type": "product-list",
-      "settings": {
-        "alignment": "center",
-        "section_width": "page",
-        "gap": 20,
-        "vertical_padding": 64
-      },
-      "blocks": {
-        "header_group": {
-          "type": "group",
+          "block_order": ["heading", "text", "button"]
+        },
+        "slide_institucional": {
+          "type": "slide",
           "settings": {
-            "direction": "row",
             "alignment": "center",
-            "alignment_vertical": "center"
+            "gap": 16,
+            "vertical_padding": 32,
+            "horizontal_padding": 32,
+            "text_color": "#FFFFFF",
+            "show_overlay": true,
+            "overlay_color": "#000000",
+            "overlay_opacity": 30
           },
           "blocks": {
             "heading": {
               "type": "heading",
               "settings": {
-                "title": "Tu título acá",
-                "size": "h5"
+                "title": "Todo lo que mueve tu obra, tu campo, tu casa o tu negocio",
+                "size": "h1"
               }
             },
-            "view_all_button": {
-              "type": "view-all-button",
+            "text": {
+              "type": "text",
               "settings": {
-                "label": "Ver más",
-                "variant": "secondary"
-              }
-            }
-          },
-          "block_order": [
-            "heading",
-            "view_all_button"
-          ]
-        },
-        "products": {
-          "type": "products",
-          "settings": {
-            "products_source": null,
-            "format": "slider",
-            "columns": "4",
-            "columns_mobile": "1"
-          }
-        }
-      },
-      "block_order": [
-        "header_group",
-        "products"
-      ]
-    },
-    "banners_grid_3_vertical": {
-      "type": "banners",
-      "settings": {
-        "format": "grid",
-        "columns": "2",
-        "columns_mobile": "1",
-        "section_width": "page",
-        "banner_aspect_ratio": "original",
-        "gap": 16,
-        "vertical_padding": 0,
-        "horizontal_padding": 0
-      },
-      "blocks": {
-        "banner_1": {
-          "type": "banner",
-          "settings": {
-            "text_outside": false,
-            "alignment": "center",
-            "alignment_vertical": "center",
-            "gap": 8,
-            "vertical_padding": 24,
-            "horizontal_padding": 24,
-            "text_color": "#FFFF00"
-          },
-          "blocks": {
-            "heading": {
-              "type": "heading",
-              "settings": {
-                "title": "Título",
-                "size": "h1"
+                "text": "Respaldo técnico y asesoramiento en cada compra.",
+                "size": "paragraph_big"
               }
             },
             "button": {
               "type": "button",
               "settings": {
-                "label": "Ver más",
-                "variant": "primary",
-                "size": "medium"
+                "label": "Conocé HMC Hub",
+                "link": "#",
+                "variant": "secondary",
+                "size": "big"
               }
             }
           },
-          "block_order": [
-            "heading",
-            "button"
-          ]
-        },
-        "banner": {
-          "type": "banner",
-          "settings": {
-            "text_outside": false,
-            "alignment": "center",
-            "alignment_vertical": "center",
-            "gap": 8,
-            "vertical_padding": 24,
-            "horizontal_padding": 24,
-            "text_color": "#FFFF00"
-          },
-          "blocks": {
-            "heading": {
-              "type": "heading",
-              "settings": {
-                "title": "Título",
-                "size": "h1"
-              }
-            },
-            "button": {
-              "type": "button",
-              "settings": {
-                "label": "Ver más",
-                "variant": "primary",
-                "size": "medium"
-              }
-            }
-          },
-          "block_order": [
-            "heading",
-            "button"
-          ]
+          "block_order": ["heading", "text", "button"]
         }
       },
-      "block_order": [
-        "banner_1",
-        "banner"
-      ]
+      "block_order": ["slide_offers", "slide_institucional"]
     }
   },
-  "order": [
-    "slideshow",
-    "featured_products_1",
-    "banners_grid_3_vertical"
-  ]
+  "order": ["slideshow"]
 }
