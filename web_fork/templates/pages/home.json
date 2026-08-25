@@ -86,7 +86,76 @@
         }
       },
       "block_order": ["slide_offers", "slide_institucional"]
+    },
+    "value_props": {
+      "type": "icon-text",
+      "settings": {
+        "alignment": "center",
+        "section_width": "page",
+        "gap": 32,
+        "vertical_padding": 64
+      },
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "title": "Por qué elegir HMC Hub",
+            "size": "h4"
+          }
+        },
+        "items": {
+          "type": "icon-text-group",
+          "settings": {
+            "icon_position": "horizontal",
+            "alignment": "left",
+            "mobile_format": "carousel",
+            "icon_size": 32,
+            "description_size": "paragraph_small",
+            "gap": 16
+          },
+          "blocks": {
+            "item_1": {
+              "type": "icon-text-item",
+              "settings": {
+                "icon_source": "design",
+                "icon": "phone",
+                "title": "Asesoramiento técnico",
+                "description": "Te ayudamos a elegir el equipo justo para tu obra, campo, casa o negocio."
+              }
+            },
+            "item_2": {
+              "type": "icon-text-item",
+              "settings": {
+                "icon_source": "design",
+                "icon": "shipping",
+                "title": "Envíos a todo el país",
+                "description": "Coordinamos el envío a donde estés."
+              }
+            },
+            "item_3": {
+              "type": "icon-text-item",
+              "settings": {
+                "icon_source": "design",
+                "icon": "card",
+                "title": "Medios de pago",
+                "description": "Tarjetas, transferencia y cuotas."
+              }
+            },
+            "item_4": {
+              "type": "icon-text-item",
+              "settings": {
+                "icon_source": "design",
+                "icon": "security",
+                "title": "Garantía y postventa",
+                "description": "Respaldo y servicio técnico después de la compra."
+              }
+            }
+          },
+          "block_order": ["item_1", "item_2", "item_3", "item_4"]
+        }
+      },
+      "block_order": ["heading", "items"]
     }
   },
-  "order": ["slideshow"]
+  "order": ["slideshow", "value_props"]
 }
