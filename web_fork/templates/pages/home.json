@@ -155,7 +155,45 @@
         }
       },
       "block_order": ["heading", "items"]
+    },
+    "featured_categories_real": {
+      "type": "featured-categories",
+      "settings": {
+        "orientation": "horizontal",
+        "use_different_mobile_orientation": true,
+        "orientation_mobile": "vertical",
+        "section_width": "page",
+        "gap": 32
+      },
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "title": "Categorías",
+            "size": "h4"
+          }
+        },
+        "nav": {
+          "type": "category-nav",
+          "static": true,
+          "settings": {
+            "category_type": "image_thumbnail",
+            "format_image": "square",
+            "gap": 32
+          },
+          "blocks": {
+            "cat_1": { "type": "category-item", "settings": { "text": "Motosierras", "link": "#" } },
+            "cat_2": { "type": "category-item", "settings": { "text": "Hidrolavadoras", "link": "#" } },
+            "cat_3": { "type": "category-item", "settings": { "text": "Desmalezadoras", "link": "#" } },
+            "cat_4": { "type": "category-item", "settings": { "text": "Generadores", "link": "#" } },
+            "cat_5": { "type": "category-item", "settings": { "text": "Ferretería", "link": "#" } },
+            "cat_6": { "type": "category-item", "settings": { "text": "Pinturas", "link": "#" } }
+          },
+          "block_order": ["cat_1", "cat_2", "cat_3", "cat_4", "cat_5", "cat_6"]
+        }
+      },
+      "block_order": ["heading", "nav"]
     }
   },
-  "order": ["slideshow", "value_props"]
+  "order": ["slideshow", "value_props", "featured_categories_real"]
 }
