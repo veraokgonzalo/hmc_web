@@ -5,7 +5,7 @@
     "body_font_size": 12,
     "paragraph_font_size": 14,
     "border_radius": "small",
-    "button_primary_background_color": "#000000",
+    "button_primary_background_color": "#3FAA47",
     "button_primary_foreground_color": "#FFFFFF",
     "button_primary_style": "filled",
     "button_primary_border_radius": 0,
