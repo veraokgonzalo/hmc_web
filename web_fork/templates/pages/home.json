@@ -256,7 +256,41 @@
         }
       },
       "block_order": ["timer", "products"]
+    },
+    "featured_brands_section": {
+      "type": "featured-brands",
+      "settings": {
+        "section_width": "page",
+        "gap": 32,
+        "text_alignment": "center"
+      },
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "title": "Marcas que trabajamos",
+            "size": "h4"
+          }
+        },
+        "brands": {
+          "type": "brand-group",
+          "settings": {
+            "logo_size": 80,
+            "gap": 40
+          },
+          "blocks": {
+            "logo_1": { "type": "brand-logo", "settings": {} },
+            "logo_2": { "type": "brand-logo", "settings": {} },
+            "logo_3": { "type": "brand-logo", "settings": {} },
+            "logo_4": { "type": "brand-logo", "settings": {} },
+            "logo_5": { "type": "brand-logo", "settings": {} },
+            "logo_6": { "type": "brand-logo", "settings": {} }
+          },
+          "block_order": ["logo_1", "logo_2", "logo_3", "logo_4", "logo_5", "logo_6"]
+        }
+      },
+      "block_order": ["heading", "brands"]
     }
   },
-  "order": ["slideshow", "value_props", "featured_categories_real", "timer_offers_section"]
+  "order": ["slideshow", "value_props", "featured_categories_real", "timer_offers_section", "featured_brands_section"]
 }
