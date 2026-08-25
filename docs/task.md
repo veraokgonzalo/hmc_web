@@ -4,12 +4,18 @@ Lista tentativa de tareas que implican programación sobre este repositorio (`we
 
 ## Landing / home a medida
 
-- [ ] Relevar qué secciones ya cubre el tema base (`sections/hero.tpl`, `sections/banners.tpl`, `sections/featured-categories.tpl`, `sections/featured-brands.tpl`, `sections/icon-text.tpl`, etc.) vs. qué necesita la landing pedida por el cliente.
-- [ ] Aplicar la identidad de marca (`docs/design.md`) a `config/settings_schema.json` / `config/settings_data.json`: paleta de colores, tipografía de headings (Quedora o alternativa web-safe), color de acento/botones.
-- [ ] Ajustar/crear los blocks y sections necesarios para armar el home a medida (composición en `templates/pages/home.json`), respetando el sistema de blocks existente (`blocks/*.tpl` + `{% schema %}`).
+Spec definida en `docs/specs.md` § Home / Landing a medida. Plan de implementación paso a paso en `docs/progress.md`.
+
+- [x] Relevar qué secciones ya cubre el tema base vs. qué necesita la landing — ninguna section nueva hizo falta, las 6 secciones de contenido ya existen en el tema (ver "Fuera de esta spec" en `docs/specs.md`).
+- [x] Aplicar la identidad de marca (`docs/design.md`) a `config/settings_schema.json` / `config/settings_data.json`: paleta de colores, tipografía de headings (Quedora o alternativa web-safe), color de acento/botones. (spec §0)
+- [x] Armar Hero — carrusel de ofertas/contenido informativo (spec §2, `sections/slideshow.tpl`).
+- [x] Armar Propuesta de valor — 4 ítems ícono+texto (spec §3, `sections/icon-text.tpl`).
+- [x] Armar Categorías destacadas — por categoría real del catálogo, placeholder (spec §4, `sections/featured-categories.tpl`).
+- [x] Armar Productos destacados/ofertas con countdown (spec §5, `sections/timer-offers.tpl`) + recordatorio de sincronizar a mano la fecha con la promoción real.
+- [x] Armar Marcas destacadas — logos placeholder (spec §6, `sections/featured-brands.tpl`).
 - [ ] Adaptar `layouts/resources/style-tokens.tpl` si los tokens de color/tipografía por defecto no alcanzan para el diseño de marca.
 - [ ] Revisar uso del logo en header/footer (`sections/header.tpl`, `snippets/logo/`, `sections/footer.tpl`) contra las reglas de `docs/design.md` (variante horizontal, área de seguridad, versión sobre fondo oscuro/claro).
-- [ ] Si la landing requiere secciones que no existen en el tema base, evaluar crear una nueva section siguiendo la convención existente (markup + `{% schema %}` con presets).
+- [ ] QA Task 7 (2026-08-24) encontró un gap concreto en el chequeo anterior: el renderizado del logo (`web_fork/blocks/header-logo.tpl:3-9` → `web_fork/snippets/logo/logo-img.tpl:12`, `image_src: store.logo(logo_thumbnail)`) siempre muestra el mismo asset subido en el admin, sin lógica que elija variante de color según el `background_color` de la sección (tabla "Usos correctos" de `docs/design.md` §1: blanco/mono sobre verde, isotipo verde + texto blanco sobre negro/gris oscuro, isotipo verde + texto negro sobre gris claro). Hoy el header (`web_fork/templates/layout/header.json:57`) y el footer (`web_fork/templates/layout/footer.json:8`) tienen `background_color: "#FFFFFF"`, que sí corresponde a la versión a color por defecto — pero si algún fondo cambia a verde/negro/gris (colores de la propia paleta de marca), el mismo logo se renderizaría sin ajuste de color. Nota: el footer (`web_fork/templates/layout/footer.json:39-46`) no tiene ningún logo cargado en el bloque `footer-institutional` (falta la key `logo`), así que hoy no muestra logo ahí.
 
 ## SEO técnico (parte de "Medición y SEO base" que sí es código)
 
