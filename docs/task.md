@@ -1,6 +1,8 @@
 # Tareas de desarrollo — tentativo
 
-Lista tentativa de tareas que implican programación sobre este repositorio (`web_fork/`), extraída de `docs/checklist_presupuesto.md`. Quedan afuera a propósito todos los ítems administrativos/de configuración de plataforma (plan, dominio, medios de pago, envíos, impuestos, páginas legales, redes sociales, carga de productos) — esos no requieren tocar código del tema.
+> **⚠️ Desactualizado:** este documento fue escrito contra la estructura de tema con sections/blocks (`web_fork/`, ya eliminada), incluyendo citas puntuales de archivos/líneas de esa estructura (hallazgos de QA histórica). Esos paths no existen en `web_ftp/`, el core de desarrollo actual (ver `CLAUDE.md`). Revisar y reescribir contra la estructura real de `web_ftp/` antes de usar como guía de trabajo.
+
+Lista tentativa de tareas que implican programación sobre el tema, extraída de `docs/checklist_presupuesto.md`. Quedan afuera a propósito todos los ítems administrativos/de configuración de plataforma (plan, dominio, medios de pago, envíos, impuestos, páginas legales, redes sociales, carga de productos) — esos no requieren tocar código del tema.
 
 ## Landing / home a medida
 

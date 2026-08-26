@@ -6,47 +6,26 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This repo develops a Tiendanube/Nuvemshop storefront theme for the client **HMC HUB**.
 
-- `web_fork/` — the theme source itself (Nimbus template engine: `.tpl` files with Twig-like syntax). This is what gets synced to the live store.
+- `web_ftp/` — the theme source itself: a copy of the theme currently hosted on the live Tiendanube/Nuvemshop store, pulled via FTP. This is the store's legacy (pre-Nimbus) theme structure — pages are plain `.tpl` templates, reusable partials live in `snipplets/`, and theme-editor settings/translations are plain-text/JSON config files under `config/` (no sections/blocks JSON composition system). This is the current core for theme development.
 - `assets/` — brand assets (logos in `Logos_JPG/` and `Logos_PNG/`, avatars, the brand manual PDF). Reference material for building the theme; not consumed directly by the theme code.
 - `docs/` — project documentation for this engagement:
+  - `docs/web_architecture.md` — full file tree of `web_ftp/` with a description of every file/folder and a summary of how the theme is structured (page templates, `snipplets/`, config, home composition). Start here to get oriented in the theme source.
   - `docs/design.md` — design/aesthetic spec (extracted from the brand manual): logo rules, color palette, typography, photography style. Source of truth for visual decisions.
-  - `docs/specs.md` — feature specs: what functionality/sections/pages need to be built.
-  - `docs/progress.md` — running task tracker for the work to be done; keep it updated as work progresses.
+  - `docs/specs.md` and `docs/task.md` — feature specs / task list. **Written against a since-removed sections/blocks theme structure — flagged as outdated at the top of each file, needs review before use as a guide for work on `web_ftp/`.**
+  - `docs/progress.md` — running task tracker for the work to be done on `web_ftp/`; keep it updated as work progresses.
+  - `docs/progress-web_fork-archive.md` — historical log of the home-page work completed on the old sections/blocks theme structure (now removed). Kept for reference only; not a guide for current work.
 
 ## Commands
 
-Theme sync is done with the `@tiendanube/cli` (`tiendanube`), installed globally. All `theme` subcommands must be run from `web_fork/` — that's where the `.nuvem` link file lives, connecting this folder to the store's theme.
+`web_ftp/` is synced with the live Tiendanube/Nuvemshop store via FTP. There is no local build/lint/test toolchain and no CLI wired up in this repo — `.tpl` files are rendered server-side by Tiendanube, so validating changes means uploading the modified files via FTP and checking the rendered store (or store preview, if the FTP workflow provides one) directly.
 
-```bash
-cd web_fork
+FTP connection details/credentials are not stored in this repo — never hardcode or commit them.
 
-tiendanube theme current              # show which store/theme this folder is linked to
-tiendanube theme authorize            # sign in via browser (needed once per machine/session)
-tiendanube theme pull                 # download the current remote theme state into this folder
-tiendanube theme diff                 # preview what a push would change on the store
-tiendanube theme push                 # upload local changes to the store
-tiendanube theme watch                # watch local files and auto-push on save (use while developing)
-tiendanube theme preview              # get a shareable preview URL before publishing
-tiendanube theme performance          # run a Lighthouse report against the current theme version
-tiendanube theme publish              # make this theme the live version of the store
-```
+## Architecture (legacy FTP theme structure)
 
-There is no local build/lint/test toolchain — `.tpl` files are rendered server-side by Nuvemshop's Nimbus engine, so validating changes means pushing/previewing and checking the rendered store (`tiendanube theme diff` first, then `preview`).
-
-`web_fork/.nuvem` holds the store's public API token and is gitignored — never commit it or print its decoded contents.
-
-## Architecture (Nimbus theme structure)
-
-- **`layouts/layout.tpl`** — the outer HTML shell all pages render into (`<head>`, critical/async CSS loading, header/footer layout templates, cart/quick-shop modals, JS bootstrapping). Start here to understand global page structure.
-- **`sections/`** — top-level, page-composable units (hero, header, footer, product grid, etc.). Each section file has two parts: the Twig template markup and a `{% schema %}...{% endschema %}` JSON block defining its theme-editor settings, block whitelist, and presets.
-- **`blocks/`** — smaller content units placed inside a section's block list (button, heading, text, image, etc.), rendered via `{% include 'blocks/' ~ block.type ~ '.tpl' with { block: block } %}`. Same two-part structure (markup + `{% schema %}`) as sections.
-- **`snippets/`** — reusable partials included by sections/blocks/layout (organized by domain: `cart/`, `product/`, `header/`, `navigation/`, `structured-data/`, etc.), plus standalone files like `image.tpl` and `breadcrumbs.tpl`.
-- **`templates/pages/*.json`** and **`templates/layout/*.json`** — define which sections appear on each page type (home, product, cart, category, etc.) and the header/footer layout templates, by referencing section files and their settings.
-- **`config/settings_schema.json`** — defines the global theme-editor settings (colors, typography, etc.) shown in the Nuvemshop admin; **`config/settings_data.json`** holds the current values for those settings plus the page-composition data (which sections/blocks are on each page, in what order).
-- **`translations/`** — per-locale JSON strings (`es`, `es_AR`, `es_CL`, `es_CO`, `es_MX`, `en`, `pt.default`) referenced in templates via `t:` schema keys and the `| t` filter; each locale has a paired `.schema.json` for editor-facing labels.
-- **`static/`** — theme assets not resolved through the template engine's asset pipeline in the same way: `css/` (critical/async/utilities stylesheets loaded from `layout.tpl`), `js/` (standalone libraries loaded blocking, plus `store.js` loaded after `LS.ready`), and `images/placeholders/`.
-- **`layouts/resources/`** — shared includes pulled into `layout.tpl` (`style-tokens.tpl` for CSS custom properties from settings, `icons-sprite.tpl` for the SVG icon sprite).
-
-### Section/block schema convention
-
-Every section and block file defines its editor-facing configuration inline via `{% schema %}`. Settings entries use `"type": "setting"` with a `setting_type` (e.g. `color`, `image_picker`, `range`, `radio`, `toggle`, `url`) and reference translation keys (`t:settings.*`, `t:names.*`) rather than hardcoded labels. `visible_if`/`disabled_if` (Twig-boolean strings evaluated against `section.settings`/`block.settings`) drive conditional field visibility. New sections/blocks should follow this same pattern rather than hardcoding text or styles.
+- **`layouts/layout.tpl`** — the outer HTML shell all pages render into (`<head>`, critical/async CSS loading, font/social-meta components, JS bootstrapping). Start here to understand global page structure.
+- **`templates/*.tpl`** — one template per page type (`home.tpl`, `product.tpl`, `category.tpl`, `cart.tpl`, `contact.tpl`, `blog.tpl`, `blog-post.tpl`, `404.tpl`, `password.tpl`, `search.tpl`, `page.tpl`), plus `templates/account/` for account-related pages (login, register, orders, addresses, etc.). Page content is composed directly in these `.tpl` files rather than through a sections/blocks system.
+- **`snipplets/`** (this is the actual folder name used by the theme, not a typo to fix) — reusable partials included via `{% snipplet 'path/to/file.tpl' %}` or `{% include 'snipplets/path/to/file.tpl' %}`, organized by domain: `header/`, `footer/`, `navigation/`, `home/`, `grid/`, `product/`, `forms/`, `shipping/`, `shipping_suboptions/`, `banner-services/`, `social/`, `svg/` (icon partials), `defaults/` (empty-state/help placeholders), plus standalone files like `breadcrumbs.tpl`, `card.tpl`, `modal.tpl`, `cart-panel.tpl`.
+- **Home page composition** — `templates/home.tpl` loops over up to 21 numbered settings (`home_order_position_1` … `_21`), each holding the name of a home module (`slider`, `main_categories`, `welcome`, `brands`, `testimonials`, etc.); `snipplets/home/home-section-switch.tpl` resolves each name to its `snipplets/home/home-*.tpl` partial. Order and visibility of home content is driven entirely by these setting values, not a drag-and-drop sections/blocks JSON.
+- **`config/`** — plain-text/JSON theme configuration: `settings.txt` (theme-editor setting field definitions, indentation-based DSL), `defaults.txt` (default values for those settings), `variants.txt` (predefined color-scheme presets), `sections.txt` (product collection/tag definitions like `primary`, `new`, `sale`), `translations.txt` (UI copy strings), `data.json` (preview/compiled-assets config).
+- **`static/`** — `css/` (`style-critical.scss`, `style-async.scss`, `style-colors.scss`, `style-tokens.tpl`), `js/` (`store.js.tpl` and other external library `.tpl` files), and `checkout.scss.tpl`.

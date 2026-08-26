@@ -61,7 +61,7 @@ El manual muestra mockups de merchandising y redes ya usando las reglas anterior
 
 ## Resumen rápido para el tema (settings del editor)
 
-Para cargar en `config/settings_schema.json` / `config/settings_data.json`:
+Para cargar en `config/settings.txt` / `config/defaults.txt`:
 
 - `background_color`: `#FFFFFF` (o `#CCCCCC` si se prefiere un fondo neutro gris claro)
 - `text_color`: `#000000` (texto principal) — usar `#494848` para texto secundario/atenuado

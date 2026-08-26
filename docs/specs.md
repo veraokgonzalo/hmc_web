@@ -1,6 +1,8 @@
 # Specs de features
 
-Especificaciones de funcionalidad a construir en `web_fork/`. Cada feature queda como una sección propia. La estética a aplicar (colores, tipografía, logo, fotografía) vive en `docs/design.md`; acá solo se referencia.
+> **⚠️ Desactualizado:** este documento fue escrito contra la estructura de tema con sections/blocks (`web_fork/`, ya eliminada). Los paths de archivo citados (`sections/*.tpl`, `blocks/*.tpl`, `config/settings_schema.json`, etc.) no existen en `web_ftp/`, el core de desarrollo actual (ver `CLAUDE.md`). Revisar y reescribir contra la estructura real de `web_ftp/` antes de usar como guía de implementación.
+
+Especificaciones de funcionalidad a construir sobre el tema. Cada feature queda como una sección propia. La estética a aplicar (colores, tipografía, logo, fotografía) vive en `docs/design.md`; acá solo se referencia.
 
 ---
 
