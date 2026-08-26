@@ -6,7 +6,7 @@
         {# Product name #}
         <h2 class="h1-md mb-3">{{ product.name }}</h2>
     {% else %}
-        {% embed "snipplets/page-header.tpl" with {container: false, padding: false, page_header_title_class: 'js-product-name mb-3'} %}
+        {% embed "snipplets/page-header.tpl" with {container: false, padding: false, breadcrumbs: false, page_header_title_class: 'js-product-name mb-3'} %}
             {% block page_header_text %}{{ product.name }}{% endblock page_header_text %}
         {% endembed %}
     {% endif %}

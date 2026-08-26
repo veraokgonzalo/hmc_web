@@ -10,6 +10,7 @@ This repo develops a Tiendanube/Nuvemshop storefront theme for the client **HMC 
 - `assets/` — brand assets (logos in `Logos_JPG/` and `Logos_PNG/`, avatars, the brand manual PDF). Reference material for building the theme; not consumed directly by the theme code.
 - `docs/` — project documentation for this engagement:
   - `docs/web_architecture.md` — full file tree of `web_ftp/` with a description of every file/folder and a summary of how the theme is structured (page templates, `snipplets/`, config, home composition). Start here to get oriented in the theme source.
+  - `docs/instructivo_tiendabe_ftp_legacy.md` — reference for the `tiendanube theme ftp ...` CLI commands used to sync `web_ftp/` with the live store (setup/pull/push/watch).
   - `docs/design.md` — design/aesthetic spec (extracted from the brand manual): logo rules, color palette, typography, photography style. Source of truth for visual decisions.
   - `docs/specs.md` and `docs/task.md` — feature specs / task list. **Written against a since-removed sections/blocks theme structure — flagged as outdated at the top of each file, needs review before use as a guide for work on `web_ftp/`.**
   - `docs/progress.md` — running task tracker for the work to be done on `web_ftp/`; keep it updated as work progresses.
@@ -17,9 +18,22 @@ This repo develops a Tiendanube/Nuvemshop storefront theme for the client **HMC 
 
 ## Commands
 
-`web_ftp/` is synced with the live Tiendanube/Nuvemshop store via FTP. There is no local build/lint/test toolchain and no CLI wired up in this repo — `.tpl` files are rendered server-side by Tiendanube, so validating changes means uploading the modified files via FTP and checking the rendered store (or store preview, if the FTP workflow provides one) directly.
+`web_ftp/` is synced with the live Tiendanube/Nuvemshop store using the `@tiendanube/cli`'s FTP workflow (legacy themes don't support the section/block Fork workflow — see `docs/instructivo_tiendabe_ftp_legacy.md`). All commands are run from `web_ftp/`, under `tiendanube theme ftp <command>`:
 
-FTP connection details/credentials are not stored in this repo — never hardcode or commit them.
+```bash
+cd web_ftp
+
+tiendanube theme ftp setup --ftp-server FTP_HOST --ftp-username FTP_USER --ftp-password FTP_PASSWORD --store-url https://yourstore.mitiendanube.com
+                                       # one-time: saves FTP credentials to .nuvem (get them from the store admin's theme settings, "Open FTP")
+tiendanube theme ftp pull             # download the current remote theme state into this folder
+tiendanube theme ftp push             # upload local changes (incremental: only changed files; also syncs deletions)
+tiendanube theme ftp push --force     # upload every file, skipping the remote-comparison/incremental check
+tiendanube theme ftp watch            # watch local files and auto-push on save; reloads a browser tab on the storefront after each sync
+```
+
+There is no local build/lint/test toolchain — `.tpl` files are rendered server-side by Tiendanube, so validating changes means pushing and checking the rendered store directly (no separate preview URL in the FTP workflow, unlike Fork).
+
+`web_ftp/.nuvem` holds the FTP credentials and is gitignored — never commit it or print its decoded contents.
 
 ## Architecture (legacy FTP theme structure)
 

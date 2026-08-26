@@ -1,5 +1,6 @@
 <div id="single-product" class="js-has-new-shipping js-product-detail js-product-container js-shipping-calculator-container background-secondary pb-4 pt-md-4 pb-md-3" data-variants="{{product.variants_object | json_encode }}" data-store="product-detail">
     <div class="container pt-md-1">
+        {% include 'snipplets/breadcrumbs.tpl' with {breadcrumbs_custom_class: 'mb-3'} %}
         <div class="row">
             <div class="col-md-7 pb-3">
                 {% include 'snipplets/product/product-image.tpl' %}
