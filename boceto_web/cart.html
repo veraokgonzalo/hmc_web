@@ -56,7 +56,7 @@
       <!-- Live Search Form -->
       <div class="header-search">
         <form class="search-form" onsubmit="event.preventDefault();">
-          <input type="text" id="mainSearchInput" class="search-input" placeholder="Buscar motosierras, generadores, hidrolavadoras..." autocomplete="off">
+          <input type="text" id="mainSearchInput" class="search-input" placeholder="Buscar demoledores, taladros, motoguadañas, bombas, sierras..." autocomplete="off">
           <button type="submit" class="search-btn" title="Buscar">
             <i class="fa-solid fa-magnifying-glass"></i>
           </button>
@@ -101,33 +101,37 @@
           <a href="catalog.html" class="nav-link">
             Categorías <i class="fa-solid fa-chevron-down" style="font-size: 0.75em; margin-left: 2px;"></i>
           </a>
+          <!-- Mega Dropdown -->
           <div class="mega-dropdown">
             <div class="mega-column">
-              <h4>Maquinaria Forestal</h4>
+              <h4>Ferretería & Taller</h4>
               <ul class="mega-links">
-                <li><a href="catalog.html?category=motosierras"><i class="fa-solid fa-angle-right"></i> Motosierras Nafteras</a></li>
-                <li><a href="catalog.html?category=motosierras"><i class="fa-solid fa-angle-right"></i> Motosierras Eléctricas</a></li>
-                <li><a href="catalog.html?category=motosierras"><i class="fa-solid fa-angle-right"></i> Espadas y Cadenas</a></li>
+                <li><a href="catalog.html?category=ferreteria"><i class="fa-solid fa-angle-right"></i> Martillos Demoledores</a></li>
+                <li><a href="catalog.html?category=ferreteria"><i class="fa-solid fa-angle-right"></i> Sierras Circulares e Ingletadoras</a></li>
+                <li><a href="catalog.html?category=herramientas-bateria"><i class="fa-solid fa-angle-right"></i> Herramientas a Batería 18V</a></li>
+                <li><a href="catalog.html?category=accesorios-insumos"><i class="fa-solid fa-angle-right"></i> Discos de Corte y Abrasivos</a></li>
               </ul>
             </div>
             <div class="mega-column">
-              <h4>Energía y Bombeo</h4>
+              <h4>Máquinas a Explosión</h4>
               <ul class="mega-links">
-                <li><a href="catalog.html?category=generadores"><i class="fa-solid fa-angle-right"></i> Generadores Nafteros</a></li>
-                <li><a href="catalog.html?category=generadores"><i class="fa-solid fa-angle-right"></i> Grupos Inverter Silenciosos</a></li>
-                <li><a href="catalog.html?category=hidrolavadoras"><i class="fa-solid fa-angle-right"></i> Bombas Sumergibles</a></li>
+                <li><a href="catalog.html?brand=SHINDAIWA"><i class="fa-solid fa-angle-right"></i> Motoguadañas Shindaiwa</a></li>
+                <li><a href="catalog.html?brand=SENSEI"><i class="fa-solid fa-angle-right"></i> Desmalezadoras Sensei</a></li>
+                <li><a href="catalog.html?category=maquinas-explosion"><i class="fa-solid fa-angle-right"></i> Mantenimiento de Parques</a></li>
+                <li><a href="catalog.html?category=maquinas-explosion"><i class="fa-solid fa-angle-right"></i> Puesta en Marcha Oficial</a></li>
               </ul>
             </div>
             <div class="mega-column">
-              <h4>Parques y Taller</h4>
+              <h4>Construcción & Agua</h4>
               <ul class="mega-links">
-                <li><a href="catalog.html?category=hidrolavadoras"><i class="fa-solid fa-angle-right"></i> Hidrolavadoras Alta Presión</a></li>
-                <li><a href="catalog.html?category=desmalezadoras"><i class="fa-solid fa-angle-right"></i> Desmalezadoras Eje Recto</a></li>
-                <li><a href="catalog.html?category=ferreteria"><i class="fa-solid fa-angle-right"></i> Compresores y Rotomartillos</a></li>
+                <li><a href="catalog.html?category=agua-bombeo"><i class="fa-solid fa-angle-right"></i> Bombas Centrífugas Niwa</a></li>
+                <li><a href="catalog.html?category=construccion"><i class="fa-solid fa-angle-right"></i> Demoledores de Pavimento</a></li>
+                <li><a href="catalog.html?category=construccion"><i class="fa-solid fa-angle-right"></i> Taladros Rotopercutores Bosch</a></li>
+                <li><a href="catalog.html?category=accesorios-insumos"><i class="fa-solid fa-angle-right"></i> Mechas y Brocas SDS Plus</a></li>
               </ul>
             </div>
             <div class="mega-banner">
-              <img src="assets/images/hero/hero-slide-1-ofertas-motosierras.jpg" alt="Línea Profesional">
+              <img src="assets/images/categories/categoria-1-ferreteria.jpg" alt="Línea Profesional">
               <h5>Línea Profesional</h5>
               <p style="font-size: 0.78rem; color: #666; margin-bottom: 8px;">Garantía oficial y puesta en marcha sin cargo.</p>
               <a href="catalog.html" class="btn btn-primary btn-sm">Ver Catálogo</a>
@@ -443,7 +447,7 @@
     </div>
     <div class="mobile-drawer-search">
       <form id="mobileDrawerSearchForm">
-        <input type="text" id="mobileDrawerSearchInput" placeholder="Buscar motosierras, generadores...">
+        <input type="text" id="mobileDrawerSearchInput" placeholder="Buscar demoledores, taladros, motoguadañas, bombas...">
         <button type="submit" title="Buscar"><i class="fa-solid fa-magnifying-glass"></i></button>
       </form>
     </div>
@@ -456,12 +460,12 @@
         <i class="fa-solid fa-chevron-down"></i>
       </div>
       <div class="mobile-drawer-accordion-content">
-        <a href="catalog.html?category=motosierras" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> Motosierras</a>
-        <a href="catalog.html?category=generadores" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> Generadores</a>
-        <a href="catalog.html?category=hidrolavadoras" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> Hidrolavadoras & Bombas</a>
-        <a href="catalog.html?category=desmalezadoras" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> Desmalezadoras</a>
         <a href="catalog.html?category=ferreteria" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> Ferretería & Taller</a>
-        <a href="catalog.html?category=jardineria" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> Jardinería & Agro</a>
+        <a href="catalog.html?category=maquinas-explosion" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> Máquinas a Explosión</a>
+        <a href="catalog.html?category=agua-bombeo" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> Agua & Bombeo</a>
+        <a href="catalog.html?category=construccion" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> Construcción & Obra</a>
+        <a href="catalog.html?category=herramientas-bateria" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> Herramientas a Batería</a>
+        <a href="catalog.html?category=accesorios-insumos" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> Accesorios & Insumos</a>
         <a href="catalog.html" class="mobile-subnav-link" style="font-weight: 700; color: var(--color-primary-dark);"><i class="fa-solid fa-grid-2"></i> Ver Todo el Catálogo →</a>
       </div>
 

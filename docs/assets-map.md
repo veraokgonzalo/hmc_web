@@ -8,12 +8,12 @@ Guía de referencia de archivos de imagen y recursos multimedia del proyecto `bo
 
 | Archivo | Sección en la Web | Descripción |
 |---|---|---|
-| `categoria-1-motosierras.jpg` | Home Page → Grilla de Categorías | Tarjeta "Motosierras" |
-| `categoria-2-generadores.jpg` | Home Page → Grilla de Categorías | Tarjeta "Generadores" |
-| `categoria-3-hidrolavadoras.jpg` | Home Page → Grilla de Categorías | Tarjeta "Hidrolavadoras & Bombas" |
-| `categoria-4-desmalezadoras.jpg` | Home Page → Grilla de Categorías | Tarjeta "Desmalezadoras" |
-| `categoria-5-ferreteria.jpg` | Home Page → Grilla de Categorías | Tarjeta "Ferretería & Taller" |
-| `categoria-6-jardineria.jpg` | Home Page → Grilla de Categorías | Tarjeta "Jardinería & Agro" |
+| `categoria-1-ferreteria.jpg` | Home Page → Grilla de Categorías | Tarjeta "Ferretería & Taller" |
+| `categoria-2-maquinas-explosion.jpg` | Home Page → Grilla de Categorías | Tarjeta "Máquinas a Explosión" |
+| `categoria-3-agua-bombeo.jpg` | Home Page → Grilla de Categorías | Tarjeta "Agua & Bombeo" |
+| `categoria-4-construccion.jpg` | Home Page → Grilla de Categorías | Tarjeta "Construcción & Obra" |
+| `categoria-5-herramientas-bateria.jpg` | Home Page → Grilla de Categorías | Tarjeta "Herramientas a Batería" |
+| `categoria-6-accesorios-insumos.jpg` | Home Page → Grilla de Categorías | Tarjeta "Accesorios & Insumos" |
 
 ---
 
@@ -21,8 +21,8 @@ Guía de referencia de archivos de imagen y recursos multimedia del proyecto `bo
 
 | Archivo | Sección en la Web | Descripción |
 |---|---|---|
-| `hero-slide-1-ofertas-motosierras.jpg` | Home Page → Hero Slider (Slide 1) & Popup Bienvenida | Banner "Ofertas de Temporada / Motosierras" |
-| `hero-slide-2-respaldo-generadores.jpg` | Home Page → Hero Slider (Slide 2) | Banner "Energía Imparable / Generadores Honda" |
+| `hero-slide-1-ofertas-motosierras.jpg` | Home Page → Hero Slider (Slide 1) & Popup Bienvenida | Banner "Ofertas de Temporada / Oportunidades" |
+| `hero-slide-2-respaldo-generadores.jpg` | Home Page → Hero Slider (Slide 2) | Banner "Trayectoria y Confianza / Todo lo que mueve tu obra" |
 | `hero-slide-3-servicio-tecnico-taller.jpg` | Home Page → Hero Slider (Slide 3) | Banner "Servicio Técnico Oficial HMC" |
 | `banner-showcase-1-linea-pesada.jpg` | Home Page → Showcase B2B (Bloque 1) | Banner "Línea Pesada & Construcción" |
 | `banner-showcase-2-linea-jardin.jpg` | Home Page → Showcase B2B (Bloque 2) | Banner "Línea Jardín & Espacios Verdes" |
@@ -33,31 +33,27 @@ Guía de referencia de archivos de imagen y recursos multimedia del proyecto `bo
 
 | Archivo | Producto / SKU | Ubicación en la Web |
 |---|---|---|
-| `prod-01-motosierra-stihl-52cc-principal.jpg` | Motosierra Stihl 52cc (`HMC-MOT-052`) | Foto principal en Catálogo, Ofertas y Ficha |
-| `prod-01-motosierra-stihl-52cc-detalle-espada.jpg` | Motosierra Stihl 52cc (`HMC-MOT-052`) | Miniatura de galería / Detalle de espada y cadena |
-| `prod-01-motosierra-stihl-52cc-detalle-motor.jpg` | Motosierra Stihl 52cc (`HMC-MOT-052`) | Miniatura de galería / Detalle de motor |
-| `prod-02-generador-honda-65kva-principal.jpg` | Generador Honda 6.5 KVA (`HMC-GEN-065`) | Foto principal en Catálogo, Ofertas y Ficha |
-| `prod-02-generador-honda-65kva-detalle-panel.jpg` | Generador Honda 6.5 KVA (`HMC-GEN-065`) | Miniatura de galería / Detalle panel de arranque |
-| `prod-02-generador-honda-65kva-detalle-chasis.jpg` | Generador Honda 6.5 KVA (`HMC-GEN-065`) | Miniatura de galería / Detalle chasis tubular |
-| `prod-03-hidrolavadora-bosch-180bar-principal.jpg` | Hidrolavadora Bosch 180 Bar (`HMC-HID-180`) | Foto principal en Catálogo, Ofertas y Ficha |
-| `prod-03-hidrolavadora-bosch-180bar-detalle-lanza.jpg` | Hidrolavadora Bosch 180 Bar (`HMC-HID-180`) | Miniatura de galería / Detalle lanza turbo |
-| `prod-03-hidrolavadora-bosch-180bar-detalle-bomba.jpg` | Hidrolavadora Bosch 180 Bar (`HMC-HID-180`) | Miniatura de galería / Detalle bomba de latón |
-| `prod-04-desmalezadora-husqvarna-52cc-principal.jpg` | Desmalezadora Husqvarna 52cc (`HMC-DES-052`) | Foto principal en Catálogo, Ofertas y Ficha |
-| `prod-04-desmalezadora-husqvarna-52cc-detalle-manillar.jpg` | Desmalezadora Husqvarna 52cc (`HMC-DES-052`) | Miniatura de galería / Detalle manillar |
-| `prod-04-desmalezadora-husqvarna-52cc-detalle-cuchilla.jpg` | Desmalezadora Husqvarna 52cc (`HMC-DES-052`) | Miniatura de galería / Detalle cuchilla |
-| `prod-05-compresor-gamma-50l-principal.jpg` | Compresor Gamma 50L (`HMC-COM-050`) | Foto principal en Catálogo y Ficha |
-| `prod-05-compresor-gamma-50l-detalle-manometros.jpg` | Compresor Gamma 50L (`HMC-COM-050`) | Miniatura de galería / Detalle manómetros |
-| `prod-05-compresor-gamma-50l-detalle-tanque.jpg` | Compresor Gamma 50L (`HMC-COM-050`) | Miniatura de galería / Detalle tanque 50L |
-| `prod-06-cortadora-cesped-echo-6hp-principal.jpg` | Cortadora de Césped Echo 6 HP (`HMC-COR-006`) | Foto principal en Catálogo y Ficha |
-| `prod-06-cortadora-cesped-echo-6hp-detalle-ruedas.jpg` | Cortadora de Césped Echo 6 HP (`HMC-COR-006`) | Miniatura de galería / Detalle ruedas y bolsa |
-| `prod-07-rotomartillo-dewalt-1100w-principal.jpg` | Rotomartillo DeWalt 1100W (`HMC-ROT-110`) | Foto principal en Catálogo y Ficha |
-| `prod-07-rotomartillo-dewalt-1100w-detalle-maletin.jpg` | Rotomartillo DeWalt 1100W (`HMC-ROT-110`) | Miniatura de galería / Detalle maletín y cinceles |
-| `prod-08-bomba-sumergible-lusqtoff-15hp-principal.jpg` | Bomba Sumergible Lüsqtoff 1.5 HP (`HMC-BOM-015`) | Foto principal en Catálogo y Ficha |
-| `prod-08-bomba-sumergible-lusqtoff-15hp-detalle-tablero.jpg` | Bomba Sumergible Lüsqtoff 1.5 HP (`HMC-BOM-015`) | Miniatura de galería / Detalle tablero térmico |
-| `prod-09-motosierra-electrica-makita-1800w-principal.jpg` | Motosierra Eléctrica Makita 1800W (`HMC-MOT-018`) | Foto principal en Catálogo y Ficha |
-| `prod-10-generador-inverter-briggs-2400w-principal.jpg` | Generador Inverter Briggs 2400W (`HMC-GEN-024`) | Foto principal en Catálogo y Ficha |
-| `prod-11-motobomba-honda-3pulgadas-principal.jpg` | Motobomba de Caudal Honda 3" (`HMC-BOM-030`) | Foto principal en Catálogo y Ficha |
-| `prod-12-taladro-percutor-bosch-750w-principal.jpg` | Taladro Percutor Bosch 750W (`HMC-TAL-075`) | Foto principal en Catálogo y Ficha |
+| `prod-01-bomba-centrifuga-niwa-wenw50c-principal.webp` | Bomba Centrífuga Niwa 0.5 HP (`HMC-BOM-050`) | Foto principal en Catálogo, Ofertas y Ficha |
+| `prod-01-bomba-centrifuga-niwa-wenw50c-specs.webp` | Bomba Centrífuga Niwa 0.5 HP (`HMC-BOM-050`) | Miniatura de galería / Ficha de especificaciones |
+| `prod-02-disco-corte-bosch-carbide-multiwheel-principal.webp` | Disco de Corte Bosch Carbide 4 1/2" (`HMC-DIS-115`) | Foto principal en Catálogo, Accesorios y Ficha |
+| `prod-03-martillo-demoledor-bosch-gsh11e-principal.webp` | Martillo Demoledor Bosch GSH 11 E 1500W (`HMC-DEM-150`) | Foto principal en Catálogo, Ofertas y Ficha |
+| `prod-04-disco-lija-bosch-expert-c470-principal.webp` | Discos de Lija Bosch C470 125mm x50 (`HMC-LIJ-120`) | Foto principal en Catálogo, Insumos y Ficha |
+| `prod-05-sierra-circular-bosch-gks235-principal.webp` | Sierra Circular Bosch GKS 235 2200W (`HMC-SIE-235`) | Foto principal en Catálogo y Ficha |
+| `prod-06-martillo-demoledor-dewalt-d25960-principal.webp` | Martillo Demoledor DeWalt 35J (`HMC-DEM-035`) | Foto principal en Catálogo y Ficha |
+| `prod-06-martillo-demoledor-dewalt-d25960-secundaria.webp` | Martillo Demoledor DeWalt 35J (`HMC-DEM-035`) | Miniatura de galería / Vista lateral |
+| `prod-06-martillo-demoledor-dewalt-d25960-tercera.webp` | Martillo Demoledor DeWalt 35J (`HMC-DEM-035`) | Miniatura de galería / Vista en maletín |
+| `prod-06-martillo-demoledor-dewalt-d25960-cuarta.webp` | Martillo Demoledor DeWalt 35J (`HMC-DEM-035`) | Miniatura de galería / Detalle de encastre |
+| `prod-07-taladro-impacto-einhell-te-cd18-principal.webp` | Taladro Percutor Einhell 18V PXC (`HMC-TAL-018`) | Foto principal en Catálogo, Ofertas y Ficha |
+| `prod-07-taladro-impacto-einhell-te-cd18-secundaria.webp` | Taladro Percutor Einhell 18V PXC (`HMC-TAL-018`) | Miniatura de galería / Vista en caja con batería |
+| `prod-07-taladro-impacto-einhell-te-cd18-specs.webp` | Taladro Percutor Einhell 18V PXC (`HMC-TAL-018`) | Miniatura de galería / Infografía técnica PXC |
+| `prod-08-taladro-percusion-bosch-gsb16re-principal.webp` | Taladro Percutor Bosch GSB 16 RE 850W (`HMC-TAL-850`) | Foto principal en Catálogo y Ficha |
+| `prod-09-sierra-ingletadora-bosch-gcm10x-principal.webp` | Sierra Ingletadora Bosch GCM 10 X (`HMC-ING-170`) | Foto principal en Catálogo y Ficha |
+| `prod-10-mecha-sds-plus-bosch-8x160-principal.webp` | Broca Mecha SDS Plus-1 Bosch 8x160 (`HMC-MEC-081`) | Foto principal en Catálogo y Ficha |
+| `prod-11-motoguadana-shindaiwa-b530-principal.webp` | Motoguadaña Shindaiwa B530 INTL 53cc (`HMC-MOT-530`) | Foto principal en Catálogo, Ofertas y Ficha |
+| `prod-11-motoguadana-shindaiwa-b530-specs.webp` | Motoguadaña Shindaiwa B530 INTL 53cc (`HMC-MOT-530`) | Miniatura de galería / Tabla técnica japonesa |
+| `prod-12-motoguadana-sensei-bd26-principal.webp` | Motoguadaña Sensei BD-26 25.4cc (`HMC-MOT-026`) | Foto principal en Catálogo y Ficha |
+| `prod-12-motoguadana-sensei-bd26-secundaria.webp` | Motoguadaña Sensei BD-26 25.4cc (`HMC-MOT-026`) | Miniatura de galería / Vista de motor y manillar |
+| `prod-12-motoguadana-sensei-bd26-specs.webp` | Motoguadaña Sensei BD-26 25.4cc (`HMC-MOT-026`) | Miniatura de galería / Ficha técnica oficial |
 
 ---
 

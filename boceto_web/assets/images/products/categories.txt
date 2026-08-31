@@ -1,0 +1,127 @@
+# ==============================================================================
+# HMC HUB - CATÁLOGO DE PRODUCTOS, TAXONOMÍA Y CATEGORÍAS
+# ==============================================================================
+# Estructura de jerarquía:
+#   MARCAS -> [Marca]
+#   CATEGORÍA PRINCIPAL -> SUBCATEGORÍA -> TIPO DE EQUIPO / APLICACIÓN
+# ==============================================================================
+
+[PROD-01]
+Nombre: Bomba Centrífuga Niwa WENW-50C 0.5 HP 16m - 4.2m³/h 1"
+SKU: HMC-BOM-050
+Marca: NIWA
+Taxonomía:
+  - Marca: NIWA
+  - Categoría: AGUA -> BOMBA SUPERFICIE -> BOMBAS CENTRÍFUGAS
+Imagen Principal: prod-01-bomba-centrifuga-niwa-wenw50c-principal.webp
+Imágenes Adicionales: prod-01-bomba-centrifuga-niwa-wenw50c-specs.webp
+
+[PROD-02]
+Nombre: Disco de Corte Bosch Expert Carbide Multi Wheel 4 1/2" (115 mm)
+SKU: HMC-DIS-115
+Marca: BOSCH
+Taxonomía:
+  - Marca: BOSCH
+  - Categoría: FERRETERIA -> ACCESORIO E INSUMOS -> DISCOS CORTE Y ABRASIVOS
+Imagen Principal: prod-02-disco-corte-bosch-carbide-multiwheel-principal.webp
+
+[PROD-03]
+Nombre: Martillo Demoledor Bosch GSH 11 E Professional 1500W 220V (16.8 Joules)
+SKU: HMC-DEM-150
+Marca: BOSCH
+Taxonomía:
+  - Marca: BOSCH
+  - Categoría: FERRETERIA -> HERRAMIENTAS ELECTRICAS -> MARTILLO DEMOLEDOR
+Imagen Principal: prod-03-martillo-demoledor-bosch-gsh11e-principal.webp
+
+[PROD-04]
+Nombre: Discos de Lija Bosch Expert C470 125mm Grano 120 (Pack 50 piezas)
+SKU: HMC-LIJ-120
+Marca: BOSCH
+Taxonomía:
+  - Marca: BOSCH
+  - Categoría: FERRETERIA -> ACCESORIO E INSUMOS -> DISCOS CORTE Y ABRASIVOS
+Imagen Principal: prod-04-disco-lija-bosch-expert-c470-principal.webp
+
+[PROD-05]
+Nombre: Sierra Circular Bosch GKS 235 9 1/4" 2200W 5000 RPM Heavy Duty
+SKU: HMC-SIE-235
+Marca: BOSCH
+Taxonomía:
+  - Marca: BOSCH
+  - Categoría: FERRETERIA -> HERRAMIENTAS ELECTRICAS -> SIERRA
+Imagen Principal: prod-05-sierra-circular-bosch-gks235-principal.webp
+
+[PROD-06]
+Nombre: Martillo Demoledor DeWalt D25960-AR 35 Joules 1600W Encastre Hexagonal 28mm
+SKU: HMC-DEM-035
+Marca: DEWALT
+Taxonomía:
+  - Marca: DEWALT
+  - Categoría: FERRETERIA -> HERRAMIENTAS ELECTRICAS -> MARTILLO DEMOLEDOR
+Imagen Principal: prod-06-martillo-demoledor-dewalt-d25960-principal.webp
+Imágenes Adicionales:
+  - prod-06-martillo-demoledor-dewalt-d25960-secundaria.webp
+  - prod-06-martillo-demoledor-dewalt-d25960-tercera.webp
+  - prod-06-martillo-demoledor-dewalt-d25960-cuarta.webp
+
+[PROD-07]
+Nombre: Taladro Percutor Inalámbrico Einhell TE-CD 18/44 Li-i (1x2.5Ah Power X-Change)
+SKU: HMC-TAL-018
+Marca: EINHELL
+Taxonomía:
+  - Marca: EINHELL
+  - Categoría: FERRETERIA -> HERRAMIENTAS A BATERIA -> TALADROS
+Imagen Principal: prod-07-taladro-impacto-einhell-te-cd18-principal.webp
+Imágenes Adicionales:
+  - prod-07-taladro-impacto-einhell-te-cd18-secundaria.webp
+  - prod-07-taladro-impacto-einhell-te-cd18-specs.webp
+
+[PROD-08]
+Nombre: Taladro de Percusión Bosch GSB 16 RE Professional 850W Mandril 13mm
+SKU: HMC-TAL-850
+Marca: BOSCH
+Taxonomía:
+  - Marca: BOSCH
+  - Categoría: CONSTRUCCION -> HERRAMIENTA ELECTRICA CONST. -> MARTILLO ROTOPERCUTOR
+Imagen Principal: prod-08-taladro-percusion-bosch-gsb16re-principal.webp
+
+[PROD-09]
+Nombre: Sierra Ingletadora Bosch GCM 10 X Professional 1700W 4800 RPM Disco 10"
+SKU: HMC-ING-170
+Marca: BOSCH
+Taxonomía:
+  - Marca: BOSCH
+  - Categoría: FERRETERIA -> HERRAMIENTAS ELECTRICAS -> SIERRA
+Imagen Principal: prod-09-sierra-ingletadora-bosch-gcm10x-principal.webp
+
+[PROD-10]
+Nombre: Broca Mecha SDS Plus-1 Bosch 8 x 160 mm para Hormigón y Mampostería
+SKU: HMC-MEC-081
+Marca: BOSCH
+Taxonomía:
+  - Marca: BOSCH
+  - Categoría: FERRETERIA -> ACCESORIO E INSUMOS -> MECHAS
+Imagen Principal: prod-10-mecha-sds-plus-bosch-8x160-principal.webp
+
+[PROD-11]
+Nombre: Motoguadaña Profesional Shindaiwa B530 INTL 53.2cc 2T Eje Recto
+SKU: HMC-MOT-530
+Marca: SHINDAIWA
+Taxonomía:
+  - Marca: SHINDAIWA
+  - Categoría: MAQUINA A EXPLOSION -> JARDIN -> DESMALEZADORA
+Imagen Principal: prod-11-motoguadana-shindaiwa-b530-principal.webp
+Imágenes Adicionales: prod-11-motoguadana-shindaiwa-b530-specs.webp
+
+[PROD-12]
+Nombre: Motoguadaña Sensei BD-26 25.4cc 2T Liviana y Ergonómica
+SKU: HMC-MOT-026
+Marca: SENSEI
+Taxonomía:
+  - Marca: SENSEI
+  - Categoría: MAQUINA A EXPLOSION -> JARDIN -> DESMALEZADORA
+Imagen Principal: prod-12-motoguadana-sensei-bd26-principal.webp
+Imágenes Adicionales:
+  - prod-12-motoguadana-sensei-bd26-secundaria.webp
+  - prod-12-motoguadana-sensei-bd26-specs.webp
