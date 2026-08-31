@@ -1040,6 +1040,87 @@
     <i class="fa-brands fa-whatsapp"></i>
   </a>
 
+  <!-- ========================================================================
+       19. Mobile Off-Canvas Drawer Menu (navigation-panel.tpl)
+       ======================================================================== -->
+  <div class="mobile-drawer-overlay" id="mobileDrawerOverlay"></div>
+  <aside class="mobile-drawer-menu" id="mobileDrawerMenu">
+    <div class="mobile-drawer-header">
+      <img src="assets/logos/logo-horizontal-white.png" alt="HMC HUB" class="mobile-drawer-logo">
+      <button class="mobile-drawer-close" id="mobileDrawerClose" title="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="mobile-drawer-search">
+      <form id="mobileDrawerSearchForm">
+        <input type="text" id="mobileDrawerSearchInput" placeholder="Buscar motosierras, generadores...">
+        <button type="submit" title="Buscar"><i class="fa-solid fa-magnifying-glass"></i></button>
+      </form>
+    </div>
+    <div class="mobile-drawer-nav">
+      <a href="index.html" class="mobile-nav-link-item active"><i class="fa-solid fa-house"></i> Inicio</a>
+      
+      <!-- Category Accordion -->
+      <div class="mobile-drawer-accordion-header js-drawer-accordion">
+        <span><i class="fa-solid fa-layer-group"></i> Categorías</span>
+        <i class="fa-solid fa-chevron-down"></i>
+      </div>
+      <div class="mobile-drawer-accordion-content">
+        <a href="catalog.html?category=motosierras" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> Motosierras</a>
+        <a href="catalog.html?category=generadores" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> Generadores</a>
+        <a href="catalog.html?category=hidrolavadoras" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> Hidrolavadoras & Bombas</a>
+        <a href="catalog.html?category=desmalezadoras" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> Desmalezadoras</a>
+        <a href="catalog.html?category=ferreteria" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> Ferretería & Taller</a>
+        <a href="catalog.html?category=jardineria" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> Jardinería & Agro</a>
+        <a href="catalog.html" class="mobile-subnav-link" style="font-weight: 700; color: var(--color-primary-dark);"><i class="fa-solid fa-grid-2"></i> Ver Todo el Catálogo →</a>
+      </div>
+
+      <a href="catalog.html?offers=true" class="mobile-nav-link-item"><span style="color: var(--color-danger);"><i class="fa-solid fa-bolt"></i> Ofertas Especiales</span> <span class="badge badge-discount">-16%</span></a>
+      <a href="catalog.html?brand=STIHL" class="mobile-nav-link-item"><i class="fa-solid fa-certificate"></i> Marcas Oficiales</a>
+      <a href="contact.html" class="mobile-nav-link-item"><i class="fa-solid fa-headset"></i> Contacto & Soporte</a>
+      <a href="contact.html" class="mobile-nav-link-item"><i class="fa-solid fa-store"></i> Sucursales & Retiro</a>
+    </div>
+    <div class="mobile-drawer-footer">
+      <a href="https://wa.me/5491100000000?text=Hola%20HMC%20Hub,%20necesito%20asesoramiento%20técnico" target="_blank" class="mobile-drawer-wa-card">
+        <i class="fa-brands fa-whatsapp"></i>
+        <div>
+          <div>Asesoría Técnica Directa</div>
+          <small style="font-weight: 400; color: #555;">Respuesta inmediata de mecánicos</small>
+        </div>
+      </a>
+      <div style="font-size: 0.78rem; color: #777; text-align: center;">
+        📍 Sucursales Zárate & Munro | Factura A y B
+      </div>
+    </div>
+  </aside>
+
+  <!-- ========================================================================
+       20. Mobile Bottom App Bar
+       ======================================================================== -->
+  <div class="mobile-bottom-nav">
+    <a href="index.html" class="mobile-nav-btn active">
+      <i class="fa-solid fa-house"></i>
+      <span>Inicio</span>
+    </a>
+    <a href="catalog.html" class="mobile-nav-btn">
+      <i class="fa-solid fa-layer-group"></i>
+      <span>Catálogo</span>
+    </a>
+    <a href="https://wa.me/5491100000000?text=Hola%20HMC%20Hub,%20necesito%20asesoramiento" target="_blank" class="mobile-nav-btn mobile-nav-wa">
+      <i class="fa-brands fa-whatsapp"></i>
+      <span>Asesoría</span>
+    </a>
+    <button class="mobile-nav-btn js-open-cart">
+      <div style="position: relative; display: inline-block;">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span class="cart-count-badge js-cart-count">1</span>
+      </div>
+      <span>Carrito</span>
+    </button>
+    <button class="mobile-nav-btn js-open-mobile-menu">
+      <i class="fa-solid fa-bars"></i>
+      <span>Menú</span>
+    </button>
+  </div>
+
   <!-- Application Logic -->
   <script src="js/app.js"></script>
 </body>

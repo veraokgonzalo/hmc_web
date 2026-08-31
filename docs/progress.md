@@ -54,3 +54,18 @@ Se rediseñó y modularizó el boceto web en páginas independientes interconect
   - Live Search con sugerencias visuales y redirección a `catalog.html?q=...`.
   - Quick View Modal reutilizable en cualquier grilla de productos.
   - Notificaciones tipo Toast.
+
+### 3. Experiencia Móvil de Primera Clase (Mobile UI/UX) - IMPLEMENTADO & PULIDO
+- **Barra de Navegación Inferior Estilo App (`.mobile-bottom-nav`)**: Fija en la parte inferior de la pantalla en móviles (< 768px) con accesos a *Inicio*, *Catálogo*, *Asesoría WhatsApp*, *Carrito con contador reactivo* y *Menú*.
+- **Menú Off-Canvas Desplegable (`#mobileDrawerMenu`)**: Menú lateral deslizable con buscador integrado, acordeón de categorías, accesos rápidos a ofertas, marcas oficiales, contacto y tarjeta de WhatsApp.
+- **Filtros en Hoja Deslizable en Catálogo**: Botón flotante *"Filtrar y Ordenar"* que abre los filtros en formato modal/drawer optimizado para pantallas táctiles.
+- **Sticky Buy Bar en Ficha de Producto (`.mobile-sticky-buy-bar`)**: Barra flotante inferior que aparece al hacer scroll en producto mostrando miniatura, precio y botón de compra inmediata.
+- **Grillas de Producto Táctiles en 2 Columnas**: Tarjetas compactas con tipografía adaptada, etiquetas de descuento legibles y botones táctiles optimizados (mínimo 44px).
+- **Transformación de Tabla de Carrito a Tarjetas Móviles**: El carrito convierte la tabla tradicional en tarjetas individuales con controles de cantidad y eliminación sin scroll horizontal.
+- **Soporte de Gestos Táctiles (Touch Swipe)**: Deslizamiento horizontal táctil en el Hero Slider principal.
+- **Correcciones de Viewport & Zero-Overflow**:
+  - Se corrigió el desborde horizontal causado por los textos de cabecera (`.d-none-mobile`) y la barra de herramientas del catálogo (`.catalog-toolbar-actions`).
+  - Se aseguró el 100% de ancho real para el footer negro (`.footer-main`) y contenedores.
+  - Se reparó el cierre de bloques en `boceto_web/js/app.js` restaurando la carga dinámica del catálogo y filtros.
+
+
