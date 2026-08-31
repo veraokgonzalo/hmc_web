@@ -5,6 +5,7 @@
 
 document.addEventListener('DOMContentLoaded', () => {
   // Global Components
+  syncNavigationActiveState();
   initCartSystem();
   initLiveSearch();
   initQuickViewModal();
@@ -36,6 +37,70 @@ document.addEventListener('DOMContentLoaded', () => {
     initContactPage();
   }
 });
+
+/* --------------------------------------------------------------------------
+   0. Global Navigation State Synchronization (Active State Engine)
+   -------------------------------------------------------------------------- */
+function syncNavigationActiveState() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const pathname = window.location.pathname;
+  const isOffers = urlParams.get('offers') === 'true';
+  const brandParam = urlParams.get('brand');
+  const categoryParam = urlParams.get('category') || urlParams.get('cat');
+
+  // Clear all desktop active nav items
+  document.querySelectorAll('.nav-list .nav-item').forEach(item => item.classList.remove('active'));
+  // Clear all mobile drawer active links
+  document.querySelectorAll('.mobile-drawer-nav .mobile-nav-link-item').forEach(item => item.classList.remove('active'));
+
+  if (pathname.includes('about.html')) {
+    document.querySelectorAll('.nav-item a[href*="about.html"]').forEach(a => a.parentElement.classList.add('active'));
+    document.querySelectorAll('.mobile-nav-link-item[href*="about.html"]').forEach(a => a.classList.add('active'));
+  } else if (pathname.includes('contact.html')) {
+    document.querySelectorAll('.nav-item a[href*="contact.html"]').forEach(a => a.parentElement.classList.add('active'));
+    document.querySelectorAll('.mobile-nav-link-item[href*="contact.html"]').forEach(a => a.classList.add('active'));
+  } else if (pathname.includes('cart.html')) {
+    // Full cart view
+  } else if (pathname.includes('catalog.html')) {
+    if (isOffers) {
+      // 1. Activate "Ofertas" in desktop navbar
+      document.querySelectorAll('.nav-item a[href*="offers=true"]').forEach(a => a.parentElement.classList.add('active'));
+      // 2. Activate "Ofertas" in mobile drawer
+      document.querySelectorAll('.mobile-nav-link-item[href*="offers=true"]').forEach(a => a.classList.add('active'));
+      
+      // 3. Update Title & Breadcrumbs
+      document.title = 'Ofertas Especiales & Oportunidades | HMC HUB';
+      const breadcrumbEl = document.getElementById('catalogBreadcrumbCurrent');
+      if (breadcrumbEl) breadcrumbEl.textContent = 'Ofertas Especiales';
+
+      // 4. Show Promo Banner
+      const promoBanner = document.getElementById('catalogOffersPromoBanner');
+      if (promoBanner) promoBanner.style.display = 'block';
+    } else if (brandParam) {
+      // 1. Activate "Marcas" in navbar
+      document.querySelectorAll('.nav-item a[href*="brand="]').forEach(a => a.parentElement.classList.add('active'));
+      document.querySelectorAll('.mobile-nav-link-item[href*="brand="]').forEach(a => a.classList.add('active'));
+      
+      // 2. Update Title & Breadcrumbs
+      document.title = `Equipos ${brandParam} Oficial | HMC HUB`;
+      const breadcrumbEl = document.getElementById('catalogBreadcrumbCurrent');
+      if (breadcrumbEl) breadcrumbEl.textContent = `Marcas: ${brandParam}`;
+    } else {
+      // Standard catalog / category view
+      document.querySelectorAll('.nav-item a[href="catalog.html"]').forEach(a => a.parentElement.classList.add('active'));
+      if (categoryParam) {
+        const catProd = PRODUCT_CATALOG.find(p => p.category === categoryParam);
+        const catName = catProd ? catProd.categoryName : categoryParam;
+        document.title = `${catName} | HMC HUB`;
+        const breadcrumbEl = document.getElementById('catalogBreadcrumbCurrent');
+        if (breadcrumbEl) breadcrumbEl.textContent = catName;
+      }
+    }
+  } else if (pathname.includes('index.html') || pathname.endsWith('/') || pathname === '') {
+    document.querySelectorAll('.nav-item a[href*="index.html"]').forEach(a => a.parentElement.classList.add('active'));
+    document.querySelectorAll('.mobile-nav-link-item[href*="index.html"]').forEach(a => a.classList.add('active'));
+  }
+}
 
 /* --------------------------------------------------------------------------
    1. Master Product Database
@@ -1038,6 +1103,11 @@ function initCatalogPage() {
       results.sort((a, b) => (b.discount || 0) - (a.discount || 0));
     } else if (sortVal === 'name-asc') {
       results.sort((a, b) => a.name.localeCompare(b.name));
+    }
+
+    const promoBanner = document.getElementById('catalogOffersPromoBanner');
+    if (promoBanner) {
+      promoBanner.style.display = onlyOffers ? 'block' : 'none';
     }
 
     renderCatalogResults(results);

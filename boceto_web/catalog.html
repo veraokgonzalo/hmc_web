@@ -157,10 +157,10 @@
   <!-- 4. Breadcrumbs Navigation -->
   <div class="breadcrumbs-section">
     <div class="container">
-      <div class="breadcrumb-list">
+      <div class="breadcrumb-list" id="catalogBreadcrumbs">
         <div class="breadcrumb-item"><a href="index.html">Inicio</a></div>
         <div class="breadcrumb-sep"><i class="fa-solid fa-chevron-right"></i></div>
-        <div class="breadcrumb-item active">Catálogo de Productos</div>
+        <div class="breadcrumb-item active" id="catalogBreadcrumbCurrent">Catálogo de Productos</div>
       </div>
     </div>
   </div>
@@ -168,6 +168,23 @@
   <!-- 5. Catalog Layout Main Section -->
   <main class="catalog-page-section" id="catalogPageLayout">
     <div class="container">
+
+      <!-- Dynamic Promotional Offers Banner (Shown when ?offers=true) -->
+      <div id="catalogOffersPromoBanner" class="catalog-offers-banner" style="display: none;">
+        <div class="catalog-offers-banner-inner">
+          <div>
+            <div class="section-tag" style="background: rgba(220, 38, 38, 0.2); color: #ff6b6b; margin-bottom: 8px;">
+              <i class="fa-solid fa-bolt"></i> Oportunidades por Tiempo Limitado
+            </div>
+            <h1 class="catalog-offers-title">Liquidación & Ofertas Especiales</h1>
+            <p class="catalog-offers-desc">Equipos de primeras marcas con hasta <strong>16% OFF</strong>, <strong>6 cuotas fijas</strong> sin interés y garantía oficial de fábrica.</p>
+          </div>
+          <div class="catalog-offers-pill">
+            <i class="fa-solid fa-tags"></i> Precios Promocionales
+          </div>
+        </div>
+      </div>
+
       <div class="catalog-layout">
         
         <!-- Left Filter Sidebar -->
