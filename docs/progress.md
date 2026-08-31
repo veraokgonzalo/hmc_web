@@ -106,3 +106,8 @@ Se rediseñó y modularizó el boceto web en páginas independientes interconect
   - **Grilla Amplia en 6 Columnas**: Distribución alfabética integral con scroll suave personalizado, mostrando las 103 marcas con sus respectivos badges de distribución oficial.
   - **Pie de Confianza**: Sello de garantía de fábrica, provisión de repuestos legítimos y enlace al catálogo general.
 - **Sincronización Total**: Actualizado en `app.js`, `styles.css` y las 6 plantillas HTML (`index.html`, `catalog.html`, `product.html`, `cart.html`, `contact.html`, `about.html`).
+
+### 9. Arquitectura Modular de Navegación (Única Fuente de Verdad) - IMPLEMENTADO
+- **Componente Global Centralizado (`renderGlobalNavigation()`)**: Se unificó toda la estructura de navegación (Top Announcement Bar, Cabecera principal con buscador en tiempo real, Mega-menús de Categorías y Marcas de 103 fabricantes, Menú móvil Drawer y Bottom App Bar) dentro de `boceto_web/js/app.js`.
+- **Eliminación de Código Duplicado**: Se reemplazaron más de 1.200 líneas de HTML repetido en [`index.html`](../boceto_web/index.html), [`catalog.html`](../boceto_web/catalog.html), [`product.html`](../boceto_web/product.html), [`cart.html`](../boceto_web/cart.html), [`contact.html`](../boceto_web/contact.html) y [`about.html`](../boceto_web/about.html) por contenedores modulares `<div id="globalNavigation"></div>` y `<div id="globalMobileNavigation"></div>`.
+- **Mantenimiento Simplificado**: Cualquier cambio futuro en el menú, enlaces o categorías se realiza en un solo lugar y se propaga automáticamente a todas las vistas.
