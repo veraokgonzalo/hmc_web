@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HMC HUB | Todo lo que mueve tu obra, tu campo, tu casa o tu negocio</title>
+  <meta name="description" content="HMC Hub - Respaldo técnico, trayectoria y asesoramiento especializado en maquinaria, herramientas, generadores y equipos para la obra, el agro y el hogar.">
+  
+  <!-- Google Fonts: Chakra Petch (Headings - alternativa oficial de Quedora) & Inter (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,500;0,600;0,700;0,800;1,700&family=Inter:wght@300;400;500;600;700;800&family=Rajdhani:wght@600;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ========================================================================
+       1. Top Advertising Bar (header-advertising.tpl)
+       ======================================================================== -->
+  <div class="top-bar">
+    <div class="container top-bar-inner">
+      <div class="top-bar-slider">
+        <i class="fa-solid fa-truck-fast"></i>
+        <span><strong>ENVÍOS A TODO EL PAÍS</strong> — Asesoramiento técnico directo en cada compra</span>
+      </div>
+      <div class="top-bar-links">
+        <a href="https://wa.me/5491100000000" target="_blank" class="top-bar-link">
+          <i class="fa-brands fa-whatsapp text-primary"></i> Asesoría WhatsApp
+        </a>
+        <span style="opacity: 0.3;">|</span>
+        <a href="#contacto" class="top-bar-link">
+          <i class="fa-solid fa-location-dot"></i> Sucursales y Retiro
+        </a>
+        <span style="opacity: 0.3;">|</span>
+        <span class="top-bar-link">
+          <i class="fa-solid fa-file-invoice"></i> Factura A y B
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       2. Main Header (header.tpl)
+       ======================================================================== -->
+  <header class="header-main">
+    <div class="container header-inner">
+      
+      <!-- Brand Logo (docs/design.md §1: Variante Horizontal a Color) -->
+      <div class="logo-container">
+        <a href="#" class="logo-link">
+          <img src="assets/logos/logo-horizontal-color.png" alt="HMC HUB" class="logo-img">
+        </a>
+      </div>
+
+      <!-- Live Search Form -->
+      <div class="header-search">
+        <form class="search-form" onsubmit="event.preventDefault();">
+          <input type="text" id="mainSearchInput" class="search-input" placeholder="Buscar motosierras, generadores, hidrolavadoras..." autocomplete="off">
+          <button type="submit" class="search-btn" title="Buscar">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </form>
+        <!-- Search Results Dropdown -->
+        <div id="searchDropdown" class="search-dropdown">
+          <div class="search-dropdown-header">Sugerencias destacadas</div>
+          <div id="searchResultsList"></div>
+        </div>
+      </div>
+
+      <!-- Header Utility Actions -->
+      <div class="header-utilities">
+        <a href="https://wa.me/5491100000000" target="_blank" class="utility-btn" style="color: var(--color-primary-dark);" title="Asesoramiento Técnico">
+          <i class="fa-brands fa-whatsapp"></i>
+          <span class="d-none-mobile">Asesoría Técnica</span>
+        </a>
+        <a href="#login" class="utility-btn" title="Mi Cuenta">
+          <i class="fa-regular fa-user"></i>
+          <span class="d-none-mobile">Mi Cuenta</span>
+        </a>
+        <button class="utility-btn js-open-cart" title="Carrito de Compras">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span class="d-none-mobile">Carrito</span>
+          <span class="cart-count-badge js-cart-count">1</span>
+        </button>
+        <button class="mobile-menu-toggle" id="mobileMenuToggle" title="Abrir Menú">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       3. Main Navigation Bar with Mega-Dropdown (navigation.tpl)
+       ======================================================================== -->
+  <nav class="nav-bar">
+    <div class="container nav-inner">
+      <ul class="nav-list">
+        <li class="nav-item active">
+          <a href="#" class="nav-link"><i class="fa-solid fa-house"></i> Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a href="#categorias" class="nav-link">
+            Categorías <i class="fa-solid fa-chevron-down" style="font-size: 0.75em; margin-left: 2px;"></i>
+          </a>
+          <!-- Mega Dropdown -->
+          <div class="mega-dropdown">
+            <div class="mega-column">
+              <h4>Maquinaria Forestal</h4>
+              <ul class="mega-links">
+                <li><a href="#catalog"><i class="fa-solid fa-angle-right"></i> Motosierras Nafteras</a></li>
+                <li><a href="#catalog"><i class="fa-solid fa-angle-right"></i> Motosierras Eléctricas</a></li>
+                <li><a href="#catalog"><i class="fa-solid fa-angle-right"></i> Espadas y Cadenas</a></li>
+                <li><a href="#catalog"><i class="fa-solid fa-angle-right"></i> Aceites y Lubricantes</a></li>
+              </ul>
+            </div>
+            <div class="mega-column">
+              <h4>Energía y Bombeo</h4>
+              <ul class="mega-links">
+                <li><a href="#catalog"><i class="fa-solid fa-angle-right"></i> Generadores Nafteros</a></li>
+                <li><a href="#catalog"><i class="fa-solid fa-angle-right"></i> Grupos Diésel Pesados</a></li>
+                <li><a href="#catalog"><i class="fa-solid fa-angle-right"></i> Motobombas de Agua</a></li>
+                <li><a href="#catalog"><i class="fa-solid fa-angle-right"></i> Bombas Sumergibles</a></li>
+              </ul>
+            </div>
+            <div class="mega-column">
+              <h4>Parques y Limpieza</h4>
+              <ul class="mega-links">
+                <li><a href="#catalog"><i class="fa-solid fa-angle-right"></i> Hidrolavadoras Alta Presión</a></li>
+                <li><a href="#catalog"><i class="fa-solid fa-angle-right"></i> Desmalezadoras Eje Recto</a></li>
+                <li><a href="#catalog"><i class="fa-solid fa-angle-right"></i> Cortadoras de Césped</a></li>
+                <li><a href="#catalog"><i class="fa-solid fa-angle-right"></i> Fumigadores y Rociadores</a></li>
+              </ul>
+            </div>
+            <div class="mega-banner">
+              <img src="assets/images/hero/hero-slide-1.jpg" alt="Equipos Destacados">
+              <h5>Línea Profesional</h5>
+              <p style="font-size: 0.78rem; color: #666; margin-bottom: 8px;">Garantía oficial y servicio de puesta en marcha.</p>
+              <a href="#catalog" class="btn btn-primary btn-sm">Ver Catálogo</a>
+            </div>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a href="#ofertas" class="nav-link has-badge">Ofertas</a>
+        </li>
+        <li class="nav-item">
+          <a href="#marcas" class="nav-link">Marcas</a>
+        </li>
+        <li class="nav-item">
+          <a href="#video-showcase" class="nav-link">Equipos en Acción</a>
+        </li>
+        <li class="nav-item">
+          <a href="#nosotros" class="nav-link">Nosotros & Respaldo</a>
+        </li>
+        <li class="nav-item">
+          <a href="#contacto" class="nav-link">Contacto</a>
+        </li>
+      </ul>
+
+      <!-- Direct Technical Advice Link -->
+      <a href="https://wa.me/5491100000000" target="_blank" class="nav-support-link">
+        <i class="fa-solid fa-screwdriver-wrench"></i> Servicio Técnico Oficial
+      </a>
+    </div>
+  </nav>
+
+  <!-- ========================================================================
+       4. Hero Slider (slideshow.tpl - docs/specs.md §2)
+       ======================================================================== -->
+  <section class="hero-slider-section">
+    <div class="hero-slider-wrapper">
+      
+      <!-- Slide 1: Ofertas de Temporada (spec §2) -->
+      <div class="hero-slide active">
+        <img src="assets/images/hero/hero-slide-1.jpg" alt="Ofertas de temporada HMC Hub" class="hero-slide-bg">
+        <div class="hero-slide-overlay"></div>
+        <div class="container">
+          <div class="hero-content">
+            <div class="hero-badge"><i class="fa-solid fa-bolt"></i> Oportunidades de Temporada</div>
+            <h1 class="hero-title">Potencia y Rendimiento <span>Para Tu Trabajo</span></h1>
+            <p class="hero-description">Descuentos en herramientas y maquinaria pesada seleccionada. Equipos testeados para resistir la máxima exigencia en obra y campo.</p>
+            <div class="hero-buttons">
+              <a href="#ofertas" class="btn btn-primary btn-lg">
+                <i class="fa-solid fa-tag"></i> Ver Ofertas Especiales
+              </a>
+              <a href="https://wa.me/5491100000000" target="_blank" class="btn btn-secondary btn-lg">
+                <i class="fa-brands fa-whatsapp"></i> Consultar a un Técnico
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2: Institucional / Propuesta Central de Marca (docs/design.md & specs.md) -->
+      <div class="hero-slide">
+        <img src="assets/images/hero/hero-slide-2.jpg" alt="Respaldo técnico HMC Hub" class="hero-slide-bg">
+        <div class="hero-slide-overlay"></div>
+        <div class="container">
+          <div class="hero-content">
+            <div class="hero-badge" style="background-color: var(--color-black); border: 1px solid var(--color-primary);"><i class="fa-solid fa-shield-check"></i> Trayectoria y Confianza</div>
+            <h1 class="hero-title">Todo lo que mueve tu obra, tu campo, tu casa <span>o tu negocio</span></h1>
+            <p class="hero-description">HMC no compite por precio, compite por respaldo técnico, trayectoria y asesoramiento especializado antes y después de cada compra.</p>
+            <div class="hero-buttons">
+              <a href="#catalog" class="btn btn-primary btn-lg">
+                <i class="fa-solid fa-layer-group"></i> Explorar Catálogo
+              </a>
+              <a href="#nosotros" class="btn btn-secondary btn-lg">
+                <i class="fa-solid fa-circle-info"></i> Conocé HMC Hub
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3: Servicio Técnico y Postventa -->
+      <div class="hero-slide">
+        <img src="assets/images/hero/hero-slide-3.jpg" alt="Servicio Técnico Oficial HMC Hub" class="hero-slide-bg">
+        <div class="hero-slide-overlay"></div>
+        <div class="container">
+          <div class="hero-content">
+            <div class="hero-badge"><i class="fa-solid fa-wrench"></i> Soporte Integral</div>
+            <h1 class="hero-title">Servicio Técnico Oficial <span>& Repuestos Originales</span></h1>
+            <p class="hero-description">Garantía total de fábrica, puesta en marcha guiada y mantenimiento preventivo para que tus equipos nunca detengan tu producción.</p>
+            <div class="hero-buttons">
+              <a href="https://wa.me/5491100000000" target="_blank" class="btn btn-primary btn-lg">
+                <i class="fa-solid fa-headset"></i> Solicitar Asistencia
+              </a>
+              <a href="#marcas" class="btn btn-secondary btn-lg">
+                <i class="fa-solid fa-certificate"></i> Marcas Oficiales
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Slider Navigation Buttons -->
+    <div class="hero-slider-nav">
+      <button class="hero-slider-btn hero-prev-btn" title="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+      <button class="hero-slider-btn hero-next-btn" title="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
+    </div>
+
+    <!-- Slider Dots -->
+    <div class="hero-slider-dots">
+      <div class="hero-dot active"></div>
+      <div class="hero-dot"></div>
+      <div class="hero-dot"></div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       5. Propuesta de Valor / 4 Pilares (icon-text.tpl - docs/specs.md §3)
+       ======================================================================== -->
+  <section class="value-props-section">
+    <div class="container">
+      <div class="value-props-grid">
+        
+        <!-- Pilar 1: Asesoramiento Técnico (Diferencial Central) -->
+        <div class="value-prop-card">
+          <div class="value-prop-icon">
+            <i class="fa-solid fa-headset"></i>
+          </div>
+          <div>
+            <h4 class="value-prop-title">Asesoramiento Técnico</h4>
+            <p class="value-prop-desc">Te ayudamos a elegir el equipo exacto para tu necesidad y dimensionamiento.</p>
+          </div>
+        </div>
+
+        <!-- Pilar 2: Envíos a Todo el País -->
+        <div class="value-prop-card">
+          <div class="value-prop-icon">
+            <i class="fa-solid fa-truck-ramp-box"></i>
+          </div>
+          <div>
+            <h4 class="value-prop-title">Envíos a Todo el País</h4>
+            <p class="value-prop-desc">Coordinamos la logística segura y rápida con seguimiento hasta tu puerta.</p>
+          </div>
+        </div>
+
+        <!-- Pilar 3: Medios de Pago & Financiación -->
+        <div class="value-prop-card">
+          <div class="value-prop-icon">
+            <i class="fa-solid fa-credit-card"></i>
+          </div>
+          <div>
+            <h4 class="value-prop-title">Medios de Pago</h4>
+            <p class="value-prop-desc">Cuotas sin interés, tarjetas bancarias, transferencia y cheques para empresas.</p>
+          </div>
+        </div>
+
+        <!-- Pilar 4: Garantía y Postventa -->
+        <div class="value-prop-card">
+          <div class="value-prop-icon">
+            <i class="fa-solid fa-shield-halved"></i>
+          </div>
+          <div>
+            <h4 class="value-prop-title">Garantía y Postventa</h4>
+            <p class="value-prop-desc">Respaldo directo de fábrica, servicio técnico propio y repuestos garantizados.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       6. Categorías Destacadas (featured-categories.tpl - docs/specs.md §4)
+       ======================================================================== -->
+  <section class="section-padding categories-section" id="categorias">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag"><i class="fa-solid fa-grid-2"></i> Catálogo Completo</div>
+        <h2 class="section-title">Categorías Principales</h2>
+        <p class="section-subtitle">Equipamiento diseñado para el trabajo pesado en obras de construcción, mantenimiento de campos, industrias y hogares.</p>
+      </div>
+
+      <div class="categories-grid">
+        
+        <div class="category-card" onclick="location.href='#catalog'">
+          <div class="category-img-wrapper">
+            <img src="assets/images/categories/DSC00883.jpg" alt="Motosierras" class="category-img">
+          </div>
+          <h3 class="category-name">Motosierras</h3>
+          <span class="category-count">24 Productos</span>
+        </div>
+
+        <div class="category-card" onclick="location.href='#catalog'">
+          <div class="category-img-wrapper">
+            <img src="assets/images/categories/DSC00887.jpg" alt="Generadores" class="category-img">
+          </div>
+          <h3 class="category-name">Generadores</h3>
+          <span class="category-count">18 Productos</span>
+        </div>
+
+        <div class="category-card" onclick="location.href='#catalog'">
+          <div class="category-img-wrapper">
+            <img src="assets/images/categories/DSC00893.jpg" alt="Hidrolavadoras" class="category-img">
+          </div>
+          <h3 class="category-name">Hidrolavadoras</h3>
+          <span class="category-count">16 Productos</span>
+        </div>
+
+        <div class="category-card" onclick="location.href='#catalog'">
+          <div class="category-img-wrapper">
+            <img src="assets/images/categories/DSC00903.jpg" alt="Desmalezadoras" class="category-img">
+          </div>
+          <h3 class="category-name">Desmalezadoras</h3>
+          <span class="category-count">20 Productos</span>
+        </div>
+
+        <div class="category-card" onclick="location.href='#catalog'">
+          <div class="category-img-wrapper">
+            <img src="assets/images/categories/DSC00909.jpg" alt="Ferretería Industrial" class="category-img">
+          </div>
+          <h3 class="category-name">Ferretería</h3>
+          <span class="category-count">45 Productos</span>
+        </div>
+
+        <div class="category-card" onclick="location.href='#catalog'">
+          <div class="category-img-wrapper">
+            <img src="assets/images/categories/DSC00915.jpg" alt="Jardinería y Agro" class="category-img">
+          </div>
+          <h3 class="category-name">Jardinería & Agro</h3>
+          <span class="category-count">32 Productos</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       7. Ofertas con Countdown (timer-offers.tpl - docs/specs.md §5)
+       ======================================================================== -->
+  <section class="section-padding timer-offers-section" id="ofertas">
+    <div class="container">
+      
+      <!-- Countdown Header Banner -->
+      <div class="timer-banner">
+        <div class="timer-banner-info">
+          <div class="section-tag dark"><i class="fa-solid fa-clock"></i> Tiempo Limitado</div>
+          <h3>Ofertas Especiales de Temporada</h3>
+          <p>Aprovechá descuentos exclusivos y financiación en cuotas fijas antes de que finalice la promoción.</p>
+        </div>
+
+        <!-- Live Clock Display -->
+        <div class="countdown-clock">
+          <div class="countdown-segment">
+            <div class="countdown-box" id="cd-days">04</div>
+            <span class="countdown-label">Días</span>
+          </div>
+          <span class="countdown-sep">:</span>
+          <div class="countdown-segment">
+            <div class="countdown-box" id="cd-hours">18</div>
+            <span class="countdown-label">Horas</span>
+          </div>
+          <span class="countdown-sep">:</span>
+          <div class="countdown-segment">
+            <div class="countdown-box" id="cd-mins">32</div>
+            <span class="countdown-label">Min</span>
+          </div>
+          <span class="countdown-sep">:</span>
+          <div class="countdown-segment">
+            <div class="countdown-box" id="cd-secs">45</div>
+            <span class="countdown-label">Seg</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Offers Product Grid -->
+      <div class="offers-grid">
+        
+        <!-- Offer Card 1 -->
+        <div class="product-card">
+          <div class="product-badge-group">
+            <span class="badge badge-discount">-16% OFF</span>
+            <span class="badge badge-shipping"><i class="fa-solid fa-truck-fast"></i> Envío Gratis</span>
+          </div>
+          <button class="product-wishlist-btn" onclick="showToast('Guardado en favoritos')" title="Favorito">
+            <i class="fa-regular fa-heart"></i>
+          </button>
+          <div class="product-image-box">
+            <img src="assets/images/products/DSC00883.jpg" alt="Motosierra STIHL" class="product-img">
+            <div class="product-quick-actions">
+              <button class="btn-quick-view" onclick="hmcOpenQuickView(1)">
+                <i class="fa-solid fa-eye"></i> Vista Rápida
+              </button>
+            </div>
+          </div>
+          <div class="product-details">
+            <div class="product-brand">STIHL</div>
+            <h4 class="product-name">Motosierra Profesional 52cc Espada 20" Motor 2T</h4>
+            <div class="product-price-box">
+              <div>
+                <span class="price-old">$419.990</span>
+                <span class="price-current">$349.990</span>
+              </div>
+              <div class="installments-info">
+                <i class="fa-solid fa-credit-card"></i> <strong>6 cuotas</strong> sin interés
+              </div>
+            </div>
+            <button class="btn btn-primary btn-add-to-cart" onclick="hmcAddToCart(1)">
+              <i class="fa-solid fa-cart-plus"></i> Comprar Ahora
+            </button>
+          </div>
+        </div>
+
+        <!-- Offer Card 2 -->
+        <div class="product-card">
+          <div class="product-badge-group">
+            <span class="badge badge-discount">-10% OFF</span>
+            <span class="badge badge-shipping"><i class="fa-solid fa-truck-fast"></i> Envío Gratis</span>
+          </div>
+          <button class="product-wishlist-btn" onclick="showToast('Guardado en favoritos')" title="Favorito">
+            <i class="fa-regular fa-heart"></i>
+          </button>
+          <div class="product-image-box">
+            <img src="assets/images/products/DSC00887.jpg" alt="Generador HONDA" class="product-img">
+            <div class="product-quick-actions">
+              <button class="btn-quick-view" onclick="hmcOpenQuickView(2)">
+                <i class="fa-solid fa-eye"></i> Vista Rápida
+              </button>
+            </div>
+          </div>
+          <div class="product-details">
+            <div class="product-brand">HONDA</div>
+            <h4 class="product-name">Generador Eléctrico 6.5 KVA Monofásico Naftero</h4>
+            <div class="product-price-box">
+              <div>
+                <span class="price-old">$990.000</span>
+                <span class="price-current">$890.500</span>
+              </div>
+              <div class="installments-info">
+                <i class="fa-solid fa-credit-card"></i> <strong>6 cuotas</strong> sin interés
+              </div>
+            </div>
+            <button class="btn btn-primary btn-add-to-cart" onclick="hmcAddToCart(2)">
+              <i class="fa-solid fa-cart-plus"></i> Comprar Ahora
+            </button>
+          </div>
+        </div>
+
+        <!-- Offer Card 3 -->
+        <div class="product-card">
+          <div class="product-badge-group">
+            <span class="badge badge-discount">-16% OFF</span>
+            <span class="badge badge-shipping"><i class="fa-solid fa-truck-fast"></i> Envío Gratis</span>
+          </div>
+          <button class="product-wishlist-btn" onclick="showToast('Guardado en favoritos')" title="Favorito">
+            <i class="fa-regular fa-heart"></i>
+          </button>
+          <div class="product-image-box">
+            <img src="assets/images/products/DSC00893.jpg" alt="Hidrolavadora BOSCH" class="product-img">
+            <div class="product-quick-actions">
+              <button class="btn-quick-view" onclick="hmcOpenQuickView(3)">
+                <i class="fa-solid fa-eye"></i> Vista Rápida
+              </button>
+            </div>
+          </div>
+          <div class="product-details">
+            <div class="product-brand">BOSCH</div>
+            <h4 class="product-name">Hidrolavadora Alta Presión 180 Bar Profesional</h4>
+            <div class="product-price-box">
+              <div>
+                <span class="price-old">$345.000</span>
+                <span class="price-current">$289.000</span>
+              </div>
+              <div class="installments-info">
+                <i class="fa-solid fa-credit-card"></i> <strong>6 cuotas</strong> sin interés
+              </div>
+            </div>
+            <button class="btn btn-primary btn-add-to-cart" onclick="hmcAddToCart(3)">
+              <i class="fa-solid fa-cart-plus"></i> Comprar Ahora
+            </button>
+          </div>
+        </div>
+
+        <!-- Offer Card 4 -->
+        <div class="product-card">
+          <div class="product-badge-group">
+            <span class="badge badge-discount">-15% OFF</span>
+            <span class="badge badge-shipping"><i class="fa-solid fa-truck-fast"></i> Envío Gratis</span>
+          </div>
+          <button class="product-wishlist-btn" onclick="showToast('Guardado en favoritos')" title="Favorito">
+            <i class="fa-regular fa-heart"></i>
+          </button>
+          <div class="product-image-box">
+            <img src="assets/images/products/DSC00903.jpg" alt="Desmalezadora HUSQVARNA" class="product-img">
+            <div class="product-quick-actions">
+              <button class="btn-quick-view" onclick="hmcOpenQuickView(4)">
+                <i class="fa-solid fa-eye"></i> Vista Rápida
+              </button>
+            </div>
+          </div>
+          <div class="product-details">
+            <div class="product-brand">HUSQVARNA</div>
+            <h4 class="product-name">Desmalezadora Naftera 52cc 2T Profesional Eje Recto</h4>
+            <div class="product-price-box">
+              <div>
+                <span class="price-old">$365.000</span>
+                <span class="price-current">$310.000</span>
+              </div>
+              <div class="installments-info">
+                <i class="fa-solid fa-credit-card"></i> <strong>6 cuotas</strong> sin interés
+              </div>
+            </div>
+            <button class="btn btn-primary btn-add-to-cart" onclick="hmcAddToCart(4)">
+              <i class="fa-solid fa-cart-plus"></i> Comprar Ahora
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       8. Bloque Nuevo / Showcase Destacado (home-new-block.tpl)
+       ======================================================================== -->
+  <section class="showcase-block-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag"><i class="fa-solid fa-star"></i> Soluciones Especializadas</div>
+        <h2 class="section-title">Tecnología y Respaldo Para Cada Sector</h2>
+        <p class="section-subtitle">Contamos con líneas específicas para cada requerimiento: desde herramientas de taller hasta maquinaria pesada para el agro.</p>
+      </div>
+
+      <div class="showcase-grid">
+        
+        <!-- Showcase Card 1 -->
+        <div class="showcase-card">
+          <img src="assets/images/hero/banner-promo.jpg" alt="Línea Profesional e Industrial" class="showcase-bg">
+          <div class="showcase-overlay"></div>
+          <span class="showcase-tag">Uso Continuo</span>
+          <h3 class="showcase-title">Línea Profesional e Industrial</h3>
+          <p class="showcase-desc">Generadores de alta capacidad, compresores industriales y maquinaria pesada para empresas constructoras y agropecuarias.</p>
+          <div>
+            <a href="#catalog" class="btn btn-primary">
+              <i class="fa-solid fa-arrow-right"></i> Ver Línea Industrial
+            </a>
+          </div>
+        </div>
+
+        <!-- Showcase Card 2 -->
+        <div class="showcase-card">
+          <img src="assets/images/hero/banner-tech.jpg" alt="Soluciones para el Campo y Hogar" class="showcase-bg">
+          <div class="showcase-overlay"></div>
+          <span class="showcase-tag">Hogar & Parque</span>
+          <h3 class="showcase-title">Soluciones para Campo y Jardín</h3>
+          <p class="showcase-desc">Motosierras, cortadoras de césped, motobombas e hidrolavadoras de fácil arranque y mantenimiento garantizado.</p>
+          <div>
+            <a href="#catalog" class="btn btn-secondary">
+              <i class="fa-solid fa-arrow-right"></i> Ver Línea Jardín
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       9. Video Showcase / Equipos en Acción (home-video.tpl)
+       ======================================================================== -->
+  <section class="section-padding video-section" id="video-showcase">
+    <div class="container">
+      <div class="video-container">
+        
+        <!-- Video Information -->
+        <div class="video-info">
+          <div class="section-tag dark"><i class="fa-solid fa-play"></i> En Acción</div>
+          <h2>Probamos Cada Equipo en Condiciones Reales de Trabajo</h2>
+          <p>En HMC Hub entendemos el valor del tiempo en obra. Por eso testeamos el arranque, la potencia y la durabilidad de nuestras máquinas antes de entregarlas.</p>
+          
+          <div class="video-features-list">
+            <div class="video-feature-item">
+              <i class="fa-solid fa-circle-check"></i>
+              <span><strong>Puesta en marcha garantizada</strong> y revisión de fluidos sin cargo.</span>
+            </div>
+            <div class="video-feature-item">
+              <i class="fa-solid fa-circle-check"></i>
+              <span><strong>Stock permanente</strong> de cadenas, filtros, bujías y cuchillas originales.</span>
+            </div>
+            <div class="video-feature-item">
+              <i class="fa-solid fa-circle-check"></i>
+              <span><strong>Capacitación operativa</strong> directa para tu equipo de trabajo.</span>
+            </div>
+          </div>
+
+          <a href="https://wa.me/5491100000000" target="_blank" class="btn btn-primary">
+            <i class="fa-brands fa-whatsapp"></i> Hablar con un Técnico
+          </a>
+        </div>
+
+        <!-- Video Player Box -->
+        <div class="video-player-box">
+          <video id="showcaseVideo" poster="assets/images/hero/hero-slide-2.jpg" loop playsinline>
+            <source src="assets/videos/showcase.mp4" type="video/mp4">
+            Tu navegador no soporta el reproductor de video.
+          </video>
+          <div class="video-play-btn" id="videoPlayBtn" title="Reproducir video">
+            <i class="fa-solid fa-play"></i>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       10. Catálogo Destacado & Interactive Tabs (featured-products)
+       ======================================================================== -->
+  <section class="section-padding featured-catalog-section" id="catalog">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag"><i class="fa-solid fa-fire"></i> Lo Más Elegido</div>
+        <h2 class="section-title">Equipamiento Destacado</h2>
+        <p class="section-subtitle">Seleccioná entre nuestras herramientas más vendidas, novedades y equipos de potencia pesada.</p>
+      </div>
+
+      <!-- Filter Tabs -->
+      <div class="catalog-tabs">
+        <button class="catalog-tab active" data-tab="all">Todos los Equipos</button>
+        <button class="catalog-tab" data-tab="bestsellers">Más Vendidos</button>
+        <button class="catalog-tab" data-tab="heavy">Línea Pesada</button>
+        <button class="catalog-tab" data-tab="new">Novedades</button>
+      </div>
+
+      <!-- Dynamic Product Grid Rendered via JS -->
+      <div class="products-grid" id="featuredProductsGrid"></div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       11. Marcas Destacadas (featured-brands.tpl - docs/specs.md §6)
+       ======================================================================== -->
+  <section class="brands-section" id="marcas">
+    <div class="container">
+      <div class="section-header" style="margin-bottom: 32px;">
+        <div class="section-tag"><i class="fa-solid fa-certificate"></i> Distribuidores Oficiales</div>
+        <h2 class="section-title">Marcas que Respaldamos</h2>
+        <p class="section-subtitle">Trabajamos únicamente con fabricantes líderes a nivel mundial que garantizan disponibilidad de repuestos y servicio oficial.</p>
+      </div>
+
+      <div class="brands-grid">
+        <div class="brand-card" title="STIHL"><span class="brand-name">STIHL</span></div>
+        <div class="brand-card" title="HONDA"><span class="brand-name">HONDA</span></div>
+        <div class="brand-card" title="HUSQVARNA"><span class="brand-name">HUSQVARNA</span></div>
+        <div class="brand-card" title="BOSCH"><span class="brand-name">BOSCH</span></div>
+        <div class="brand-card" title="DEWALT"><span class="brand-name">DEWALT</span></div>
+        <div class="brand-card" title="ECHO"><span class="brand-name">ECHO</span></div>
+        <div class="brand-card" title="GAMMA"><span class="brand-name">GAMMA</span></div>
+        <div class="brand-card" title="LUSQTOFF"><span class="brand-name">LÜSQTOFF</span></div>
+        <div class="brand-card" title="MAKITA"><span class="brand-name">MAKITA</span></div>
+        <div class="brand-card" title="BRIGGS & STRATTON"><span class="brand-name">B&S POWER</span></div>
+        <div class="brand-card" title="BLACK & DECKER"><span class="brand-name">B&D</span></div>
+        <div class="brand-card" title="DOWEN PAGIO"><span class="brand-name">DOWEN PAGIO</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       12. Testimonios & Respaldo (home-testimonials.tpl)
+       ======================================================================== -->
+  <section class="section-padding testimonials-section" id="nosotros">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag"><i class="fa-solid fa-comments"></i> Experiencias Reales</div>
+        <h2 class="section-title">La Opinión de Quienes Trabajan Con Nosotros</h2>
+        <p class="section-subtitle">Contratistas, productores agropecuarios y talleres confían a diario en el asesoramiento y la velocidad de entrega de HMC Hub.</p>
+      </div>
+
+      <div class="testimonials-grid">
+        
+        <div class="testimonial-card">
+          <div>
+            <div class="testimonial-rating">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="testimonial-quote">"Compramos dos grupos electrógenos de 6.5 KVA para la obra en Zárate. El asesoramiento para el cálculo de consumo fue impecable y nos entregaron las máquinas probadas en 24 horas."</p>
+          </div>
+          <div class="testimonial-author">
+            <img src="assets/logos/logo-circular-green.png" alt="Ing. Carlos Menéndez" class="author-avatar">
+            <div class="author-info">
+              <h5>Ing. Carlos Menéndez</h5>
+              <span>Constructora Norte SRL</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div>
+            <div class="testimonial-rating">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="testimonial-quote">"Excelente atención y posventa. Necesitábamos repuestos urgentes para desmalezadoras en plena cosecha y nos resolvieron el envío al campo sin demoras. Totalmente recomendables."</p>
+          </div>
+          <div class="testimonial-author">
+            <img src="assets/logos/logo-circular-dark.png" alt="Esteban Rossi" class="author-avatar">
+            <div class="author-info">
+              <h5>Esteban Rossi</h5>
+              <span>Establecimiento Agropecuario Las Lilas</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div>
+            <div class="testimonial-rating">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="testimonial-quote">"La diferencia con otras casas es que acá te atiende gente que sabe de mecánica y te orienta de verdad sobre qué máquina te conviene según las horas de uso que le vas a dar."</p>
+          </div>
+          <div class="testimonial-author">
+            <img src="assets/logos/logo-circular-badge.png" alt="Martín Álvarez" class="author-avatar">
+            <div class="author-info">
+              <h5>Martín Álvarez</h5>
+              <span>Servicios y Mantenimiento de Parques</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       13. Banners de Servicios B2B (banner-services.tpl)
+       ======================================================================== -->
+  <section class="services-banners-section">
+    <div class="container">
+      <div class="services-grid">
+        
+        <div class="service-item">
+          <i class="fa-solid fa-truck-fast service-icon"></i>
+          <div class="service-text">
+            <h4>Envíos a Todo el País</h4>
+            <p>Logística segura y rápida en cada pedido.</p>
+          </div>
+        </div>
+
+        <div class="service-item">
+          <i class="fa-solid fa-store service-icon"></i>
+          <div class="service-text">
+            <h4>Retiro en Sucursal</h4>
+            <p>Retirá sin costo adicional en nuestros puntos.</p>
+          </div>
+        </div>
+
+        <div class="service-item">
+          <i class="fa-solid fa-file-invoice-dollar service-icon"></i>
+          <div class="service-text">
+            <h4>Facturación A y B</h4>
+            <p>Emisión automática para empresas y particulares.</p>
+          </div>
+        </div>
+
+        <div class="service-item">
+          <i class="fa-solid fa-shield-halved service-icon"></i>
+          <div class="service-text">
+            <h4>Garantía Oficial</h4>
+            <p>Taller homologado y repuestos legítimos.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       14. Instagram Feed & Comunidad (home-instafeed.tpl)
+       ======================================================================== -->
+  <section class="section-padding instafeed-section">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag"><i class="fa-brands fa-instagram"></i> @hmchub</div>
+        <h2 class="section-title">Comunidad en Obra y Campo</h2>
+        <p class="section-subtitle">Seguinos en redes para ver tips de mantenimiento, demostraciones de herramientas y novedades de catálogo.</p>
+      </div>
+
+      <div class="insta-grid">
+        <div class="insta-item" onclick="window.open('https://instagram.com', '_blank')">
+          <img src="assets/images/products/DSC00885.jpg" alt="HMC Instagram 1" class="insta-img">
+          <div class="insta-overlay"><i class="fa-brands fa-instagram"></i></div>
+        </div>
+        <div class="insta-item" onclick="window.open('https://instagram.com', '_blank')">
+          <img src="assets/images/products/DSC00888.jpg" alt="HMC Instagram 2" class="insta-img">
+          <div class="insta-overlay"><i class="fa-brands fa-instagram"></i></div>
+        </div>
+        <div class="insta-item" onclick="window.open('https://instagram.com', '_blank')">
+          <img src="assets/images/products/DSC00895.jpg" alt="HMC Instagram 3" class="insta-img">
+          <div class="insta-overlay"><i class="fa-brands fa-instagram"></i></div>
+        </div>
+        <div class="insta-item" onclick="window.open('https://instagram.com', '_blank')">
+          <img src="assets/images/products/DSC00904.jpg" alt="HMC Instagram 4" class="insta-img">
+          <div class="insta-overlay"><i class="fa-brands fa-instagram"></i></div>
+        </div>
+        <div class="insta-item" onclick="window.open('https://instagram.com', '_blank')">
+          <img src="assets/images/products/DSC00918.jpg" alt="HMC Instagram 5" class="insta-img">
+          <div class="insta-overlay"><i class="fa-brands fa-instagram"></i></div>
+        </div>
+        <div class="insta-item" onclick="window.open('https://instagram.com', '_blank')">
+          <img src="assets/images/products/DSC00934.jpg" alt="HMC Instagram 6" class="insta-img">
+          <div class="insta-overlay"><i class="fa-brands fa-instagram"></i></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       15. Newsletter (home-newsletter.tpl)
+       ======================================================================== -->
+  <section class="newsletter-section">
+    <div class="container">
+      <div class="newsletter-box">
+        <div class="newsletter-info">
+          <h3>Suscribite al Newsletter HMC</h3>
+          <p>Recibí ofertas exclusivas, lanzamientos y un <strong>10% de descuento de bienvenida</strong> en tu primera compra.</p>
+        </div>
+        <form class="newsletter-form" id="newsletterForm">
+          <input type="email" class="newsletter-input" placeholder="Ingresá tu correo electrónico..." required>
+          <button type="submit" class="btn btn-primary">
+            <i class="fa-solid fa-paper-plane"></i> Suscribirme
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       16. Footer (footer.tpl)
+       ======================================================================== -->
+  <footer class="footer-main" id="contacto">
+    <div class="container">
+      
+      <div class="footer-grid">
+        
+        <!-- Col 1: Brand Info -->
+        <div class="footer-col">
+          <img src="assets/logos/logo-horizontal-white.png" alt="HMC HUB" class="footer-logo">
+          <p class="footer-brand-desc">
+            Un solo lugar. Todo lo que mueve tu obra, tu campo, tu casa o tu negocio. Respaldo técnico profesional, trayectoria y servicio oficial.
+          </p>
+          <div class="footer-social-links">
+            <a href="https://instagram.com" target="_blank" class="social-btn" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://facebook.com" target="_blank" class="social-btn" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://wa.me/5491100000000" target="_blank" class="social-btn" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="https://youtube.com" target="_blank" class="social-btn" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          </div>
+        </div>
+
+        <!-- Col 2: Navigation Links -->
+        <div class="footer-col">
+          <h4>Navegación</h4>
+          <ul class="footer-links">
+            <li><a href="#"><i class="fa-solid fa-chevron-right"></i> Inicio</a></li>
+            <li><a href="#categorias"><i class="fa-solid fa-chevron-right"></i> Categorías</a></li>
+            <li><a href="#ofertas"><i class="fa-solid fa-chevron-right"></i> Ofertas Especiales</a></li>
+            <li><a href="#marcas"><i class="fa-solid fa-chevron-right"></i> Marcas Oficiales</a></li>
+            <li><a href="#nosotros"><i class="fa-solid fa-chevron-right"></i> Quienes Somos</a></li>
+            <li><a href="#contacto"><i class="fa-solid fa-chevron-right"></i> Contacto y Sucursales</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Customer Care & Policies (docs/checklist_presupuesto.md §5) -->
+        <div class="footer-col">
+          <h4>Atención al Cliente</h4>
+          <ul class="footer-links">
+            <li><a href="#envios"><i class="fa-solid fa-chevron-right"></i> Formas de Envío</a></li>
+            <li><a href="#pagos"><i class="fa-solid fa-chevron-right"></i> Medios de Pago</a></li>
+            <li><a href="#garantia"><i class="fa-solid fa-chevron-right"></i> Garantía y Devoluciones</a></li>
+            <li><a href="#servicio-tecnico"><i class="fa-solid fa-chevron-right"></i> Servicio Técnico</a></li>
+            <li><a href="#terminos"><i class="fa-solid fa-chevron-right"></i> Términos y Condiciones</a></li>
+            <li><a href="#privacidad"><i class="fa-solid fa-chevron-right"></i> Política de Privacidad</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Direct Contact -->
+        <div class="footer-col">
+          <h4>Contacto Directo</h4>
+          <ul class="footer-contact-list">
+            <li>
+              <i class="fa-solid fa-location-dot"></i>
+              <span>Av. Principal 1240, Parque Industrial, Buenos Aires, Argentina</span>
+            </li>
+            <li>
+              <i class="fa-brands fa-whatsapp"></i>
+              <span>+54 9 11 0000-0000 (Ventas & Asesoría)</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-envelope"></i>
+              <span>contacto@hmchub.com.ar</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-clock"></i>
+              <span>Lunes a Viernes: 8:00 a 18:00 hs | Sábados: 8:30 a 13:00 hs</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="footer-bottom">
+        <div class="footer-bottom-inner">
+          <div>
+            © 2026 <strong>HMC HUB</strong> — Todos los derechos reservados.
+          </div>
+          <div class="payment-methods-icons">
+            <i class="fa-brands fa-cc-visa" title="Visa"></i>
+            <i class="fa-brands fa-cc-mastercard" title="Mastercard"></i>
+            <i class="fa-brands fa-cc-amex" title="American Express"></i>
+            <i class="fa-solid fa-money-bill-transfer" title="Transferencia Bancaria"></i>
+            <i class="fa-solid fa-shield-check text-primary" title="Compra 100% Protegida"></i>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       17. Interactive AJAX Cart Drawer (cart-panel.tpl)
+       ======================================================================== -->
+  <div class="cart-drawer-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    
+    <!-- Drawer Header -->
+    <div class="cart-drawer-header">
+      <h3><i class="fa-solid fa-cart-shopping text-primary"></i> Mi Carrito</h3>
+      <button class="cart-close-btn" id="cartCloseBtn" title="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <!-- Free Shipping Goal Progress Bar -->
+    <div class="cart-shipping-bar">
+      <div class="shipping-bar-text" id="shippingBarText">
+        <span>Cargando beneficios de envío...</span>
+      </div>
+      <div class="shipping-bar-progress">
+        <div class="shipping-bar-fill" id="shippingBarFill" style="width: 0%;"></div>
+      </div>
+    </div>
+
+    <!-- Cart Items Scroll Area -->
+    <div class="cart-items-container" id="cartItemsContainer"></div>
+
+    <!-- Drawer Footer -->
+    <div class="cart-drawer-footer">
+      
+      <!-- Quick Postal Code Calculator (docs/checklist_presupuesto.md §3) -->
+      <div style="margin-bottom: 14px; padding-bottom: 12px; border-bottom: 1px solid var(--color-gray-border);">
+        <label style="font-size: 0.82rem; font-weight: 700; color: var(--color-gray-dark); margin-bottom: 4px; display: block;">
+          <i class="fa-solid fa-truck"></i> Calcular costo de envío:
+        </label>
+        <div style="display: flex; gap: 6px;">
+          <input type="text" id="shippingCpInput" placeholder="Tu Código Postal" maxlength="5" style="flex: 1; padding: 6px 10px; border: 1px solid var(--color-gray-border); border-radius: 4px; font-size: 0.85rem;">
+          <button class="btn btn-dark btn-sm" onclick="hmcCalcShipping()">Calcular</button>
+        </div>
+        <div id="shippingResultBox"></div>
+      </div>
+
+      <div class="cart-total-row">
+        <span>Subtotal:</span>
+        <strong id="cartSubtotal">$0</strong>
+      </div>
+      <div class="cart-total-row">
+        <span>Envío estimado:</span>
+        <span style="color: var(--color-primary-dark); font-weight: 700;">A calcular</span>
+      </div>
+      <div class="cart-total-row total-final">
+        <span>Total:</span>
+        <span id="cartTotalFinal" style="color: var(--color-primary);">$0</span>
+      </div>
+
+      <button class="btn btn-primary btn-lg cart-checkout-btn" onclick="showToast('Redirigiendo a pasarela segura de pago...')">
+        <i class="fa-solid fa-lock"></i> Iniciar Compra Segura
+      </button>
+    </div>
+
+  </aside>
+
+  <!-- ========================================================================
+       18. Quick View Modal (quick-shop.tpl)
+       ======================================================================== -->
+  <div class="modal-overlay" id="quickViewModal">
+    <div class="modal-content-box">
+      <button class="modal-close-btn" id="quickViewClose" title="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+      
+      <div class="quick-view-grid">
+        
+        <div class="quick-view-gallery">
+          <img src="" alt="" id="qvImage" class="quick-view-main-img">
+        </div>
+
+        <div class="quick-view-details">
+          <div class="product-brand" id="qvBrand">STIHL</div>
+          <h3 id="qvTitle" style="font-size: 1.35rem; margin-bottom: 12px; color: var(--color-black);"></h3>
+          
+          <div class="product-price-box" style="margin-bottom: 16px;">
+            <span class="price-old" id="qvOldPrice"></span>
+            <span class="price-current" id="qvPrice" style="font-size: 1.6rem; color: var(--color-primary);"></span>
+            <span class="badge badge-discount" id="qvDiscount" style="margin-left: 8px;"></span>
+          </div>
+
+          <p id="qvDesc" style="font-size: 0.9rem; color: var(--color-gray-dark); margin-bottom: 18px; line-height: 1.5;"></p>
+
+          <div style="margin-bottom: 20px;">
+            <h5 style="font-size: 0.85rem; margin-bottom: 8px; text-transform: uppercase;">Especificaciones Técnicas:</h5>
+            <ul id="qvSpecs" style="font-size: 0.84rem; color: #555; display: flex; flex-direction: column; gap: 4px;"></ul>
+          </div>
+
+          <div style="display: flex; gap: 10px; margin-top: auto;">
+            <input type="number" id="qvQtyInput" value="1" min="1" max="99" style="width: 60px; padding: 10px; border: 1px solid var(--color-gray-border); border-radius: var(--radius-sm); text-align: center; font-weight: 700;">
+            <button class="btn btn-primary" id="qvAddToCartBtn" style="flex: 1;">
+              <i class="fa-solid fa-cart-plus"></i> Agregar al Carrito
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       19. Promotional Welcome Popup (home-popup.tpl)
+       ======================================================================== -->
+  <div class="modal-overlay" id="promoPopup">
+    <div class="promo-popup-card">
+      <button class="modal-close-btn" id="promoPopupClose" title="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+      <img src="assets/images/hero/hero-slide-1.jpg" alt="Promo Bienvenida" class="promo-popup-img">
+      <div class="promo-popup-body">
+        <span class="promo-popup-badge"><i class="fa-solid fa-gift"></i> Beneficio Exclusivo</span>
+        <h3 class="promo-popup-title">¡10% OFF en Tu Primera Compra!</h3>
+        <p class="promo-popup-desc">Suscribite y recibí tu cupón exclusivo para herramientas, generadores y maquinaria con respaldo oficial.</p>
+        <form onsubmit="event.preventDefault(); showToast('🎉 Cupón BIENVENIDO-HMC aplicado con éxito!'); document.getElementById('promoPopupClose').click();" style="display: flex; flex-direction: column; gap: 10px;">
+          <input type="email" placeholder="Ingresá tu email..." required style="padding: 12px 16px; border: 1px solid var(--color-gray-border); border-radius: var(--radius-sm); font-size: 0.95rem;">
+          <button type="submit" class="btn btn-primary">Obtener Mi Descuento</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       20. Floating WhatsApp Button (whatsapp-chat.tpl)
+       ======================================================================== -->
+  <a href="https://wa.me/5491100000000?text=Hola%20HMC%20Hub,%20necesito%20asesoramiento%20técnico%20sobre%20un%20equipo" target="_blank" class="floating-whatsapp" title="Hablar con un Asesor Técnico">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+  <!-- Application Logic -->
+  <script src="js/app.js"></script>
+</body>
+</html>
