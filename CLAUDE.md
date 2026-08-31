@@ -43,3 +43,16 @@ There is no local build/lint/test toolchain — `.tpl` files are rendered server
 - **Home page composition** — `templates/home.tpl` loops over up to 21 numbered settings (`home_order_position_1` … `_21`), each holding the name of a home module (`slider`, `main_categories`, `welcome`, `brands`, `testimonials`, etc.); `snipplets/home/home-section-switch.tpl` resolves each name to its `snipplets/home/home-*.tpl` partial. Order and visibility of home content is driven entirely by these setting values, not a drag-and-drop sections/blocks JSON.
 - **`config/`** — plain-text/JSON theme configuration: `settings.txt` (theme-editor setting field definitions, indentation-based DSL), `defaults.txt` (default values for those settings), `variants.txt` (predefined color-scheme presets), `sections.txt` (product collection/tag definitions like `primary`, `new`, `sale`), `translations.txt` (UI copy strings), `data.json` (preview/compiled-assets config).
 - **`static/`** — `css/` (`style-critical.scss`, `style-async.scss`, `style-colors.scss`, `style-tokens.tpl`), `js/` (`store.js.tpl` and other external library `.tpl` files), and `checkout.scss.tpl`.
+
+## 📱 Mobile-First & Responsiveness Rule (Mandatory Memory Bank Rule)
+
+**CRITICAL MANDATE FOR ALL CODE MODIFICATIONS & NEW COMPONENTS:**
+Whenever any component, UI block, navigation item, modal, drawer, filter, card, or page is created or modified (in `boceto_web/` prototype or `web_ftp/` Tiendanube theme), **its Mobile version (< 768px and < 480px) MUST be explicitly implemented, adapted, and tested concurrently**.
+
+### Core Mobile Implementation Guidelines:
+1. **Never ship desktop-only changes**: Every HTML/CSS/JS modification must have its corresponding mobile stylesheet rules, drawer/accordion behavior, and touch handling.
+2. **Navigation & Menus**: Desktop mega-dropdowns (Categories, Brands 103 directory, etc.) must automatically have their mobile touch equivalents in `#mobileDrawerMenu` (via accordions, bottom sheets, or touch-friendly lists).
+3. **Touch Targets**: Minimum clickable/tappable area must be $\ge 44 \times 44\text{px}$ with adequate tap spacing.
+4. **No Horizontal Overflow**: Elements must be bounded by `max-width: 100%`, `overflow-x: hidden`, with responsive padding (`--container-padding: 16px` on mobile).
+5. **Mobile Bottom App Bar**: Maintain integration with `.mobile-bottom-nav` (Home, Catalog, WhatsApp advice, Reactive Cart counter, Menu drawer).
+6. **Modals & Drawers**: Modals, Cart Drawers, and Filters on mobile must adapt to full-height slide-over drawers or bottom sheets with visible touch close buttons and backdrop overlays.

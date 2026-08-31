@@ -68,3 +68,24 @@ Para cargar en `config/settings.txt` / `config/defaults.txt`:
 - `accent_color` / color de botones y CTAs: `#3FAA47`
 - `font_headings`: Quedora (si está disponible como web font; si no, buscar geométrica condensada similar)
 - `font_rest`: pendiente de definición (ver punto 3)
+
+## 6. Reglas de Diseño Mobile-First & Responsividad Obligatoria (Memory Bank)
+
+**Regla Mandatoria del Proyecto:**
+Cada vez que se cree, modifique o refactorice un componente (en el prototipo `boceto_web/` o en las plantillas de Tiendanube `web_ftp/`), **es obligatorio diseñar e implementar su comportamiento móvil de forma simultánea**.
+
+### Estándares de Experiencia Móvil:
+1. **Breakpoints Oficiales:**
+   - Desktop amplio: $\ge 1200\text{px}$
+   - Tablet / Laptop compacta: $769\text{px} - 1024\text{px}$
+   - Mobile estándar: $\le 768\text{px}$
+   - Mobile compacto: $\le 480\text{px}$
+2. **Navegación y Menús:**
+   - Todo mega-menú de escritorio (como Categorías o el Directorio de 103 Marcas) debe mapearse a su versión táctil en el `#mobileDrawerMenu` mediante acordeones colapsables (`.js-drawer-accordion`).
+   - Mantener siempre visible la barra de navegación inferior fija estilo app (`.mobile-bottom-nav`) con acceso a *Inicio*, *Catálogo*, *Asesoría WhatsApp*, *Carrito con contador reactivo* y *Menú*.
+3. **Áreas de Toque (Touch Targets):**
+   - Todos los botones, enlaces interactivos e inputs deben tener una altura/área táctil mínima de **44px** y separación adecuada para evitar toques erróneos.
+4. **Grillas y Layouts:**
+   - Grilla de productos en móvil: 2 columnas compactas con tipografía adaptada y sin desbordes horizontales.
+   - Tablas de carrito: Transformación automática a tarjetas verticales individuales.
+   - Filtros laterales: Conversión a hoja deslizable / Bottom Sheet táctil.
