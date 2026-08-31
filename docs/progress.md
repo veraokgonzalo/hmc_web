@@ -87,3 +87,22 @@ Se rediseñó y modularizó el boceto web en páginas independientes interconect
 - **Motor Centralizado de Estado Activo (`syncNavigationActiveState()`)**: Se añadió un despachador global en `boceto_web/js/app.js` que evalúa la URL y parámetros de consulta (`?offers=true`, `?brand=...`, `?category=...`), asignando la clase `.active` de forma precisa al botón correspondiente (*Ofertas*, *Marcas*, *Categorías*, *Nosotros*, *Contacto* o *Inicio*) en desktop y mobile.
 - **Banner Promocional Dinámico en Catálogo (`#catalogOffersPromoBanner`)**: Se integró un banner premium de liquidación en `catalog.html` con diseño oscuro, acento en rojo, tag de *"Oportunidades por Tiempo Limitado"* y pill de *"Precios Promocionales"*, el cual se despliega y oculta de forma reactiva al filtrar por ofertas.
 - **Actualización Dinámica de Breadcrumbs & SEO Titles**: Al acceder a ofertas, el título cambia a *"Ofertas Especiales & Oportunidades | HMC HUB"* y la miga de pan se actualiza a *"Inicio > Ofertas Especiales"*.
+
+### 8. Mega Dropdown Híbrido de Marcas para 103 Fabricantes (Opción 2C) - IMPLEMENTADO
+- **Arquitectura de 2 Zonas (`.mega-dropdown-brands`)**:
+  - **Zona 1 (Marcas Oficiales Destacadas)**: 8 tarjetas interactivas de fabricantes oficiales líderes (*BOSCH, DEWALT, NIWA, EINHELL, SHINDAIWA, SENSEI, STIHL, HONDA*) con descripción de línea y sello de garantía.
+  - **Zona 2 (Directorio Completo de 103 Marcas)**: Buscador instantáneo en tiempo real + barra de navegación alfabética rápida (A-Z) + grilla en 4 columnas con scroll suave personalizado.
+- **Motor Interactivo en JavaScript (`initMegaBrandsDropdown()`)**:
+  - Base de datos completa de 103 marcas del sector industrial y de maquinaria.
+  - Filtrado en vivo por texto o por letra inicial sin recargar página.
+  - Contador dinámico de marcas disponibles y badges de *"Oficial"*.
+- **Integración Responsive & Mobile Drawer**: Acordeón táctil integrado en el menú móvil para explorar las marcas con un toque.
+- **Sincronización Total**: Desplegado en las 6 plantillas HTML (`index.html`, `catalog.html`, `product.html`, `cart.html`, `contact.html`, `about.html`).
+
+### 8. Mega Dropdown Alfabético Completo A-Z con Buscador Integrado (Opción 2A) - IMPLEMENTADO
+- **Directorio Alfabético Completo para 103 Marcas (`.mega-dropdown-brands-2a`)**:
+  - **Cabecera Unificada**: Título del directorio oficial, buscador interactivo centrado en tiempo real y contador de marcas disponibles.
+  - **Barra de Navegación Rápida A-Z**: Selector alfabético horizontal completo (`TODAS`, `A` a `Z`) para filtrar o saltar entre letras al instante.
+  - **Grilla Amplia en 6 Columnas**: Distribución alfabética integral con scroll suave personalizado, mostrando las 103 marcas con sus respectivos badges de distribución oficial.
+  - **Pie de Confianza**: Sello de garantía de fábrica, provisión de repuestos legítimos y enlace al catálogo general.
+- **Sincronización Total**: Actualizado en `app.js`, `styles.css` y las 6 plantillas HTML (`index.html`, `catalog.html`, `product.html`, `cart.html`, `contact.html`, `about.html`).

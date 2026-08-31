@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initQuickViewModal();
   initNewsletter();
   initMobileMenu();
+  initMegaBrandsDropdown();
 
   // Page-Specific Dispatcher
   if (document.querySelector('.hero-slider-section')) {
@@ -78,8 +79,8 @@ function syncNavigationActiveState() {
       if (promoBanner) promoBanner.style.display = 'block';
     } else if (brandParam) {
       // 1. Activate "Marcas" in navbar
-      document.querySelectorAll('.nav-item a[href*="brand="]').forEach(a => a.parentElement.classList.add('active'));
-      document.querySelectorAll('.mobile-nav-link-item[href*="brand="]').forEach(a => a.classList.add('active'));
+      const brandsNavItem = document.querySelector('.mega-dropdown-brands-2a, .mega-dropdown-brands')?.closest('.nav-item');
+      if (brandsNavItem) brandsNavItem.classList.add('active');
       
       // 2. Update Title & Breadcrumbs
       document.title = `Equipos ${brandParam} Oficial | HMC HUB`;
@@ -87,7 +88,8 @@ function syncNavigationActiveState() {
       if (breadcrumbEl) breadcrumbEl.textContent = `Marcas: ${brandParam}`;
     } else {
       // Standard catalog / category view
-      document.querySelectorAll('.nav-item a[href="catalog.html"]').forEach(a => a.parentElement.classList.add('active'));
+      const categoriesNavItem = document.querySelector('.mega-dropdown:not(.mega-dropdown-brands):not(.mega-dropdown-brands-2a)')?.closest('.nav-item');
+      if (categoriesNavItem) categoriesNavItem.classList.add('active');
       if (categoryParam) {
         const catProd = PRODUCT_CATALOG.find(p => p.category === categoryParam);
         const catName = catProd ? catProd.categoryName : categoryParam;
@@ -100,6 +102,124 @@ function syncNavigationActiveState() {
     document.querySelectorAll('.nav-item a[href*="index.html"]').forEach(a => a.parentElement.classList.add('active'));
     document.querySelectorAll('.mobile-nav-link-item[href*="index.html"]').forEach(a => a.classList.add('active'));
   }
+}
+
+
+/* --------------------------------------------------------------------------
+   0.1. Master 103 Industrial Brands Database & Interactive Mega Dropdown
+   -------------------------------------------------------------------------- */
+const ALL_BRANDS_103 = [
+  "3M", "Aeg", "Annovi Reverberi", "Apex", "Bahco", "Barovo", "Bellota", "Beta", "Biassoni", "Black+Decker",
+  "Bosch", "Bremen", "Briggs & Stratton", "Chicago Pneumatic", "Cirigliano", "Crescent", "Crossmaster", "Czerweny", "DeWalt", "Doble A",
+  "Dowen Pagio", "Dremel", "Echo", "Einhell", "Facom", "Fema", "Festool", "Fiac", "Fischer", "Fluvial",
+  "Franklin Electric", "GearWrench", "Gedore", "Gherardi", "Gladiator", "Grundfos", "Hamilton", "Hilti", "Hitachi / Hikoki", "Honda",
+  "Husqvarna", "Ingco", "Ingersoll Rand", "Irwin", "Kärcher", "Klingspor", "Knipex", "Kohler", "Lenox", "Lifan",
+  "Loncin", "Lufkin", "Lüsqtoff", "Makita", "Maruyama", "Metabo", "Milwaukee", "Motorarg", "MTD", "Murray",
+  "Neo", "Nicholson", "Niwa", "Norton", "Oleo-Mac", "Pedrollo", "Pferd", "Pluvia", "Poulan", "Pretul",
+  "Rems", "Ridgid", "Robin Subaru", "Rotor Pump", "Rothenberger", "Rowa", "Ryobi", "Schulz", "Sensei", "Shindaiwa",
+  "Sika", "Sin Par", "Skil", "Stanley", "Stanley FatMax", "Starrett", "Stihl", "Toro", "Total", "Tramontina",
+  "Truper", "Tyrolit", "Unior", "Usag", "Villa Zapp", "Virax", "Vulcano", "Weller", "Wera", "Wiha",
+  "Worx", "Yard Machines", "Zenith"
+];
+
+const OFFICIAL_CORE_BRANDS = ["BOSCH", "DEWALT", "NIWA", "EINHELL", "SHINDAIWA", "SENSEI", "STIHL", "HONDA"];
+
+function initMegaBrandsDropdown() {
+  const lists = document.querySelectorAll(".js-mega-brands-list");
+  if (!lists.length) return;
+
+  function renderBrands(filterText = "", filterLetter = "ALL") {
+    const query = filterText.trim().toLowerCase();
+    let filtered = ALL_BRANDS_103.filter(b => {
+      const matchesText = !query || b.toLowerCase().includes(query);
+      const initial = b.charAt(0).toUpperCase();
+      const matchesLetter = (filterLetter === "ALL") || (initial === filterLetter) || (filterLetter === "0-9" && /\d/.test(initial));
+      return matchesText && matchesLetter;
+    });
+
+    const groups = {};
+    filtered.forEach(b => {
+      let init = b.charAt(0).toUpperCase();
+      if (/\d/.test(init)) init = "#";
+      if (!groups[init]) groups[init] = [];
+      groups[init].push(b);
+    });
+
+    const sortedLetters = Object.keys(groups).sort((a, b) => {
+      if (a === "#") return -1;
+      if (b === "#") return 1;
+      return a.localeCompare(b);
+    });
+
+    lists.forEach(container => {
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div style="grid-column: 1 / -1; text-align: center; padding: 24px 10px; color: #888; font-size: 0.85rem;">
+            <i class="fa-solid fa-circle-exclamation" style="font-size: 1.5rem; margin-bottom: 6px; display: block; color: var(--color-primary);"></i>
+            No se encontraron marcas con "<strong>${filterText}</strong>".
+          </div>
+        `;
+        return;
+      }
+
+      let html = "";
+      sortedLetters.forEach(letter => {
+        html += `<div class="brand-group" data-letter="${letter}">`;
+        html += `<span class="brand-group-letter">${letter}</span>`;
+        groups[letter].forEach(brand => {
+          const isOfficial = OFFICIAL_CORE_BRANDS.includes(brand.toUpperCase());
+          html += `
+            <a href="catalog.html?brand=${encodeURIComponent(brand)}" class="mega-brand-link ${isOfficial ? "is-official" : ""}" title="Ver productos de ${brand}">
+              ${isOfficial ? `<strong>${brand}</strong>` : brand}
+              ${isOfficial ? `<span class="badge-official">Oficial</span>` : ""}
+            </a>
+          `;
+        });
+        html += `</div>`;
+      });
+      container.innerHTML = html;
+    });
+
+    // Update count pills
+    document.querySelectorAll(".js-brands-count").forEach(el => {
+      el.textContent = `${filtered.length} marcas disponibles`;
+    });
+  }
+
+  // Initial render
+  renderBrands();
+
+  // Search input listeners
+  document.querySelectorAll(".js-mega-brand-search").forEach(input => {
+    input.addEventListener("input", (e) => {
+      const val = e.target.value;
+      const parentDir = input.closest(".mega-brands-2a-wrapper, .mega-brands-directory, .mega-dropdown");
+      if (parentDir) {
+        parentDir.querySelectorAll(".mega-brands-alphabet-bar .alpha-btn").forEach(b => b.classList.remove("active"));
+        const allBtn = parentDir.querySelector(".mega-brands-alphabet-bar .alpha-btn[data-letter='ALL']");
+        if (allBtn) allBtn.classList.add("active");
+      }
+      renderBrands(val, "ALL");
+    });
+    input.addEventListener("click", (e) => e.stopPropagation());
+  });
+
+  // Alphabet buttons listeners
+  document.querySelectorAll(".mega-brands-alphabet-bar .alpha-btn").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      const parentBar = btn.closest(".mega-brands-alphabet-bar");
+      if (parentBar) {
+        parentBar.querySelectorAll(".alpha-btn").forEach(b => b.classList.remove("active"));
+      }
+      btn.classList.add("active");
+      const letter = btn.dataset.letter;
+      const searchInput = btn.closest(".mega-brands-2a-wrapper, .mega-brands-directory, .mega-dropdown")?.querySelector(".js-mega-brand-search");
+      const query = searchInput ? searchInput.value : "";
+      renderBrands(query, letter);
+    });
+  });
 }
 
 /* --------------------------------------------------------------------------

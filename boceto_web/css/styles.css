@@ -4403,3 +4403,235 @@ h6 { font-size: 0.95rem; }
     font-size: 0.88rem;
   }
 }
+
+/* --------------------------------------------------------------------------
+   Mega Dropdown Marcas (Option 2A: Full A-Z Directory with Live Search for 103 Brands)
+   -------------------------------------------------------------------------- */
+.mega-dropdown-brands-2a {
+  width: 980px !important;
+  max-width: 96vw;
+  grid-template-columns: 1fr !important;
+  padding: 22px 26px !important;
+}
+
+.mega-brands-2a-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.mega-brands-2a-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--color-gray-border);
+}
+
+.mega-brands-2a-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mega-brands-2a-title i {
+  font-size: 1.4rem;
+}
+
+.mega-brands-2a-title h4 {
+  font-family: var(--font-headings);
+  font-size: 1.05rem;
+  color: var(--color-black);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.mega-brands-2a-title span {
+  font-size: 0.76rem;
+  color: #777;
+}
+
+.mega-brands-2a-search-wrapper {
+  position: relative;
+  flex: 1;
+  max-width: 420px;
+}
+
+.mega-brands-2a-search-wrapper i {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #888;
+  font-size: 0.85rem;
+}
+
+.mega-brands-2a-search-wrapper input {
+  width: 100%;
+  padding: 8px 14px 8px 36px;
+  border: 1.5px solid var(--color-gray-border);
+  border-radius: var(--radius-full);
+  font-size: 0.84rem;
+  font-family: var(--font-body);
+  outline: none;
+  background: var(--color-gray-ultra-light);
+  transition: all var(--transition-fast);
+}
+
+.mega-brands-2a-search-wrapper input:focus {
+  background: var(--color-white);
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px var(--color-primary-light);
+}
+
+.mega-brands-2a-stats {
+  display: flex;
+  align-items: center;
+}
+
+.mega-brands-alphabet-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  background: var(--color-gray-ultra-light);
+  padding: 5px 8px;
+  border-radius: var(--radius-sm);
+  align-items: center;
+}
+
+.alpha-btn {
+  font-family: var(--font-headings);
+  font-size: 0.74rem;
+  font-weight: 700;
+  padding: 3px 6px;
+  border-radius: 3px;
+  color: var(--color-gray-dark);
+  cursor: pointer;
+  user-select: none;
+  transition: all var(--transition-fast);
+}
+
+.alpha-btn:hover, .alpha-btn.active {
+  background: var(--color-primary);
+  color: var(--color-white);
+}
+
+.mega-brands-2a-grid {
+  max-height: 270px;
+  overflow-y: auto;
+  padding-right: 8px;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 14px 16px;
+}
+
+/* Custom Slim Scrollbar */
+.mega-brands-2a-grid::-webkit-scrollbar {
+  width: 6px;
+}
+
+.mega-brands-2a-grid::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.mega-brands-2a-grid::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 3px;
+}
+
+.mega-brands-2a-grid::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+}
+
+.brand-group {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.brand-group-letter {
+  font-family: var(--font-headings);
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: var(--color-primary-dark);
+  border-bottom: 1.5px solid var(--color-primary);
+  padding-bottom: 2px;
+  margin-bottom: 4px;
+  display: block;
+}
+
+.mega-brand-link {
+  font-size: 0.78rem;
+  color: var(--color-gray-dark);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  line-height: 1.35;
+  transition: color var(--transition-fast);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mega-brand-link:hover {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.mega-brand-link.is-official strong {
+  color: var(--color-black);
+}
+
+.badge-official {
+  font-size: 0.6rem;
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  font-weight: 700;
+  padding: 1px 4px;
+  border-radius: 2px;
+  text-transform: uppercase;
+}
+
+.mega-brands-2a-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 10px;
+  border-top: 1px solid var(--color-gray-border);
+  font-size: 0.8rem;
+}
+
+.mega-brands-2a-footer-note {
+  color: #666;
+  font-size: 0.78rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.link-all-brands {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color var(--transition-fast);
+}
+
+.link-all-brands:hover {
+  color: var(--color-primary);
+}
+
+.brands-counter-pill {
+  font-size: 0.72rem;
+  color: #777;
+  background: var(--color-gray-ultra-light);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+}

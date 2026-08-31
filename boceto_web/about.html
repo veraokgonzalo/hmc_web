@@ -132,8 +132,78 @@
         <li class="nav-item">
           <a href="catalog.html?offers=true" class="nav-link has-badge">Ofertas</a>
         </li>
-        <li class="nav-item">
-          <a href="catalog.html?brand=BOSCH" class="nav-link">Marcas</a>
+                        <li class="nav-item has-mega-dropdown">
+          <a href="catalog.html" class="nav-link">
+            Marcas <i class="fa-solid fa-chevron-down" style="font-size: 0.75em; margin-left: 2px;"></i>
+          </a>
+          
+          <!-- Brands Mega Dropdown (Option 2A: Full A-Z Directory with Live Search) -->
+          <div class="mega-dropdown mega-dropdown-brands-2a">
+            <div class="mega-brands-2a-wrapper">
+              
+              <!-- Header Bar: Title, Live Search Input & Counter -->
+              <div class="mega-brands-2a-topbar">
+                <div class="mega-brands-2a-title">
+                  <i class="fa-solid fa-certificate text-primary"></i>
+                  <div>
+                    <h4>Directorio Oficial de Fabricantes</h4>
+                    <span>103 marcas y distribuidores homologados</span>
+                  </div>
+                </div>
+                
+                <div class="mega-brands-2a-search-wrapper">
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                  <input type="text" class="js-mega-brand-search" placeholder="Escribí para filtrar marcas... (ej: Bosch, Niwa, Makita)" autocomplete="off">
+                </div>
+
+                <div class="mega-brands-2a-stats">
+                  <span class="brands-counter-pill js-brands-count">103 marcas disponibles</span>
+                </div>
+              </div>
+
+              <!-- A-Z Alphabet Filter Jump Bar -->
+              <div class="mega-brands-alphabet-bar">
+                <span class="alpha-btn active" data-letter="ALL">TODAS</span>
+                <span class="alpha-btn" data-letter="A">A</span>
+                <span class="alpha-btn" data-letter="B">B</span>
+                <span class="alpha-btn" data-letter="C">C</span>
+                <span class="alpha-btn" data-letter="D">D</span>
+                <span class="alpha-btn" data-letter="E">E</span>
+                <span class="alpha-btn" data-letter="F">F</span>
+                <span class="alpha-btn" data-letter="G">G</span>
+                <span class="alpha-btn" data-letter="H">H</span>
+                <span class="alpha-btn" data-letter="I">I</span>
+                <span class="alpha-btn" data-letter="K">K</span>
+                <span class="alpha-btn" data-letter="L">L</span>
+                <span class="alpha-btn" data-letter="M">M</span>
+                <span class="alpha-btn" data-letter="N">N</span>
+                <span class="alpha-btn" data-letter="O">O</span>
+                <span class="alpha-btn" data-letter="P">P</span>
+                <span class="alpha-btn" data-letter="R">R</span>
+                <span class="alpha-btn" data-letter="S">S</span>
+                <span class="alpha-btn" data-letter="T">T</span>
+                <span class="alpha-btn" data-letter="U">U</span>
+                <span class="alpha-btn" data-letter="V">V</span>
+                <span class="alpha-btn" data-letter="W">W</span>
+                <span class="alpha-btn" data-letter="Y">Y</span>
+                <span class="alpha-btn" data-letter="Z">Z</span>
+              </div>
+
+              <!-- Scrollable Directory Grid (Populated dynamically) -->
+              <div class="mega-brands-2a-grid js-mega-brands-list"></div>
+
+              <!-- Footer Bar -->
+              <div class="mega-brands-2a-footer">
+                <div class="mega-brands-2a-footer-note">
+                  <i class="fa-solid fa-shield-check text-primary"></i> Todos los productos cuentan con garantía directa de fábrica y provisión de repuestos legítimos.
+                </div>
+                <a href="catalog.html" class="link-all-brands">
+                  <i class="fa-solid fa-grid-2"></i> Ver todo el catálogo por marcas →
+                </a>
+              </div>
+
+            </div>
+          </div>
         </li>
         <li class="nav-item active">
           <a href="about.html" class="nav-link">Nosotros</a>
@@ -549,7 +619,21 @@
         <a href="catalog.html" class="mobile-subnav-link" style="font-weight: 700; color: var(--color-primary-dark);"><i class="fa-solid fa-grid-2"></i> Ver Todo el Catálogo →</a>
       </div>
       <a href="catalog.html?offers=true" class="mobile-nav-link-item"><span style="color: var(--color-danger);"><i class="fa-solid fa-bolt"></i> Ofertas Especiales</span> <span class="badge badge-discount">-15%</span></a>
-      <a href="catalog.html?brand=BOSCH" class="mobile-nav-link-item"><i class="fa-solid fa-certificate"></i> Marcas Oficiales</a>
+            <div class="mobile-drawer-accordion-header js-drawer-accordion">
+        <span><i class="fa-solid fa-certificate"></i> Marcas Oficiales (103)</span>
+        <i class="fa-solid fa-chevron-down"></i>
+      </div>
+      <div class="mobile-drawer-accordion-content">
+        <a href="catalog.html?brand=BOSCH" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> BOSCH Professional</a>
+        <a href="catalog.html?brand=DEWALT" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> DEWALT Heavy Duty</a>
+        <a href="catalog.html?brand=NIWA" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> NIWA Máquinas</a>
+        <a href="catalog.html?brand=EINHELL" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> EINHELL Power X-Change</a>
+        <a href="catalog.html?brand=SHINDAIWA" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> SHINDAIWA Japón</a>
+        <a href="catalog.html?brand=SENSEI" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> SENSEI Maquinaria</a>
+        <a href="catalog.html?brand=STIHL" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> STIHL Forestal</a>
+        <a href="catalog.html?brand=HONDA" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> HONDA Motores</a>
+        <a href="catalog.html" class="mobile-subnav-link" style="font-weight: 700; color: var(--color-primary-dark);"><i class="fa-solid fa-grid-2"></i> Explorar las 103 Marcas →</a>
+      </div>
       <a href="about.html" class="mobile-nav-link-item active"><i class="fa-solid fa-building"></i> Nosotros</a>
       <a href="contact.html" class="mobile-nav-link-item"><i class="fa-solid fa-headset"></i> Contacto & Sucursales</a>
     </div>
