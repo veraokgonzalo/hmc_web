@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalle de Producto | HMC HUB</title>
+  <meta name="description" content="Detalle de producto, especificaciones técnicas, precio, financiamiento y asesoramiento profesional en HMC Hub.">
+  
+  <!-- Google Fonts: Chakra Petch (Headings) & Inter (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,500;0,600;0,700;0,800;1,700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- 1. Top Advertising Bar -->
+  <div class="top-bar">
+    <div class="container top-bar-inner">
+      <div class="top-bar-slider">
+        <i class="fa-solid fa-truck-fast"></i>
+        <span><strong>ENVÍOS A TODO EL PAÍS</strong> — Asesoramiento técnico directo en cada compra</span>
+      </div>
+      <div class="top-bar-links">
+        <a href="https://wa.me/5491100000000" target="_blank" class="top-bar-link">
+          <i class="fa-brands fa-whatsapp text-primary"></i> Asesoría WhatsApp
+        </a>
+        <span style="opacity: 0.3;">|</span>
+        <a href="contact.html" class="top-bar-link">
+          <i class="fa-solid fa-location-dot"></i> Sucursales y Retiro
+        </a>
+        <span style="opacity: 0.3;">|</span>
+        <span class="top-bar-link">
+          <i class="fa-solid fa-file-invoice"></i> Factura A y B
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Main Header -->
+  <header class="header-main">
+    <div class="container header-inner">
+      
+      <!-- Brand Logo -->
+      <div class="logo-container">
+        <a href="index.html" class="logo-link">
+          <img src="assets/logos/logo-horizontal-color.png" alt="HMC HUB" class="logo-img">
+        </a>
+      </div>
+
+      <!-- Live Search Form -->
+      <div class="header-search">
+        <form class="search-form" onsubmit="event.preventDefault();">
+          <input type="text" id="mainSearchInput" class="search-input" placeholder="Buscar motosierras, generadores, hidrolavadoras..." autocomplete="off">
+          <button type="submit" class="search-btn" title="Buscar">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </form>
+        <div id="searchDropdown" class="search-dropdown">
+          <div class="search-dropdown-header">Sugerencias destacadas</div>
+          <div id="searchResultsList"></div>
+        </div>
+      </div>
+
+      <!-- Utility Actions -->
+      <div class="header-utilities">
+        <a href="https://wa.me/5491100000000" target="_blank" class="utility-btn" style="color: var(--color-primary-dark);" title="Asesoramiento Técnico">
+          <i class="fa-brands fa-whatsapp"></i>
+          <span class="d-none-mobile">Asesoría Técnica</span>
+        </a>
+        <a href="contact.html" class="utility-btn" title="Contacto y Sucursales">
+          <i class="fa-regular fa-user"></i>
+          <span class="d-none-mobile">Mi Cuenta</span>
+        </a>
+        <button class="utility-btn js-open-cart" title="Carrito de Compras">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span class="d-none-mobile">Carrito</span>
+          <span class="cart-count-badge js-cart-count">1</span>
+        </button>
+        <button class="mobile-menu-toggle" id="mobileMenuToggle" title="Abrir Menú">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- 3. Navigation Bar with Mega-Dropdown -->
+  <nav class="nav-bar">
+    <div class="container nav-inner">
+      <ul class="nav-list">
+        <li class="nav-item">
+          <a href="index.html" class="nav-link"><i class="fa-solid fa-house"></i> Inicio</a>
+        </li>
+        <li class="nav-item active">
+          <a href="catalog.html" class="nav-link">
+            Categorías <i class="fa-solid fa-chevron-down" style="font-size: 0.75em; margin-left: 2px;"></i>
+          </a>
+          <div class="mega-dropdown">
+            <div class="mega-column">
+              <h4>Maquinaria Forestal</h4>
+              <ul class="mega-links">
+                <li><a href="catalog.html?category=motosierras"><i class="fa-solid fa-angle-right"></i> Motosierras Nafteras</a></li>
+                <li><a href="catalog.html?category=motosierras"><i class="fa-solid fa-angle-right"></i> Motosierras Eléctricas</a></li>
+                <li><a href="catalog.html?category=motosierras"><i class="fa-solid fa-angle-right"></i> Espadas y Cadenas</a></li>
+              </ul>
+            </div>
+            <div class="mega-column">
+              <h4>Energía y Bombeo</h4>
+              <ul class="mega-links">
+                <li><a href="catalog.html?category=generadores"><i class="fa-solid fa-angle-right"></i> Generadores Nafteros</a></li>
+                <li><a href="catalog.html?category=generadores"><i class="fa-solid fa-angle-right"></i> Grupos Inverter Silenciosos</a></li>
+                <li><a href="catalog.html?category=hidrolavadoras"><i class="fa-solid fa-angle-right"></i> Bombas Sumergibles</a></li>
+              </ul>
+            </div>
+            <div class="mega-column">
+              <h4>Parques y Taller</h4>
+              <ul class="mega-links">
+                <li><a href="catalog.html?category=hidrolavadoras"><i class="fa-solid fa-angle-right"></i> Hidrolavadoras Alta Presión</a></li>
+                <li><a href="catalog.html?category=desmalezadoras"><i class="fa-solid fa-angle-right"></i> Desmalezadoras Eje Recto</a></li>
+                <li><a href="catalog.html?category=ferreteria"><i class="fa-solid fa-angle-right"></i> Compresores y Rotomartillos</a></li>
+              </ul>
+            </div>
+            <div class="mega-banner">
+              <img src="assets/images/hero/hero-slide-1.jpg" alt="Línea Profesional">
+              <h5>Línea Profesional</h5>
+              <p style="font-size: 0.78rem; color: #666; margin-bottom: 8px;">Garantía oficial y puesta en marcha sin cargo.</p>
+              <a href="catalog.html" class="btn btn-primary btn-sm">Ver Catálogo</a>
+            </div>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a href="catalog.html?offers=true" class="nav-link has-badge">Ofertas</a>
+        </li>
+        <li class="nav-item">
+          <a href="catalog.html?brand=STIHL" class="nav-link">Marcas Oficiales</a>
+        </li>
+        <li class="nav-item">
+          <a href="index.html#nosotros" class="nav-link">Nosotros & Respaldo</a>
+        </li>
+        <li class="nav-item">
+          <a href="contact.html" class="nav-link">Contacto</a>
+        </li>
+      </ul>
+
+      <a href="https://wa.me/5491100000000" target="_blank" class="nav-support-link">
+        <i class="fa-solid fa-screwdriver-wrench"></i> Servicio Técnico Oficial
+      </a>
+    </div>
+  </nav>
+
+  <!-- 4. Breadcrumbs Navigation -->
+  <div class="breadcrumbs-section">
+    <div class="container">
+      <div class="breadcrumb-list">
+        <div class="breadcrumb-item"><a href="index.html">Inicio</a></div>
+        <div class="breadcrumb-sep"><i class="fa-solid fa-chevron-right"></i></div>
+        <div class="breadcrumb-item"><a href="catalog.html" id="breadcrumbCategory">Categoría</a></div>
+        <div class="breadcrumb-sep"><i class="fa-solid fa-chevron-right"></i></div>
+        <div class="breadcrumb-item active" id="breadcrumbProduct">Cargando producto...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. Product Detail Main Section -->
+  <main class="product-detail-section" id="productDetailLayout">
+    <div class="container">
+      
+      <div class="product-detail-layout">
+        
+        <!-- Left: Product Gallery Box -->
+        <div class="product-gallery-box">
+          <div class="gallery-main-wrapper">
+            <img src="" alt="" id="productMainImg" class="gallery-main-img">
+          </div>
+          <div class="gallery-thumbnails" id="productThumbsContainer"></div>
+        </div>
+
+        <!-- Right: Buy Box & Product Info -->
+        <div class="product-info-box">
+          
+          <div class="product-sku-bar">
+            <span style="font-weight: 700; color: var(--color-primary-dark); text-transform: uppercase;" id="productBrand">STIHL</span>
+            <span id="productSku">SKU: HMC-001</span>
+            <div class="product-stock-status">
+              <span class="stock-pulse-dot"></span>
+              <span>Stock Disponible</span>
+            </div>
+          </div>
+
+          <h1 class="product-detail-title" id="productTitle">Cargando título...</h1>
+
+          <!-- Reviews Rating -->
+          <div class="product-rating-row">
+            <div class="product-rating-stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <span style="font-weight: 700;">5.0</span>
+            <span class="product-reviews-count">(28 opiniones verificadas)</span>
+          </div>
+
+          <!-- Price Panel -->
+          <div class="product-price-panel">
+            <div class="product-price-row">
+              <span class="product-detail-price" id="productPrice">$0</span>
+              <span class="product-detail-oldprice" id="productOldPrice">$0</span>
+              <span class="badge badge-discount" id="productDiscountBadge">-16% OFF</span>
+            </div>
+            
+            <div class="installments-badge-box">
+              <i class="fa-solid fa-credit-card text-primary" style="font-size: 1.2rem;"></i>
+              <div id="productInstallmentsText">
+                <strong>6 cuotas fijas</strong> sin interés con todas las tarjetas
+              </div>
+            </div>
+          </div>
+
+          <!-- Short Description -->
+          <p id="productFullDesc" style="color: var(--color-gray-dark); font-size: 0.95rem; line-height: 1.6;"></p>
+
+          <!-- Postal Code Shipping Estimator -->
+          <div class="product-shipping-estimator">
+            <h5><i class="fa-solid fa-truck text-primary"></i> Calcular costo y tiempo de envío:</h5>
+            <div style="display: flex; gap: 8px;">
+              <input type="text" id="productCpInput" placeholder="Ingresá tu Código Postal" maxlength="5" style="flex: 1; padding: 8px 12px; border: 1px solid var(--color-gray-border); border-radius: var(--radius-sm); font-size: 0.9rem;">
+              <button class="btn btn-dark btn-sm" onclick="hmcCalcShipping('productShippingResult', 'productCpInput')">Calcular</button>
+            </div>
+            <div id="productShippingResult"></div>
+            <div style="font-size: 0.8rem; color: #666; margin-top: 8px;">
+              <i class="fa-solid fa-store text-primary"></i> Retiro <strong>GRATIS</strong> en Sucursal Central Zárate o Munro (Listo en 2 hs hábiles).
+            </div>
+          </div>
+
+          <!-- Actions Group -->
+          <div class="product-actions-group">
+            <div class="qty-input-box">
+              <button id="qtyMinusBtn" title="Restar">-</button>
+              <input type="number" id="productDetailQty" value="1" min="1" max="99">
+              <button id="qtyPlusBtn" title="Sumar">+</button>
+            </div>
+            <button class="btn btn-primary btn-add-cart-lg" id="productAddToCartBtn">
+              <i class="fa-solid fa-cart-plus"></i> Agregar al Carrito
+            </button>
+            <button class="btn btn-buy-now" id="productBuyNowBtn">
+              Comprar Ahora
+            </button>
+          </div>
+
+          <!-- Direct Technical Advice WhatsApp CTA -->
+          <a href="#" target="_blank" class="product-whatsapp-advice" id="productWhatsappBtn">
+            <i class="fa-brands fa-whatsapp" style="font-size: 1.3rem;"></i>
+            <span>Consultar con un Técnico Especialista</span>
+          </a>
+
+          <!-- Guarantee Bullets -->
+          <div class="product-guarantee-bullets">
+            <div class="guarantee-bullet">
+              <i class="fa-solid fa-shield-halved"></i>
+              <span>Garantía Oficial de Fábrica</span>
+            </div>
+            <div class="guarantee-bullet">
+              <i class="fa-solid fa-file-invoice"></i>
+              <span>Emitimos Factura A y B</span>
+            </div>
+            <div class="guarantee-bullet">
+              <i class="fa-solid fa-screwdriver-wrench"></i>
+              <span>Taller y Puesta en Marcha</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- 6. Product Tabs Section -->
+      <div class="product-tabs-wrapper">
+        <div class="product-tabs-header">
+          <button class="product-tab-btn active" data-tab="tabSpecs">
+            <i class="fa-solid fa-list-check"></i> Especificaciones Técnicas
+          </button>
+          <button class="product-tab-btn" data-tab="tabDesc">
+            <i class="fa-solid fa-circle-info"></i> Descripción & Aplicaciones
+          </button>
+          <button class="product-tab-btn" data-tab="tabWarranty">
+            <i class="fa-solid fa-award"></i> Garantía & Respaldo Oficial
+          </button>
+          <button class="product-tab-btn" data-tab="tabReviews">
+            <i class="fa-solid fa-star"></i> Opiniones de Clientes (28)
+          </button>
+        </div>
+
+        <div class="product-tab-content">
+          
+          <!-- Tab 1: Specs -->
+          <div class="product-tab-panel active" id="tabSpecs">
+            <table class="specs-table">
+              <tbody id="productSpecsTableBody"></tbody>
+            </table>
+          </div>
+
+          <!-- Tab 2: Applications -->
+          <div class="product-tab-panel" id="tabDesc">
+            <h4 style="margin-bottom: 12px; font-size: 1.15rem;">Recomendaciones de Uso y Dimensionamiento:</h4>
+            <p id="productApplications" style="color: #444; line-height: 1.7; margin-bottom: 20px;"></p>
+            <div style="background: var(--color-gray-ultra-light); border-radius: var(--radius-md); padding: 20px; border-left: 4px solid var(--color-primary);">
+              <h5 style="margin-bottom: 6px; font-size: 0.95rem;"><i class="fa-solid fa-lightbulb text-primary"></i> Consejo de mantenimiento HMC:</h5>
+              <p style="font-size: 0.88rem; color: #555; margin: 0;">Revisá periódicamente el filtro de aire y utilizá lubricantes de alta pureza homologados para extender la vida útil del motor y mantener la cobertura total de la garantía oficial.</p>
+            </div>
+          </div>
+
+          <!-- Tab 3: Warranty & Support -->
+          <div class="product-tab-panel" id="tabWarranty">
+            <h4 style="margin-bottom: 12px; font-size: 1.15rem;">Respaldo Directo y Servicio Postventa HMC Hub</h4>
+            <p style="color: #444; line-height: 1.7; margin-bottom: 16px;">
+              En HMC no competimos por precio, competimos por <strong>respaldo técnico, trayectoria y asesoramiento</strong>. Cada máquina que entregamos cuenta con revisión de fluidos, prueba de arranque y asistencia directa para su puesta en marcha.
+            </p>
+            <ul style="display: flex; flex-direction: column; gap: 8px; font-size: 0.92rem; color: #444;">
+              <li><i class="fa-solid fa-check text-primary"></i> <strong>Red de talleres homologados:</strong> atención inmediata para mantenimiento preventivo y correctivo.</li>
+              <li><i class="fa-solid fa-check text-primary"></i> <strong>Repuestos 100% legítimos:</strong> disponibilidad permanente de filtros, bujías, correas y cuchillas.</li>
+              <li><i class="fa-solid fa-check text-primary"></i> <strong>Atención corporativa:</strong> presupuestos en el acto y cuentas corrientes para constructoras y contratistas.</li>
+            </ul>
+          </div>
+
+          <!-- Tab 4: Reviews -->
+          <div class="product-tab-panel" id="tabReviews">
+            <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--color-gray-border);">
+              <div style="text-align: center;">
+                <div style="font-family: var(--font-headings); font-size: 3rem; font-weight: 800; color: var(--color-black);">5.0</div>
+                <div style="color: var(--color-warning);"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <span style="font-size: 0.8rem; color: #888;">28 valoraciones</span>
+              </div>
+              <div style="flex: 1; border-left: 1px solid var(--color-gray-border); padding-left: 20px;">
+                <p style="font-size: 0.9rem; color: #555; margin: 0;">El 100% de los clientes que compraron este equipo lo recomiendan por su potencia, calidad de materiales y respaldo técnico postventa.</p>
+              </div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+              <div style="padding: 16px; background: var(--color-gray-ultra-light); border-radius: var(--radius-md);">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                  <strong style="font-size: 0.92rem;">Ing. Marcelo R. (Contratista de Obra)</strong>
+                  <div style="color: var(--color-warning); font-size: 0.8rem;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                </div>
+                <p style="font-size: 0.88rem; color: #555; margin: 0;">"Excelente máquina. La pusimos a trabajar en doble turno en obra y responde con potencia pareja. La entrega con fluidos listos nos ahorró tiempo valioso."</p>
+              </div>
+              <div style="padding: 16px; background: var(--color-gray-ultra-light); border-radius: var(--radius-md);">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 6px;">
+                  <strong style="font-size: 0.92rem;">Daniel G. (Mantenimiento Agropecuario)</strong>
+                  <div style="color: var(--color-warning); font-size: 0.8rem;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                </div>
+                <p style="font-size: 0.88rem; color: #555; margin: 0;">"Muy buen asesoramiento telefónico antes de comprar. Me orientaron sobre el modelo exacto que necesitaba para no quedarme corto de potencia."</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 7. Related Products Section -->
+      <section style="margin-top: 50px;">
+        <div class="section-header" style="text-align: left; margin-bottom: 28px;">
+          <div class="section-tag"><i class="fa-solid fa-layer-group"></i> Complementá tu compra</div>
+          <h2 class="section-title" style="font-size: 1.8rem;">Equipos y Accesorios Relacionados</h2>
+        </div>
+        <div class="products-grid" id="relatedProductsGrid"></div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- 8. Footer -->
+  <footer class="footer-main">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <img src="assets/logos/logo-horizontal-white.png" alt="HMC HUB" class="footer-logo">
+          <p class="footer-brand-desc">
+            Un solo lugar. Todo lo que mueve tu obra, tu campo, tu casa o tu negocio. Respaldo técnico profesional, trayectoria y servicio oficial.
+          </p>
+          <div class="footer-social-links">
+            <a href="https://instagram.com" target="_blank" class="social-btn"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://facebook.com" target="_blank" class="social-btn"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://wa.me/5491100000000" target="_blank" class="social-btn"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="https://youtube.com" target="_blank" class="social-btn"><i class="fa-brands fa-youtube"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navegación</h4>
+          <ul class="footer-links">
+            <li><a href="index.html"><i class="fa-solid fa-chevron-right"></i> Inicio</a></li>
+            <li><a href="catalog.html"><i class="fa-solid fa-chevron-right"></i> Catálogo Completo</a></li>
+            <li><a href="catalog.html?offers=true"><i class="fa-solid fa-chevron-right"></i> Ofertas Especiales</a></li>
+            <li><a href="catalog.html?brand=STIHL"><i class="fa-solid fa-chevron-right"></i> Marcas Oficiales</a></li>
+            <li><a href="contact.html"><i class="fa-solid fa-chevron-right"></i> Contacto y Sucursales</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Atención al Cliente</h4>
+          <ul class="footer-links">
+            <li><a href="contact.html"><i class="fa-solid fa-chevron-right"></i> Formas de Envío</a></li>
+            <li><a href="contact.html"><i class="fa-solid fa-chevron-right"></i> Medios de Pago</a></li>
+            <li><a href="contact.html"><i class="fa-solid fa-chevron-right"></i> Garantía y Devoluciones</a></li>
+            <li><a href="contact.html"><i class="fa-solid fa-chevron-right"></i> Servicio Técnico</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Contacto Directo</h4>
+          <ul class="footer-contact-list">
+            <li><i class="fa-solid fa-location-dot"></i> <span>Av. Principal 1240, Parque Industrial, Buenos Aires</span></li>
+            <li><i class="fa-brands fa-whatsapp"></i> <span>+54 9 11 0000-0000 (Ventas & Asesoría)</span></li>
+            <li><i class="fa-solid fa-envelope"></i> <span>contacto@hmchub.com.ar</span></li>
+            <li><i class="fa-solid fa-clock"></i> <span>Lunes a Viernes: 8:00 a 18:00 hs</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-bottom-inner">
+          <div>© 2026 <strong>HMC HUB</strong> — Todos los derechos reservados.</div>
+          <div class="payment-methods-icons">
+            <i class="fa-brands fa-cc-visa"></i>
+            <i class="fa-brands fa-cc-mastercard"></i>
+            <i class="fa-brands fa-cc-amex"></i>
+            <i class="fa-solid fa-money-bill-transfer"></i>
+            <i class="fa-solid fa-shield-check text-primary"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 9. AJAX Cart Drawer -->
+  <div class="cart-drawer-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="cart-drawer-header">
+      <h3><i class="fa-solid fa-cart-shopping text-primary"></i> Mi Carrito</h3>
+      <button class="cart-close-btn" id="cartCloseBtn" title="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="cart-shipping-bar">
+      <div class="shipping-bar-text" id="shippingBarText">
+        <span>Cargando beneficios de envío...</span>
+      </div>
+      <div class="shipping-bar-progress">
+        <div class="shipping-bar-fill" id="shippingBarFill" style="width: 0%;"></div>
+      </div>
+    </div>
+    <div class="cart-items-container" id="cartItemsContainer"></div>
+    <div class="cart-drawer-footer">
+      <div class="cart-total-row">
+        <span>Subtotal:</span>
+        <strong id="cartSubtotal">$0</strong>
+      </div>
+      <div class="cart-total-row total-final">
+        <span>Total:</span>
+        <span id="cartTotalFinal" style="color: var(--color-primary);">$0</span>
+      </div>
+      <a href="cart.html" class="btn btn-primary btn-lg cart-checkout-btn" style="text-align: center; text-decoration: none;">
+        <i class="fa-solid fa-lock"></i> Ver Carrito & Pagar
+      </a>
+    </div>
+  </aside>
+
+  <!-- 10. Quick View Modal -->
+  <div class="modal-overlay" id="quickViewModal">
+    <div class="modal-content-box">
+      <button class="modal-close-btn" id="quickViewClose" title="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+      <div class="quick-view-grid">
+        <div class="quick-view-gallery">
+          <img src="" alt="" id="qvImage" class="quick-view-main-img">
+        </div>
+        <div class="quick-view-details">
+          <div class="product-brand" id="qvBrand"></div>
+          <h3 id="qvTitle" style="font-size: 1.35rem; margin-bottom: 12px; color: var(--color-black);"></h3>
+          <div class="product-price-box" style="margin-bottom: 16px;">
+            <span class="price-old" id="qvOldPrice"></span>
+            <span class="price-current" id="qvPrice" style="font-size: 1.6rem; color: var(--color-primary);"></span>
+            <span class="badge badge-discount" id="qvDiscount" style="margin-left: 8px;"></span>
+          </div>
+          <p id="qvDesc" style="font-size: 0.9rem; color: var(--color-gray-dark); margin-bottom: 18px; line-height: 1.5;"></p>
+          <div style="margin-bottom: 20px;">
+            <h5 style="font-size: 0.85rem; margin-bottom: 8px; text-transform: uppercase;">Especificaciones Técnicas:</h5>
+            <ul id="qvSpecs" style="font-size: 0.84rem; color: #555; display: flex; flex-direction: column; gap: 4px;"></ul>
+          </div>
+          <div style="display: flex; gap: 10px; margin-top: auto;">
+            <input type="number" id="qvQtyInput" value="1" min="1" max="99" style="width: 60px; padding: 10px; border: 1px solid var(--color-gray-border); border-radius: var(--radius-sm); text-align: center; font-weight: 700;">
+            <button class="btn btn-primary" id="qvAddToCartBtn" style="flex: 1;">
+              <i class="fa-solid fa-cart-plus"></i> Agregar al Carrito
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 11. Floating WhatsApp Button -->
+  <a href="https://wa.me/5491100000000?text=Hola%20HMC%20Hub,%20necesito%20asesoramiento%20técnico%20sobre%20un%20equipo" target="_blank" class="floating-whatsapp" title="Hablar con un Asesor Técnico">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+  <!-- Application Logic -->
+  <script src="js/app.js"></script>
+</body>
+</html>

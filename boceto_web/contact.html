@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto & Asesoramiento Técnico | HMC HUB</title>
+  <meta name="description" content="Comunicate con el equipo técnico de HMC Hub. Atención especializada para obras, campos y talleres, cotizaciones para empresas y sucursales.">
+  
+  <!-- Google Fonts: Chakra Petch (Headings) & Inter (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,500;0,600;0,700;0,800;1,700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- 1. Top Advertising Bar -->
+  <div class="top-bar">
+    <div class="container top-bar-inner">
+      <div class="top-bar-slider">
+        <i class="fa-solid fa-truck-fast"></i>
+        <span><strong>ENVÍOS A TODO EL PAÍS</strong> — Asesoramiento técnico directo en cada compra</span>
+      </div>
+      <div class="top-bar-links">
+        <a href="https://wa.me/5491100000000" target="_blank" class="top-bar-link">
+          <i class="fa-brands fa-whatsapp text-primary"></i> Asesoría WhatsApp
+        </a>
+        <span style="opacity: 0.3;">|</span>
+        <a href="contact.html" class="top-bar-link">
+          <i class="fa-solid fa-location-dot"></i> Sucursales y Retiro
+        </a>
+        <span style="opacity: 0.3;">|</span>
+        <span class="top-bar-link">
+          <i class="fa-solid fa-file-invoice"></i> Factura A y B
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Main Header -->
+  <header class="header-main">
+    <div class="container header-inner">
+      
+      <!-- Brand Logo -->
+      <div class="logo-container">
+        <a href="index.html" class="logo-link">
+          <img src="assets/logos/logo-horizontal-color.png" alt="HMC HUB" class="logo-img">
+        </a>
+      </div>
+
+      <!-- Live Search Form -->
+      <div class="header-search">
+        <form class="search-form" onsubmit="event.preventDefault();">
+          <input type="text" id="mainSearchInput" class="search-input" placeholder="Buscar motosierras, generadores, hidrolavadoras..." autocomplete="off">
+          <button type="submit" class="search-btn" title="Buscar">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </form>
+        <div id="searchDropdown" class="search-dropdown">
+          <div class="search-dropdown-header">Sugerencias destacadas</div>
+          <div id="searchResultsList"></div>
+        </div>
+      </div>
+
+      <!-- Utility Actions -->
+      <div class="header-utilities">
+        <a href="https://wa.me/5491100000000" target="_blank" class="utility-btn" style="color: var(--color-primary-dark);" title="Asesoramiento Técnico">
+          <i class="fa-brands fa-whatsapp"></i>
+          <span class="d-none-mobile">Asesoría Técnica</span>
+        </a>
+        <a href="contact.html" class="utility-btn" title="Contacto y Sucursales">
+          <i class="fa-regular fa-user"></i>
+          <span class="d-none-mobile">Mi Cuenta</span>
+        </a>
+        <button class="utility-btn js-open-cart" title="Carrito de Compras">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span class="d-none-mobile">Carrito</span>
+          <span class="cart-count-badge js-cart-count">1</span>
+        </button>
+        <button class="mobile-menu-toggle" id="mobileMenuToggle" title="Abrir Menú">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- 3. Navigation Bar with Mega-Dropdown -->
+  <nav class="nav-bar">
+    <div class="container nav-inner">
+      <ul class="nav-list">
+        <li class="nav-item">
+          <a href="index.html" class="nav-link"><i class="fa-solid fa-house"></i> Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a href="catalog.html" class="nav-link">
+            Categorías <i class="fa-solid fa-chevron-down" style="font-size: 0.75em; margin-left: 2px;"></i>
+          </a>
+          <div class="mega-dropdown">
+            <div class="mega-column">
+              <h4>Maquinaria Forestal</h4>
+              <ul class="mega-links">
+                <li><a href="catalog.html?category=motosierras"><i class="fa-solid fa-angle-right"></i> Motosierras Nafteras</a></li>
+                <li><a href="catalog.html?category=motosierras"><i class="fa-solid fa-angle-right"></i> Motosierras Eléctricas</a></li>
+                <li><a href="catalog.html?category=motosierras"><i class="fa-solid fa-angle-right"></i> Espadas y Cadenas</a></li>
+              </ul>
+            </div>
+            <div class="mega-column">
+              <h4>Energía y Bombeo</h4>
+              <ul class="mega-links">
+                <li><a href="catalog.html?category=generadores"><i class="fa-solid fa-angle-right"></i> Generadores Nafteros</a></li>
+                <li><a href="catalog.html?category=generadores"><i class="fa-solid fa-angle-right"></i> Grupos Inverter Silenciosos</a></li>
+                <li><a href="catalog.html?category=hidrolavadoras"><i class="fa-solid fa-angle-right"></i> Bombas Sumergibles</a></li>
+              </ul>
+            </div>
+            <div class="mega-column">
+              <h4>Parques y Taller</h4>
+              <ul class="mega-links">
+                <li><a href="catalog.html?category=hidrolavadoras"><i class="fa-solid fa-angle-right"></i> Hidrolavadoras Alta Presión</a></li>
+                <li><a href="catalog.html?category=desmalezadoras"><i class="fa-solid fa-angle-right"></i> Desmalezadoras Eje Recto</a></li>
+                <li><a href="catalog.html?category=ferreteria"><i class="fa-solid fa-angle-right"></i> Compresores y Rotomartillos</a></li>
+              </ul>
+            </div>
+            <div class="mega-banner">
+              <img src="assets/images/hero/hero-slide-1.jpg" alt="Línea Profesional">
+              <h5>Línea Profesional</h5>
+              <p style="font-size: 0.78rem; color: #666; margin-bottom: 8px;">Garantía oficial y puesta en marcha sin cargo.</p>
+              <a href="catalog.html" class="btn btn-primary btn-sm">Ver Catálogo</a>
+            </div>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a href="catalog.html?offers=true" class="nav-link has-badge">Ofertas</a>
+        </li>
+        <li class="nav-item">
+          <a href="catalog.html?brand=STIHL" class="nav-link">Marcas Oficiales</a>
+        </li>
+        <li class="nav-item">
+          <a href="index.html#nosotros" class="nav-link">Nosotros & Respaldo</a>
+        </li>
+        <li class="nav-item active">
+          <a href="contact.html" class="nav-link">Contacto</a>
+        </li>
+      </ul>
+
+      <a href="https://wa.me/5491100000000" target="_blank" class="nav-support-link">
+        <i class="fa-solid fa-screwdriver-wrench"></i> Servicio Técnico Oficial
+      </a>
+    </div>
+  </nav>
+
+  <!-- 4. Breadcrumbs Navigation -->
+  <div class="breadcrumbs-section">
+    <div class="container">
+      <div class="breadcrumb-list">
+        <div class="breadcrumb-item"><a href="index.html">Inicio</a></div>
+        <div class="breadcrumb-sep"><i class="fa-solid fa-chevron-right"></i></div>
+        <div class="breadcrumb-item active">Contacto & Soporte Técnico</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. Contact Main Section -->
+  <main class="contact-page-section" id="contactPageLayout">
+    <div class="container">
+      
+      <!-- Section Header -->
+      <div class="section-header">
+        <div class="section-tag"><i class="fa-solid fa-headset"></i> Atención Especializada</div>
+        <h1 class="section-title" style="font-size: 2.4rem;">Estamos Para Respaldar Tu Trabajo</h1>
+        <p class="section-subtitle">HMC no compite por precio, compite por respaldo técnico, trayectoria y asesoramiento especializado antes y después de cada compra.</p>
+      </div>
+
+      <!-- 3 Fast Contact Cards -->
+      <div class="contact-cards-grid">
+        
+        <div class="contact-card">
+          <div class="contact-card-icon">
+            <i class="fa-brands fa-whatsapp"></i>
+          </div>
+          <h3 style="font-size: 1.25rem;">Asesoría Técnica WhatsApp</h3>
+          <p style="font-size: 0.9rem; color: var(--color-gray-dark); margin: 0;">Chateá de forma directa con nuestros especialistas para dimensionar generadores, elegir motosierras o solicitar repuestos.</p>
+          <a href="https://wa.me/5491100000000" target="_blank" class="btn btn-primary btn-sm" style="margin-top: auto;">
+            <i class="fa-brands fa-whatsapp"></i> Chatear Ahora
+          </a>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-card-icon">
+            <i class="fa-solid fa-file-invoice-dollar"></i>
+          </div>
+          <h3 style="font-size: 1.25rem;">Ventas Corporativas & Factura A</h3>
+          <p style="font-size: 0.9rem; color: var(--color-gray-dark); margin: 0;">Presupuestos a medida para empresas constructoras, municipios, establecimientos agrícolas y talleres industriales.</p>
+          <a href="mailto:ventas@hmchub.com.ar" class="btn btn-dark btn-sm" style="margin-top: auto;">
+            <i class="fa-solid fa-envelope"></i> ventas@hmchub.com.ar
+          </a>
+        </div>
+
+        <div class="contact-card">
+          <div class="contact-card-icon">
+            <i class="fa-solid fa-screwdriver-wrench"></i>
+          </div>
+          <h3 style="font-size: 1.25rem;">Servicio Técnico & Puesta en Marcha</h3>
+          <p style="font-size: 0.9rem; color: var(--color-gray-dark); margin: 0;">Taller propio homologado por marcas líderes. Mantenimiento preventivo, afilado de cadenas y provisión de repuestos legítimos.</p>
+          <a href="tel:+5491100000000" class="btn btn-secondary btn-sm" style="margin-top: auto;">
+            <i class="fa-solid fa-phone"></i> +54 9 11 0000-0000
+          </a>
+        </div>
+
+      </div>
+
+      <!-- Main Form & Branches Grid -->
+      <div class="contact-main-grid">
+        
+        <!-- Contact Form Card -->
+        <div class="contact-form-card">
+          <h3 style="font-size: 1.35rem; margin-bottom: 8px;">Envianos tu Consulta o Solicitud de Cotización</h3>
+          <p style="color: #666; font-size: 0.9rem; margin-bottom: 24px;">Completá el siguiente formulario y un técnico especialista responderá dentro de las 2 horas hábiles.</p>
+
+          <form id="contactInquiryForm">
+            <div class="form-group-hmc">
+              <label for="contactName">Nombre y Apellido / Razón Social *</label>
+              <input type="text" id="contactName" class="form-input-hmc" placeholder="Ej: Ing. Juan Pérez o Constructora del Plata" required>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+              <div class="form-group-hmc">
+                <label for="contactEmail">Correo Electrónico *</label>
+                <input type="email" id="contactEmail" class="form-input-hmc" placeholder="tuemail@dominio.com" required>
+              </div>
+              <div class="form-group-hmc">
+                <label for="contactPhone">Teléfono / Celular *</label>
+                <input type="tel" id="contactPhone" class="form-input-hmc" placeholder="Ej: 11 4455-6677" required>
+              </div>
+            </div>
+
+            <div class="form-group-hmc">
+              <label for="contactType">Tipo de Consulta *</label>
+              <select id="contactType" class="form-input-hmc" required>
+                <option value="">Seleccioná un motivo...</option>
+                <option value="asesoria">Asesoramiento técnico para elegir una máquina</option>
+                <option value="presupuesto">Presupuesto para empresa / Factura A</option>
+                <option value="repuestos">Repuestos, servicio técnico o puesta en marcha</option>
+                <option value="envio">Consulta sobre estado de pedido o envío</option>
+                <option value="otro">Otras consultas</option>
+              </select>
+            </div>
+
+            <div class="form-group-hmc">
+              <label for="contactMessage">Mensaje o Detalle del Requerimiento *</label>
+              <textarea id="contactMessage" class="form-input-hmc" rows="4" placeholder="Detallanos el trabajo a realizar, potencia requerida o equipo de interés..." required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
+              <i class="fa-solid fa-paper-plane"></i> Enviar Mensaje a HMC
+            </button>
+          </form>
+        </div>
+
+        <!-- Branches and Physical Presence -->
+        <div>
+          <h3 style="font-size: 1.35rem; margin-bottom: 20px;"><i class="fa-solid fa-location-dot text-primary"></i> Sucursales y Puntos de Retiro</h3>
+          
+          <div class="branch-card">
+            <h4><i class="fa-solid fa-store"></i> Sucursal Central Zárate</h4>
+            <p style="font-size: 0.88rem; color: #555; margin-bottom: 8px;">
+              <strong>Dirección:</strong> Av. Antártida Argentina 1450, Parque Industrial Zárate, Prov. de Buenos Aires.
+            </p>
+            <p style="font-size: 0.88rem; color: #555; margin-bottom: 8px;">
+              <strong>Horarios:</strong> Lunes a Viernes de 8:00 a 18:00 hs | Sábados de 8:30 a 13:00 hs.
+            </p>
+            <p style="font-size: 0.85rem; color: var(--color-primary-dark); font-weight: 700;">
+              ✓ Showroom de maquinaria, taller oficial y retiro con prueba de arranque sin cargo.
+            </p>
+          </div>
+
+          <div class="branch-card">
+            <h4><i class="fa-solid fa-store"></i> Centro de Distribución Munro</h4>
+            <p style="font-size: 0.88rem; color: #555; margin-bottom: 8px;">
+              <strong>Dirección:</strong> Av. Mitre 2300, Munro, Vicente López, Gran Buenos Aires.
+            </p>
+            <p style="font-size: 0.88rem; color: #555; margin-bottom: 8px;">
+              <strong>Horarios:</strong> Lunes a Viernes de 8:30 a 17:30 hs.
+            </p>
+            <p style="font-size: 0.85rem; color: var(--color-primary-dark); font-weight: 700;">
+              ✓ Despacho rápido para CABA y GBA, entrega de repuestos e insumos.
+            </p>
+          </div>
+
+          <!-- Trust Callout -->
+          <div style="background: var(--color-surface-dark); color: #fff; border-radius: var(--radius-md); padding: 20px; margin-top: 20px; border-left: 4px solid var(--color-primary);">
+            <h5 style="color: #fff; font-size: 0.95rem; margin-bottom: 6px;"><i class="fa-solid fa-shield-check text-primary"></i> Respaldo de fábrica garantizado</h5>
+            <p style="font-size: 0.84rem; color: #aaa; margin: 0;">Todos los equipos se entregan con factura oficial, garantía registrada y número de serie homologado por el fabricante.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- FAQ Accordion -->
+      <section class="faq-accordion">
+        <div class="section-header" style="text-align: left; margin-bottom: 24px;">
+          <div class="section-tag"><i class="fa-solid fa-circle-question"></i> Dudas Frecuentes</div>
+          <h2 class="section-title" style="font-size: 1.8rem;">Preguntas Frecuentes</h2>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>¿Los equipos se entregan listos para usar o hay que armarlos?</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            En los retiros por sucursal entregamos las máquinas armadas, con fluidos revisados y prueba de marcha sin costo. Para envíos al interior, viajan en su caja original de fábrica con manuales en español y ofrecemos asistencia remota guiada por videollamada para el primer encendido.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>¿Hacen envíos de generadores y maquinaria pesada a todo el país?</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            Sí. Coordinamos envíos paletizados y asegurados a través de expresos y transportes de carga con seguimiento en tiempo real hasta tu obra o depósito. Superando los $300.000 el envío es gratis en productos seleccionados.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>¿Cómo solicito Factura A para mi empresa o CUIT?</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            Al momento de realizar la compra, simplemente ingresá tu CUIT y Razón Social en el campo de facturación. La factura electrónica A se genera automáticamente y se envía a tu correo en formato PDF.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question">
+            <span>¿Cuentan con repuestos originales de las marcas que comercializan?</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            Sí, somos distribuidores y centro de servicio oficial de STIHL, HONDA, HUSQVARNA, BOSCH, DEWALT y marcas asociadas. Disponemos de stock permanente de espadas, cadenas, bujías, filtros, cuchillas y lubricantes originales.
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <!-- 6. Footer -->
+  <footer class="footer-main">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <img src="assets/logos/logo-horizontal-white.png" alt="HMC HUB" class="footer-logo">
+          <p class="footer-brand-desc">
+            Un solo lugar. Todo lo que mueve tu obra, tu campo, tu casa o tu negocio. Respaldo técnico profesional, trayectoria y servicio oficial.
+          </p>
+          <div class="footer-social-links">
+            <a href="https://instagram.com" target="_blank" class="social-btn"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://facebook.com" target="_blank" class="social-btn"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://wa.me/5491100000000" target="_blank" class="social-btn"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="https://youtube.com" target="_blank" class="social-btn"><i class="fa-brands fa-youtube"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navegación</h4>
+          <ul class="footer-links">
+            <li><a href="index.html"><i class="fa-solid fa-chevron-right"></i> Inicio</a></li>
+            <li><a href="catalog.html"><i class="fa-solid fa-chevron-right"></i> Catálogo Completo</a></li>
+            <li><a href="catalog.html?offers=true"><i class="fa-solid fa-chevron-right"></i> Ofertas Especiales</a></li>
+            <li><a href="catalog.html?brand=STIHL"><i class="fa-solid fa-chevron-right"></i> Marcas Oficiales</a></li>
+            <li><a href="contact.html"><i class="fa-solid fa-chevron-right"></i> Contacto y Sucursales</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Atención al Cliente</h4>
+          <ul class="footer-links">
+            <li><a href="contact.html"><i class="fa-solid fa-chevron-right"></i> Formas de Envío</a></li>
+            <li><a href="contact.html"><i class="fa-solid fa-chevron-right"></i> Medios de Pago</a></li>
+            <li><a href="contact.html"><i class="fa-solid fa-chevron-right"></i> Garantía y Devoluciones</a></li>
+            <li><a href="contact.html"><i class="fa-solid fa-chevron-right"></i> Servicio Técnico</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Contacto Directo</h4>
+          <ul class="footer-contact-list">
+            <li><i class="fa-solid fa-location-dot"></i> <span>Av. Principal 1240, Parque Industrial, Buenos Aires</span></li>
+            <li><i class="fa-brands fa-whatsapp"></i> <span>+54 9 11 0000-0000 (Ventas & Asesoría)</span></li>
+            <li><i class="fa-solid fa-envelope"></i> <span>contacto@hmchub.com.ar</span></li>
+            <li><i class="fa-solid fa-clock"></i> <span>Lunes a Viernes: 8:00 a 18:00 hs</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-bottom-inner">
+          <div>© 2026 <strong>HMC HUB</strong> — Todos los derechos reservados.</div>
+          <div class="payment-methods-icons">
+            <i class="fa-brands fa-cc-visa"></i>
+            <i class="fa-brands fa-cc-mastercard"></i>
+            <i class="fa-brands fa-cc-amex"></i>
+            <i class="fa-solid fa-money-bill-transfer"></i>
+            <i class="fa-solid fa-shield-check text-primary"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 7. AJAX Cart Drawer -->
+  <div class="cart-drawer-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="cart-drawer-header">
+      <h3><i class="fa-solid fa-cart-shopping text-primary"></i> Mi Carrito</h3>
+      <button class="cart-close-btn" id="cartCloseBtn" title="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="cart-shipping-bar">
+      <div class="shipping-bar-text" id="shippingBarText">
+        <span>Cargando beneficios de envío...</span>
+      </div>
+      <div class="shipping-bar-progress">
+        <div class="shipping-bar-fill" id="shippingBarFill" style="width: 0%;"></div>
+      </div>
+    </div>
+    <div class="cart-items-container" id="cartItemsContainer"></div>
+    <div class="cart-drawer-footer">
+      <div class="cart-total-row">
+        <span>Subtotal:</span>
+        <strong id="cartSubtotal">$0</strong>
+      </div>
+      <div class="cart-total-row total-final">
+        <span>Total:</span>
+        <span id="cartTotalFinal" style="color: var(--color-primary);">$0</span>
+      </div>
+      <a href="cart.html" class="btn btn-primary btn-lg cart-checkout-btn" style="text-align: center; text-decoration: none;">
+        <i class="fa-solid fa-lock"></i> Ver Carrito & Pagar
+      </a>
+    </div>
+  </aside>
+
+  <!-- 8. Floating WhatsApp Button -->
+  <a href="https://wa.me/5491100000000?text=Hola%20HMC%20Hub,%20necesito%20asesoramiento%20técnico%20sobre%20un%20equipo" target="_blank" class="floating-whatsapp" title="Hablar con un Asesor Técnico">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+  <!-- Application Logic -->
+  <script src="js/app.js"></script>
+</body>
+</html>
