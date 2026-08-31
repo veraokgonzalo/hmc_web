@@ -50,11 +50,11 @@ const PRODUCT_CATALOG = [
     brand: "STIHL",
     price: 349990,
     oldPrice: 419990,
-    image: "assets/images/products/DSC00883.jpg",
+    image: "assets/images/products/prod-01-motosierra-stihl-52cc-principal.jpg",
     gallery: [
-      "assets/images/products/DSC00883.jpg",
-      "assets/images/products/DSC00885.jpg",
-      "assets/images/products/DSC00886.jpg"
+      "assets/images/products/prod-01-motosierra-stihl-52cc-principal.jpg",
+      "assets/images/products/prod-01-motosierra-stihl-52cc-detalle-espada.jpg",
+      "assets/images/products/prod-01-motosierra-stihl-52cc-detalle-motor.jpg"
     ],
     inStock: true,
     freeShipping: true,
@@ -83,11 +83,11 @@ const PRODUCT_CATALOG = [
     brand: "HONDA",
     price: 890500,
     oldPrice: 990000,
-    image: "assets/images/products/DSC00887.jpg",
+    image: "assets/images/products/prod-02-generador-honda-65kva-principal.jpg",
     gallery: [
-      "assets/images/products/DSC00887.jpg",
-      "assets/images/products/DSC00888.jpg",
-      "assets/images/products/DSC00889.jpg"
+      "assets/images/products/prod-02-generador-honda-65kva-principal.jpg",
+      "assets/images/products/prod-02-generador-honda-65kva-detalle-panel.jpg",
+      "assets/images/products/prod-02-generador-honda-65kva-detalle-chasis.jpg"
     ],
     inStock: true,
     freeShipping: true,
@@ -116,11 +116,11 @@ const PRODUCT_CATALOG = [
     brand: "BOSCH",
     price: 289000,
     oldPrice: 345000,
-    image: "assets/images/products/DSC00893.jpg",
+    image: "assets/images/products/prod-03-hidrolavadora-bosch-180bar-principal.jpg",
     gallery: [
-      "assets/images/products/DSC00893.jpg",
-      "assets/images/products/DSC00895.jpg",
-      "assets/images/products/DSC00898.jpg"
+      "assets/images/products/prod-03-hidrolavadora-bosch-180bar-principal.jpg",
+      "assets/images/products/prod-03-hidrolavadora-bosch-180bar-detalle-lanza.jpg",
+      "assets/images/products/prod-03-hidrolavadora-bosch-180bar-detalle-bomba.jpg"
     ],
     inStock: true,
     freeShipping: true,
@@ -148,11 +148,11 @@ const PRODUCT_CATALOG = [
     brand: "HUSQVARNA",
     price: 310000,
     oldPrice: 365000,
-    image: "assets/images/products/DSC00903.jpg",
+    image: "assets/images/products/prod-04-desmalezadora-husqvarna-52cc-principal.jpg",
     gallery: [
-      "assets/images/products/DSC00903.jpg",
-      "assets/images/products/DSC00904.jpg",
-      "assets/images/products/DSC00906.jpg"
+      "assets/images/products/prod-04-desmalezadora-husqvarna-52cc-principal.jpg",
+      "assets/images/products/prod-04-desmalezadora-husqvarna-52cc-detalle-manillar.jpg",
+      "assets/images/products/prod-04-desmalezadora-husqvarna-52cc-detalle-cuchilla.jpg"
     ],
     inStock: true,
     freeShipping: true,
@@ -180,11 +180,11 @@ const PRODUCT_CATALOG = [
     brand: "GAMMA",
     price: 245000,
     oldPrice: 285000,
-    image: "assets/images/products/DSC00909.jpg",
+    image: "assets/images/products/prod-05-compresor-gamma-50l-principal.jpg",
     gallery: [
-      "assets/images/products/DSC00909.jpg",
-      "assets/images/products/DSC00912.jpg",
-      "assets/images/products/DSC00913.jpg"
+      "assets/images/products/prod-05-compresor-gamma-50l-principal.jpg",
+      "assets/images/products/prod-05-compresor-gamma-50l-detalle-manometros.jpg",
+      "assets/images/products/prod-05-compresor-gamma-50l-detalle-tanque.jpg"
     ],
     inStock: true,
     freeShipping: false,
@@ -212,10 +212,10 @@ const PRODUCT_CATALOG = [
     brand: "ECHO",
     price: 475000,
     oldPrice: 530000,
-    image: "assets/images/products/DSC00915.jpg",
+    image: "assets/images/products/prod-06-cortadora-cesped-echo-6hp-principal.jpg",
     gallery: [
-      "assets/images/products/DSC00915.jpg",
-      "assets/images/products/DSC00918.jpg"
+      "assets/images/products/prod-06-cortadora-cesped-echo-6hp-principal.jpg",
+      "assets/images/products/prod-06-cortadora-cesped-echo-6hp-detalle-ruedas.jpg"
     ],
     inStock: true,
     freeShipping: true,
@@ -243,10 +243,10 @@ const PRODUCT_CATALOG = [
     brand: "DEWALT",
     price: 198000,
     oldPrice: 230000,
-    image: "assets/images/products/DSC00923.jpg",
+    image: "assets/images/products/prod-07-rotomartillo-dewalt-1100w-principal.jpg",
     gallery: [
-      "assets/images/products/DSC00923.jpg",
-      "assets/images/products/DSC00925.jpg"
+      "assets/images/products/prod-07-rotomartillo-dewalt-1100w-principal.jpg",
+      "assets/images/products/prod-07-rotomartillo-dewalt-1100w-detalle-maletin.jpg"
     ],
     inStock: true,
     freeShipping: false,
@@ -274,10 +274,10 @@ const PRODUCT_CATALOG = [
     brand: "LUSQTOFF",
     price: 215000,
     oldPrice: 260000,
-    image: "assets/images/products/DSC00928.jpg",
+    image: "assets/images/products/prod-08-bomba-sumergible-lusqtoff-15hp-principal.jpg",
     gallery: [
-      "assets/images/products/DSC00928.jpg",
-      "assets/images/products/DSC00932.jpg"
+      "assets/images/products/prod-08-bomba-sumergible-lusqtoff-15hp-principal.jpg",
+      "assets/images/products/prod-08-bomba-sumergible-lusqtoff-15hp-detalle-tablero.jpg"
     ],
     inStock: true,
     freeShipping: true,
@@ -305,10 +305,10 @@ const PRODUCT_CATALOG = [
     brand: "MAKITA",
     price: 185000,
     oldPrice: 215000,
-    image: "assets/images/products/DSC00934.jpg",
+    image: "assets/images/products/prod-09-motosierra-electrica-makita-1800w-principal.jpg",
     gallery: [
-      "assets/images/products/DSC00934.jpg",
-      "assets/images/products/DSC00885.jpg"
+      "assets/images/products/prod-09-motosierra-electrica-makita-1800w-principal.jpg",
+      "assets/images/products/prod-01-motosierra-stihl-52cc-detalle-espada.jpg"
     ],
     inStock: true,
     freeShipping: true,
@@ -335,10 +335,10 @@ const PRODUCT_CATALOG = [
     brand: "BRIGGS & STRATTON",
     price: 640000,
     oldPrice: 720000,
-    image: "assets/images/products/DSC00938.jpg",
+    image: "assets/images/products/prod-10-generador-inverter-briggs-2400w-principal.jpg",
     gallery: [
-      "assets/images/products/DSC00938.jpg",
-      "assets/images/products/DSC00888.jpg"
+      "assets/images/products/prod-10-generador-inverter-briggs-2400w-principal.jpg",
+      "assets/images/products/prod-02-generador-honda-65kva-detalle-panel.jpg"
     ],
     inStock: true,
     freeShipping: true,
@@ -366,10 +366,10 @@ const PRODUCT_CATALOG = [
     brand: "HONDA",
     price: 520000,
     oldPrice: 590000,
-    image: "assets/images/products/DSC00928.jpg",
+    image: "assets/images/products/prod-11-motobomba-honda-3pulgadas-principal.jpg",
     gallery: [
-      "assets/images/products/DSC00928.jpg",
-      "assets/images/products/DSC00889.jpg"
+      "assets/images/products/prod-08-bomba-sumergible-lusqtoff-15hp-principal.jpg",
+      "assets/images/products/prod-02-generador-honda-65kva-detalle-chasis.jpg"
     ],
     inStock: true,
     freeShipping: true,
@@ -396,10 +396,10 @@ const PRODUCT_CATALOG = [
     brand: "BOSCH",
     price: 115000,
     oldPrice: 135000,
-    image: "assets/images/products/DSC00923.jpg",
+    image: "assets/images/products/prod-12-taladro-percutor-bosch-750w-principal.jpg",
     gallery: [
-      "assets/images/products/DSC00923.jpg",
-      "assets/images/products/DSC00912.jpg"
+      "assets/images/products/prod-07-rotomartillo-dewalt-1100w-principal.jpg",
+      "assets/images/products/prod-05-compresor-gamma-50l-detalle-manometros.jpg"
     ],
     inStock: true,
     freeShipping: false,

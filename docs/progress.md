@@ -63,9 +63,10 @@ Se rediseñó y modularizó el boceto web en páginas independientes interconect
 - **Grillas de Producto Táctiles en 2 Columnas**: Tarjetas compactas con tipografía adaptada, etiquetas de descuento legibles y botones táctiles optimizados (mínimo 44px).
 - **Transformación de Tabla de Carrito a Tarjetas Móviles**: El carrito convierte la tabla tradicional en tarjetas individuales con controles de cantidad y eliminación sin scroll horizontal.
 - **Soporte de Gestos Táctiles (Touch Swipe)**: Deslizamiento horizontal táctil en el Hero Slider principal.
-- **Correcciones de Viewport & Zero-Overflow**:
-  - Se corrigió el desborde horizontal causado por los textos de cabecera (`.d-none-mobile`) y la barra de herramientas del catálogo (`.catalog-toolbar-actions`).
-  - Se aseguró el 100% de ancho real para el footer negro (`.footer-main`) y contenedores.
-  - Se reparó el cierre de bloques en `boceto_web/js/app.js` restaurando la carga dinámica del catálogo y filtros.
+### 4. Nomenclatura Semántica de Imágenes & Assets - IMPLEMENTADO
+- Se reemplazaron todos los nombres genéricos de cámara (`DSC00...`) por nombres semánticos estructurados que identifican inmediatamente el producto, la categoría y la sección de la web.
+- Se creó el mapa completo de referencia en [`docs/assets-map.md`](file:///mnt/0076ECF676ECED7A/1_FABRICCKK/1_Trabajo/WEB/HMC_WEB/hmc_web/docs/assets-map.md).
+- Se actualizaron todos los archivos HTML y el catálogo maestro en `boceto_web/js/app.js`.
+
 
 
