@@ -8,12 +8,12 @@ Guía de referencia de archivos de imagen y recursos multimedia del proyecto `bo
 
 | Archivo | Sección en la Web | Descripción |
 |---|---|---|
-| `categoria-1-ferreteria.jpg` | Home Page → Grilla de Categorías | Tarjeta "Ferretería & Taller" |
-| `categoria-2-maquinas-explosion.jpg` | Home Page → Grilla de Categorías | Tarjeta "Máquinas a Explosión" |
-| `categoria-3-agua-bombeo.jpg` | Home Page → Grilla de Categorías | Tarjeta "Agua & Bombeo" |
-| `categoria-4-construccion.jpg` | Home Page → Grilla de Categorías | Tarjeta "Construcción & Obra" |
-| `categoria-5-herramientas-bateria.jpg` | Home Page → Grilla de Categorías | Tarjeta "Herramientas a Batería" |
-| `categoria-6-accesorios-insumos.jpg` | Home Page → Grilla de Categorías | Tarjeta "Accesorios & Insumos" |
+| `categoria-1-ferreteria.webp` | Home Page → Grilla de Categorías | Tarjeta "Ferretería & Taller" |
+| `categoria-2-maquinas-explosion.webp` | Home Page → Grilla de Categorías | Tarjeta "Máquinas a Explosión" |
+| `categoria-3-agua-bombeo.webp` | Home Page → Grilla de Categorías | Tarjeta "Agua & Bombeo" |
+| `categoria-4-construccion.webp` | Home Page → Grilla de Categorías | Tarjeta "Construcción & Obra" |
+| `categoria-5-herramientas-bateria.webp` | Home Page → Grilla de Categorías | Tarjeta "Herramientas a Batería" |
+| `categoria-6-accesorios-insumos.webp` | Home Page → Grilla de Categorías | Tarjeta "Accesorios & Insumos" |
 
 ---
 
