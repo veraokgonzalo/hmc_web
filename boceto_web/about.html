@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sobre Nosotros | HMC HUB - Especialistas en Maquinaria y Herramientas</title>
+  
+  <!-- Google Fonts: Chakra Petch (Headings) & Inter (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,400;0,600;0,700;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons Pro CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Master Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ========================================================================
+       1. Top Announcement Bar (top-bar.tpl)
+       ======================================================================== -->
+  <div class="top-bar">
+    <div class="container top-bar-inner">
+      <div class="top-bar-slider">
+        <i class="fa-solid fa-truck-fast"></i> Envíos a todo el país | <strong>6 cuotas fijas</strong> sin interés | Puesta en marcha oficial
+      </div>
+      <div class="top-bar-links">
+        <a href="contact.html"><i class="fa-solid fa-location-dot"></i> Sucursales: Zárate & Munro</a>
+        <a href="https://wa.me/5491100000000" target="_blank"><i class="fa-brands fa-whatsapp"></i> Ventas & Factura A</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       2. Header & Live Search (header.tpl)
+       ======================================================================== -->
+  <header class="header-main">
+    <div class="container header-inner">
+      
+      <!-- Brand Logo -->
+      <div class="logo-container">
+        <a href="index.html" class="logo-link">
+          <img src="assets/logos/logo-horizontal-color.png" alt="HMC HUB" class="logo-img">
+        </a>
+      </div>
+
+      <!-- Live Search Form -->
+      <div class="header-search">
+        <form class="search-form" onsubmit="event.preventDefault();">
+          <input type="text" id="mainSearchInput" class="search-input" placeholder="Buscar demoledores, taladros, motoguadañas, bombas, sierras..." autocomplete="off">
+          <button type="submit" class="search-btn" title="Buscar">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </form>
+        <div id="searchDropdown" class="search-dropdown">
+          <div class="search-dropdown-header">Sugerencias destacadas</div>
+          <div id="searchResultsList"></div>
+        </div>
+      </div>
+
+      <!-- Header Utility Actions -->
+      <div class="header-utilities">
+        <a href="contact.html" class="utility-btn" title="Mi Cuenta & Sucursales">
+          <i class="fa-regular fa-user"></i>
+          <span class="d-none-mobile">Mi Cuenta</span>
+        </a>
+        <button class="utility-btn js-open-cart" title="Carrito de Compras">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <span class="d-none-mobile">Carrito</span>
+          <span class="cart-count-badge js-cart-count">1</span>
+        </button>
+        <button class="mobile-menu-toggle" id="mobileMenuToggle" title="Abrir Menú">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       3. Main Navigation Bar with Mega-Dropdown (navigation.tpl)
+       ======================================================================== -->
+  <nav class="nav-bar">
+    <div class="container nav-inner">
+      <ul class="nav-list">
+        <li class="nav-item">
+          <a href="index.html" class="nav-link"><i class="fa-solid fa-house"></i> Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a href="catalog.html" class="nav-link">
+            Categorías <i class="fa-solid fa-chevron-down" style="font-size: 0.75em; margin-left: 2px;"></i>
+          </a>
+          <!-- Mega Dropdown -->
+          <div class="mega-dropdown">
+            <div class="mega-column">
+              <h4>Ferretería & Taller</h4>
+              <ul class="mega-links">
+                <li><a href="catalog.html?category=ferreteria"><i class="fa-solid fa-angle-right"></i> Martillos Demoledores</a></li>
+                <li><a href="catalog.html?category=ferreteria"><i class="fa-solid fa-angle-right"></i> Sierras Circulares e Ingletadoras</a></li>
+                <li><a href="catalog.html?category=herramientas-bateria"><i class="fa-solid fa-angle-right"></i> Herramientas a Batería 18V</a></li>
+                <li><a href="catalog.html?category=accesorios-insumos"><i class="fa-solid fa-angle-right"></i> Discos de Corte y Abrasivos</a></li>
+              </ul>
+            </div>
+            <div class="mega-column">
+              <h4>Máquinas a Explosión</h4>
+              <ul class="mega-links">
+                <li><a href="catalog.html?brand=SHINDAIWA"><i class="fa-solid fa-angle-right"></i> Motoguadañas Shindaiwa</a></li>
+                <li><a href="catalog.html?brand=SENSEI"><i class="fa-solid fa-angle-right"></i> Desmalezadoras Sensei</a></li>
+                <li><a href="catalog.html?category=maquinas-explosion"><i class="fa-solid fa-angle-right"></i> Mantenimiento de Parques</a></li>
+                <li><a href="catalog.html?category=maquinas-explosion"><i class="fa-solid fa-angle-right"></i> Puesta en Marcha Oficial</a></li>
+              </ul>
+            </div>
+            <div class="mega-column">
+              <h4>Construcción & Agua</h4>
+              <ul class="mega-links">
+                <li><a href="catalog.html?category=agua-bombeo"><i class="fa-solid fa-angle-right"></i> Bombas Centrífugas Niwa</a></li>
+                <li><a href="catalog.html?category=construccion"><i class="fa-solid fa-angle-right"></i> Demoledores de Pavimento</a></li>
+                <li><a href="catalog.html?category=construccion"><i class="fa-solid fa-angle-right"></i> Taladros Rotopercutores Bosch</a></li>
+                <li><a href="catalog.html?category=accesorios-insumos"><i class="fa-solid fa-angle-right"></i> Mechas y Brocas SDS Plus</a></li>
+              </ul>
+            </div>
+            <div class="mega-banner">
+              <img src="assets/images/categories/categoria-1-ferreteria.jpg" alt="Línea Profesional">
+              <h5>Línea Profesional</h5>
+              <p style="font-size: 0.78rem; color: #666; margin-bottom: 8px;">Garantía oficial y puesta en marcha sin cargo.</p>
+              <a href="catalog.html" class="btn btn-primary btn-sm">Ver Catálogo</a>
+            </div>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a href="catalog.html?offers=true" class="nav-link has-badge">Ofertas</a>
+        </li>
+        <li class="nav-item">
+          <a href="catalog.html?brand=BOSCH" class="nav-link">Marcas</a>
+        </li>
+        <li class="nav-item active">
+          <a href="about.html" class="nav-link">Nosotros</a>
+        </li>
+        <li class="nav-item">
+          <a href="contact.html" class="nav-link">Contacto</a>
+        </li>
+      </ul>
+
+      <!-- Direct Technical Advice Link in Navbar -->
+      <a href="https://wa.me/5491100000000?text=Hola%20HMC%20Hub,%20necesito%20asesoramiento%20t%C3%A9cnico" target="_blank" class="nav-support-link">
+        <i class="fa-brands fa-whatsapp"></i> Asesoría Técnica
+      </a>
+    </div>
+  </nav>
+
+  <!-- ========================================================================
+       4. Breadcrumbs Navigation
+       ======================================================================== -->
+  <div class="breadcrumbs-section">
+    <div class="container">
+      <div class="breadcrumb-list">
+        <div class="breadcrumb-item"><a href="index.html">Inicio</a></div>
+        <div class="breadcrumb-sep"><i class="fa-solid fa-chevron-right"></i></div>
+        <div class="breadcrumb-item active">Nosotros & Respaldo</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       5. About Page Main Content
+       ======================================================================== -->
+  <main class="about-page-section" style="padding: 60px 0 80px 0;">
+    <div class="container">
+      
+      <!-- Intro Hero Banner -->
+      <div style="background: linear-gradient(135deg, var(--color-black) 0%, #1e241e 100%); border-radius: var(--radius-lg); padding: 60px 40px; color: var(--color-white); margin-bottom: 60px; position: relative; overflow: hidden; border-left: 6px solid var(--color-primary);">
+        <div style="max-width: 780px; position: relative; z-index: 2;">
+          <div class="section-tag" style="background: rgba(63, 170, 71, 0.2); color: var(--color-primary-light); margin-bottom: 16px;">
+            <i class="fa-solid fa-shield-check"></i> Trayectoria & Confianza Oficial
+          </div>
+          <h1 style="font-family: var(--font-headings); font-size: 2.6rem; line-height: 1.15; margin-bottom: 20px; color: var(--color-white);">
+            Todo lo que mueve tu obra, tu campo, tu casa <span style="color: var(--color-primary);">o tu negocio</span>
+          </h1>
+          <p style="font-size: 1.15rem; line-height: 1.6; color: #ccc; margin-bottom: 28px; font-weight: 300;">
+            <strong style="color: var(--color-white);">HMC no compite por precio, compite por respaldo técnico, trayectoria y asesoramiento especializado antes y después de cada compra.</strong>
+          </p>
+          <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+            <a href="https://wa.me/5491100000000?text=Hola%20HMC%20Hub,%20quiero%20conocer%20m%C3%A1s%20sobre%20sus%20servicios" target="_blank" class="btn btn-primary btn-lg">
+              <i class="fa-brands fa-whatsapp"></i> Hablar con un Especialista
+            </a>
+            <a href="catalog.html" class="btn btn-secondary btn-lg">
+              <i class="fa-solid fa-layer-group"></i> Ver Catálogo Completo
+            </a>
+          </div>
+        </div>
+        <div style="position: absolute; right: -20px; bottom: -30px; opacity: 0.08; font-size: 20rem; pointer-events: none; color: #fff;">
+          <i class="fa-solid fa-gears"></i>
+        </div>
+      </div>
+
+      <!-- Company Identity & Philosophy -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; margin-bottom: 70px;">
+        <div>
+          <div class="section-tag"><i class="fa-solid fa-building"></i> Nuestra Identidad</div>
+          <h2 style="font-family: var(--font-headings); font-size: 2rem; margin-bottom: 18px; color: var(--color-black);">
+            Más que una tienda, tu socio técnico en cada proyecto
+          </h2>
+          <p style="font-size: 1rem; line-height: 1.7; color: var(--color-gray-dark); margin-bottom: 16px;">
+            En <strong>HMC HUB</strong> nacimos con una premisa clara: el equipamiento pesado y las herramientas profesionales requieren un conocimiento técnico profundo que va mucho más allá de un simple carrito de compras.
+          </p>
+          <p style="font-size: 1rem; line-height: 1.7; color: var(--color-gray-dark); margin-bottom: 16px;">
+            Cada contratista, empresa constructora, productor agropecuario o taller que confía en nosotros recibe asesoramiento directo de especialistas mecánicos para dimensionar la máquina exacta según su nivel de uso, exigencia y presupuesto.
+          </p>
+          <p style="font-size: 1rem; line-height: 1.7; color: var(--color-gray-dark);">
+            Respaldamos cada unidad con <strong>servicio técnico homologado, provisión garantizada de repuestos legítimos y puesta en marcha guiada</strong> para que tu inversión rinda desde el primer minuto.
+          </p>
+        </div>
+        <div style="position: relative;">
+          <div style="border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg); border: 2px solid var(--color-gray-border);">
+            <img src="assets/images/hero/hero-slide-3-servicio-tecnico-taller.jpg" alt="Taller Oficial HMC HUB" style="width: 100%; height: 380px; object-fit: cover; display: block;">
+          </div>
+          <div style="position: absolute; bottom: 20px; left: 20px; right: 20px; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px); padding: 18px 22px; border-radius: var(--radius-md); color: var(--color-white); border-left: 4px solid var(--color-primary);">
+            <div style="font-weight: 700; font-size: 1rem; color: var(--color-primary); margin-bottom: 4px;"><i class="fa-solid fa-certificate"></i> Taller Oficial & Puesta en Marcha</div>
+            <div style="font-size: 0.85rem; color: #ccc;">Mecánicos capacitados por fábricas internacionales para diagnóstico y calibración.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 Pillars Grid -->
+      <div style="margin-bottom: 70px;">
+        <div class="section-header">
+          <div class="section-tag"><i class="fa-solid fa-award"></i> Valores y Diferenciales</div>
+          <h2 class="section-title">Por Qué Elegir HMC HUB</h2>
+          <p class="section-subtitle">Cuatro pilares innegociables que sustentan nuestra relación a largo plazo con cada cliente.</p>
+        </div>
+
+        <div class="value-props-grid">
+          <div class="value-prop-card">
+            <div class="value-prop-icon">
+              <i class="fa-solid fa-headset"></i>
+            </div>
+            <div>
+              <h4 class="value-prop-title">Asesoría Especializada</h4>
+              <p class="value-prop-desc">Mecánicos y técnicos que entienden de obra y campo para ayudarte a elegir la máquina exacta.</p>
+            </div>
+          </div>
+
+          <div class="value-prop-card">
+            <div class="value-prop-icon">
+              <i class="fa-solid fa-screwdriver-wrench"></i>
+            </div>
+            <div>
+              <h4 class="value-prop-title">Servicio Técnico y Taller</h4>
+              <p class="value-prop-desc">Taller propio homologado, puesta en marcha sin cargo y mantenimiento preventivo continuo.</p>
+            </div>
+          </div>
+
+          <div class="value-prop-card">
+            <div class="value-prop-icon">
+              <i class="fa-solid fa-box-open"></i>
+            </div>
+            <div>
+              <h4 class="value-prop-title">Repuestos 100% Legítimos</h4>
+              <p class="value-prop-desc">Stock permanente de insumos, cuchillas, carbones, bujes y piezas originales de cada marca.</p>
+            </div>
+          </div>
+
+          <div class="value-prop-card">
+            <div class="value-prop-icon">
+              <i class="fa-solid fa-truck-fast"></i>
+            </div>
+            <div>
+              <h4 class="value-prop-title">Logística Nacional & Factura A</h4>
+              <p class="value-prop-desc">Envíos rápidos a todo el país con embalaje reforzado y facturación A inmediata para empresas.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Metrics and Achievements -->
+      <div style="background: var(--color-gray-ultra-light); border-radius: var(--radius-lg); padding: 50px 30px; margin-bottom: 70px; border: 1px solid var(--color-gray-border);">
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; text-align: center;">
+          <div>
+            <div style="font-family: var(--font-headings); font-size: 3rem; font-weight: 700; color: var(--color-primary); line-height: 1;">+15</div>
+            <div style="font-size: 0.95rem; font-weight: 600; color: var(--color-black); margin-top: 8px;">Años de Trayectoria</div>
+            <div style="font-size: 0.82rem; color: #777;">En el mercado de maquinaria</div>
+          </div>
+          <div>
+            <div style="font-family: var(--font-headings); font-size: 3rem; font-weight: 700; color: var(--color-primary); line-height: 1;">+25.000</div>
+            <div style="font-size: 0.95rem; font-weight: 600; color: var(--color-black); margin-top: 8px;">Clientes Atendidos</div>
+            <div style="font-size: 0.82rem; color: #777;">Empresas, campo y profesionales</div>
+          </div>
+          <div>
+            <div style="font-family: var(--font-headings); font-size: 3rem; font-weight: 700; color: var(--color-primary); line-height: 1;">6</div>
+            <div style="font-size: 0.95rem; font-weight: 600; color: var(--color-black); margin-top: 8px;">Marcas Oficiales</div>
+            <div style="font-size: 0.82rem; color: #777;">Distribución y servicio directo</div>
+          </div>
+          <div>
+            <div style="font-family: var(--font-headings); font-size: 3rem; font-weight: 700; color: var(--color-primary); line-height: 1;">2</div>
+            <div style="font-size: 0.95rem; font-weight: 600; color: var(--color-black); margin-top: 8px;">Sucursales Físicas</div>
+            <div style="font-size: 0.82rem; color: #777;">Zárate y Munro (GBA)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Official Brands Strip -->
+      <div style="margin-bottom: 70px;">
+        <div class="section-header" style="margin-bottom: 28px;">
+          <div class="section-tag"><i class="fa-solid fa-certificate"></i> Alianzas Estratégicas</div>
+          <h2 class="section-title">Distribuidores Oficiales</h2>
+          <p class="section-subtitle">Garantía directa de fábrica y repuestos originales en todas nuestras líneas.</p>
+        </div>
+
+        <div class="brands-grid">
+          <div class="brand-card" title="BOSCH" onclick="location.href='catalog.html?brand=BOSCH'"><span class="brand-name">BOSCH</span></div>
+          <div class="brand-card" title="DEWALT" onclick="location.href='catalog.html?brand=DEWALT'"><span class="brand-name">DEWALT</span></div>
+          <div class="brand-card" title="NIWA" onclick="location.href='catalog.html?brand=NIWA'"><span class="brand-name">NIWA</span></div>
+          <div class="brand-card" title="EINHELL" onclick="location.href='catalog.html?brand=EINHELL'"><span class="brand-name">EINHELL</span></div>
+          <div class="brand-card" title="SHINDAIWA" onclick="location.href='catalog.html?brand=SHINDAIWA'"><span class="brand-name">SHINDAIWA</span></div>
+          <div class="brand-card" title="SENSEI" onclick="location.href='catalog.html?brand=SENSEI'"><span class="brand-name">SENSEI</span></div>
+        </div>
+      </div>
+
+      <!-- Physical Presence & Branches CTA -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+        <div class="branch-card" style="margin-bottom: 0;">
+          <h4><i class="fa-solid fa-store text-primary"></i> Sucursal Central Zárate</h4>
+          <p style="font-size: 0.9rem; color: #555; margin-bottom: 8px;">
+            <strong>Dirección:</strong> Av. Antártida Argentina 1450, Parque Industrial Zárate, Prov. de Buenos Aires.
+          </p>
+          <p style="font-size: 0.9rem; color: #555; margin-bottom: 16px;">
+            <strong>Horarios:</strong> Lunes a Viernes de 8:00 a 18:00 hs | Sábados de 8:30 a 13:00 hs.
+          </p>
+          <a href="https://wa.me/5491100000000?text=Hola%20HMC%20Zarate,%20quiero%20consultar%20por%20retiro" target="_blank" class="btn btn-dark btn-sm">
+            <i class="fa-brands fa-whatsapp"></i> Contactar Sucursal Zárate
+          </a>
+        </div>
+
+        <div class="branch-card" style="margin-bottom: 0;">
+          <h4><i class="fa-solid fa-warehouse text-primary"></i> Centro de Distribución Munro</h4>
+          <p style="font-size: 0.9rem; color: #555; margin-bottom: 8px;">
+            <strong>Dirección:</strong> Av. Vélez Sarsfield 2890, Polo Logístico Munro, Vicente López, GBA Norte.
+          </p>
+          <p style="font-size: 0.9rem; color: #555; margin-bottom: 16px;">
+            <strong>Horarios:</strong> Lunes a Viernes de 8:30 a 17:30 hs (Retiro de mercadería y despacho de encomiendas).
+          </p>
+          <a href="https://wa.me/5491100000000?text=Hola%20HMC%20Munro,%20quiero%20consultar%20por%20retiro" target="_blank" class="btn btn-dark btn-sm">
+            <i class="fa-brands fa-whatsapp"></i> Contactar Depósito Munro
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ========================================================================
+       6. Footer (footer.tpl)
+       ======================================================================== -->
+  <footer class="footer-main" id="contacto">
+    <div class="container">
+      
+      <div class="footer-grid">
+        
+        <!-- Col 1: Brand Info -->
+        <div class="footer-col">
+          <img src="assets/logos/logo-horizontal-white.png" alt="HMC HUB" class="footer-logo">
+          <p class="footer-desc">
+            Equipamiento pesado, maquinaria de fuerza y herramientas industriales para construcción, mantenimiento de campo y talleres.
+          </p>
+          <div class="footer-social-links">
+            <a href="https://instagram.com" target="_blank" class="footer-social-icon" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://facebook.com" target="_blank" class="footer-social-icon" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://youtube.com" target="_blank" class="footer-social-icon" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="https://wa.me/5491100000000" target="_blank" class="footer-social-icon" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          </div>
+        </div>
+
+        <!-- Col 2: Categories Links -->
+        <div class="footer-col">
+          <h4>Categorías</h4>
+          <ul class="footer-links">
+            <li><a href="catalog.html?category=ferreteria"><i class="fa-solid fa-angle-right"></i> Ferretería & Taller</a></li>
+            <li><a href="catalog.html?category=maquinas-explosion"><i class="fa-solid fa-angle-right"></i> Máquinas a Explosión</a></li>
+            <li><a href="catalog.html?category=agua-bombeo"><i class="fa-solid fa-angle-right"></i> Agua & Bombeo</a></li>
+            <li><a href="catalog.html?category=construccion"><i class="fa-solid fa-angle-right"></i> Construcción & Obra</a></li>
+            <li><a href="catalog.html?category=herramientas-bateria"><i class="fa-solid fa-angle-right"></i> Herramientas a Batería</a></li>
+            <li><a href="catalog.html?category=accesorios-insumos"><i class="fa-solid fa-angle-right"></i> Accesorios & Insumos</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Institutional Links -->
+        <div class="footer-col">
+          <h4>Institucional</h4>
+          <ul class="footer-links">
+            <li><a href="about.html"><i class="fa-solid fa-angle-right"></i> Nosotros & Respaldo</a></li>
+            <li><a href="catalog.html?offers=true"><i class="fa-solid fa-angle-right"></i> Ofertas Especiales</a></li>
+            <li><a href="contact.html"><i class="fa-solid fa-angle-right"></i> Sucursales y Retiro</a></li>
+            <li><a href="contact.html"><i class="fa-solid fa-angle-right"></i> Facturación A para Empresas</a></li>
+            <li><a href="contact.html"><i class="fa-solid fa-angle-right"></i> Preguntas Frecuentes (FAQ)</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Direct Contact -->
+        <div class="footer-col">
+          <h4>Contacto Directo</h4>
+          <ul class="footer-contact-list">
+            <li>
+              <i class="fa-solid fa-location-dot"></i>
+              <span>Av. Antártida Argentina 1450, Parque Industrial Zárate, Buenos Aires</span>
+            </li>
+            <li>
+              <i class="fa-brands fa-whatsapp"></i>
+              <span>+54 9 11 0000-0000 (Ventas & Asesoría)</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-envelope"></i>
+              <span>contacto@hmchub.com.ar</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-clock"></i>
+              <span>Lunes a Viernes: 8:00 a 18:00 hs | Sábados: 8:30 a 13:00 hs</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <!-- Footer Bottom -->
+      <div class="footer-bottom">
+        <div class="footer-bottom-inner">
+          <div>
+            © 2026 <strong>HMC HUB</strong> — Todos los derechos reservados.
+          </div>
+          <div class="payment-methods-icons">
+            <i class="fa-brands fa-cc-visa" title="Visa"></i>
+            <i class="fa-brands fa-cc-mastercard" title="Mastercard"></i>
+            <i class="fa-brands fa-cc-amex" title="American Express"></i>
+            <i class="fa-solid fa-money-bill-transfer" title="Transferencia Bancaria"></i>
+            <i class="fa-solid fa-shield-check text-primary" title="Compra 100% Protegida"></i>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       7. Interactive AJAX Cart Drawer (cart-panel.tpl)
+       ======================================================================== -->
+  <div class="cart-drawer-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="cart-drawer-header">
+      <h3><i class="fa-solid fa-cart-shopping text-primary"></i> Mi Carrito</h3>
+      <button class="cart-close-btn" id="cartCloseBtn" title="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="cart-shipping-bar">
+      <div class="shipping-bar-text" id="shippingBarText">
+        <span>Cargando beneficios de envío...</span>
+      </div>
+      <div class="shipping-bar-progress">
+        <div class="shipping-bar-fill" id="shippingBarFill" style="width: 0%;"></div>
+      </div>
+    </div>
+    <div class="cart-items-container" id="cartItemsContainer"></div>
+    <div class="cart-drawer-footer">
+      <div class="cart-total-row">
+        <span>Subtotal:</span>
+        <strong id="cartSubtotal">$0</strong>
+      </div>
+      <div class="cart-total-row">
+        <span>Envío estimado:</span>
+        <span style="color: var(--color-primary-dark); font-weight: 700;">A calcular</span>
+      </div>
+      <div class="cart-total-row total-final">
+        <span>Total:</span>
+        <span id="cartTotalFinal" style="color: var(--color-primary);">$0</span>
+      </div>
+      <a href="cart.html" class="btn btn-primary btn-lg cart-checkout-btn" style="text-align: center; text-decoration: none;">
+        <i class="fa-solid fa-lock"></i> Iniciar Compra Segura
+      </a>
+    </div>
+  </aside>
+
+  <!-- ========================================================================
+       8. Quick View Modal (quick-shop.tpl)
+       ======================================================================== -->
+  <div class="modal-overlay" id="quickViewModal">
+    <div class="modal-content-box">
+      <button class="modal-close-btn" id="quickViewClose" title="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+      <div class="quick-view-grid">
+        <div class="quick-view-gallery">
+          <img src="" alt="" id="qvImage" class="quick-view-main-img">
+        </div>
+        <div class="quick-view-details">
+          <div class="product-brand" id="qvBrand">BOSCH</div>
+          <h3 id="qvTitle" style="font-size: 1.35rem; margin-bottom: 12px; color: var(--color-black);"></h3>
+          <div class="product-price-box" style="margin-bottom: 16px;">
+            <span class="price-old" id="qvOldPrice"></span>
+            <span class="price-current" id="qvPrice" style="font-size: 1.6rem; color: var(--color-primary);"></span>
+            <span class="badge badge-discount" id="qvDiscount" style="margin-left: 8px;"></span>
+          </div>
+          <p id="qvDesc" style="font-size: 0.9rem; color: var(--color-gray-dark); margin-bottom: 18px; line-height: 1.5;"></p>
+          <div style="margin-bottom: 20px;">
+            <ul id="qvSpecs" style="list-style: none; padding: 0; margin: 0; font-size: 0.85rem; display: flex; flex-direction: column; gap: 6px;"></ul>
+          </div>
+          <div style="display: flex; gap: 12px;">
+            <input type="number" id="qvQtyInput" value="1" min="1" max="99" style="width: 60px; text-align: center; border: 1px solid var(--color-gray-border); border-radius: var(--radius-sm); font-weight: 700;">
+            <button class="btn btn-primary btn-lg" id="qvAddToCartBtn" style="flex: 1;">
+              <i class="fa-solid fa-cart-plus"></i> Agregar al Carrito
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       9. Floating WhatsApp Button
+       ======================================================================== -->
+  <a href="https://wa.me/5491100000000?text=Hola%20HMC%20Hub,%20necesito%20asesoramiento%20t%C3%A9cnico" target="_blank" class="floating-whatsapp" title="Hablar con un Asesor Técnico">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+  <!-- ========================================================================
+       10. Mobile Off-Canvas Drawer Menu
+       ======================================================================== -->
+  <div class="mobile-drawer-overlay" id="mobileDrawerOverlay"></div>
+  <aside class="mobile-drawer-menu" id="mobileDrawerMenu">
+    <div class="mobile-drawer-header">
+      <img src="assets/logos/logo-horizontal-white.png" alt="HMC HUB" class="mobile-drawer-logo">
+      <button class="mobile-drawer-close" id="mobileDrawerClose" title="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="mobile-drawer-search">
+      <form id="mobileDrawerSearchForm">
+        <input type="text" id="mobileDrawerSearchInput" placeholder="Buscar demoledores, taladros, bombas...">
+        <button type="submit" title="Buscar"><i class="fa-solid fa-magnifying-glass"></i></button>
+      </form>
+    </div>
+    <div class="mobile-drawer-nav">
+      <a href="index.html" class="mobile-nav-link-item"><i class="fa-solid fa-house"></i> Inicio</a>
+      <div class="mobile-drawer-accordion-header js-drawer-accordion">
+        <span><i class="fa-solid fa-layer-group"></i> Categorías</span>
+        <i class="fa-solid fa-chevron-down"></i>
+      </div>
+      <div class="mobile-drawer-accordion-content">
+        <a href="catalog.html?category=ferreteria" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> Ferretería & Taller</a>
+        <a href="catalog.html?category=maquinas-explosion" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> Máquinas a Explosión</a>
+        <a href="catalog.html?category=agua-bombeo" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> Agua & Bombeo</a>
+        <a href="catalog.html?category=construccion" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> Construcción & Obra</a>
+        <a href="catalog.html?category=herramientas-bateria" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> Herramientas a Batería</a>
+        <a href="catalog.html?category=accesorios-insumos" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> Accesorios & Insumos</a>
+        <a href="catalog.html" class="mobile-subnav-link" style="font-weight: 700; color: var(--color-primary-dark);"><i class="fa-solid fa-grid-2"></i> Ver Todo el Catálogo →</a>
+      </div>
+      <a href="catalog.html?offers=true" class="mobile-nav-link-item"><span style="color: var(--color-danger);"><i class="fa-solid fa-bolt"></i> Ofertas Especiales</span> <span class="badge badge-discount">-15%</span></a>
+      <a href="catalog.html?brand=BOSCH" class="mobile-nav-link-item"><i class="fa-solid fa-certificate"></i> Marcas Oficiales</a>
+      <a href="about.html" class="mobile-nav-link-item active"><i class="fa-solid fa-building"></i> Nosotros</a>
+      <a href="contact.html" class="mobile-nav-link-item"><i class="fa-solid fa-headset"></i> Contacto & Sucursales</a>
+    </div>
+  </aside>
+
+  <!-- ========================================================================
+       11. Mobile Bottom App Bar
+       ======================================================================== -->
+  <div class="mobile-bottom-nav">
+    <a href="index.html" class="mobile-nav-btn">
+      <i class="fa-solid fa-house"></i>
+      <span>Inicio</span>
+    </a>
+    <a href="catalog.html" class="mobile-nav-btn">
+      <i class="fa-solid fa-layer-group"></i>
+      <span>Catálogo</span>
+    </a>
+    <a href="https://wa.me/5491100000000?text=Hola%20HMC%20Hub,%20necesito%20asesoramiento" target="_blank" class="mobile-nav-btn mobile-nav-wa">
+      <i class="fa-brands fa-whatsapp"></i>
+      <span>Asesoría</span>
+    </a>
+    <button class="mobile-nav-btn js-open-cart">
+      <div style="position: relative; display: inline-block;">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span class="cart-count-badge js-cart-count">1</span>
+      </div>
+      <span>Carrito</span>
+    </button>
+    <button class="mobile-nav-btn js-open-mobile-menu">
+      <i class="fa-solid fa-bars"></i>
+      <span>Menú</span>
+    </button>
+  </div>
+
+  <!-- Application Logic -->
+  <script src="js/app.js"></script>
+</body>
+</html>
