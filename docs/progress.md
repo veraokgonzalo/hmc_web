@@ -134,5 +134,13 @@ Se rediseñó y modularizó el boceto web en páginas independientes interconect
 - **Eliminación de Código Duplicado**: Se reemplazaron más de 600 líneas de código HTML repetido en [`index.html`](../boceto_web/index.html), [`catalog.html`](../boceto_web/catalog.html), [`product.html`](../boceto_web/product.html), [`cart.html`](../boceto_web/cart.html), [`contact.html`](../boceto_web/contact.html), [`about.html`](../boceto_web/about.html) y [`brands.html`](../boceto_web/brands.html) por el contenedor modular `<div id="globalFooter"></div>`.
 - **Mantenimiento Unificado**: Cualquier cambio futuro en el pie de página (teléfonos, horarios, enlaces de navegación o logos) se actualiza en un solo lugar y se refleja inmediatamente en todas las vistas de la tienda.
 
+### 13. Integración de Tipografía Secundaria (Plus Jakarta Sans) - IMPLEMENTADO
+- **Definiciones Locales `@font-face`**: Se configuraron las fuentes locales situadas en `boceto_web/assets/fonts/` (*Medium 500, SemiBold 600, Bold 700, ExtraBold 800 y variantes itálicas*) en `boceto_web/css/styles.css`.
+- **Actualización de Tokens Tipográficos**:
+  - `--font-headings`: `'Quedora', 'Plus Jakarta Sans', 'Chakra Petch', 'Rajdhani', 'Montserrat', sans-serif;` (Títulos y display de marca).
+  - `--font-body` & `--font-secondary`: `'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;` (Cuerpo, fichas técnicas, navegación y UI).
+- **Actualización de Reglas de Diseño**: Se documentó formalmente en [`docs/design.md`](design.md) y se integró a los estándares del repositorio.
+
+
 
 

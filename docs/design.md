@@ -43,8 +43,8 @@ No se define un color de error/éxito/advertencia ni una escala de tintes (tints
 
 ## 3. Tipografía
 
-- **Quedora** (variable, pesos *semibold* y *medium*) — tipografía nombrada explícitamente en el manual, de estilo geométrico/técnico (misma familia usada en el logotipo). Se muestra en mayúsculas y minúsculas.
-- El manual incluye además una muestra "Aa" en gris, sin nombre de fuente asociado — presumiblemente pensada como tipografía complementaria para texto de cuerpo, pero no está identificada. **Pendiente de confirmar con el cliente/diseñador** qué tipografía usar para body copy si no se quiere usar Quedora para todo (Quedora, por su estilo display/condensado, es más apta para títulos y logotipo que para párrafos largos).
+- **Quedora** (variable, pesos *regular*, *medium*, *semibold*, *bold*, *extrabold*) — tipografía principal nombrada explícitamente en el manual de marca, de estilo geométrico/técnico (misma familia usada en el logotipo). Se utiliza para encabezados principales, títulos de secciones (`h1`, `h2`, `h3`), logotipos y elementos display.
+- **Plus Jakarta Sans** (pesos *medium (500)*, *semibold (600)*, *bold (700)*, *extrabold (800)* y variantes itálicas) — **tipografía secundaria oficial del proyecto** (ubicada en `boceto_web/assets/fonts/`). Diseñada para máxima legibilidad en texto de cuerpo (*body copy*), fichas técnicas, subtítulos, navegación, botones, inputs y UI en general. Reemplaza a las fuentes genéricas y brinda una presencia moderna, técnica y sobria alineada al rubro industrial.
 
 ## 4. Estilo fotográfico
 
@@ -66,8 +66,8 @@ Para cargar en `config/settings.txt` / `config/defaults.txt`:
 - `background_color`: `#FFFFFF` (o `#CCCCCC` si se prefiere un fondo neutro gris claro)
 - `text_color`: `#000000` (texto principal) — usar `#494848` para texto secundario/atenuado
 - `accent_color` / color de botones y CTAs: `#3FAA47`
-- `font_headings`: Quedora (si está disponible como web font; si no, buscar geométrica condensada similar)
-- `font_rest`: pendiente de definición (ver punto 3)
+- `font_headings`: Quedora (fallback: Plus Jakarta Sans / Chakra Petch / Montserrat / sans-serif)
+- `font_rest`: Plus Jakarta Sans (fallback: Inter / system-ui / sans-serif)
 
 ## 6. Reglas de Diseño Mobile-First & Responsividad Obligatoria (Memory Bank)
 
