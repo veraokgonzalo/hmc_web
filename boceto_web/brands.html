@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Directorio de Marcas | HMC HUB</title>
+  
+  <!-- Google Fonts: Chakra Petch (Headings) & Inter (Body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,400;0,600;0,700;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons Pro CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Master Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body id="brandsPageLayout">
+
+  <!-- ========================================================================
+       Global Header & Navigation Component (Single Source of Truth: js/app.js)
+       ======================================================================== -->
+  <div id="globalNavigation"></div>
+
+  <!-- ========================================================================
+       Breadcrumbs Navigation
+       ======================================================================== -->
+  <div class="breadcrumbs-section">
+    <div class="container">
+      <div class="breadcrumb-list">
+        <div class="breadcrumb-item"><a href="index.html">Inicio</a></div>
+        <div class="breadcrumb-sep"><i class="fa-solid fa-chevron-right"></i></div>
+        <div class="breadcrumb-item active">Directorio de Marcas</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       Brands Page Main Content
+       ======================================================================== -->
+  <main class="brands-page-section" style="padding: 40px 0 80px 0;">
+    <div class="container">
+
+      <!-- 3. Directorio Alfabético Completo (103 Marcas con Filtro Interactivo A-Z) -->
+      <section class="brands-directory-section" id="directorio">
+        
+        <!-- Header & Control Bar -->
+        <div class="brands-directory-panel">
+          
+          <div class="directory-panel-top">
+            <div class="directory-panel-heading">
+              <i class="fa-solid fa-list-check text-primary" style="font-size: 1.6rem;"></i>
+              <div>
+                <h2 class="directory-panel-title">Directorio Alfabético Completo</h2>
+                <p class="directory-panel-desc">Explorá nuestro catálogo organizado alfabéticamente o utilizá el buscador para encontrar tu fabricante.</p>
+              </div>
+            </div>
+            
+            <div class="directory-search-wrapper">
+              <i class="fa-solid fa-magnifying-glass search-icon"></i>
+              <input type="text" id="brandsPageSearchInput" class="js-brands-page-search" placeholder="Escribí para buscar marcas... (ej: Bahco, Makita, Kärcher, 3M)" autocomplete="off">
+              <button type="button" class="btn-clear-search" id="brandsPageClearSearch" title="Limpiar búsqueda" style="display: none;">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+            </div>
+
+            <div class="directory-counter-box">
+              <span class="brands-counter-pill js-brands-page-count">
+                <i class="fa-solid fa-tags"></i> 103 marcas disponibles
+              </span>
+            </div>
+          </div>
+
+          <!-- Fast Jump Alphabet Bar -->
+          <div class="brands-alphabet-bar js-brands-page-alpha-bar">
+            <button type="button" class="alpha-btn active" data-letter="ALL">TODAS</button>
+            <button type="button" class="alpha-btn" data-letter="#"># / 0-9</button>
+            <button type="button" class="alpha-btn" data-letter="A">A</button>
+            <button type="button" class="alpha-btn" data-letter="B">B</button>
+            <button type="button" class="alpha-btn" data-letter="C">C</button>
+            <button type="button" class="alpha-btn" data-letter="D">D</button>
+            <button type="button" class="alpha-btn" data-letter="E">E</button>
+            <button type="button" class="alpha-btn" data-letter="F">F</button>
+            <button type="button" class="alpha-btn" data-letter="G">G</button>
+            <button type="button" class="alpha-btn" data-letter="H">H</button>
+            <button type="button" class="alpha-btn" data-letter="I">I</button>
+            <button type="button" class="alpha-btn" data-letter="K">K</button>
+            <button type="button" class="alpha-btn" data-letter="L">L</button>
+            <button type="button" class="alpha-btn" data-letter="M">M</button>
+            <button type="button" class="alpha-btn" data-letter="N">N</button>
+            <button type="button" class="alpha-btn" data-letter="O">O</button>
+            <button type="button" class="alpha-btn" data-letter="P">P</button>
+            <button type="button" class="alpha-btn" data-letter="R">R</button>
+            <button type="button" class="alpha-btn" data-letter="S">S</button>
+            <button type="button" class="alpha-btn" data-letter="T">T</button>
+            <button type="button" class="alpha-btn" data-letter="U">U</button>
+            <button type="button" class="alpha-btn" data-letter="V">V</button>
+            <button type="button" class="alpha-btn" data-letter="W">W</button>
+            <button type="button" class="alpha-btn" data-letter="Y">Y</button>
+            <button type="button" class="alpha-btn" data-letter="Z">Z</button>
+          </div>
+
+        </div>
+
+        <!-- Render Target for Alphabetical Brand Groups -->
+        <div class="brands-alphabet-grid js-brands-page-grid" id="brandsAlphabetGrid">
+          <!-- Dynamically populated by js/app.js -->
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ========================================================================
+       Footer Component
+       ======================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      
+      <div class="footer-grid">
+        
+        <!-- Col 1: Brand Info & Values -->
+        <div class="footer-col brand-col">
+          <img src="assets/logos/logo-horizontal-white.png" alt="HMC HUB" class="footer-logo">
+          <p class="footer-about">
+            Especialistas en equipamiento, maquinaria y herramientas industriales. Respaldo técnico, puesta en marcha y provisión continua de repuestos legítimos.
+          </p>
+          <div class="footer-social-links">
+            <a href="https://instagram.com" target="_blank" class="social-btn" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://facebook.com" target="_blank" class="social-btn" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://wa.me/5491100000000" target="_blank" class="social-btn" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="https://youtube.com" target="_blank" class="social-btn" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+          </div>
+        </div>
+
+        <!-- Col 2: Navigation Links -->
+        <div class="footer-col">
+          <h4>Navegación</h4>
+          <ul class="footer-links">
+            <li><a href="index.html"><i class="fa-solid fa-chevron-right"></i> Inicio</a></li>
+            <li><a href="catalog.html"><i class="fa-solid fa-chevron-right"></i> Catálogo Completo</a></li>
+            <li><a href="catalog.html?offers=true"><i class="fa-solid fa-chevron-right"></i> Ofertas Especiales</a></li>
+            <li><a href="brands.html"><i class="fa-solid fa-chevron-right"></i> Marcas Oficiales</a></li>
+            <li><a href="about.html"><i class="fa-solid fa-chevron-right"></i> Nosotros & Respaldo</a></li>
+            <li><a href="contact.html"><i class="fa-solid fa-chevron-right"></i> Contacto y Sucursales</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Customer Care & Policies -->
+        <div class="footer-col">
+          <h4>Atención al Cliente</h4>
+          <ul class="footer-links">
+            <li><a href="contact.html"><i class="fa-solid fa-chevron-right"></i> Formas de Envío</a></li>
+            <li><a href="contact.html"><i class="fa-solid fa-chevron-right"></i> Medios de Pago</a></li>
+            <li><a href="contact.html"><i class="fa-solid fa-chevron-right"></i> Garantía y Devoluciones</a></li>
+            <li><a href="contact.html"><i class="fa-solid fa-chevron-right"></i> Servicio Técnico Oficial</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 4: Direct Contact -->
+        <div class="footer-col">
+          <h4>Contacto Directo</h4>
+          <ul class="footer-contact-list">
+            <li>
+              <i class="fa-solid fa-location-dot"></i>
+              <span>Av. Principal 1240, Parque Industrial, Buenos Aires, Argentina</span>
+            </li>
+            <li>
+              <i class="fa-brands fa-whatsapp"></i>
+              <span>+54 9 11 0000-0000 (Ventas & Asesoría)</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-envelope"></i>
+              <span>contacto@hmchub.com.ar</span>
+            </li>
+            <li>
+              <i class="fa-solid fa-clock"></i>
+              <span>Lunes a Viernes: 8:00 a 18:00 hs | Sábados: 8:30 a 13:00 hs</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <div class="footer-bottom-inner">
+          <div>
+            © 2026 <strong>HMC HUB</strong> — Todos los derechos reservados.
+          </div>
+          <div class="payment-methods-icons">
+            <i class="fa-brands fa-cc-visa" title="Visa"></i>
+            <i class="fa-brands fa-cc-mastercard" title="Mastercard"></i>
+            <i class="fa-brands fa-cc-amex" title="American Express"></i>
+            <i class="fa-solid fa-money-bill-transfer" title="Transferencia Bancaria"></i>
+            <i class="fa-solid fa-shield-check text-primary" title="Compra 100% Protegida"></i>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       AJAX Cart Drawer (cart-panel.tpl)
+       ======================================================================== -->
+  <div class="cart-drawer-overlay" id="cartOverlay"></div>
+  <aside class="cart-drawer" id="cartDrawer">
+    <div class="cart-drawer-header">
+      <h3><i class="fa-solid fa-cart-shopping text-primary"></i> Mi Carrito</h3>
+      <button class="cart-close-btn" id="cartCloseBtn" title="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="cart-shipping-bar">
+      <div class="shipping-bar-text" id="shippingBarText">
+        <span>Cargando beneficios de envío...</span>
+      </div>
+      <div class="shipping-bar-progress">
+        <div class="shipping-bar-fill" id="shippingBarFill" style="width: 0%;"></div>
+      </div>
+    </div>
+    <div class="cart-items-container" id="cartItemsContainer"></div>
+    <div class="cart-drawer-footer">
+      <div class="cart-total-row">
+        <span>Subtotal:</span>
+        <strong id="cartSubtotal">$0</strong>
+      </div>
+      <div class="cart-total-row">
+        <span>Envío estimado:</span>
+        <span style="color: var(--color-primary-dark); font-weight: 700;">A calcular</span>
+      </div>
+      <div class="cart-total-row total-final">
+        <span>Total:</span>
+        <span id="cartTotalFinal" style="color: var(--color-primary);">$0</span>
+      </div>
+      <a href="cart.html" class="btn btn-primary btn-lg cart-checkout-btn" style="text-align: center; text-decoration: none;">
+        <i class="fa-solid fa-lock"></i> Iniciar Compra Segura
+      </a>
+    </div>
+  </aside>
+
+  <!-- ========================================================================
+       Quick View Modal (quick-shop.tpl)
+       ======================================================================== -->
+  <div class="modal-overlay" id="quickViewModal">
+    <div class="modal-content-box">
+      <button class="modal-close-btn" id="quickViewClose" title="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+      <div class="quick-view-grid">
+        <div class="quick-view-gallery">
+          <img src="" alt="" id="qvImage" class="quick-view-main-img">
+        </div>
+        <div class="quick-view-details">
+          <div class="product-brand" id="qvBrand">BOSCH</div>
+          <h3 id="qvTitle" style="font-size: 1.35rem; margin-bottom: 12px; color: var(--color-black);"></h3>
+          <div class="product-price-box" style="margin-bottom: 16px;">
+            <span class="price-old" id="qvOldPrice"></span>
+            <span class="price-current" id="qvPrice" style="font-size: 1.6rem; color: var(--color-primary);"></span>
+            <span class="badge badge-discount" id="qvDiscount" style="margin-left: 8px;"></span>
+          </div>
+          <p id="qvDesc" style="font-size: 0.9rem; color: var(--color-gray-dark); margin-bottom: 18px; line-height: 1.5;"></p>
+          <div style="margin-bottom: 20px;">
+            <ul id="qvSpecs" style="list-style: none; padding: 0; margin: 0; font-size: 0.85rem; display: flex; flex-direction: column; gap: 6px;"></ul>
+          </div>
+          <div style="display: flex; gap: 12px;">
+            <input type="number" id="qvQtyInput" value="1" min="1" max="99" style="width: 60px; text-align: center; border: 1px solid var(--color-gray-border); border-radius: var(--radius-sm); font-weight: 700;">
+            <button class="btn btn-primary btn-lg" id="qvAddToCartBtn" style="flex: 1;">
+              <i class="fa-solid fa-cart-plus"></i> Agregar al Carrito
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       Floating WhatsApp Button
+       ======================================================================== -->
+  <a href="https://wa.me/5491100000000?text=Hola%20HMC%20Hub,%20necesito%20asesoramiento%20t%C3%A9cnico" target="_blank" class="floating-whatsapp" title="Hablar con un Asesor Técnico">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+
+  <!-- ========================================================================
+       Global Mobile Drawer & Bottom Navigation (Single Source of Truth: js/app.js)
+       ======================================================================== -->
+  <div id="globalMobileNavigation"></div>
+
+  <!-- Master Application Script -->
+  <script src="js/app.js"></script>
+</body>
+</html>

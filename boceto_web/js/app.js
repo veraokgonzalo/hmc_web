@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initQuickViewModal();
   initNewsletter();
   initMobileMenu();
-  initMegaBrandsDropdown();
 
   // Page-Specific Dispatcher
   if (document.querySelector('.hero-slider-section')) {
@@ -21,6 +20,10 @@ document.addEventListener('DOMContentLoaded', () => {
     initCatalogTabs();
     initVideoPlayer();
     initPromoPopup();
+  }
+
+  if (document.getElementById('brandsPageLayout') || document.querySelector('.brands-page-section')) {
+    initBrandsPage();
   }
 
   if (document.getElementById('catalogPageLayout')) {
@@ -173,72 +176,94 @@ function renderGlobalNavigation() {
           <a href="catalog.html?offers=true" class="nav-link has-badge">Ofertas</a>
         </li>
         <li class="nav-item has-mega-dropdown">
-          <a href="catalog.html" class="nav-link">
+          <a href="brands.html" class="nav-link">
             Marcas <i class="fa-solid fa-chevron-down" style="font-size: 0.75em; margin-left: 2px;"></i>
           </a>
           
-          <!-- Brands Mega Dropdown (Option 2A: Full A-Z Directory with Live Search) -->
-          <div class="mega-dropdown mega-dropdown-brands-2a">
-            <div class="mega-brands-2a-wrapper">
+          <!-- Simple & Focused Featured Brands Dropdown with Direct Link to Brands Directory -->
+          <div class="mega-dropdown mega-dropdown-brands-featured">
+            <div class="dropdown-brands-wrapper">
               
-              <!-- Header Bar: Title, Live Search Input & Counter -->
-              <div class="mega-brands-2a-topbar">
-                <div class="mega-brands-2a-title">
+              <!-- Header -->
+              <div class="dropdown-brands-header">
+                <div class="dropdown-brands-title">
                   <i class="fa-solid fa-certificate text-primary"></i>
                   <div>
-                    <h4>Directorio Oficial de Fabricantes</h4>
-                    <span>103 marcas y distribuidores homologados</span>
+                    <h4>Marcas Destacadas</h4>
+                    <span>Distribuidores oficiales con respaldo técnico directo</span>
                   </div>
                 </div>
-                
-                <div class="mega-brands-2a-search-wrapper">
-                  <i class="fa-solid fa-magnifying-glass"></i>
-                  <input type="text" class="js-mega-brand-search" placeholder="Escribí para filtrar marcas... (ej: Bosch, Niwa, Makita)" autocomplete="off">
-                </div>
-
-                <div class="mega-brands-2a-stats">
-                  <span class="brands-counter-pill js-brands-count">103 marcas disponibles</span>
-                </div>
+                <span class="badge-official-pill"><i class="fa-solid fa-shield-check"></i> Garantía Oficial</span>
               </div>
 
-              <!-- A-Z Alphabet Filter Jump Bar -->
-              <div class="mega-brands-alphabet-bar">
-                <span class="alpha-btn active" data-letter="ALL">TODAS</span>
-                <span class="alpha-btn" data-letter="A">A</span>
-                <span class="alpha-btn" data-letter="B">B</span>
-                <span class="alpha-btn" data-letter="C">C</span>
-                <span class="alpha-btn" data-letter="D">D</span>
-                <span class="alpha-btn" data-letter="E">E</span>
-                <span class="alpha-btn" data-letter="F">F</span>
-                <span class="alpha-btn" data-letter="G">G</span>
-                <span class="alpha-btn" data-letter="H">H</span>
-                <span class="alpha-btn" data-letter="I">I</span>
-                <span class="alpha-btn" data-letter="K">K</span>
-                <span class="alpha-btn" data-letter="L">L</span>
-                <span class="alpha-btn" data-letter="M">M</span>
-                <span class="alpha-btn" data-letter="N">N</span>
-                <span class="alpha-btn" data-letter="O">O</span>
-                <span class="alpha-btn" data-letter="P">P</span>
-                <span class="alpha-btn" data-letter="R">R</span>
-                <span class="alpha-btn" data-letter="S">S</span>
-                <span class="alpha-btn" data-letter="T">T</span>
-                <span class="alpha-btn" data-letter="U">U</span>
-                <span class="alpha-btn" data-letter="V">V</span>
-                <span class="alpha-btn" data-letter="W">W</span>
-                <span class="alpha-btn" data-letter="Y">Y</span>
-                <span class="alpha-btn" data-letter="Z">Z</span>
+              <!-- 8 Featured Brands Grid -->
+              <div class="dropdown-brands-grid">
+                <a href="catalog.html?brand=BOSCH" class="dropdown-brand-card">
+                  <div class="dropdown-brand-name">
+                    <span>BOSCH</span>
+                    <span class="badge-official">Oficial</span>
+                  </div>
+                  <span class="dropdown-brand-desc">Línea Profesional & Batería</span>
+                </a>
+                <a href="catalog.html?brand=DEWALT" class="dropdown-brand-card">
+                  <div class="dropdown-brand-name">
+                    <span>DEWALT</span>
+                    <span class="badge-official">Oficial</span>
+                  </div>
+                  <span class="dropdown-brand-desc">Heavy Duty & Construcción</span>
+                </a>
+                <a href="catalog.html?brand=NIWA" class="dropdown-brand-card">
+                  <div class="dropdown-brand-name">
+                    <span>NIWA</span>
+                    <span class="badge-official">Oficial</span>
+                  </div>
+                  <span class="dropdown-brand-desc">Bombas, Generadores & Jardín</span>
+                </a>
+                <a href="catalog.html?brand=EINHELL" class="dropdown-brand-card">
+                  <div class="dropdown-brand-name">
+                    <span>EINHELL</span>
+                    <span class="badge-official">Oficial</span>
+                  </div>
+                  <span class="dropdown-brand-desc">Power X-Change 18V</span>
+                </a>
+                <a href="catalog.html?brand=SHINDAIWA" class="dropdown-brand-card">
+                  <div class="dropdown-brand-name">
+                    <span>SHINDAIWA</span>
+                    <span class="badge-official">Oficial</span>
+                  </div>
+                  <span class="dropdown-brand-desc">Motoguadañas Japón</span>
+                </a>
+                <a href="catalog.html?brand=SENSEI" class="dropdown-brand-card">
+                  <div class="dropdown-brand-name">
+                    <span>SENSEI</span>
+                    <span class="badge-official">Oficial</span>
+                  </div>
+                  <span class="dropdown-brand-desc">Maquinaria a Explosión</span>
+                </a>
+                <a href="catalog.html?brand=STIHL" class="dropdown-brand-card">
+                  <div class="dropdown-brand-name">
+                    <span>STIHL</span>
+                    <span class="badge-official">Oficial</span>
+                  </div>
+                  <span class="dropdown-brand-desc">Línea Forestal & Parque</span>
+                </a>
+                <a href="catalog.html?brand=HONDA" class="dropdown-brand-card">
+                  <div class="dropdown-brand-name">
+                    <span>HONDA</span>
+                    <span class="badge-official">Oficial</span>
+                  </div>
+                  <span class="dropdown-brand-desc">Motores & Generadores</span>
+                </a>
               </div>
 
-              <!-- Scrollable Directory Grid -->
-              <div class="mega-brands-2a-grid js-mega-brands-list"></div>
-
-              <!-- Footer Bar -->
-              <div class="mega-brands-2a-footer">
-                <div class="mega-brands-2a-footer-note">
-                  <i class="fa-solid fa-shield-check text-primary"></i> Todos los productos cuentan con garantía directa de fábrica y provisión de repuestos legítimos.
+              <!-- Footer CTA Button: Explora todas nuestras marcas -->
+              <div class="dropdown-brands-footer">
+                <div class="dropdown-brands-footer-text">
+                  <i class="fa-solid fa-layer-group text-primary"></i>
+                  <span>Representamos a más de <strong>100 fabricantes líderes</strong> con stock y repuestos.</span>
                 </div>
-                <a href="catalog.html" class="link-all-brands">
-                  <i class="fa-solid fa-grid-2"></i> Ver todo el catálogo por marcas →
+                <a href="brands.html" class="btn btn-primary btn-sm btn-explore-brands">
+                  <i class="fa-solid fa-grid-2"></i> Explorar todas nuestras marcas →
                 </a>
               </div>
 
@@ -300,7 +325,7 @@ function renderGlobalNavigation() {
       
       <!-- Marcas Accordion -->
       <div class="mobile-drawer-accordion-header js-drawer-accordion">
-        <span><i class="fa-solid fa-certificate"></i> Marcas Oficiales (103)</span>
+        <span><i class="fa-solid fa-certificate"></i> Marcas Oficiales</span>
         <i class="fa-solid fa-chevron-down"></i>
       </div>
       <div class="mobile-drawer-accordion-content">
@@ -312,7 +337,7 @@ function renderGlobalNavigation() {
         <a href="catalog.html?brand=SENSEI" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> SENSEI Maquinaria</a>
         <a href="catalog.html?brand=STIHL" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> STIHL Forestal</a>
         <a href="catalog.html?brand=HONDA" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> HONDA Motores</a>
-        <a href="catalog.html" class="mobile-subnav-link" style="font-weight: 700; color: var(--color-primary-dark);"><i class="fa-solid fa-grid-2"></i> Explorar las 103 Marcas →</a>
+        <a href="brands.html" class="mobile-subnav-link" style="font-weight: 700; color: var(--color-primary-dark); background: rgba(63, 170, 71, 0.1); border-radius: var(--radius-sm); margin-top: 6px; padding: 10px 12px;"><i class="fa-solid fa-grid-2"></i> Explorar todas nuestras marcas (103) →</a>
       </div>
 
       <a href="about.html" class="mobile-nav-link-item"><i class="fa-solid fa-building"></i> Nosotros</a>
@@ -377,6 +402,9 @@ function syncNavigationActiveState() {
   if (pathname.includes('about.html')) {
     document.querySelectorAll('.nav-item a[href*="about.html"]').forEach(a => a.parentElement.classList.add('active'));
     document.querySelectorAll('.mobile-nav-link-item[href*="about.html"]').forEach(a => a.classList.add('active'));
+  } else if (pathname.includes('brands.html')) {
+    document.querySelectorAll('.nav-item a[href*="brands.html"]').forEach(a => a.parentElement.classList.add('active'));
+    document.querySelectorAll('.mobile-nav-link-item[href*="brands.html"]').forEach(a => a.classList.add('active'));
   } else if (pathname.includes('contact.html')) {
     document.querySelectorAll('.nav-item a[href*="contact.html"]').forEach(a => a.parentElement.classList.add('active'));
     document.querySelectorAll('.mobile-nav-link-item[href*="contact.html"]').forEach(a => a.classList.add('active'));
@@ -399,7 +427,7 @@ function syncNavigationActiveState() {
       if (promoBanner) promoBanner.style.display = 'block';
     } else if (brandParam) {
       // 1. Activate "Marcas" in navbar
-      const brandsNavItem = document.querySelector('.mega-dropdown-brands-2a, .mega-dropdown-brands')?.closest('.nav-item');
+      const brandsNavItem = document.querySelector('.mega-dropdown-brands-featured, .mega-dropdown-brands-2a, .mega-dropdown-brands')?.closest('.nav-item');
       if (brandsNavItem) brandsNavItem.classList.add('active');
       
       // 2. Update Title & Breadcrumbs
@@ -408,7 +436,7 @@ function syncNavigationActiveState() {
       if (breadcrumbEl) breadcrumbEl.textContent = `Marcas: ${brandParam}`;
     } else {
       // Standard catalog / category view
-      const categoriesNavItem = document.querySelector('.mega-dropdown:not(.mega-dropdown-brands):not(.mega-dropdown-brands-2a)')?.closest('.nav-item');
+      const categoriesNavItem = document.querySelector('.mega-dropdown:not(.mega-dropdown-brands):not(.mega-dropdown-brands-2a):not(.mega-dropdown-brands-featured)')?.closest('.nav-item');
       if (categoriesNavItem) categoriesNavItem.classList.add('active');
       if (categoryParam) {
         const catProd = PRODUCT_CATALOG.find(p => p.category === categoryParam);
@@ -426,7 +454,7 @@ function syncNavigationActiveState() {
 
 
 /* --------------------------------------------------------------------------
-   0.1. Master 103 Industrial Brands Database & Interactive Mega Dropdown
+   0.1. Master 103 Industrial Brands Database & Dedicated Brands Page Logic
    -------------------------------------------------------------------------- */
 const ALL_BRANDS_103 = [
   "3M", "Aeg", "Annovi Reverberi", "Apex", "Bahco", "Barovo", "Bellota", "Beta", "Biassoni", "Black+Decker",
@@ -444,25 +472,39 @@ const ALL_BRANDS_103 = [
 
 const OFFICIAL_CORE_BRANDS = ["BOSCH", "DEWALT", "NIWA", "EINHELL", "SHINDAIWA", "SENSEI", "STIHL", "HONDA"];
 
-function initMegaBrandsDropdown() {
-  const lists = document.querySelectorAll(".js-mega-brands-list");
-  if (!lists.length) return;
+function initBrandsPage() {
+  const container = document.getElementById("brandsAlphabetGrid") || document.querySelector(".js-brands-page-grid");
+  if (!container) return;
 
-  function renderBrands(filterText = "", filterLetter = "ALL") {
+  const searchInput = document.getElementById("brandsPageSearchInput") || document.querySelector(".js-brands-page-search");
+  const clearBtn = document.getElementById("brandsPageClearSearch");
+  const alphaBtns = document.querySelectorAll(".js-brands-page-alpha-bar .alpha-btn");
+  const countPills = document.querySelectorAll(".js-brands-page-count");
+
+  let currentLetter = "ALL";
+  let currentSearch = "";
+
+  function renderBrandsDirectory(filterText = "", filterLetter = "ALL") {
     const query = filterText.trim().toLowerCase();
-    let filtered = ALL_BRANDS_103.filter(b => {
-      const matchesText = !query || b.toLowerCase().includes(query);
-      const initial = b.charAt(0).toUpperCase();
-      const matchesLetter = (filterLetter === "ALL") || (initial === filterLetter) || (filterLetter === "0-9" && /\d/.test(initial));
+    
+    const filtered = ALL_BRANDS_103.filter(brand => {
+      const matchesText = !query || brand.toLowerCase().includes(query);
+      const initial = brand.charAt(0).toUpperCase();
+      const matchesLetter = 
+        (filterLetter === "ALL") || 
+        (initial === filterLetter) || 
+        (filterLetter === "#" && /\d/.test(initial)) ||
+        (filterLetter === "0-9" && /\d/.test(initial));
       return matchesText && matchesLetter;
     });
 
+    // Grouping by letter
     const groups = {};
-    filtered.forEach(b => {
-      let init = b.charAt(0).toUpperCase();
+    filtered.forEach(brand => {
+      let init = brand.charAt(0).toUpperCase();
       if (/\d/.test(init)) init = "#";
       if (!groups[init]) groups[init] = [];
-      groups[init].push(b);
+      groups[init].push(brand);
     });
 
     const sortedLetters = Object.keys(groups).sort((a, b) => {
@@ -471,73 +513,111 @@ function initMegaBrandsDropdown() {
       return a.localeCompare(b);
     });
 
-    lists.forEach(container => {
-      if (filtered.length === 0) {
-        container.innerHTML = `
-          <div style="grid-column: 1 / -1; text-align: center; padding: 24px 10px; color: #888; font-size: 0.85rem;">
-            <i class="fa-solid fa-circle-exclamation" style="font-size: 1.5rem; margin-bottom: 6px; display: block; color: var(--color-primary);"></i>
-            No se encontraron marcas con "<strong>${filterText}</strong>".
-          </div>
-        `;
-        return;
-      }
-
-      let html = "";
-      sortedLetters.forEach(letter => {
-        html += `<div class="brand-group" data-letter="${letter}">`;
-        html += `<span class="brand-group-letter">${letter}</span>`;
-        groups[letter].forEach(brand => {
-          const isOfficial = OFFICIAL_CORE_BRANDS.includes(brand.toUpperCase());
-          html += `
-            <a href="catalog.html?brand=${encodeURIComponent(brand)}" class="mega-brand-link ${isOfficial ? "is-official" : ""}" title="Ver productos de ${brand}">
-              ${isOfficial ? `<strong>${brand}</strong>` : brand}
-              ${isOfficial ? `<span class="badge-official">Oficial</span>` : ""}
-            </a>
-          `;
-        });
-        html += `</div>`;
-      });
-      container.innerHTML = html;
+    // Update Counter
+    countPills.forEach(pill => {
+      pill.innerHTML = `<i class="fa-solid fa-tags"></i> <strong>${filtered.length}</strong> marcas disponibles`;
     });
 
-    // Update count pills
-    document.querySelectorAll(".js-brands-count").forEach(el => {
-      el.textContent = `${filtered.length} marcas disponibles`;
+    // Handle Empty State
+    if (filtered.length === 0) {
+      container.innerHTML = `
+        <div class="brands-empty-state">
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <h4>No encontramos marcas con "${filterText}"</h4>
+          <p>Verificá la ortografía o consultá con nuestros especialistas técnicos para cotizar repuestos o equipos a pedido.</p>
+          <button type="button" class="btn btn-primary" id="btnResetBrandsFilter">
+            <i class="fa-solid fa-rotate-left"></i> Restablecer Directorio Completo
+          </button>
+        </div>
+      `;
+      const resetBtn = document.getElementById("btnResetBrandsFilter");
+      if (resetBtn) {
+        resetBtn.addEventListener("click", () => {
+          if (searchInput) searchInput.value = "";
+          if (clearBtn) clearBtn.style.display = "none";
+          currentSearch = "";
+          currentLetter = "ALL";
+          alphaBtns.forEach(b => b.classList.remove("active"));
+          const allBtn = document.querySelector(".js-brands-page-alpha-bar .alpha-btn[data-letter='ALL']");
+          if (allBtn) allBtn.classList.add("active");
+          renderBrandsDirectory("", "ALL");
+        });
+      }
+      return;
+    }
+
+    // Build Alphabetical Cards HTML
+    let html = "";
+    sortedLetters.forEach(letter => {
+      const brandList = groups[letter];
+      html += `
+        <div class="brand-group-card" id="brand-group-${letter}">
+          <div class="brand-group-card-header">
+            <span class="brand-group-letter">${letter}</span>
+            <span class="brand-group-count">${brandList.length}</span>
+          </div>
+          <div class="brand-group-card-body">
+      `;
+
+      brandList.forEach(brand => {
+        const isOfficial = OFFICIAL_CORE_BRANDS.includes(brand.toUpperCase());
+        html += `
+          <a href="catalog.html?brand=${encodeURIComponent(brand)}" class="brand-directory-item ${isOfficial ? "is-official" : ""}" title="Ver productos de ${brand} en el catálogo">
+            <span>${isOfficial ? `<strong>${brand}</strong>` : brand}</span>
+            ${isOfficial ? `<span class="badge-official">Oficial</span>` : `<i class="fa-solid fa-angle-right brand-item-arrow"></i>`}
+          </a>
+        `;
+      });
+
+      html += `
+          </div>
+        </div>
+      `;
+    });
+
+    container.innerHTML = html;
+  }
+
+  // Initial Render
+  renderBrandsDirectory("", "ALL");
+
+  // Search Input Handler
+  if (searchInput) {
+    searchInput.addEventListener("input", (e) => {
+      currentSearch = e.target.value;
+      if (clearBtn) {
+        clearBtn.style.display = currentSearch.length > 0 ? "flex" : "none";
+      }
+      // Reset active letter to ALL when typing
+      alphaBtns.forEach(b => b.classList.remove("active"));
+      const allBtn = document.querySelector(".js-brands-page-alpha-bar .alpha-btn[data-letter='ALL']");
+      if (allBtn) allBtn.classList.add("active");
+      currentLetter = "ALL";
+
+      renderBrandsDirectory(currentSearch, "ALL");
     });
   }
 
-  // Initial render
-  renderBrands();
-
-  // Search input listeners
-  document.querySelectorAll(".js-mega-brand-search").forEach(input => {
-    input.addEventListener("input", (e) => {
-      const val = e.target.value;
-      const parentDir = input.closest(".mega-brands-2a-wrapper, .mega-brands-directory, .mega-dropdown");
-      if (parentDir) {
-        parentDir.querySelectorAll(".mega-brands-alphabet-bar .alpha-btn").forEach(b => b.classList.remove("active"));
-        const allBtn = parentDir.querySelector(".mega-brands-alphabet-bar .alpha-btn[data-letter='ALL']");
-        if (allBtn) allBtn.classList.add("active");
+  // Clear Search Button
+  if (clearBtn) {
+    clearBtn.addEventListener("click", () => {
+      if (searchInput) {
+        searchInput.value = "";
+        searchInput.focus();
       }
-      renderBrands(val, "ALL");
+      clearBtn.style.display = "none";
+      currentSearch = "";
+      renderBrandsDirectory("", currentLetter);
     });
-    input.addEventListener("click", (e) => e.stopPropagation());
-  });
+  }
 
-  // Alphabet buttons listeners
-  document.querySelectorAll(".mega-brands-alphabet-bar .alpha-btn").forEach(btn => {
-    btn.addEventListener("click", (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      const parentBar = btn.closest(".mega-brands-alphabet-bar");
-      if (parentBar) {
-        parentBar.querySelectorAll(".alpha-btn").forEach(b => b.classList.remove("active"));
-      }
+  // Alphabet Filter Bar Handler
+  alphaBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      alphaBtns.forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
-      const letter = btn.dataset.letter;
-      const searchInput = btn.closest(".mega-brands-2a-wrapper, .mega-brands-directory, .mega-dropdown")?.querySelector(".js-mega-brand-search");
-      const query = searchInput ? searchInput.value : "";
-      renderBrands(query, letter);
+      currentLetter = btn.dataset.letter;
+      renderBrandsDirectory(currentSearch, currentLetter);
     });
   });
 }

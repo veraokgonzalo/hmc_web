@@ -115,3 +115,18 @@ Se rediseñó y modularizó el boceto web en páginas independientes interconect
 ### 10. Regla Permanente de Responsividad Mobile-First en el Memory Bank - ACTUALIZADO
 - **Documentación de Memoria Actualizada**: Se incorporó formalmente en [`CLAUDE.md`](../CLAUDE.md) y [`docs/design.md`](design.md) la regla mandatoria para que **cualquier nuevo componente, refactorización o cambio visual incluya estrictamente su implementación y validación móvil (< 768px y < 480px)** en simultáneo.
 - **Pautas Clave**: Áreas táctiles $\ge 44\text{px}$, acordeones móviles para mega-menús, soporte para la barra inferior fija de la app (`.mobile-bottom-nav`), ausencia total de desborde horizontal y transformación de tablas/filtros a hojas deslizables táctiles.
+
+### 11. Nueva Página Dedicada de Marcas & Dropdown Simplificado en Navbar - ACTUALIZADO
+- **Página de Directorio de Marcas (`brands.html`)**:
+  - **Estructura Depurada y Focalizada**: Se eliminaron secciones accesorias (hero redundante, grilla previa de destacadas y banner B2B) para centrar la página directamente en la herramienta de filtrado y exploración.
+  - **Directorio Alfabético Completo Interactivo (103 Marcas)**: Buscador reactivo en tiempo real con botón de borrado rápido + barra horizontal de salto alfabético (A-Z, `# / 0-9`, `TODAS`) + grilla organizada en tarjetas por letra inicial + contador dinámico de marcas disponibles + badges de distribución oficial + estado vacío con botón de reinicio.
+- **Navbar Dropdown Simplificado & Enfocado (`.mega-dropdown-brands-featured`)**:
+  - Se removió el directorio masivo del dropdown para brindar una experiencia ágil y elegante.
+  - Muestra las 8 marcas oficiales destacadas en una cuadrícula compacta y limpia.
+  - Incorpora pie destacado con el botón CTA **"Explorar todas nuestras marcas →"** que redirige a `brands.html`.
+- **Integración Mobile Drawer & Sincronización Global**:
+  - Acordeón móvil táctil actualizado con acceso a las marcas destacadas y enlace resaltado para explorar las 103 marcas en `brands.html`.
+  - Motor de estado activo `syncNavigationActiveState()` sincronizado para marcar la navegación activa en `brands.html`.
+  - Enlaces de pie de página actualizados en las 7 vistas (`index.html`, `catalog.html`, `product.html`, `cart.html`, `contact.html`, `about.html`, `brands.html`).
+
+
