@@ -54,7 +54,7 @@
 @font-face {
   font-family: 'Plus Jakarta Sans';
   src: url('../assets/fonts/PlusJakartaSans-Medium.ttf') format('truetype');
-  font-weight: 500;
+  font-weight: 300 500;
   font-style: normal;
   font-display: swap;
 }
