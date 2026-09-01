@@ -129,4 +129,10 @@ Se rediseñó y modularizó el boceto web en páginas independientes interconect
   - Motor de estado activo `syncNavigationActiveState()` sincronizado para marcar la navegación activa en `brands.html`.
   - Enlaces de pie de página actualizados en las 7 vistas (`index.html`, `catalog.html`, `product.html`, `cart.html`, `contact.html`, `about.html`, `brands.html`).
 
+### 12. Componente Global de Footer Modular (Única Fuente de Verdad) - IMPLEMENTADO
+- **Modularización del Footer (`renderGlobalFooter()`)**: Se centralizó la estructura HTML completa del pie de página institucional (información corporativa, enlaces de navegación, atención al cliente, contacto directo, medios de pago y copyright) dentro de `boceto_web/js/app.js`.
+- **Eliminación de Código Duplicado**: Se reemplazaron más de 600 líneas de código HTML repetido en [`index.html`](../boceto_web/index.html), [`catalog.html`](../boceto_web/catalog.html), [`product.html`](../boceto_web/product.html), [`cart.html`](../boceto_web/cart.html), [`contact.html`](../boceto_web/contact.html), [`about.html`](../boceto_web/about.html) y [`brands.html`](../boceto_web/brands.html) por el contenedor modular `<div id="globalFooter"></div>`.
+- **Mantenimiento Unificado**: Cualquier cambio futuro en el pie de página (teléfonos, horarios, enlaces de navegación o logos) se actualiza en un solo lugar y se refleja inmediatamente en todas las vistas de la tienda.
+
+
 
