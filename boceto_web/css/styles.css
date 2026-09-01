@@ -4,6 +4,51 @@
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
+   0. Local Font Faces (Quedora - brand heading typeface, docs/design.md §3)
+   Free-for-personal-use build from Casloop Studio (1001fonts.com).
+   Commercial license required before this ships to production.
+   -------------------------------------------------------------------------- */
+@font-face {
+  font-family: 'Quedora';
+  src: url('../assets/fonts/quedora-regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Quedora';
+  src: url('../assets/fonts/quedora-medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Quedora';
+  src: url('../assets/fonts/quedora-semibold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Quedora';
+  src: url('../assets/fonts/quedora-bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Quedora';
+  src: url('../assets/fonts/quedora-extrabold.otf') format('opentype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* --------------------------------------------------------------------------
    1. CSS Custom Properties / Design Tokens
    -------------------------------------------------------------------------- */
 :root {
@@ -31,7 +76,7 @@
   --color-success: #3FAA47;
   
   /* Typography */
-  --font-headings: 'Chakra Petch', 'Rajdhani', 'Montserrat', sans-serif;
+  --font-headings: 'Quedora', 'Chakra Petch', 'Rajdhani', 'Montserrat', sans-serif;
   --font-body: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   
   /* Spacing */
@@ -339,15 +384,54 @@ h6 { font-size: 0.95rem; }
 }
 
 .top-bar-slider {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-weight: 500;
-  color: #DDD;
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 32px, #000 calc(100% - 32px), transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 32px, #000 calc(100% - 32px), transparent);
 }
 
 .top-bar-slider i {
   color: var(--color-primary);
+}
+
+/* Marquee: two identical content blocks side by side, scrolled exactly -50%
+   so the loop point is invisible (works with any number of messages). */
+.top-bar-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: hmc-top-bar-marquee 26s linear infinite;
+}
+
+.top-bar-slider:hover .top-bar-marquee-track {
+  animation-play-state: paused;
+}
+
+.top-bar-marquee-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-right: 48px;
+  white-space: nowrap;
+  font-weight: 500;
+  color: #DDD;
+}
+
+.top-bar-marquee-sep {
+  color: var(--color-primary);
+  opacity: 0.5;
+}
+
+@keyframes hmc-top-bar-marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .top-bar-marquee-track {
+    animation: none;
+  }
 }
 
 .top-bar-links {
@@ -877,14 +961,46 @@ h6 { font-size: 0.95rem; }
 }
 
 /* --------------------------------------------------------------------------
-   9. Propuesta de Valor / 4 Pilares (Section 3 - spec §3)
+   9. Propuesta de Valor / 4 Pilares - Tira Compacta (Section 3 - spec §3)
    -------------------------------------------------------------------------- */
 .value-props-section {
   background-color: var(--color-white);
   border-bottom: 1px solid var(--color-gray-border);
-  padding: 50px 0;
+  padding: 16px 0;
 }
 
+.value-props-strip {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.value-strip-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 28px;
+  border-right: 1px solid var(--color-gray-border);
+  font-family: var(--font-headings);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-gray-dark);
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+.value-strip-item:last-child {
+  border-right: none;
+}
+
+.value-strip-item i {
+  color: var(--color-primary);
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+/* 4-Pillar Card Grid (still used standalone on about.html) */
 .value-props-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -3677,6 +3793,8 @@ h6 { font-size: 0.95rem; }
   .mega-dropdown { display: none !important; }
   .mobile-menu-toggle { display: flex; align-items: center; justify-content: center; }
   
+  .value-strip-item { width: 50%; justify-content: center; text-align: center; padding: 10px 8px; border-right: none; }
+  .value-strip-item:nth-child(-n+2) { border-bottom: 1px solid var(--color-gray-border); }
   .value-props-grid { grid-template-columns: repeat(2, 1fr); }
   .showcase-grid { grid-template-columns: 1fr; }
   .video-container { grid-template-columns: 1fr; }
@@ -3796,11 +3914,10 @@ h6 { font-size: 0.95rem; }
 
   .top-bar-slider {
     font-size: 0.72rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 100%;
-    justify-content: center;
+  }
+
+  .top-bar-marquee-content {
+    padding-right: 32px;
   }
 
   /* Header Mobile */
@@ -3892,7 +4009,26 @@ h6 { font-size: 0.95rem; }
     margin-bottom: 10px;
   }
 
-  /* 4 Pillars Mobile 2x2 Grid */
+  /* Value Props Strip - Mobile Compact 2x2 */
+  .value-props-section {
+    padding: 10px 0;
+  }
+
+  .value-strip-item {
+    width: 50%;
+    justify-content: center;
+    text-align: center;
+    padding: 8px 6px;
+    font-size: 0.72rem;
+    gap: 6px;
+    white-space: normal;
+  }
+
+  .value-strip-item i {
+    font-size: 0.95rem;
+  }
+
+  /* 4-Pillar Card Grid Mobile 2x2 (about.html) */
   .value-props-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;

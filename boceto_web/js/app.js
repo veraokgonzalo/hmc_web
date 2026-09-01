@@ -47,11 +47,28 @@ function renderGlobalNavigation() {
   const navContainer = document.getElementById("globalNavigation") || document.getElementById("siteHeaderNav");
   if (navContainer) {
     navContainer.innerHTML = `
-  <!-- 1. Top Announcement Bar -->
+  <!-- 1. Top Announcement Bar (Marquee) -->
   <div class="top-bar">
     <div class="container top-bar-inner">
       <div class="top-bar-slider">
-        <i class="fa-solid fa-truck-fast"></i> Envíos a todo el país | <strong>6 cuotas fijas</strong> sin interés | Puesta en marcha oficial
+        <div class="top-bar-marquee-track">
+          <div class="top-bar-marquee-content">
+            <span><i class="fa-solid fa-truck-fast"></i> Envíos a todo el país</span>
+            <span class="top-bar-marquee-sep">•</span>
+            <span><i class="fa-solid fa-credit-card"></i> <strong>6 cuotas fijas</strong> sin interés</span>
+            <span class="top-bar-marquee-sep">•</span>
+            <span><i class="fa-solid fa-screwdriver-wrench"></i> Puesta en marcha oficial</span>
+            <span class="top-bar-marquee-sep">•</span>
+          </div>
+          <div class="top-bar-marquee-content" aria-hidden="true">
+            <span><i class="fa-solid fa-truck-fast"></i> Envíos a todo el país</span>
+            <span class="top-bar-marquee-sep">•</span>
+            <span><i class="fa-solid fa-credit-card"></i> <strong>6 cuotas fijas</strong> sin interés</span>
+            <span class="top-bar-marquee-sep">•</span>
+            <span><i class="fa-solid fa-screwdriver-wrench"></i> Puesta en marcha oficial</span>
+            <span class="top-bar-marquee-sep">•</span>
+          </div>
+        </div>
       </div>
       <div class="top-bar-links">
         <a href="contact.html"><i class="fa-solid fa-location-dot"></i> Sucursales: Zárate & Munro</a>
