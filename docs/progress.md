@@ -141,6 +141,14 @@ Se rediseñó y modularizó el boceto web en páginas independientes interconect
   - `--font-body` & `--font-secondary`: `'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;` (Cuerpo, fichas técnicas, navegación y UI).
 - **Actualización de Reglas de Diseño**: Se documentó formalmente en [`docs/design.md`](design.md) y se integró a los estándares del repositorio.
 
+---
 
+## 📋 Pendientes — Ajustes de Diseño y Copy (reportados 2026-09-02)
 
+1. **Mapa de Google Maps en Contacto**: agregar un mapa embebido (Google Maps) en la sección de sucursal de `contact.html`, junto a la dirección de la sucursal Santa Rosa.
+2. **Rediseño de `.section-tag`**: quitar el recuadro/badge que envuelve al tag; pasar a texto simple en verde (`--color-primary`), con espaciado hacia el título siguiente. Cambiar el CSS directamente en `boceto_web/css/styles.css` para que se aplique de forma global en todas las páginas que usan `.section-tag`.
+3. **Copy de `contact.html`** — subtítulo de la sección de contacto: quitar "con Factura A" de "Envianos tu consulta técnica, cotización corporativa con Factura A o visitanos en nuestra sucursal de Santa Rosa."
+4. **Copy del formulario de contacto**: cambiar "Completá el siguiente formulario y un técnico especialista responderá dentro de las 2 horas hábiles." por "...responderá lo antes posible", y aclarar que para respuestas más rápidas escriban por WhatsApp ("no dudes en escribirnos ahí").
+5. **Centrado del FAQ**: el tag "Dudas Frecuentes" y el título "Preguntas Frecuentes" en el acordeón de FAQ (`contact.html`) no están correctamente centrados — revisar y corregir.
+6. **Bug de imágenes en showcase del home**: en la sección "Soluciones Especializadas" del home, las imágenes del showcase aparecen en blanco y solo se muestran al pasar el mouse por encima (hover) — deberían mostrarse por defecto.
 
