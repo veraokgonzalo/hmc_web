@@ -75,8 +75,8 @@ function renderGlobalNavigation() {
         </div>
       </div>
       <div class="top-bar-links">
-        <a href="contact.html"><i class="fa-solid fa-location-dot"></i> Sucursales: Zárate & Munro</a>
-        <a href="https://wa.me/5491100000000" target="_blank"><i class="fa-brands fa-whatsapp"></i> Ventas & Factura A</a>
+        <a href="contact.html"><i class="fa-solid fa-location-dot"></i> Sucursal: Santa Rosa, La Pampa</a>
+        <a href="https://wa.me/5492954696231" target="_blank"><i class="fa-brands fa-whatsapp"></i> Ventas & Factura A</a>
       </div>
     </div>
   </div>
@@ -280,7 +280,7 @@ function renderGlobalNavigation() {
       </ul>
 
       <!-- Direct Technical Advice Link in Navbar -->
-      <a href="https://wa.me/5491100000000?text=Hola%20HMC%20Hub,%20necesito%20asesoramiento%20t%C3%A9cnico" target="_blank" class="nav-support-link">
+      <a href="https://wa.me/5492954696231?text=Hola%20HMC%20Hub,%20necesito%20asesoramiento%20t%C3%A9cnico" target="_blank" class="nav-support-link">
         <i class="fa-brands fa-whatsapp"></i> Asesoría Técnica
       </a>
     </div>
@@ -345,7 +345,7 @@ function renderGlobalNavigation() {
       <a href="contact.html" class="mobile-nav-link-item"><i class="fa-solid fa-headset"></i> Contacto & Sucursales</a>
     </div>
     <div class="mobile-drawer-footer">
-      <a href="https://wa.me/5491100000000?text=Hola%20HMC%20Hub,%20necesito%20asesoramiento%20t%C3%A9cnico" target="_blank" class="mobile-drawer-wa-card">
+      <a href="https://wa.me/5492954696231?text=Hola%20HMC%20Hub,%20necesito%20asesoramiento%20t%C3%A9cnico" target="_blank" class="mobile-drawer-wa-card">
         <i class="fa-brands fa-whatsapp"></i>
         <div>
           <div>Asesoría Técnica Directa</div>
@@ -365,7 +365,7 @@ function renderGlobalNavigation() {
       <i class="fa-solid fa-layer-group"></i>
       <span>Catálogo</span>
     </a>
-    <a href="https://wa.me/5491100000000?text=Hola%20HMC%20Hub,%20necesito%20asesoramiento" target="_blank" class="mobile-nav-btn mobile-nav-wa">
+    <a href="https://wa.me/5492954696231?text=Hola%20HMC%20Hub,%20necesito%20asesoramiento" target="_blank" class="mobile-nav-btn mobile-nav-wa">
       <i class="fa-brands fa-whatsapp"></i>
       <span>Asesoría</span>
     </a>
@@ -404,10 +404,8 @@ function renderGlobalFooter() {
             Un solo lugar. Todo lo que mueve tu obra, tu campo, tu casa o tu negocio. Respaldo técnico profesional, trayectoria y servicio oficial.
           </p>
           <div class="footer-social-links">
-            <a href="https://instagram.com" target="_blank" class="social-btn" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
-            <a href="https://facebook.com" target="_blank" class="social-btn" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-            <a href="https://wa.me/5491100000000" target="_blank" class="social-btn" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
-            <a href="https://youtube.com" target="_blank" class="social-btn" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="https://instagram.com/hmchub" target="_blank" class="social-btn" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://wa.me/5492954696231" target="_blank" class="social-btn" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
           </div>
         </div>
 
@@ -441,11 +439,11 @@ function renderGlobalFooter() {
           <ul class="footer-contact-list">
             <li>
               <i class="fa-solid fa-location-dot"></i>
-              <span>Av. Principal 1240, Parque Industrial, Buenos Aires, Argentina</span>
+              <span>Av. Santiago Marzo (Norte) 171, Santa Rosa, La Pampa, Argentina</span>
             </li>
             <li>
               <i class="fa-brands fa-whatsapp"></i>
-              <span>+54 9 11 0000-0000 (Ventas & Asesoría)</span>
+              <span>+54 9 2954 69-6231 (Ventas & Asesoría)</span>
             </li>
             <li>
               <i class="fa-solid fa-envelope"></i>
@@ -1944,7 +1942,7 @@ function initProductPage() {
   // WhatsApp Technical Inquiry prefill
   if (whatsappAdviceBtn) {
     const msg = encodeURIComponent(`Hola HMC Hub, estoy viendo el equipo "${prod.name}" (SKU: ${prod.sku}) en la web y me gustaría recibir asesoramiento técnico para mi trabajo.`);
-    whatsappAdviceBtn.href = `https://wa.me/5491100000000?text=${msg}`;
+    whatsappAdviceBtn.href = `https://wa.me/5492954696231?text=${msg}`;
   }
 
   // Quantity and Actions
@@ -2239,7 +2237,7 @@ function initShippingCalculator() {
           <div style="color: #2e7d32; font-weight: 700; margin-bottom: 4px;"><i class="fa-solid fa-truck-fast"></i> Opciones de entrega para CP ${cp}:</div>
           <div>• <strong>Envío Estándar a Domicilio:</strong> $4.200 (Llega en 48-72 hs hábiles)</div>
           <div>• <strong>Envío Exprés con Puesta en Marcha:</strong> $6.500 (Llega en 24-48 hs)</div>
-          <div>• <strong>Retiro en Sucursal Central Zárate / Munro:</strong> <span style="color: #2e7d32; font-weight: 700;">¡GRATIS! (Listo en 2 hs)</span></div>
+          <div>• <strong>Retiro en Sucursal HMC HUB (Santa Rosa):</strong> <span style="color: #2e7d32; font-weight: 700;">¡GRATIS! (Listo en 2 hs)</span></div>
         </div>
       `;
     }
