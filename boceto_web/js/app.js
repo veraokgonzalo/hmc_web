@@ -173,9 +173,6 @@ function renderGlobalNavigation() {
             </div>
           </div>
         </li>
-        <li class="nav-item">
-          <a href="catalog.html?offers=true" class="nav-link has-badge">Ofertas</a>
-        </li>
         <li class="nav-item has-mega-dropdown">
           <a href="brands.html" class="nav-link">
             Marcas <i class="fa-solid fa-chevron-down" style="font-size: 0.75em; margin-left: 2px;"></i>
@@ -270,6 +267,9 @@ function renderGlobalNavigation() {
 
             </div>
           </div>
+        </li>
+        <li class="nav-item">
+          <a href="catalog.html?offers=true" class="nav-link has-badge">Ofertas</a>
         </li>
         <li class="nav-item">
           <a href="about.html" class="nav-link">Nosotros</a>
