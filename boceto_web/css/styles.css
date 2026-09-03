@@ -754,7 +754,7 @@ h6 { font-size: 0.95rem; }
 }
 
 .nav-link.has-badge::after {
-  content: 'HOT';
+  content: 'OFF';
   background: var(--color-danger);
   color: var(--color-white);
   font-size: 0.65rem;

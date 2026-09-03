@@ -141,6 +141,23 @@ Se rediseñó y modularizó el boceto web en páginas independientes interconect
   - `--font-body` & `--font-secondary`: `'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;` (Cuerpo, fichas técnicas, navegación y UI).
 - **Actualización de Reglas de Diseño**: Se documentó formalmente en [`docs/design.md`](design.md) y se integró a los estándares del repositorio.
 
+### 14. Ajustes en Hero Slider, Navegación y Grilla de Ofertas - EN PROGRESO (LOCAL)
+- **Calibración de Velocidad del Hero Slider & Countdown**:
+  - Se extendió el tiempo de rotación automática a `8500ms` (8.5 segundos) en `initHeroSlider()` (`boceto_web/js/app.js`) para una lectura pausada y cómoda de los slides.
+  - Se restableció el intervalo de actualización de `initCountdown()` a `1000ms` asegurando que el reloj de ofertas descuente segundo a segundo sin saltos.
+- **Limpieza Visual de Badges en Hero Slider**:
+  - Se eliminaron los `<div class="hero-badge">` en los 3 slides de `boceto_web/index.html`, logrando un encabezado más limpio y minimalista.
+- **Refinamiento de Micro-Copies en CTAs del Hero**:
+  - Slide 1: `"Ver Ofertas Especiales"` $\rightarrow$ `"Ofertas"` / `"Consultar a un Técnico"` $\rightarrow$ `"Escribinos por WhatsApp"`.
+  - Slide 2: `"Conocé HMC Hub"` $\rightarrow$ `"Conocenos"`.
+  - Slide 3: `"Marcas Oficiales"` $\rightarrow$ `"Nuestras Marcas"`.
+- **Reorganización de Navegación & Badge de Ofertas**:
+  - Se ubicó el enlace de `"Ofertas"` siguiendo el flujo comercial (`Categorías` $\rightarrow$ `Marcas` $\rightarrow$ `Ofertas` $\rightarrow$ `Nosotros` $\rightarrow$ `Contacto`) en `renderGlobalNavigation()` (`boceto_web/js/app.js`).
+  - Se actualizó el badge del navbar `.nav-link.has-badge::after` a `'OFF'` en `boceto_web/css/styles.css`.
+- **Nuevo CTA en Sección de Ofertas**:
+  - Se incorporó el botón `<a href="catalog.html?offers=true">Ver todas las Ofertas</a>` centrado y con espaciado de 40px al pie de la grilla en `boceto_web/index.html`.
+  - Se eliminó el tag superior `<div class="section-tag dark">Tiempo Limitado</div>` en el banner del temporizador.
+
 ---
 
 ## 📋 Pendientes — Ajustes de Diseño y Copy (reportados 2026-09-02)
