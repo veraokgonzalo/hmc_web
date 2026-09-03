@@ -145,10 +145,11 @@ Se rediseñó y modularizó el boceto web en páginas independientes interconect
 
 ## 📋 Pendientes — Ajustes de Diseño y Copy (reportados 2026-09-02)
 
-1. **Mapa de Google Maps en Contacto**: agregar un mapa embebido (Google Maps) en la sección de sucursal de `contact.html`, junto a la dirección de la sucursal Santa Rosa.
-2. **Rediseño de `.section-tag`**: quitar el recuadro/badge que envuelve al tag; pasar a texto simple en verde (`--color-primary`), con espaciado hacia el título siguiente. Cambiar el CSS directamente en `boceto_web/css/styles.css` para que se aplique de forma global en todas las páginas que usan `.section-tag`.
-3. **Copy de `contact.html`** — subtítulo de la sección de contacto: quitar "con Factura A" de "Envianos tu consulta técnica, cotización corporativa con Factura A o visitanos en nuestra sucursal de Santa Rosa."
-4. **Copy del formulario de contacto**: cambiar "Completá el siguiente formulario y un técnico especialista responderá dentro de las 2 horas hábiles." por "...responderá lo antes posible", y aclarar que para respuestas más rápidas escriban por WhatsApp ("no dudes en escribirnos ahí").
-5. **Centrado del FAQ**: el tag "Dudas Frecuentes" y el título "Preguntas Frecuentes" en el acordeón de FAQ (`contact.html`) no están correctamente centrados — revisar y corregir.
-6. **Bug de imágenes en showcase del home**: en la sección "Soluciones Especializadas" del home, las imágenes del showcase aparecen en blanco y solo se muestran al pasar el mouse por encima (hover) — deberían mostrarse por defecto.
+1. **Mapa de Google Maps en Contacto** — IMPLEMENTADO: mapa embebido (Google Maps) en la sección de sucursal de `contact.html`, junto a la dirección de la sucursal Santa Rosa, con link "Cómo llegar".
+2. **Rediseño de `.section-tag`** — IMPLEMENTADO: se quitó el recuadro/badge que envolvía al tag; ahora es texto simple en verde (`--color-primary` / `--color-primary-dark`), con espaciado hacia el título siguiente. Cambio hecho directamente en `boceto_web/css/styles.css`, aplicado globalmente a todas las páginas.
+3. **Copy de `contact.html`** — IMPLEMENTADO: se quitó "con Factura A" del subtítulo de la sección de contacto.
+4. **Copy del formulario de contacto** — IMPLEMENTADO: ahora dice "...responderá lo antes posible" y aclara que para respuestas más rápidas escriban por WhatsApp.
+5. **Centrado del FAQ** — IMPLEMENTADO: se corrigió el `text-align: left` inline que dejaba el tag "Dudas Frecuentes" y el título "Preguntas Frecuentes" descentrados dentro de su contenedor centrado.
+6. **Bug de imágenes en showcase del home** — IMPLEMENTADO: las imágenes de "Soluciones Especializadas" aparecían en blanco hasta el hover porque `.showcase-card` no generaba su propio stacking context para contener el `z-index` negativo del fondo/overlay; se agregó `z-index: 0` a `.showcase-card` y ahora se muestran siempre.
+7. **Igualar altura de columnas en `<!-- Main Form & Branches Grid -->` (`contact.html`)** — IMPLEMENTADO: `.contact-main-grid` pasó a `align-items: stretch`; la columna de sucursales (`.contact-branches-col`) es ahora flex-column a 100% de alto, y el "Trust Callout" final usa `margin-top: auto` para absorber la diferencia y quedar alineado con el botón "Enviar Mensaje" del formulario. También se centró el título "Sucursal y Punto de Retiro".
 

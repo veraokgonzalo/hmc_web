@@ -3389,7 +3389,7 @@ h6 { font-size: 0.95rem; }
   display: grid;
   grid-template-columns: 1.2fr 1fr;
   gap: 40px;
-  align-items: start;
+  align-items: stretch;
 }
 
 .contact-form-card {
@@ -3398,6 +3398,16 @@ h6 { font-size: 0.95rem; }
   border-radius: var(--radius-lg);
   padding: 36px;
   box-shadow: var(--shadow-sm);
+}
+
+.contact-branches-col {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.contact-trust-callout {
+  margin-top: auto;
 }
 
 .form-group-hmc {
