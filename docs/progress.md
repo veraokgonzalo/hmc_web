@@ -141,6 +141,23 @@ Se rediseñó y modularizó el boceto web en páginas independientes interconect
   - `--font-body` & `--font-secondary`: `'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;` (Cuerpo, fichas técnicas, navegación y UI).
 - **Actualización de Reglas de Diseño**: Se documentó formalmente en [`docs/design.md`](design.md) y se integró a los estándares del repositorio.
 
+### 14. Ajustes en Hero Slider, Navegación y Grilla de Ofertas - EN PROGRESO (LOCAL)
+- **Calibración de Velocidad del Hero Slider & Countdown**:
+  - Se extendió el tiempo de rotación automática a `8500ms` (8.5 segundos) en `initHeroSlider()` (`boceto_web/js/app.js`) para una lectura pausada y cómoda de los slides.
+  - Se restableció el intervalo de actualización de `initCountdown()` a `1000ms` asegurando que el reloj de ofertas descuente segundo a segundo sin saltos.
+- **Limpieza Visual de Badges en Hero Slider**:
+  - Se eliminaron los `<div class="hero-badge">` en los 3 slides de `boceto_web/index.html`, logrando un encabezado más limpio y minimalista.
+- **Refinamiento de Micro-Copies en CTAs del Hero**:
+  - Slide 1: `"Ver Ofertas Especiales"` $\rightarrow$ `"Ofertas"` / `"Consultar a un Técnico"` $\rightarrow$ `"Escribinos por WhatsApp"`.
+  - Slide 2: `"Conocé HMC Hub"` $\rightarrow$ `"Conocenos"`.
+  - Slide 3: `"Marcas Oficiales"` $\rightarrow$ `"Nuestras Marcas"`.
+- **Reorganización de Navegación & Badge de Ofertas**:
+  - Se ubicó el enlace de `"Ofertas"` siguiendo el flujo comercial (`Categorías` $\rightarrow$ `Marcas` $\rightarrow$ `Ofertas` $\rightarrow$ `Nosotros` $\rightarrow$ `Contacto`) en `renderGlobalNavigation()` (`boceto_web/js/app.js`).
+  - Se actualizó el badge del navbar `.nav-link.has-badge::after` a `'OFF'` en `boceto_web/css/styles.css`.
+- **Nuevo CTA en Sección de Ofertas**:
+  - Se incorporó el botón `<a href="catalog.html?offers=true">Ver todas las Ofertas</a>` centrado y con espaciado de 40px al pie de la grilla en `boceto_web/index.html`.
+  - Se eliminó el tag superior `<div class="section-tag dark">Tiempo Limitado</div>` en el banner del temporizador.
+
 ---
 
 ## 📋 Pendientes — Ajustes de Diseño y Copy (reportados 2026-09-02)
@@ -152,4 +169,5 @@ Se rediseñó y modularizó el boceto web en páginas independientes interconect
 5. **Centrado del FAQ** — IMPLEMENTADO: se corrigió el `text-align: left` inline que dejaba el tag "Dudas Frecuentes" y el título "Preguntas Frecuentes" descentrados dentro de su contenedor centrado.
 6. **Bug de imágenes en showcase del home** — IMPLEMENTADO: las imágenes de "Soluciones Especializadas" aparecían en blanco hasta el hover porque `.showcase-card` no generaba su propio stacking context para contener el `z-index` negativo del fondo/overlay; se agregó `z-index: 0` a `.showcase-card` y ahora se muestran siempre.
 7. **Igualar altura de columnas en `<!-- Main Form & Branches Grid -->` (`contact.html`)** — IMPLEMENTADO: `.contact-main-grid` pasó a `align-items: stretch`; la columna de sucursales (`.contact-branches-col`) es ahora flex-column a 100% de alto, y el "Trust Callout" final usa `margin-top: auto` para absorber la diferencia y quedar alineado con el botón "Enviar Mensaje" del formulario. También se centró el título "Sucursal y Punto de Retiro".
+
 
