@@ -14,24 +14,42 @@
 
 {{ component('nubesdk-slot', { type: "before_footer" }) }}
 
-<footer class="js-footer js-hide-footer-while-scrolling {% if settings.footer_colors %}footer-colors{% endif %} display-when-content-ready overflow-none" data-store="footer">
-	{% if has_social_network %}
-		<div class="social-footer text-center">
-			{% include "snipplets/social/social-links.tpl" %}
-		</div>
-	{% endif %}
+<footer class="js-footer js-hide-footer-while-scrolling footer-main {% if settings.footer_colors %}footer-colors{% endif %} display-when-content-ready overflow-none" data-store="footer">
 	{% if template != 'password' %}
 		<div class="container py-md-3">
-			<div class="row">
+			<div class="row footer-grid">
+
+				{# Brand #}
+				<div class="col-md-4 footer-col footer-col-brand">
+					<div class="footer-brand-logo">
+						{{ component('logos/logo', {
+								logo_img_classes: 'footer-brand-logo-img',
+								logo_text_classes: 'h3 m-0',
+								logo_size: 'large'
+							})
+						}}
+					</div>
+					<p class="footer-brand-desc">{{ "Un solo lugar. Todo lo que mueve tu obra, tu campo, tu casa o tu negocio. Respaldo técnico profesional, trayectoria y servicio oficial." | translate }}</p>
+					{% if has_social_network or store.whatsapp %}
+						<div class="footer-social-links">
+							{% include "snipplets/social/social-links.tpl" %}
+							{% if store.whatsapp %}
+								<a class="social-icon icon-40px icon-circle" href="{{ store.whatsapp }}" target="_blank" aria-label="{{ 'Whatsapp de' | translate }} {{ store.name }}">
+									{% include "snipplets/svg/whatsapp.tpl" with {svg_custom_class: "icon-inline icon-lg"} %}
+								</a>
+							{% endif %}
+						</div>
+					{% endif %}
+				</div>
 
 				{# Foot Nav #}
 				{% if has_footer_menu %}
-					<div class="{% if settings.footer_menus_toggle %}js-accordion-container accordion{% endif %} col-md">
+					<div class="footer-col {% if settings.footer_menus_toggle %}js-accordion-container accordion{% endif %} col-md">
 						{% if settings.footer_menus_toggle %}
 							<a href="#" class="js-accordion-toggle-mobile row">
 						{% endif %}
 							{% if settings.footer_menu_title %}
-								<div class="font-small text-uppercase font-weight-bold {% if settings.footer_menus_toggle %}col p-3{% else %}py-3{% endif %}">{{ settings.footer_menu_title }}</div>
+								<div class="footer-col-title font-small text-uppercase font-weight-bold {% if settings.footer_menus_toggle %}col p-3{% else %}py-3{% endif %}">{{ settings.footer_menu_title }}</div>
 							{% endif %}
 						{% if settings.footer_menus_toggle %}
 								<div class="d-md-none col-auto icon-48px">
@@ -54,12 +72,12 @@
 
 				{# Foot Nav Secondary #}
 				{% if has_footer_menu_secondary %}
-					<div class="{% if settings.footer_menus_toggle %}js-accordion-container accordion{% endif %} col-md">
+					<div class="footer-col {% if settings.footer_menus_toggle %}js-accordion-container accordion{% endif %} col-md">
 						{% if settings.footer_menus_toggle %}
 							<a href="#" class="js-accordion-toggle-mobile row">
 						{% endif %}
 							{% if settings.footer_menu_secondary_title %}
-								<div class="font-small text-uppercase font-weight-bold {% if settings.footer_menus_toggle %}col p-3{% else %}py-3{% endif %}">{{ settings.footer_menu_secondary_title }}</div>
+								<div class="footer-col-title font-small text-uppercase font-weight-bold {% if settings.footer_menus_toggle %}col p-3{% else %}py-3{% endif %}">{{ settings.footer_menu_secondary_title }}</div>
 							{% endif %}
 						{% if settings.footer_menus_toggle %}
 								<div class="d-md-none col-auto icon-48px">
@@ -82,12 +100,12 @@
 
 				{# Contact info #}
 				{% if has_footer_contact_info %}
-					<div class="{% if settings.footer_menus_toggle %}js-accordion-container accordion{% endif %} col-md">
+					<div class="footer-col {% if settings.footer_menus_toggle %}js-accordion-container accordion{% endif %} col-md">
 						{% if settings.footer_menus_toggle %}
 							<a href="#" class="js-accordion-toggle-mobile row">
 						{% endif %}
 							{% if settings.footer_contact_title %}
-								<div class="font-small text-uppercase font-weight-bold {% if settings.footer_menus_toggle %}col p-3{% else %}py-3{% endif %}">{{ settings.footer_contact_title }}</div>
+								<div class="footer-col-title font-small text-uppercase font-weight-bold {% if settings.footer_menus_toggle %}col p-3{% else %}py-3{% endif %}">{{ settings.footer_contact_title }}</div>
 							{% endif %}
 						{% if settings.footer_menus_toggle %}
 								<div class="d-md-none col-auto icon-48px">
@@ -101,7 +119,11 @@
 							</a>
 							<div class="js-accordion-content js-accordion-content-mobile">
 						{% endif %}
-								{% include "snipplets/contact-links.tpl" with {footer: true} %}
+								{% include "snipplets/contact-links.tpl" with {footer: true, with_icons: true} %}
+								<div class="footer-contact-hours">
+									{% include "snipplets/svg/history.tpl" with {svg_custom_class: "icon-inline mr-2 font-body"} %}
+									{{ "Lunes a Viernes de 8:00 a 18:00 hs | Sábados de 8:30 a 13:00 hs." | translate }}
+								</div>
 						{% if settings.footer_menus_toggle %}
 							</div>
 						{% endif %}
@@ -109,7 +131,7 @@
 				{% endif %}
 
 				{% if settings.news_show %}
-					<div class="col-md{% if not ((has_footer_menu and has_footer_menu_secondary) or (has_footer_menu and has_footer_contact_info) or (has_footer_menu_secondary and has_footer_contact_info)) %}-4{% endif %}">
+					<div class="footer-col col-md{% if not ((has_footer_menu and has_footer_menu_secondary) or (has_footer_menu and has_footer_contact_info) or (has_footer_menu_secondary and has_footer_contact_info)) %}-4{% endif %}">
 						{% include 'snipplets/newsletter.tpl' %}
 					</div>
 				{% endif %}
