@@ -141,7 +141,7 @@ Se rediseñó y modularizó el boceto web en páginas independientes interconect
   - `--font-body` & `--font-secondary`: `'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;` (Cuerpo, fichas técnicas, navegación y UI).
 - **Actualización de Reglas de Diseño**: Se documentó formalmente en [`docs/design.md`](design.md) y se integró a los estándares del repositorio.
 
-### 14. Ajustes en Hero Slider, Navegación y Grilla de Ofertas - EN PROGRESO (LOCAL)
+### 14. Ajustes en Hero Slider, Navegación y Grilla de Ofertas - IMPLEMENTADO
 - **Calibración de Velocidad del Hero Slider & Countdown**:
   - Se extendió el tiempo de rotación automática a `8500ms` (8.5 segundos) en `initHeroSlider()` (`boceto_web/js/app.js`) para una lectura pausada y cómoda de los slides.
   - Se restableció el intervalo de actualización de `initCountdown()` a `1000ms` asegurando que el reloj de ofertas descuente segundo a segundo sin saltos.
@@ -157,6 +157,19 @@ Se rediseñó y modularizó el boceto web en páginas independientes interconect
 - **Nuevo CTA en Sección de Ofertas**:
   - Se incorporó el botón `<a href="catalog.html?offers=true">Ver todas las Ofertas</a>` centrado y con espaciado de 40px al pie de la grilla en `boceto_web/index.html`.
   - Se eliminó el tag superior `<div class="section-tag dark">Tiempo Limitado</div>` en el banner del temporizador.
+
+### 15. Reorganización de Secciones de la Home, Limpieza de Tags y CTA de Categorías - IMPLEMENTADO
+- **Reordenamiento Estratégico de Secciones en Home (`index.html`)**:
+  - Se adelantó la sección *"Nuestras Marcas"* (`#marcas`) para ubicarse inmediatamente tras *"Categorías Destacadas"*, unificando la exploración de catálogo (por rubro o por fabricante oficial) en la parte superior.
+  - Se reubicó el bloque de *"Showcase Destacado / Tecnología y Respaldo"* (`.showcase-block-section`) inmediatamente después del *"Video Showcase"*.
+- **Nuevo CTA en Categorías Destacadas**:
+  - Se agregó el botón `<a href="catalog.html">Explorar Catálogo</a>` centrado con margen de 40px al pie de la cuadrícula de categorías en `index.html`.
+- **Depuración de `.section-tag` en Encabezados**:
+  - Se eliminaron las micro-etiquetas decorativas en Categorías (*"Catálogo Completo"*), Marcas (*"Distribuidores Oficiales"*), Video Showcase (*"En Acción"*) y Showcase de Sectores (*"Soluciones Especializadas"*), logrando un diseño más despejado.
+- **Ocultamiento Limpio de Catálogo con Tabs (`#catalog`)**:
+  - Se configuró `style="display: none;"` en la sección `.featured-catalog-section` para colapsar completamente el espacio en el layout sin dejar huecos vacíos.
+- **Eliminación del Popup de Bienvenida**:
+  - Se removió el markup de `#promoPopup` en `index.html`.
 
 ---
 

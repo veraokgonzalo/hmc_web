@@ -347,8 +347,7 @@
   <section class="section-padding categories-section" id="categorias">
     <div class="container">
       <div class="section-header">
-        <div class="section-tag"><i class="fa-solid fa-grid-2"></i> Catálogo Completo</div>
-        <h2 class="section-title">Categorías Principales</h2>
+        <h2 class="section-title">Categorías Destacadas</h2>
         <p class="section-subtitle">Equipamiento diseñado para el trabajo pesado en obras de construcción, mantenimiento de campos, industrias y hogares.</p>
       </div>
 
@@ -403,50 +402,40 @@
         </div>
 
       </div>
+
+      <div style="text-align: center; margin-top: 40px;">
+        <a href="catalog.html" class="btn btn-primary btn-lg">
+          <i class="fa-solid fa-layer-group"></i> Explorar Catálogo
+        </a>
+      </div>
     </div>
   </section>
 
   <!-- ========================================================================
-       8. Bloque Nuevo / Showcase Destacado (home-new-block.tpl)
+       8. Marcas Destacadas (featured-brands.tpl - docs/specs.md §6)
        ======================================================================== -->
-  <section class="showcase-block-section">
+  <section class="brands-section" id="marcas">
     <div class="container">
-      <div class="section-header">
-        <div class="section-tag"><i class="fa-solid fa-star"></i> Soluciones Especializadas</div>
-        <h2 class="section-title">Tecnología y Respaldo Para Cada Sector</h2>
-        <p class="section-subtitle">Contamos con líneas específicas para cada requerimiento: desde herramientas de taller hasta maquinaria pesada para el agro.</p>
+      <div class="section-header" style="margin-bottom: 32px;">
+        <h2 class="section-title">Nuestras Marcas</h2>
+        <p class="section-subtitle">Trabajamos únicamente con fabricantes líderes a nivel mundial que garantizan disponibilidad de repuestos y servicio oficial.</p>
       </div>
 
-      <div class="showcase-grid">
-        
-        <!-- Showcase Card 1 -->
-        <div class="showcase-card">
-          <img src="assets/images/hero/banner-showcase-1-linea-pesada.jpg" alt="Línea Profesional e Industrial" class="showcase-bg">
-          <div class="showcase-overlay"></div>
-          <span class="showcase-tag">Uso Continuo</span>
-          <h3 class="showcase-title">Línea Profesional e Industrial</h3>
-          <p class="showcase-desc">Generadores de alta capacidad, compresores industriales y maquinaria pesada para empresas constructoras y agropecuarias.</p>
-          <div>
-            <a href="catalog.html?category=generadores" class="btn btn-primary">
-              <i class="fa-solid fa-arrow-right"></i> Ver Línea Industrial
-            </a>
-          </div>
-        </div>
+      <div class="brands-grid">
+        <div class="brand-card" title="BOSCH" onclick="location.href='catalog.html?brand=BOSCH'"><span class="brand-name">BOSCH</span></div>
+        <div class="brand-card" title="DEWALT" onclick="location.href='catalog.html?brand=DEWALT'"><span class="brand-name">DEWALT</span></div>
+        <div class="brand-card" title="NIWA" onclick="location.href='catalog.html?brand=NIWA'"><span class="brand-name">NIWA</span></div>
+        <div class="brand-card" title="EINHELL" onclick="location.href='catalog.html?brand=EINHELL'"><span class="brand-name">EINHELL</span></div>
+        <div class="brand-card" title="SHINDAIWA" onclick="location.href='catalog.html?brand=SHINDAIWA'"><span class="brand-name">SHINDAIWA</span></div>
+        <div class="brand-card" title="SENSEI" onclick="location.href='catalog.html?brand=SENSEI'"><span class="brand-name">SENSEI</span></div>
+        <div class="brand-card" title="STIHL" onclick="location.href='catalog.html?brand=STIHL'"><span class="brand-name">STIHL</span></div>
+        <div class="brand-card" title="HONDA" onclick="location.href='catalog.html?brand=HONDA'"><span class="brand-name">HONDA</span></div>
+      </div>
 
-        <!-- Showcase Card 2 -->
-        <div class="showcase-card">
-          <img src="assets/images/hero/banner-showcase-2-linea-jardin.jpg" alt="Soluciones para el Campo y Hogar" class="showcase-bg">
-          <div class="showcase-overlay"></div>
-          <span class="showcase-tag">Hogar & Parque</span>
-          <h3 class="showcase-title">Soluciones para Campo y Jardín</h3>
-          <p class="showcase-desc">Motosierras, cortadoras de césped, motobombas e hidrolavadoras de fácil arranque y mantenimiento garantizado.</p>
-          <div>
-            <a href="catalog.html?category=jardineria" class="btn btn-secondary">
-              <i class="fa-solid fa-arrow-right"></i> Ver Línea Jardín
-            </a>
-          </div>
-        </div>
-
+      <div style="text-align: center; margin-top: 32px;">
+        <a href="brands.html" class="btn btn-outline-primary btn-lg">
+          <i class="fa-solid fa-grid-2"></i> Explorar el directorio de marcas
+        </a>
       </div>
     </div>
   </section>
@@ -460,7 +449,6 @@
         
         <!-- Video Information -->
         <div class="video-info">
-          <div class="section-tag dark"><i class="fa-solid fa-play"></i> En Acción</div>
           <h2>Probamos Cada Equipo en Condiciones Reales de Trabajo</h2>
           <p>En HMC Hub entendemos el valor del tiempo en obra. Por eso testeamos el arranque, la potencia y la durabilidad de nuestras máquinas antes de entregarlas.</p>
           
@@ -500,9 +488,53 @@
   </section>
 
   <!-- ========================================================================
-       10. Catálogo Destacado & Interactive Tabs (featured-products)
+       10. Bloque Nuevo / Showcase Destacado (home-new-block.tpl)
        ======================================================================== -->
-  <section class="section-padding featured-catalog-section" id="catalog">
+  <section class="showcase-block-section">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">Tecnología y Respaldo Para Cada Sector</h2>
+        <p class="section-subtitle">Contamos con líneas específicas para cada requerimiento: desde herramientas de taller hasta maquinaria pesada para el agro.</p>
+      </div>
+
+      <div class="showcase-grid">
+        
+        <!-- Showcase Card 1 -->
+        <div class="showcase-card">
+          <img src="assets/images/hero/banner-showcase-1-linea-pesada.jpg" alt="Línea Profesional e Industrial" class="showcase-bg">
+          <div class="showcase-overlay"></div>
+          <span class="showcase-tag">Uso Continuo</span>
+          <h3 class="showcase-title">Línea Profesional e Industrial</h3>
+          <p class="showcase-desc">Generadores de alta capacidad, compresores industriales y maquinaria pesada para empresas constructoras y agropecuarias.</p>
+          <div>
+            <a href="catalog.html?category=generadores" class="btn btn-primary">
+              <i class="fa-solid fa-arrow-right"></i> Ver Línea Industrial
+            </a>
+          </div>
+        </div>
+
+        <!-- Showcase Card 2 -->
+        <div class="showcase-card">
+          <img src="assets/images/hero/banner-showcase-2-linea-jardin.jpg" alt="Soluciones para el Campo y Hogar" class="showcase-bg">
+          <div class="showcase-overlay"></div>
+          <span class="showcase-tag">Hogar & Parque</span>
+          <h3 class="showcase-title">Soluciones para Campo y Jardín</h3>
+          <p class="showcase-desc">Motosierras, cortadoras de césped, motobombas e hidrolavadoras de fácil arranque y mantenimiento garantizado.</p>
+          <div>
+            <a href="catalog.html?category=jardineria" class="btn btn-secondary">
+              <i class="fa-solid fa-arrow-right"></i> Ver Línea Jardín
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       11. Catálogo Destacado & Interactive Tabs (featured-products - Oculto)
+       ======================================================================== -->
+  <section class="section-padding featured-catalog-section" id="catalog" style="display: none;">
     <div class="container">
       <div class="section-header">
         <div class="section-tag"><i class="fa-solid fa-fire"></i> Lo Más Elegido</div>
@@ -527,36 +559,6 @@
         </a>
       </div>
 
-    </div>
-  </section>
-
-  <!-- ========================================================================
-       11. Marcas Destacadas (featured-brands.tpl - docs/specs.md §6)
-       ======================================================================== -->
-  <section class="brands-section" id="marcas">
-    <div class="container">
-      <div class="section-header" style="margin-bottom: 32px;">
-        <div class="section-tag"><i class="fa-solid fa-certificate"></i> Distribuidores Oficiales</div>
-        <h2 class="section-title">Marcas que Respaldamos</h2>
-        <p class="section-subtitle">Trabajamos únicamente con fabricantes líderes a nivel mundial que garantizan disponibilidad de repuestos y servicio oficial.</p>
-      </div>
-
-      <div class="brands-grid">
-        <div class="brand-card" title="BOSCH" onclick="location.href='catalog.html?brand=BOSCH'"><span class="brand-name">BOSCH</span></div>
-        <div class="brand-card" title="DEWALT" onclick="location.href='catalog.html?brand=DEWALT'"><span class="brand-name">DEWALT</span></div>
-        <div class="brand-card" title="NIWA" onclick="location.href='catalog.html?brand=NIWA'"><span class="brand-name">NIWA</span></div>
-        <div class="brand-card" title="EINHELL" onclick="location.href='catalog.html?brand=EINHELL'"><span class="brand-name">EINHELL</span></div>
-        <div class="brand-card" title="SHINDAIWA" onclick="location.href='catalog.html?brand=SHINDAIWA'"><span class="brand-name">SHINDAIWA</span></div>
-        <div class="brand-card" title="SENSEI" onclick="location.href='catalog.html?brand=SENSEI'"><span class="brand-name">SENSEI</span></div>
-        <div class="brand-card" title="STIHL" onclick="location.href='catalog.html?brand=STIHL'"><span class="brand-name">STIHL</span></div>
-        <div class="brand-card" title="HONDA" onclick="location.href='catalog.html?brand=HONDA'"><span class="brand-name">HONDA</span></div>
-      </div>
-
-      <div style="text-align: center; margin-top: 32px;">
-        <a href="brands.html" class="btn btn-outline-primary btn-lg">
-          <i class="fa-solid fa-grid-2"></i> Explorar el directorio de marcas
-        </a>
-      </div>
     </div>
   </section>
 
@@ -768,25 +770,6 @@
           </div>
         </div>
 
-      </div>
-    </div>
-  </div>
-
-  <!-- ========================================================================
-       17. Promotional Welcome Popup (home-popup.tpl)
-       ======================================================================== -->
-  <div class="modal-overlay" id="promoPopup">
-    <div class="promo-popup-card">
-      <button class="modal-close-btn" id="promoPopupClose" title="Cerrar"><i class="fa-solid fa-xmark"></i></button>
-      <img src="assets/images/hero/hero-slide-1-ofertas-motosierras.jpg" alt="Promo Bienvenida" class="promo-popup-img">
-      <div class="promo-popup-body">
-        <span class="promo-popup-badge"><i class="fa-solid fa-gift"></i> Beneficio Exclusivo</span>
-        <h3 class="promo-popup-title">¡10% OFF en Tu Primera Compra!</h3>
-        <p class="promo-popup-desc">Suscribite y recibí tu cupón exclusivo para herramientas, generadores y maquinaria con respaldo oficial.</p>
-        <form onsubmit="event.preventDefault(); showToast('🎉 Cupón BIENVENIDO-HMC aplicado con éxito!'); document.getElementById('promoPopupClose').click();" style="display: flex; flex-direction: column; gap: 10px;">
-          <input type="email" placeholder="Ingresá tu email..." required style="padding: 12px 16px; border: 1px solid var(--color-gray-border); border-radius: var(--radius-sm); font-size: 0.95rem;">
-          <button type="submit" class="btn btn-primary">Obtener Mi Descuento</button>
-        </form>
       </div>
     </div>
   </div>
