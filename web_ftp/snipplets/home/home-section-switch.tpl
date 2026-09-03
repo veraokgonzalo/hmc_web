@@ -206,6 +206,15 @@
 		{% include 'snipplets/home/home-brands.tpl' %}
 	{% endif %}
 
+{% elseif section_select == 'new_block' %}
+
+	{#  **** Bloque Nuevo ****  #}
+	{% if show_help or (show_component_help and not has_new_block) %}
+		{% include 'snipplets/defaults/home/institutional_message_help.tpl' with { section_name: 'new-block', title: 'Bloque Nuevo' | translate} %}
+	{% else %}
+		{% include 'snipplets/home/home-new-block.tpl' %}
+	{% endif %}
+
 {% elseif section_select == 'testimonials' %}
 
 	{#  **** Testimonials slider ****  #}

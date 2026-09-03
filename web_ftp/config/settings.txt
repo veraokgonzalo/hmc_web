@@ -1378,6 +1378,31 @@ Página de inicio
 		gallery_width = 200
 		gallery_height = 200
 	collapse
+		title = Bloque Nuevo
+		backto = home_order_position
+	checkbox
+		name = new_block
+		description = Mostrar este bloque en la página de inicio
+	i18n_input
+		name = new_block_title
+		description = Título del bloque
+	image
+		original = new_block_image_01.jpg
+		title = Cargar Imagen 1
+		width = 800
+		height = 800
+	i18n_input
+		name = new_block_image_01_link
+		description = Link de Imagen 1 (Opcional)
+	image
+		original = new_block_image_02.jpg
+		title = Cargar Imagen 2
+		width = 800
+		height = 800
+	i18n_input
+		name = new_block_image_02_link
+		description = Link de Imagen 2 (Opcional)
+	collapse
 		title = Video
 		backto = home_order_position
 	dropdown
@@ -1562,6 +1587,7 @@ Página de inicio
 			news_banners = Banners de novedades
 			featured_banners = Banners destacados
 			brands = Marcas
+			new_block = Bloque Nuevo
 			video = Video
 			newsletter = Newsletter
 			main_product = Producto principal
