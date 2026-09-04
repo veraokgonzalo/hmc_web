@@ -171,6 +171,12 @@ Se rediseñó y modularizó el boceto web en páginas independientes interconect
 - **Eliminación del Popup de Bienvenida**:
   - Se removió el markup de `#promoPopup` en `index.html`.
 
+### 16. Sincronización de Marcas Reales del Catálogo Tiendanube y Contadores de Productos - IMPLEMENTADO
+- **Auditoría y Extracción Real del Catálogo**: Se integraron las 113 marcas reales normalizadas extraídas directamente de `data/tiendanube-productos-utf8.csv` (3.398 productos) mediante el script sincronizador `scripts/sync_brands.py`.
+- **Contadores Reales de Productos por Marca**: Cada ítem en el directorio alfabético de `brands.html` ahora muestra su contador real de productos disponibles (`.brand-count-badge`) respetando el estándar táctil mobile de 44px.
+- **Actualización de Top Marcas Destacadas**: Se actualizaron las 8 marcas principales en el Dropdown de navegación, Menú móvil Drawer, filtros de barra lateral en `catalog.html` y grilla del Home (`index.html`) por las líderes en volumen de catálogo real: OREGON (433), NIWA (240), BOSCH (214), EINHELL (193), HUSQVARNA (193), GARDENA (159), SENSEI (96) y HONDA (74).
+- **Refinamiento Visual**: Se corrigió la alineación del ícono de encabezado en `brands.html`, se centraron las tarjetas de marca en el Dropdown del Navbar y se limpió el código huérfano.
+
 ---
 
 ## 📋 Pendientes — Ajustes de Diseño y Copy (reportados 2026-09-02)
