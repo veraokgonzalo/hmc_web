@@ -27,6 +27,10 @@ document.addEventListener('DOMContentLoaded', () => {
     initBrandsPage();
   }
 
+  if (document.getElementById('directorioCategorias') || document.querySelector('.categories-page-section') || document.getElementById('categoriesTreeContainer')) {
+    initCategoriesPage();
+  }
+
   if (document.getElementById('catalogPageLayout')) {
     initCatalogPage();
   }
@@ -43,6 +47,83 @@ document.addEventListener('DOMContentLoaded', () => {
     initContactPage();
   }
 });
+
+/* --------------------------------------------------------------------------
+   -1.5. Master Store Categories (Single Source of Truth, Alphabetical, No &, No Emojis)
+   -------------------------------------------------------------------------- */
+const REAL_STORE_CATEGORIES = [
+  { id: "agua", name: "AGUA", displayName: "Agua", count: 19 },
+  { id: "construccion", name: "CONSTRUCCION", displayName: "Construcción", count: 151 },
+  { id: "consumibles-e-insumos", name: "CONSUMIBLES E INSUMOS", displayName: "Consumibles e Insumos", count: 82 },
+  { id: "ferreteria", name: "FERRETERIA", displayName: "Ferretería", count: 1192 },
+  { id: "generacion-energia", name: "GENERACION ENERGIA", displayName: "Generación Energía", count: 112 },
+  { id: "jardin", name: "JARDIN", displayName: "Jardín", count: 287 },
+  { id: "maquina-a-bateria", name: "MAQUINA A BATERIA", displayName: "Máquinas a Batería", count: 159 },
+  { id: "maquina-a-explosion", name: "MAQUINA A EXPLOSION", displayName: "Máquinas a Explosión", count: 265 },
+  { id: "maquina-electrica", name: "MAQUINA ELECTRICA", displayName: "Máquinas Eléctricas", count: 108 },
+  { id: "maquina-manual", name: "MAQUINA MANUAL", displayName: "Máquinas Manuales", count: 8 },
+  { id: "producto-de-fuerza", name: "PRODUCTO DE FUERZA", displayName: "Productos de Fuerza", count: 96 },
+  { id: "repuestos", name: "REPUESTOS", displayName: "Repuestos", count: 563 },
+  { id: "riego", name: "RIEGO", displayName: "Riego", count: 200 }
+];
+
+function getCategoriesDropdownHtml() {
+  const source = (typeof window !== 'undefined' && window.REAL_CATEGORIES_TREE && window.REAL_CATEGORIES_TREE.length > 0)
+    ? window.REAL_CATEGORIES_TREE
+    : REAL_STORE_CATEGORIES;
+
+  // 12 Categorías principales por volumen, ordenadas alfabéticamente por displayName
+  const top12 = [...source]
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 12)
+    .sort((a, b) => a.displayName.localeCompare(b.displayName, 'es'));
+
+  return top12.map(cat => `
+    <a href="catalog.html?category=${cat.id}" class="dropdown-category-card" title="Ver ${cat.count.toLocaleString('es-AR')} productos en ${cat.displayName}">
+      <div class="dropdown-category-info">
+        <span class="dropdown-category-name">${cat.displayName}</span>
+        <span class="dropdown-category-count">${cat.count.toLocaleString('es-AR')} productos</span>
+      </div>
+    </a>
+  `).join('');
+}
+
+function getMobileDrawerCategoriesHtml() {
+  const source = (typeof window !== 'undefined' && window.REAL_CATEGORIES_TREE && window.REAL_CATEGORIES_TREE.length > 0)
+    ? window.REAL_CATEGORIES_TREE
+    : REAL_STORE_CATEGORIES;
+
+  const top12 = [...source]
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 12)
+    .sort((a, b) => a.displayName.localeCompare(b.displayName, 'es'));
+
+  let html = top12.map(cat => `
+    <a href="catalog.html?category=${cat.id}" class="mobile-subnav-link">${cat.displayName}</a>
+  `).join('');
+
+  html += `
+    <a href="categories.html" class="mobile-subnav-link mobile-subnav-link-cta" style="font-weight: 700; color: var(--color-primary-dark); background: rgba(63, 170, 71, 0.1); border-radius: var(--radius-sm); margin-top: 6px; padding: 10px 12px;">Explorar todas las categorías (${source.length}) →</a>
+  `;
+  return html;
+}
+
+function getCategoriesFastJumpBarHtml(activeCat = "ALL") {
+  const source = (typeof window !== 'undefined' && window.REAL_CATEGORIES_TREE && window.REAL_CATEGORIES_TREE.length > 0)
+    ? window.REAL_CATEGORIES_TREE
+    : REAL_STORE_CATEGORIES;
+
+  const sortedCategories = [...source].sort((a, b) => 
+    (a.displayName || a.name).localeCompare(b.displayName || b.name, 'es')
+  );
+
+  let html = `<button type="button" class="alpha-btn${activeCat === 'ALL' ? ' active' : ''}" data-cat="ALL">TODAS</button>`;
+  sortedCategories.forEach(cat => {
+    const isActive = activeCat === cat.id ? ' active' : '';
+    html += `\n            <button type="button" class="alpha-btn${isActive}" data-cat="${cat.id}">${cat.displayName || cat.name}</button>`;
+  });
+  return html;
+}
 
 /* --------------------------------------------------------------------------
    -1. Single Source of Truth: Global Header & Navigation Component
@@ -132,44 +213,40 @@ function renderGlobalNavigation() {
         <li class="nav-item">
           <a href="index.html" class="nav-link"><i class="fa-solid fa-house"></i> Inicio</a>
         </li>
-        <li class="nav-item">
-          <a href="catalog.html" class="nav-link">
+        <li class="nav-item has-mega-dropdown">
+          <a href="categories.html" class="nav-link">
             Categorías <i class="fa-solid fa-chevron-down" style="font-size: 0.75em; margin-left: 2px;"></i>
           </a>
-          <!-- Mega Dropdown Categorías -->
-          <div class="mega-dropdown">
-            <div class="mega-column">
-              <h4>Ferretería & Taller</h4>
-              <ul class="mega-links">
-                <li><a href="catalog.html?category=ferreteria"><i class="fa-solid fa-angle-right"></i> Martillos Demoledores</a></li>
-                <li><a href="catalog.html?category=ferreteria"><i class="fa-solid fa-angle-right"></i> Sierras Circulares e Ingletadoras</a></li>
-                <li><a href="catalog.html?category=herramientas-bateria"><i class="fa-solid fa-angle-right"></i> Herramientas a Batería 18V</a></li>
-                <li><a href="catalog.html?category=accesorios-insumos"><i class="fa-solid fa-angle-right"></i> Discos de Corte y Abrasivos</a></li>
-              </ul>
-            </div>
-            <div class="mega-column">
-              <h4>Máquinas a Explosión</h4>
-              <ul class="mega-links">
-                <li><a href="catalog.html?brand=SHINDAIWA"><i class="fa-solid fa-angle-right"></i> Motoguadañas Shindaiwa</a></li>
-                <li><a href="catalog.html?brand=SENSEI"><i class="fa-solid fa-angle-right"></i> Desmalezadoras Sensei</a></li>
-                <li><a href="catalog.html?category=maquinas-explosion"><i class="fa-solid fa-angle-right"></i> Mantenimiento de Parques</a></li>
-                <li><a href="catalog.html?category=maquinas-explosion"><i class="fa-solid fa-angle-right"></i> Puesta en Marcha Oficial</a></li>
-              </ul>
-            </div>
-            <div class="mega-column">
-              <h4>Construcción & Agua</h4>
-              <ul class="mega-links">
-                <li><a href="catalog.html?category=agua-bombeo"><i class="fa-solid fa-angle-right"></i> Bombas Centrífugas Niwa</a></li>
-                <li><a href="catalog.html?category=construccion"><i class="fa-solid fa-angle-right"></i> Demoledores de Pavimento</a></li>
-                <li><a href="catalog.html?category=construccion"><i class="fa-solid fa-angle-right"></i> Taladros Rotopercutores Bosch</a></li>
-                <li><a href="catalog.html?category=accesorios-insumos"><i class="fa-solid fa-angle-right"></i> Mechas y Brocas SDS Plus</a></li>
-              </ul>
-            </div>
-            <div class="mega-banner">
-              <img src="assets/images/categories/categoria-1-ferreteria.jpg" alt="Línea Profesional">
-              <h5>Línea Profesional</h5>
-              <p style="font-size: 0.78rem; color: #666; margin-bottom: 8px;">Garantía oficial y puesta en marcha sin cargo.</p>
-              <a href="catalog.html" class="btn btn-primary btn-sm">Ver Catálogo</a>
+          <!-- Compact Categories Mega Dropdown (12 Top Categories) -->
+          <div class="mega-dropdown mega-dropdown-categories-featured">
+            <div class="dropdown-categories-wrapper">
+              
+              <!-- Header -->
+              <div class="dropdown-categories-header">
+                <div class="dropdown-categories-title">
+                  <div>
+                    <h4>Categorías Principales</h4>
+                  </div>
+                </div>
+                <span class="badge-official-pill"><i class="fa-solid fa-boxes-stacked"></i> Catálogo HMC</span>
+              </div>
+
+              <!-- 12 Top Categories Grid (4 cols x 3 rows, Dynamic & Alphabetical) -->
+              <div class="dropdown-categories-grid">
+                ${getCategoriesDropdownHtml()}
+              </div>
+
+              <!-- Footer CTA Button -->
+              <div class="dropdown-categories-footer">
+                <div class="dropdown-categories-footer-text">
+                  <i class="fa-solid fa-layer-group text-primary"></i>
+                  <span>Más de <strong>13 rubros industriales</strong> y 460 subrubros con stock y repuestos.</span>
+                </div>
+                <a href="categories.html" class="btn btn-primary btn-sm btn-explore-categories">
+                  Todas las categorías →
+                </a>
+              </div>
+
             </div>
           </div>
         </li>
@@ -291,17 +368,11 @@ function renderGlobalNavigation() {
       
       <!-- Category Accordion -->
       <div class="mobile-drawer-accordion-header js-drawer-accordion">
-        <span><i class="fa-solid fa-layer-group"></i> Categorías</span>
+        <span>Categorías Principales</span>
         <i class="fa-solid fa-chevron-down"></i>
       </div>
       <div class="mobile-drawer-accordion-content">
-        <a href="catalog.html?category=ferreteria" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> Ferretería & Taller</a>
-        <a href="catalog.html?category=maquinas-explosion" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> Máquinas a Explosión</a>
-        <a href="catalog.html?category=agua-bombeo" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> Agua & Bombeo</a>
-        <a href="catalog.html?category=construccion" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> Construcción & Obra</a>
-        <a href="catalog.html?category=herramientas-bateria" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> Herramientas a Batería</a>
-        <a href="catalog.html?category=accesorios-insumos" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> Accesorios & Insumos</a>
-        <a href="catalog.html" class="mobile-subnav-link" style="font-weight: 700; color: var(--color-primary-dark);"><i class="fa-solid fa-grid-2"></i> Ver Todo el Catálogo →</a>
+        ${getMobileDrawerCategoriesHtml()}
       </div>
 
       <a href="catalog.html?offers=true" class="mobile-nav-link-item"><span style="color: var(--color-danger);"><i class="fa-solid fa-bolt"></i> Ofertas Especiales</span> <span class="badge badge-discount">-16%</span></a>
@@ -317,7 +388,7 @@ function renderGlobalNavigation() {
         <a href="catalog.html?brand=BOSCH" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> BOSCH Professional</a>
         <a href="catalog.html?brand=EINHELL" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> EINHELL Power X-Change</a>
         <a href="catalog.html?brand=HUSQVARNA" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> HUSQVARNA Forestal</a>
-        <a href="catalog.html?brand=GARDENA" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> GARDENA Riego & Jardín</a>
+        <a href="catalog.html?brand=GARDENA" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> GARDENA Riego y Jardín</a>
         <a href="catalog.html?brand=SENSEI" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> SENSEI Maquinaria</a>
         <a href="catalog.html?brand=HONDA" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> HONDA Motores</a>
         <a href="brands.html" class="mobile-subnav-link" style="font-weight: 700; color: var(--color-primary-dark); background: rgba(63, 170, 71, 0.1); border-radius: var(--radius-sm); margin-top: 6px; padding: 10px 12px;"><i class="fa-solid fa-grid-2"></i> Explorar todas nuestras marcas (113) →</a>
@@ -397,6 +468,7 @@ function renderGlobalFooter() {
           <ul class="footer-links">
             <li><a href="index.html"><i class="fa-solid fa-chevron-right"></i> Inicio</a></li>
             <li><a href="catalog.html"><i class="fa-solid fa-chevron-right"></i> Catálogo Completo</a></li>
+            <li><a href="categories.html"><i class="fa-solid fa-chevron-right"></i> Directorio de Categorías</a></li>
             <li><a href="catalog.html?offers=true"><i class="fa-solid fa-chevron-right"></i> Ofertas Especiales</a></li>
             <li><a href="brands.html"><i class="fa-solid fa-chevron-right"></i> Marcas Oficiales</a></li>
             <li><a href="about.html"><i class="fa-solid fa-chevron-right"></i> Nosotros & Respaldo</a></li>
@@ -483,6 +555,11 @@ function syncNavigationActiveState() {
   } else if (pathname.includes('brands.html')) {
     document.querySelectorAll('.nav-item a[href*="brands.html"]').forEach(a => a.parentElement.classList.add('active'));
     document.querySelectorAll('.mobile-nav-link-item[href*="brands.html"]').forEach(a => a.classList.add('active'));
+  } else if (pathname.includes('categories.html')) {
+    document.querySelectorAll('.nav-item a[href*="categories.html"]').forEach(a => a.parentElement.classList.add('active'));
+    document.querySelectorAll('.mobile-nav-link-item[href*="categories.html"]').forEach(a => a.classList.add('active'));
+    const categoriesNavItem = document.querySelector('.mega-dropdown-categories-featured, .mega-dropdown:not(.mega-dropdown-brands-featured)')?.closest('.nav-item');
+    if (categoriesNavItem) categoriesNavItem.classList.add('active');
   } else if (pathname.includes('contact.html')) {
     document.querySelectorAll('.nav-item a[href*="contact.html"]').forEach(a => a.parentElement.classList.add('active'));
     document.querySelectorAll('.mobile-nav-link-item[href*="contact.html"]').forEach(a => a.classList.add('active'));
@@ -514,7 +591,7 @@ function syncNavigationActiveState() {
       if (breadcrumbEl) breadcrumbEl.textContent = `Marcas: ${brandParam}`;
     } else {
       // Standard catalog / category view
-      const categoriesNavItem = document.querySelector('.mega-dropdown:not(.mega-dropdown-brands):not(.mega-dropdown-brands-2a):not(.mega-dropdown-brands-featured)')?.closest('.nav-item');
+      const categoriesNavItem = document.querySelector('.mega-dropdown-categories-featured, .mega-dropdown:not(.mega-dropdown-brands):not(.mega-dropdown-brands-2a):not(.mega-dropdown-brands-featured)')?.closest('.nav-item');
       if (categoriesNavItem) categoriesNavItem.classList.add('active');
       if (categoryParam) {
         const catProd = PRODUCT_CATALOG.find(p => p.category === categoryParam);
@@ -805,6 +882,261 @@ function initBrandsPage() {
 }
 
 /* --------------------------------------------------------------------------
+   0.2. Dedicated Hierarchical Categories Page Engine (categories.html)
+   -------------------------------------------------------------------------- */
+function initCategoriesPage() {
+  const container = document.getElementById("categoriesTreeContainer") || document.querySelector(".js-categories-page-container");
+  if (!container) return;
+
+  const categoriesTree = (typeof window !== 'undefined' && window.REAL_CATEGORIES_TREE && window.REAL_CATEGORIES_TREE.length > 0)
+    ? window.REAL_CATEGORIES_TREE
+    : (typeof REAL_CATEGORIES_TREE !== 'undefined' && REAL_CATEGORIES_TREE.length > 0 ? REAL_CATEGORIES_TREE : REAL_STORE_CATEGORIES);
+  if (!categoriesTree || categoriesTree.length === 0) return;
+
+  const searchInput = document.getElementById("categoriesPageSearchInput") || document.querySelector(".js-categories-page-search");
+  const clearBtn = document.getElementById("categoriesPageClearSearch");
+  const jumpBar = document.getElementById("categoriesFastJumpBar") || document.querySelector(".js-categories-page-alpha-bar");
+  const countPills = document.querySelectorAll(".js-categories-page-count");
+
+  let currentCategory = "ALL";
+  let currentSearch = "";
+
+  // Check URL params on initial load
+  const urlParams = new URLSearchParams(window.location.search);
+  const initialCat = urlParams.get('cat') || urlParams.get('category');
+  const initialQuery = urlParams.get('search') || urlParams.get('q');
+
+  if (initialCat) {
+    const exists = categoriesTree.some(c => c.id === initialCat.toLowerCase());
+    if (exists) {
+      currentCategory = initialCat.toLowerCase();
+    }
+  }
+
+  // Populate Fast Jump Bar dynamically from categoriesTree (sorted alphabetically, no &, no emojis)
+  if (jumpBar) {
+    jumpBar.innerHTML = getCategoriesFastJumpBarHtml(currentCategory);
+  }
+
+  const jumpBtns = jumpBar ? jumpBar.querySelectorAll(".alpha-btn") : [];
+
+  if (initialQuery && searchInput) {
+    searchInput.value = initialQuery;
+    currentSearch = initialQuery;
+    if (clearBtn) clearBtn.style.display = "flex";
+  }
+
+  function renderCategoriesDirectory(filterText = "", filterCat = "ALL") {
+    const query = filterText.trim().toLowerCase();
+
+    // 1. Filter and sort tree alphabetically
+    const matchingResults = [];
+    let totalMatchingProducts = 0;
+
+    const sortedTree = [...categoriesTree].sort((a, b) => 
+      (a.displayName || a.name).localeCompare(b.displayName || b.name, 'es')
+    );
+
+    sortedTree.forEach(cat => {
+      // Check fast-jump filter
+      if (filterCat !== "ALL" && cat.id !== filterCat) {
+        return;
+      }
+
+      const catNameMatches = !query || 
+        cat.name.toLowerCase().includes(query) || 
+        (cat.displayName && cat.displayName.toLowerCase().includes(query)) || 
+        (cat.description && cat.description.toLowerCase().includes(query));
+
+      const matchedSubcategories = [];
+
+      // Sort subcategories alphabetically
+      const sortedSubcats = (cat.subcategories || []).slice().sort((a, b) => 
+        (a.displayName || a.name).localeCompare(b.displayName || b.name, 'es')
+      );
+
+      sortedSubcats.forEach(sub => {
+        const subNameMatches = !query || 
+          sub.name.toLowerCase().includes(query) || 
+          (sub.displayName && sub.displayName.toLowerCase().includes(query));
+
+        const matchedSubsubs = [];
+        // Sort sub-subcategories alphabetically
+        const subsubsList = (sub.subsubcategories || []).slice().sort((a, b) => 
+          a.name.localeCompare(b.name, 'es')
+        );
+
+        if (subsubsList.length > 0) {
+          subsubsList.forEach(sss => {
+            const sssMatches = !query || sss.name.toLowerCase().includes(query);
+            if (catNameMatches || subNameMatches || sssMatches) {
+              matchedSubsubs.push(sss);
+            }
+          });
+        }
+
+        if (catNameMatches || subNameMatches || matchedSubsubs.length > 0) {
+          matchedSubcategories.push({
+            ...sub,
+            filteredSubsubcategories: (query && !catNameMatches && !subNameMatches) ? matchedSubsubs : subsubsList
+          });
+        }
+      });
+
+      if (catNameMatches || matchedSubcategories.length > 0) {
+        matchingResults.push({
+          ...cat,
+          filteredSubcategories: matchedSubcategories
+        });
+        totalMatchingProducts += cat.count;
+      }
+    });
+
+    // 2. Update Counter
+    const totalInitialProducts = categoriesTree.reduce((sum, c) => sum + (c.count || 0), 0);
+    countPills.forEach(pill => {
+      if (!query && filterCat === "ALL") {
+        pill.innerHTML = `<strong>${categoriesTree.length}</strong> rubros • <strong>${totalInitialProducts.toLocaleString('es-AR')}</strong> productos`;
+      } else {
+        pill.innerHTML = `<strong>${matchingResults.length}</strong> rubros • <strong>${totalMatchingProducts.toLocaleString('es-AR')}</strong> productos`;
+      }
+    });
+
+    // 3. Handle Empty State
+    if (matchingResults.length === 0) {
+      container.innerHTML = `
+        <div class="brands-empty-state">
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <h4>No encontramos rubros ni repuestos con "${filterText}"</h4>
+          <p>Verificá la ortografía o consultá con nuestros especialistas técnicos para cotizar repuestos o equipos a pedido.</p>
+          <button type="button" class="btn btn-primary" id="btnResetCategoriesFilter">
+            <i class="fa-solid fa-rotate-left"></i> Restablecer Directorio Completo
+          </button>
+        </div>
+      `;
+      const resetBtn = document.getElementById("btnResetCategoriesFilter");
+      if (resetBtn) {
+        resetBtn.addEventListener("click", () => {
+          if (searchInput) searchInput.value = "";
+          if (clearBtn) clearBtn.style.display = "none";
+          currentSearch = "";
+          currentCategory = "ALL";
+          jumpBtns.forEach(b => b.classList.remove("active"));
+          const allBtn = jumpBar ? jumpBar.querySelector(".alpha-btn[data-cat='ALL']") : null;
+          if (allBtn) allBtn.classList.add("active");
+          renderCategoriesDirectory("", "ALL");
+        });
+      }
+      return;
+    }
+
+    // 4. Build Hierarchical Cards HTML (Columns for subsubs, No Emojis/Icons, No &)
+    let html = "";
+    matchingResults.forEach(cat => {
+      const subcats = cat.filteredSubcategories || [];
+
+      let subcategoriesHtml = "";
+      subcats.forEach(sub => {
+        const subsubs = sub.filteredSubsubcategories || [];
+        let columnsHtml = "";
+        if (subsubs.length > 0) {
+          columnsHtml = `
+            <div class="category-subsub-columns">
+              ${subsubs.map(sss => `
+                <a href="catalog.html?q=${encodeURIComponent(sss.name)}" class="category-subsub-item" title="Ver ${sss.count} productos de ${sss.name}">
+                  <span class="subsub-name">${sss.name}</span>
+                  <span class="subsub-count">(${sss.count})</span>
+                </a>
+              `).join('')}
+            </div>
+          `;
+        }
+
+        subcategoriesHtml += `
+          <div class="category-sub-block">
+            <div class="category-sub-header">
+              <a href="catalog.html?q=${encodeURIComponent(sub.name)}" class="category-sub-title" title="Ver productos de ${sub.displayName || sub.name}">
+                ${sub.displayName || sub.name}
+              </a>
+              <span class="category-sub-count">${sub.count} productos</span>
+            </div>
+            ${columnsHtml}
+          </div>
+        `;
+      });
+
+      html += `
+        <div class="category-group-card" id="cat-${cat.id}">
+          <div class="category-group-header">
+            <div class="category-group-title-box">
+              <h3 class="category-group-name">${cat.displayName || cat.name}</h3>
+              <p class="category-group-desc">${cat.description || ''}</p>
+            </div>
+            <div class="category-group-meta">
+              <span class="category-group-badge">${cat.subcategories.length} subcategorías</span>
+              <span class="category-group-count">${cat.count.toLocaleString('es-AR')} productos</span>
+              <a href="catalog.html?category=${cat.id}" class="btn btn-outline btn-sm category-group-btn" title="Ver catálogo completo de ${cat.displayName || cat.name}">
+                Ver catálogo <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </div>
+          </div>
+          <div class="category-group-body">
+            <div class="category-sub-grid">
+              ${subcategoriesHtml}
+            </div>
+          </div>
+        </div>
+      `;
+    });
+
+    container.innerHTML = html;
+  }
+
+  // Initial Render
+  renderCategoriesDirectory(currentSearch, currentCategory);
+
+  // Search Input Handler
+  if (searchInput) {
+    searchInput.addEventListener("input", (e) => {
+      currentSearch = e.target.value;
+      if (clearBtn) {
+        clearBtn.style.display = currentSearch.length > 0 ? "flex" : "none";
+      }
+      // Reset fast jump bar to ALL when user types a search query
+      jumpBtns.forEach(b => b.classList.remove("active"));
+      const allBtn = jumpBar ? jumpBar.querySelector(".alpha-btn[data-cat='ALL']") : null;
+      if (allBtn) allBtn.classList.add("active");
+      currentCategory = "ALL";
+
+      renderCategoriesDirectory(currentSearch, "ALL");
+    });
+  }
+
+  // Clear Search Button
+  if (clearBtn) {
+    clearBtn.addEventListener("click", () => {
+      if (searchInput) {
+        searchInput.value = "";
+        searchInput.focus();
+      }
+      clearBtn.style.display = "none";
+      currentSearch = "";
+      renderCategoriesDirectory("", currentCategory);
+    });
+  }
+
+  // Fast Jump Bar Buttons
+  jumpBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      jumpBtns.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      currentCategory = btn.dataset.cat;
+      renderCategoriesDirectory(currentSearch, currentCategory);
+    });
+  });
+}
+
+/* --------------------------------------------------------------------------
    1. Master Product Database
    -------------------------------------------------------------------------- */
 const PRODUCT_CATALOG = [
@@ -813,7 +1145,7 @@ const PRODUCT_CATALOG = [
     sku: "HMC-BOM-050",
     name: "Bomba Centrífuga Niwa WENW-50C 0.5 HP 16m - 4.2 m³/h 1\"",
     category: "agua-bombeo",
-    categoryName: "Agua & Bombeo",
+    categoryName: "Agua",
     subCategory: "Bombas Centrífugas",
     brand: "NIWA",
     price: 145000,
@@ -847,7 +1179,7 @@ const PRODUCT_CATALOG = [
     sku: "HMC-DIS-115",
     name: "Disco de Corte Bosch Expert Carbide Multi Wheel 4 1/2\" (115 mm)",
     category: "accesorios-insumos",
-    categoryName: "Accesorios & Insumos",
+    categoryName: "Consumibles e Insumos",
     subCategory: "Discos Corte y Abrasivos",
     brand: "BOSCH",
     price: 18500,
@@ -879,7 +1211,7 @@ const PRODUCT_CATALOG = [
     sku: "HMC-DEM-150",
     name: "Martillo Demoledor Bosch GSH 11 E Professional 1500W SDS Max (16.8J)",
     category: "ferreteria",
-    categoryName: "Ferretería & Taller",
+    categoryName: "Ferretería",
     subCategory: "Martillo Demoledor",
     brand: "BOSCH",
     price: 980000,
@@ -912,7 +1244,7 @@ const PRODUCT_CATALOG = [
     sku: "HMC-LIJ-120",
     name: "Discos de Lija Bosch Expert C470 125mm Grano 120 (Pack 50 piezas)",
     category: "accesorios-insumos",
-    categoryName: "Accesorios & Insumos",
+    categoryName: "Consumibles e Insumos",
     subCategory: "Discos Corte y Abrasivos",
     brand: "BOSCH",
     price: 32500,
@@ -944,7 +1276,7 @@ const PRODUCT_CATALOG = [
     sku: "HMC-SIE-235",
     name: "Sierra Circular Bosch GKS 235 9 1/4\" 2200W 5000 RPM Heavy Duty",
     category: "ferreteria",
-    categoryName: "Ferretería & Taller",
+    categoryName: "Ferretería",
     subCategory: "Sierras",
     brand: "BOSCH",
     price: 389000,
@@ -977,7 +1309,7 @@ const PRODUCT_CATALOG = [
     sku: "HMC-DEM-035",
     name: "Martillo Demoledor DeWalt D25960-AR 35 Joules 1600W Encastre 28mm",
     category: "construccion",
-    categoryName: "Construcción & Obra",
+    categoryName: "Construcción",
     subCategory: "Martillo Demoledor",
     brand: "DEWALT",
     price: 1420000,
@@ -1048,7 +1380,7 @@ const PRODUCT_CATALOG = [
     sku: "HMC-TAL-850",
     name: "Taladro de Percusión Bosch GSB 16 RE Professional 850W Mandril 13mm",
     category: "construccion",
-    categoryName: "Construcción & Obra",
+    categoryName: "Construcción",
     subCategory: "Taladros y Rotopercutores",
     brand: "BOSCH",
     price: 178000,
@@ -1081,7 +1413,7 @@ const PRODUCT_CATALOG = [
     sku: "HMC-ING-170",
     name: "Sierra Ingletadora Bosch GCM 10 X Professional 1700W 4800 RPM Disco 10\"",
     category: "ferreteria",
-    categoryName: "Ferretería & Taller",
+    categoryName: "Ferretería",
     subCategory: "Sierras",
     brand: "BOSCH",
     price: 745000,
@@ -1114,7 +1446,7 @@ const PRODUCT_CATALOG = [
     sku: "HMC-MEC-081",
     name: "Broca Mecha SDS Plus-1 Bosch 8 x 160 mm para Hormigón y Mampostería",
     category: "accesorios-insumos",
-    categoryName: "Accesorios & Insumos",
+    categoryName: "Consumibles e Insumos",
     subCategory: "Mechas",
     brand: "BOSCH",
     price: 7800,

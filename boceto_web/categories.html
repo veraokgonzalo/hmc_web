@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Directorio de Categorías | HMC HUB - Maquinarias, Herramientas y Repuestos</title>
+  <meta name="description" content="Explorá el directorio completo de categorías y subrubros de HMC Hub: Ferretería, Repuestos, Máquinas a Explosión, Riego, Construcción, Energía y más.">
+  <link rel="icon" type="image/png" href="assets/logos/isotipo-verde.png">
+
+  <!-- Google Fonts & Font Awesome 6 Pro -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ========================================================================
+       Global Header & Navigation Component (Single Source of Truth: js/app.js)
+       ======================================================================== -->
+  <div id="globalNavigation"></div>
+
+  <!-- ========================================================================
+       Breadcrumbs Navigation
+       ======================================================================== -->
+  <div class="breadcrumbs-section">
+    <div class="container">
+      <div class="breadcrumb-list">
+        <div class="breadcrumb-item"><a href="index.html">Inicio</a></div>
+        <div class="breadcrumb-sep"><i class="fa-solid fa-chevron-right"></i></div>
+        <div class="breadcrumb-item active">Directorio de Categorías</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       Categories Page Main Content
+       ======================================================================== -->
+  <main class="categories-page-section" style="padding: 40px 0 80px 0;">
+    <div class="container">
+
+      <!-- Directorio Completo Jerárquico (13 Categorías Principales, 79 Subcategorías, 464 Subrubros) -->
+      <section class="categories-directory-section" id="directorioCategorias">
+        
+        <!-- Header & Control Bar -->
+        <div class="brands-directory-panel">
+          
+          <div class="directory-panel-top">
+            <div class="directory-panel-heading">
+              <i class="fa-solid fa-layer-group text-primary" style="font-size: 1.6rem;"></i>
+              <div>
+                <h2 class="directory-panel-title">Directorio de Categorías</h2>
+                <p class="directory-panel-desc">Explorá los 13 rubros industriales, subcategorías especializadas y subrubros técnicos de nuestro catálogo.</p>
+              </div>
+            </div>
+            
+            <div class="directory-search-wrapper">
+              <i class="fa-solid fa-magnifying-glass search-icon"></i>
+              <input type="text" id="categoriesPageSearchInput" class="js-categories-page-search" placeholder="Buscar categoría, subcategoría o repuesto" autocomplete="off">
+              <button type="button" class="btn-clear-search" id="categoriesPageClearSearch" title="Limpiar búsqueda" style="display: none;">
+                <i class="fa-solid fa-xmark"></i>
+              </button>
+            </div>
+
+            <div class="directory-counter-box">
+              <span class="brands-counter-pill js-categories-page-count">
+                <strong>13</strong> rubros • <strong>3.242</strong> productos
+              </span>
+            </div>
+          </div>
+
+          <!-- Fast Jump Category Bar (Sorted Alphabetically, Generated Dynamically) -->
+          <div class="brands-alphabet-bar js-categories-page-alpha-bar" id="categoriesFastJumpBar">
+            <!-- Dynamically populated by js/app.js -->
+          </div>
+
+        </div>
+
+        <!-- Render Target for Hierarchical Category Cards -->
+        <div class="categories-tree-container js-categories-page-container" id="categoriesTreeContainer">
+          <!-- Dynamically populated by js/app.js -->
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ========================================================================
+       Global Footer Component (Single Source of Truth: js/app.js)
+       ======================================================================== -->
+  <div id="globalFooter"></div>
+
+  <!-- ========================================================================
+       Global Mobile Drawer & Bottom Navigation (Single Source of Truth: js/app.js)
+       ======================================================================== -->
+  <div id="globalMobileNavigation"></div>
+
+  <!-- Scripts -->
+  <script src="js/categories-data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

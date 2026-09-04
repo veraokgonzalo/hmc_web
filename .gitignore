@@ -2,3 +2,5 @@ web_fork/.nuvem
 web_ftp/.nuvem
 assets/FOTOS/
 assets/VIDEOS/
+__pycache__/
+*.pyc

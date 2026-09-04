@@ -4796,6 +4796,333 @@ h6 { font-size: 0.95rem; }
 }
 
 /* --------------------------------------------------------------------------
+   Mega Dropdown Categorías (Simplified: 12 Top Categories + CTA to Directory)
+   -------------------------------------------------------------------------- */
+.mega-dropdown-categories-featured {
+  width: 780px !important;
+  max-width: 95vw;
+  grid-template-columns: 1fr !important;
+  padding: 18px 20px !important;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.16) !important;
+}
+
+.dropdown-categories-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+}
+
+.dropdown-categories-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--color-gray-border);
+}
+
+.dropdown-categories-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dropdown-categories-title h4 {
+  font-family: var(--font-headings);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-black);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.dropdown-categories-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.dropdown-category-card {
+  display: flex;
+  align-items: center;
+  padding: 10px 14px;
+  background: var(--color-gray-ultra-light);
+  border: 1px solid var(--color-gray-border);
+  border-left: 3px solid transparent;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  position: relative;
+  min-height: 48px;
+}
+
+.dropdown-category-card:hover {
+  background: var(--color-white);
+  border-color: var(--color-primary);
+  border-left-color: var(--color-primary);
+  box-shadow: 0 4px 12px rgba(63, 170, 71, 0.12);
+  transform: translateY(-2px);
+}
+
+.dropdown-category-info {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.dropdown-category-name {
+  font-family: var(--font-headings);
+  font-weight: 700;
+  font-size: 0.84rem;
+  color: var(--color-black);
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dropdown-category-card:hover .dropdown-category-name {
+  color: var(--color-primary-dark);
+}
+
+.dropdown-category-count {
+  font-size: 0.68rem;
+  color: #777;
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+.dropdown-categories-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--color-gray-border);
+}
+
+.dropdown-categories-footer-text {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: #666;
+}
+
+.dropdown-categories-footer-text strong {
+  color: var(--color-black);
+}
+
+.btn-explore-categories {
+  font-size: 0.82rem !important;
+  font-weight: 700 !important;
+  padding: 8px 16px !important;
+  white-space: nowrap;
+  text-decoration: none;
+}
+
+/* --------------------------------------------------------------------------
+   DEDICATED CATEGORIES PAGE (categories.html) STYLES
+   -------------------------------------------------------------------------- */
+.categories-page-section {
+  background: var(--color-gray-ultra-light);
+}
+
+.categories-tree-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.category-group-card {
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: box-shadow var(--transition-normal), border-color var(--transition-normal);
+}
+
+.category-group-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: #bbb;
+}
+
+.category-group-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 20px 24px;
+  background: var(--color-gray-ultra-light);
+  border-bottom: 1px solid var(--color-gray-border);
+}
+
+.category-group-title-box {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.category-group-name {
+  font-family: var(--font-headings);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--color-black);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.category-group-desc {
+  font-size: 0.86rem;
+  color: var(--color-gray-dark);
+  margin: 0;
+}
+
+.category-group-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.category-group-badge {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--color-black);
+  background: #e6e6e6;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+}
+
+.category-group-count {
+  font-size: 0.80rem;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  background: var(--color-primary-light);
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+}
+
+.category-group-btn {
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 6px 14px;
+  white-space: nowrap;
+}
+
+.category-group-body {
+  padding: 22px 24px;
+}
+
+.category-sub-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.category-sub-block {
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-border);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: all var(--transition-fast);
+}
+
+.category-sub-block:hover {
+  border-color: #bbb;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+}
+
+.category-sub-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--color-gray-border);
+}
+
+.category-sub-title {
+  font-family: var(--font-headings);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-black);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.category-sub-title:hover {
+  color: var(--color-primary);
+}
+
+.category-sub-count {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #666;
+  background: var(--color-gray-ultra-light);
+  padding: 3px 9px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-gray-border);
+  white-space: nowrap;
+}
+
+/* Multi-column list for sub-subcategories */
+.category-subsub-columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 6px 18px;
+  padding-top: 2px;
+}
+
+.category-subsub-item {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 0.83rem;
+  color: var(--color-gray-dark);
+  text-decoration: none;
+  padding: 6px 8px;
+  border-radius: var(--radius-sm);
+  border-left: 2px solid transparent;
+  background: transparent;
+  transition: all var(--transition-fast);
+  line-height: 1.35;
+}
+
+.category-subsub-item:hover {
+  background: var(--color-gray-ultra-light);
+  color: var(--color-primary-dark);
+  border-left-color: var(--color-primary);
+  padding-left: 11px;
+}
+
+.category-subsub-item .subsub-name {
+  color: inherit;
+  font-weight: 500;
+}
+
+.category-subsub-item:hover .subsub-name {
+  font-weight: 600;
+}
+
+.category-subsub-item .subsub-count {
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: #888;
+  flex-shrink: 0;
+}
+
+.category-subsub-item:hover .subsub-count {
+  color: var(--color-primary-dark);
+}
+
+/* --------------------------------------------------------------------------
    DEDICATED BRANDS PAGE (brands.html) STYLES
    -------------------------------------------------------------------------- */
 .brands-page-section {
@@ -5423,6 +5750,59 @@ h6 { font-size: 0.95rem; }
   .brand-directory-item {
     padding: 10px 8px;
     min-height: 44px;
+  }
+
+  .category-group-title-box {
+    width: 100%;
+    gap: 6px;
+  }
+
+  .category-group-meta {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .category-group-btn {
+    width: 100%;
+    text-align: center;
+    margin-top: 6px;
+  }
+
+  .category-subsub-columns {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+
+  .category-subsub-item {
+    padding: 8px 10px;
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 768px) {
+  .mega-dropdown-categories-featured {
+    display: none !important;
+  }
+
+  .category-group-header {
+    padding: 16px 18px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .category-group-meta {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .category-group-body {
+    padding: 16px 18px;
+  }
+
+  .category-subsub-columns {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px 14px;
   }
 }
 

@@ -177,6 +177,35 @@ Se rediseñó y modularizó el boceto web en páginas independientes interconect
 - **Actualización de Top Marcas Destacadas**: Se actualizaron las 8 marcas principales en el Dropdown de navegación, Menú móvil Drawer, filtros de barra lateral en `catalog.html` y grilla del Home (`index.html`) por las líderes en volumen de catálogo real: OREGON (433), NIWA (240), BOSCH (214), EINHELL (193), HUSQVARNA (193), GARDENA (159), SENSEI (96) y HONDA (74).
 - **Refinamiento Visual**: Se corrigió la alineación del ícono de encabezado en `brands.html`, se centraron las tarjetas de marca en el Dropdown del Navbar y se limpió el código huérfano.
 
+### 17. Simplificación de Categorías en Navbar y Directorio Jerárquico Completo (`categories.html`) - IMPLEMENTADO & REFINADO
+- **Auditoría y Extracción del Árbol Real de Categorías (`scripts/sync_categories.py`)**:
+  - Se procesó el catálogo maestro CSV (`data/tiendanube-productos-utf8.csv`) para extraer la taxonomía completa en 3 niveles: 13 Categorías Principales (Nivel 1), 79 Subcategorías (Nivel 2) y 464 Sub-subcategorías / Rubros específicos (Nivel 3), totalizando 3.242 productos clasificados.
+  - Se eliminó el uso del símbolo `&` en todos los nombres y descripciones de categorías, utilizando conjunciones gramaticales estándar en español ("y", "e").
+  - Se generó el dataset estructurado en `boceto_web/js/categories-data.js` (`REAL_CATEGORIES_TREE`) con ordenamiento alfabético estricto en todos los niveles.
+- **Mega Dropdown Dinámico en Navbar de Navegación (`renderGlobalNavigation`)**:
+  - El dropdown de escritorio ya no se encuentra hardcodeado: se renderiza de forma 100% dinámica mediante la función auxiliar `getCategoriesDropdownHtml()`, tomando las 12 categorías principales de mayor volumen del catálogo y presentándolas en **orden alfabético** (4 columnas x 3 filas).
+  - Se removieron todos los emojis e íconos decorativos de las categorías para lograr un diseño industrial sobrio, limpio y moderno.
+  - Se conservó la barra superior y el botón footer *"Todas las categorías →"* apuntando al nuevo directorio.
+- **Menú Móvil Drawer (`#mobileDrawerMenu`) Dinámico y Alfabético**:
+  - El acordeón de categorías en dispositivos móviles (< 768px) se genera dinámicamente con `getMobileDrawerCategoriesHtml()`, listando las 12 categorías principales ordenadas alfabéticamente, sin íconos/emojis, sin `&`, con acceso destacado a `categories.html`.
+- **Nueva Página de Directorio Jerárquico Completo (`boceto_web/categories.html`) — Propuesta 2 Pulida**:
+  - Buscador reactivo en vivo (`#categoriesPageSearchInput`) que filtra al instante por cualquier coincidencia en nombre de rubro, subcategoría o repuesto específico, con botón de limpieza rápida (`#categoriesPageClearSearch`).
+  - Barra de salto rápido horizontal (`#categoriesFastJumpBar`) generada de forma 100% dinámica mediante `getCategoriesFastJumpBarHtml()` en `boceto_web/js/app.js`, ordenada alfabéticamente (Agua, Construcción, Consumibles e Insumos, Ferretería, Generación Energía, Jardín, Máquinas a Batería, Máquinas a Explosión, Máquinas Eléctricas, Máquinas Manuales, Productos de Fuerza, Repuestos, Riego), sin hardcodear en el HTML y sin íconos ni emojis.
+  - Tarjetas jerárquicas estructuradas (`.category-group-card`):
+    - **Header**: Título del rubro sin íconos/emojis, descripción técnica, badge de cantidad de subcategorías, píldora con total de productos y botón *"Ver catálogo"*.
+    - **Cuerpo**: Bloques de subcategorías a ancho completo (`.category-sub-block`), ordenadas alfabéticamente.
+    - **Sub-subcategorías en Columnas Legibles (`.category-subsub-columns`)**: Se eliminaron los badges/pills comprimidos y se reemplazaron por una grilla multi-columna limpia y escaneable (4 columnas en desktop, 2 en tablet y 1 en mobile) donde cada ítem muestra su nombre y contador entre paréntesis alineado, con efecto hover sutil.
+  - Contador reactivo en cabecera (`.js-categories-page-count`) que refleja en tiempo real los rubros y productos filtrados.
+  - Filtrado estático sin desplazamiento forzado: se eliminó el auto-scroll al pulsar los botones de la barra de salto rápido (`#categoriesFastJumpBar`) para permitir una exploración más fluida y sin saltos bruscos de pantalla.
+  - Estado vacío (*empty state*) personalizado con botón para restablecer filtros cuando no hay coincidencias.
+- **Sincronización de Estado y Rutas Globales**:
+  - `syncNavigationActiveState()` en `boceto_web/js/app.js` identifica la ruta activa `categories.html` y resalta automáticamente el menú de escritorio y el drawer móvil.
+  - Se agregó el enlace directo a "Directorio de Categorías" en el footer global (`renderGlobalFooter`).
+  - Sincronización en `catalog.html` e `index.html` para unificar los nombres de categorías sin `&` y ordenados alfabéticamente.
+- **Cumplimiento de Estándares de Diseño y Mobile-First (`CLAUDE.md`)**:
+  - Botones, enlaces y filas de sub-subcategorías en móvil con tap target garantizado $\ge 44$px.
+  - Adaptación fluida sin scroll horizontal ni desbordes en viewports de 768px y 480px.
+
 ---
 
 ## 📋 Pendientes — Ajustes de Diseño y Copy (reportados 2026-09-02)
