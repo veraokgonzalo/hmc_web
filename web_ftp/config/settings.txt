@@ -1368,6 +1368,14 @@ Página de inicio
 		values
 			grid = Grilla
 			slider = Carrusel
+			marquee = Marquesina continua (Marquee)
+	dropdown
+		name = brands_marquee_speed
+		description = Velocidad de la marquesina:
+		values
+			55 = Lenta (55s)
+			42 = Normal (42s)
+			25 = Rápida (25s)
 	i18n_input
 		name = brands_title
 		description = Título

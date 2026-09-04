@@ -7,13 +7,49 @@
 						<h2 class="h6 mb-3{% if settings.brands_format == 'slider' %} m-md-0{% endif %}">{{ settings.brands_title }}</h2>
 					</div>
 				{% endif %}
-				<div class="{% if settings.brands_title %}col-md-10{% else %}col-12{% endif %}">
-					{% if settings.brands_format == 'slider' %}
+				<div class="{% if settings.brands_title and settings.brands_format != 'marquee' %}col-md-10{% else %}col-12{% endif %}">
+					{% if settings.brands_format == 'marquee' %}
+						<div class="brands-marquee-container" data-speed="{{ settings.brands_marquee_speed | default(42) }}">
+							<div class="brands-marquee-track" style="--marquee-speed: {{ settings.brands_marquee_speed | default(42) }}s;">
+								<div class="brands-marquee-group">
+									{% for slide in settings.brands %}
+										{% if slide.link %}
+											<a href="{{ slide.link | setting_url }}" class="brand-marquee-card" title="{{ 'Marca {1} de' | translate(loop.index) }} {{ store.name }}">
+										{% else %}
+											<div class="brand-marquee-card">
+										{% endif %}
+												<img src="{{ 'images/empty-placeholder.png' | static_url }}" data-src="{{ slide.image | static_url | settings_image_url('large') }}" class="lazyload" alt="{{ 'Marca {1} de' | translate(loop.index) }} {{ store.name }}">
+										{% if slide.link %}
+											</a>
+										{% else %}
+											</div>
+										{% endif %}
+									{% endfor %}
+								</div>
+								<div class="brands-marquee-group" aria-hidden="true">
+									{% for slide in settings.brands %}
+										{% if slide.link %}
+											<a href="{{ slide.link | setting_url }}" class="brand-marquee-card" tabindex="-1">
+										{% else %}
+											<div class="brand-marquee-card" tabindex="-1">
+										{% endif %}
+												<img src="{{ 'images/empty-placeholder.png' | static_url }}" data-src="{{ slide.image | static_url | settings_image_url('large') }}" class="lazyload" alt="">
+										{% if slide.link %}
+											</a>
+										{% else %}
+											</div>
+										{% endif %}
+									{% endfor %}
+								</div>
+							</div>
+						</div>
+					{% elseif settings.brands_format == 'slider' %}
 						<div class="js-swiper-brands swiper-container text-center w-auto mx-4 m-md-0">
 							<div class="js-swiper-brands-wrapper swiper-wrapper">
 					{% else %}
 						<div class="row">
 					{% endif %}
+					{% if settings.brands_format != 'marquee' %}
 							{% for slide in settings.brands %}
 								<div class="{% if settings.brands_format == 'slider' %}swiper-slide slide-container{% else %}col-md-2 col-3{% endif %} text-center">
 									{% if slide.link %}
@@ -28,6 +64,7 @@
 								</div>
 							{% endfor %}
 						</div>
+					{% endif %}
 					{% if settings.brands_format == 'slider' %}
 						</div>
 						<div class="js-swiper-brands-prev swiper-button-prev swiper-button-outside svg-icon-text">{% include "snipplets/svg/chevron-left.tpl" with {svg_custom_class: "icon-inline icon-lg"} %}</div>
