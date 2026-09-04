@@ -532,21 +532,125 @@ function syncNavigationActiveState() {
 
 
 /* --------------------------------------------------------------------------
-   0.1. Master 103 Industrial Brands Database & Dedicated Brands Page Logic
+   0.1. Master 113 Real Catalog Brands Database (Extracted from Tiendanube CSV)
    -------------------------------------------------------------------------- */
-const ALL_BRANDS_103 = [
-  "3M", "Aeg", "Annovi Reverberi", "Apex", "Bahco", "Barovo", "Bellota", "Beta", "Biassoni", "Black+Decker",
-  "Bosch", "Bremen", "Briggs & Stratton", "Chicago Pneumatic", "Cirigliano", "Crescent", "Crossmaster", "Czerweny", "DeWalt", "Doble A",
-  "Dowen Pagio", "Dremel", "Echo", "Einhell", "Facom", "Fema", "Festool", "Fiac", "Fischer", "Fluvial",
-  "Franklin Electric", "GearWrench", "Gedore", "Gherardi", "Gladiator", "Grundfos", "Hamilton", "Hilti", "Hitachi / Hikoki", "Honda",
-  "Husqvarna", "Ingco", "Ingersoll Rand", "Irwin", "Kärcher", "Klingspor", "Knipex", "Kohler", "Lenox", "Lifan",
-  "Loncin", "Lufkin", "Lüsqtoff", "Makita", "Maruyama", "Metabo", "Milwaukee", "Motorarg", "MTD", "Murray",
-  "Neo", "Nicholson", "Niwa", "Norton", "Oleo-Mac", "Pedrollo", "Pferd", "Pluvia", "Poulan", "Pretul",
-  "Rems", "Ridgid", "Robin Subaru", "Rotor Pump", "Rothenberger", "Rowa", "Ryobi", "Schulz", "Sensei", "Shindaiwa",
-  "Sika", "Sin Par", "Skil", "Stanley", "Stanley FatMax", "Starrett", "Stihl", "Toro", "Total", "Tramontina",
-  "Truper", "Tyrolit", "Unior", "Usag", "Villa Zapp", "Virax", "Vulcano", "Weller", "Wera", "Wiha",
-  "Worx", "Yard Machines", "Zenith"
+const REAL_CATALOG_BRANDS = [
+  { name: "3M", count: 12 },
+  { name: "ACA", count: 1 },
+  { name: "ADIABATIC", count: 2 },
+  { name: "ALIAFOR", count: 13 },
+  { name: "BAHCO", count: 11 },
+  { name: "BEAR CAT", count: 4 },
+  { name: "BELLOTA", count: 7 },
+  { name: "BIASSONI", count: 84 },
+  { name: "BLACK & DECKER", count: 1 },
+  { name: "BLU", count: 3 },
+  { name: "BORDER", count: 2 },
+  { name: "BOSCH", count: 214 },
+  { name: "BTA", count: 57 },
+  { name: "CARBORUNDUM", count: 2 },
+  { name: "CATANESE", count: 10 },
+  { name: "CHERTA", count: 11 },
+  { name: "CRAFTSMAN", count: 10 },
+  { name: "CROSSMASTER", count: 79 },
+  { name: "CUB CADET", count: 1 },
+  { name: "DEWALT", count: 22 },
+  { name: "DIBRA", count: 4 },
+  { name: "DOBLE A", count: 4 },
+  { name: "DOLPHIN", count: 4 },
+  { name: "DORMER", count: 1 },
+  { name: "DOWEN PAGIO", count: 103 },
+  { name: "DREMEL", count: 44 },
+  { name: "DUCA", count: 17 },
+  { name: "DUKE", count: 6 },
+  { name: "DUROLL", count: 8 },
+  { name: "ECHO", count: 52 },
+  { name: "EINHELL", count: 193 },
+  { name: "EL CENCERRO", count: 7 },
+  { name: "ENERTIK", count: 3 },
+  { name: "ESAB", count: 10 },
+  { name: "ESLINGAR", count: 4 },
+  { name: "EUREKA", count: 1 },
+  { name: "EURODRIP", count: 5 },
+  { name: "EXPLORER", count: 11 },
+  { name: "FASSI", count: 13 },
+  { name: "FEMA", count: 34 },
+  { name: "FGP", count: 40 },
+  { name: "FIASA", count: 37 },
+  { name: "FRAMER", count: 3 },
+  { name: "FRAVIDA", count: 1 },
+  { name: "FREPLAST", count: 14 },
+  { name: "GAMMA", count: 9 },
+  { name: "GARDENA", count: 159 },
+  { name: "GARDEX", count: 47 },
+  { name: "GIBER", count: 28 },
+  { name: "GREENWORKS", count: 9 },
+  { name: "GROWATT", count: 7 },
+  { name: "GTM", count: 8 },
+  { name: "HI-FLEX", count: 1 },
+  { name: "HONDA", count: 74 },
+  { name: "HUNTER", count: 75 },
+  { name: "HUSQVARNA", count: 193 },
+  { name: "INDELPLAS", count: 1 },
+  { name: "INVT", count: 2 },
+  { name: "IRIMO", count: 18 },
+  { name: "ITALIMPIA", count: 6 },
+  { name: "KARCHER", count: 7 },
+  { name: "KEX", count: 4 },
+  { name: "KOHLER", count: 10 },
+  { name: "KWB", count: 63 },
+  { name: "LAHUEN", count: 4 },
+  { name: "LATYN", count: 19 },
+  { name: "LIBUS", count: 23 },
+  { name: "LOCTITE", count: 1 },
+  { name: "LUSQTOFF", count: 43 },
+  { name: "MAZAFERRO", count: 8 },
+  { name: "METABO", count: 49 },
+  { name: "MILWAUKEE", count: 27 },
+  { name: "MOURA", count: 12 },
+  { name: "NIWA", count: 240 },
+  { name: "NUVIS", count: 5 },
+  { name: "OLEO MAC", count: 3 },
+  { name: "OMBU", count: 9 },
+  { name: "OREGON", count: 433 },
+  { name: "PAMPA PRO", count: 10 },
+  { name: "PATROLL", count: 3 },
+  { name: "PEGASO", count: 2 },
+  { name: "PERFECTO", count: 1 },
+  { name: "PICASSO", count: 34 },
+  { name: "PLASTICA ALFA", count: 72 },
+  { name: "POLIMEX", count: 126 },
+  { name: "POWERCLEAN", count: 3 },
+  { name: "RERAR", count: 2 },
+  { name: "RIVULIS", count: 5 },
+  { name: "SANMARQ", count: 7 },
+  { name: "SANOGASS", count: 1 },
+  { name: "SEERY", count: 6 },
+  { name: "SEGOD", count: 3 },
+  { name: "SENNINGER", count: 8 },
+  { name: "SENSEI", count: 96 },
+  { name: "SENSEI PARTS", count: 109 },
+  { name: "SHINDAIWA", count: 3 },
+  { name: "SHIZEN", count: 4 },
+  { name: "SINCROLAMP", count: 1 },
+  { name: "SOCH", count: 4 },
+  { name: "STANLEY", count: 53 },
+  { name: "SUPER SCRUBBER", count: 2 },
+  { name: "SUPER SPEED", count: 22 },
+  { name: "TACSA", count: 2 },
+  { name: "TECOMEC", count: 2 },
+  { name: "TORLETTI", count: 11 },
+  { name: "TORO", count: 5 },
+  { name: "TORQUE TOOLS", count: 4 },
+  { name: "TREBO", count: 19 },
+  { name: "TRICOLOR", count: 5 },
+  { name: "TROY-BILT", count: 5 },
+  { name: "UNIVERSAL", count: 3 },
+  { name: "VENTURO", count: 1 },
+  { name: "VULCANO", count: 1 }
 ];
+
+const ALL_BRANDS_103 = REAL_CATALOG_BRANDS.map(b => b.name);
 
 const OFFICIAL_CORE_BRANDS = ["BOSCH", "DEWALT", "NIWA", "EINHELL", "SHINDAIWA", "SENSEI", "STIHL", "HONDA"];
 
@@ -565,7 +669,8 @@ function initBrandsPage() {
   function renderBrandsDirectory(filterText = "", filterLetter = "ALL") {
     const query = filterText.trim().toLowerCase();
     
-    const filtered = ALL_BRANDS_103.filter(brand => {
+    const filtered = REAL_CATALOG_BRANDS.filter(item => {
+      const brand = item.name;
       const matchesText = !query || brand.toLowerCase().includes(query);
       const initial = brand.charAt(0).toUpperCase();
       const matchesLetter = 
@@ -578,11 +683,11 @@ function initBrandsPage() {
 
     // Grouping by letter
     const groups = {};
-    filtered.forEach(brand => {
-      let init = brand.charAt(0).toUpperCase();
+    filtered.forEach(item => {
+      let init = item.name.charAt(0).toUpperCase();
       if (/\d/.test(init)) init = "#";
       if (!groups[init]) groups[init] = [];
-      groups[init].push(brand);
+      groups[init].push(item);
     });
 
     const sortedLetters = Object.keys(groups).sort((a, b) => {
@@ -637,10 +742,11 @@ function initBrandsPage() {
           <div class="brand-group-card-body">
       `;
 
-      brandList.forEach(brand => {
+      brandList.forEach(item => {
         html += `
-          <a href="catalog.html?brand=${encodeURIComponent(brand)}" class="brand-directory-item" title="Ver productos de ${brand} en el catálogo">
-            <span>${brand}</span>
+          <a href="catalog.html?brand=${encodeURIComponent(item.name)}" class="brand-directory-item" title="Ver ${item.count} productos de ${item.name} en el catálogo">
+            <span class="brand-item-name">${item.name}</span>
+            <span class="brand-count-badge">${item.count}</span>
           </a>
         `;
       });

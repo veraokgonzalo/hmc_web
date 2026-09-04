@@ -5176,6 +5176,35 @@ h6 { font-size: 0.95rem; }
   font-weight: 600;
 }
 
+.brand-item-name {
+  font-weight: 600;
+  color: var(--color-black);
+  letter-spacing: 0.2px;
+  transition: color var(--transition-fast);
+}
+
+.brand-directory-item:hover .brand-item-name {
+  color: var(--color-primary-dark);
+}
+
+.brand-count-badge {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #666;
+  background: var(--color-gray-ultra-light);
+  padding: 2px 7px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-gray-border);
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.brand-directory-item:hover .brand-count-badge {
+  color: var(--color-primary-dark);
+  background: var(--color-white);
+  border-color: var(--color-primary);
+}
+
 .brand-directory-item.is-official {
   font-weight: 700;
   color: var(--color-black);
