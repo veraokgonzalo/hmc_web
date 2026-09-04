@@ -953,11 +953,16 @@ function initBrandsPage() {
 }
 
 /* --------------------------------------------------------------------------
-   0.2. Dedicated Hierarchical Categories Page Engine (categories.html)
+   0.2. Dedicated Hierarchical Categories Page Engine: Master-Detail Architecture
    -------------------------------------------------------------------------- */
 function initCategoriesPage() {
-  const container = document.getElementById("categoriesTreeContainer") || document.querySelector(".js-categories-page-container");
-  if (!container) return;
+  const sectionContainer = document.getElementById("directorioCategorias") || document.querySelector(".categories-directory-section");
+  const sidebarNav = document.getElementById("categoriesMasterNavList");
+  const detailHero = document.getElementById("categoryDetailHero");
+  const detailSubgrid = document.getElementById("categoryDetailSubgrid");
+
+  // Fallback check: if elements don't exist, exit
+  if (!sidebarNav && !detailSubgrid) return;
 
   const categoriesTree = (typeof window !== 'undefined' && window.REAL_CATEGORIES_TREE && window.REAL_CATEGORIES_TREE.length > 0)
     ? window.REAL_CATEGORIES_TREE
@@ -966,220 +971,453 @@ function initCategoriesPage() {
 
   const searchInput = document.getElementById("categoriesPageSearchInput") || document.querySelector(".js-categories-page-search");
   const clearBtn = document.getElementById("categoriesPageClearSearch");
-  const jumpBar = document.getElementById("categoriesFastJumpBar") || document.querySelector(".js-categories-page-alpha-bar");
+  const sidebarCountBadge = document.getElementById("categoriesSidebarCount");
   const countPills = document.querySelectorAll(".js-categories-page-count");
+  const mobileBackBtn = document.getElementById("btnMobileBackToRubros");
 
-  let currentCategory = "ALL";
-  let currentSearch = "";
+  // Sort master categories tree alphabetically (A-Z)
+  const sortedCategories = [...categoriesTree].sort((a, b) => 
+    (a.displayName || a.name).localeCompare(b.displayName || b.name, 'es')
+  );
 
-  // Check URL params on initial load
+  // Expanded subcategories tracker for progressive disclosure (Level 3)
+  const expandedSubcategories = new Set();
+
+  // State
+  let activeCatId = sortedCategories[0]?.id || "agua";
+  let searchQuery = "";
+
+  // Check URL query parameters and hash
   const urlParams = new URLSearchParams(window.location.search);
-  const initialCat = urlParams.get('cat') || urlParams.get('category');
+  const initialCat = urlParams.get('cat') || urlParams.get('category') || (window.location.hash ? window.location.hash.replace('#', '').replace('cat-', '') : null);
   const initialQuery = urlParams.get('search') || urlParams.get('q');
 
   if (initialCat) {
-    const exists = categoriesTree.some(c => c.id === initialCat.toLowerCase());
+    const exists = sortedCategories.find(c => c.id.toLowerCase() === initialCat.toLowerCase());
     if (exists) {
-      currentCategory = initialCat.toLowerCase();
+      activeCatId = exists.id;
+      // On mobile, if a specific category was linked, switch directly to detail step
+      if (sectionContainer) {
+        sectionContainer.classList.remove("mobile-step-categories");
+        sectionContainer.classList.add("mobile-step-detail");
+      }
     }
   }
-
-  // Populate Fast Jump Bar dynamically from categoriesTree (sorted alphabetically, no &, no emojis)
-  if (jumpBar) {
-    jumpBar.innerHTML = getCategoriesFastJumpBarHtml(currentCategory);
-  }
-
-  const jumpBtns = jumpBar ? jumpBar.querySelectorAll(".alpha-btn") : [];
 
   if (initialQuery && searchInput) {
     searchInput.value = initialQuery;
-    currentSearch = initialQuery;
+    searchQuery = initialQuery.trim();
     if (clearBtn) clearBtn.style.display = "flex";
   }
 
-  function renderCategoriesDirectory(filterText = "", filterCat = "ALL") {
-    const query = filterText.trim().toLowerCase();
+  // Text highlighter helper
+  function highlightMatches(text, query) {
+    if (!query || !text) return text || "";
+    const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const regex = new RegExp(`(${escaped})`, 'gi');
+    return text.replace(regex, '<mark class="search-highlight">$1</mark>');
+  }
 
-    // 1. Filter and sort tree alphabetically
-    const matchingResults = [];
-    let totalMatchingProducts = 0;
+  // Render Master Sidebar
+  function renderMasterSidebar() {
+    if (!sidebarNav) return;
+    const query = searchQuery.toLowerCase();
 
-    const sortedTree = [...categoriesTree].sort((a, b) => 
-      (a.displayName || a.name).localeCompare(b.displayName || b.name, 'es')
-    );
+    let matchingCategories = sortedCategories;
+    if (query) {
+      matchingCategories = sortedCategories.filter(cat => {
+        const catNameMatches = cat.name.toLowerCase().includes(query) || 
+          (cat.displayName && cat.displayName.toLowerCase().includes(query)) || 
+          (cat.description && cat.description.toLowerCase().includes(query));
+        if (catNameMatches) return true;
 
-    sortedTree.forEach(cat => {
-      // Check fast-jump filter
-      if (filterCat !== "ALL" && cat.id !== filterCat) {
-        return;
-      }
-
-      const catNameMatches = !query || 
-        cat.name.toLowerCase().includes(query) || 
-        (cat.displayName && cat.displayName.toLowerCase().includes(query)) || 
-        (cat.description && cat.description.toLowerCase().includes(query));
-
-      const matchedSubcategories = [];
-
-      // Sort subcategories alphabetically
-      const sortedSubcats = (cat.subcategories || []).slice().sort((a, b) => 
-        (a.displayName || a.name).localeCompare(b.displayName || b.name, 'es')
-      );
-
-      sortedSubcats.forEach(sub => {
-        const subNameMatches = !query || 
-          sub.name.toLowerCase().includes(query) || 
-          (sub.displayName && sub.displayName.toLowerCase().includes(query));
-
-        const matchedSubsubs = [];
-        // Sort sub-subcategories alphabetically
-        const subsubsList = (sub.subsubcategories || []).slice().sort((a, b) => 
-          a.name.localeCompare(b.name, 'es')
-        );
-
-        if (subsubsList.length > 0) {
-          subsubsList.forEach(sss => {
-            const sssMatches = !query || sss.name.toLowerCase().includes(query);
-            if (catNameMatches || subNameMatches || sssMatches) {
-              matchedSubsubs.push(sss);
-            }
-          });
-        }
-
-        if (catNameMatches || subNameMatches || matchedSubsubs.length > 0) {
-          matchedSubcategories.push({
-            ...sub,
-            filteredSubsubcategories: (query && !catNameMatches && !subNameMatches) ? matchedSubsubs : subsubsList
-          });
-        }
-      });
-
-      if (catNameMatches || matchedSubcategories.length > 0) {
-        matchingResults.push({
-          ...cat,
-          filteredSubcategories: matchedSubcategories
+        // Check if any subcategory or sub-subcategory matches
+        return (cat.subcategories || []).some(sub => {
+          if (sub.name.toLowerCase().includes(query) || (sub.displayName && sub.displayName.toLowerCase().includes(query))) return true;
+          return (sub.subsubcategories || []).some(sss => sss.name.toLowerCase().includes(query));
         });
-        totalMatchingProducts += cat.count;
-      }
-    });
+      });
+    }
 
-    // 2. Update Counter
-    const totalInitialProducts = categoriesTree.reduce((sum, c) => sum + (c.count || 0), 0);
-    countPills.forEach(pill => {
-      if (!query && filterCat === "ALL") {
-        pill.innerHTML = `<strong>${categoriesTree.length}</strong> rubros • <strong>${totalInitialProducts.toLocaleString('es-AR')}</strong> productos`;
-      } else {
-        pill.innerHTML = `<strong>${matchingResults.length}</strong> rubros • <strong>${totalMatchingProducts.toLocaleString('es-AR')}</strong> productos`;
-      }
-    });
+    if (sidebarCountBadge) {
+      sidebarCountBadge.textContent = matchingCategories.length;
+    }
 
-    // 3. Handle Empty State
-    if (matchingResults.length === 0) {
-      container.innerHTML = `
-        <div class="brands-empty-state">
-          <i class="fa-solid fa-circle-exclamation"></i>
-          <h4>No encontramos rubros ni repuestos con "${filterText}"</h4>
-          <p>Verificá la ortografía o consultá con nuestros especialistas técnicos para cotizar repuestos o equipos a pedido.</p>
-          <button type="button" class="btn btn-primary" id="btnResetCategoriesFilter">
-            <i class="fa-solid fa-rotate-left"></i> Restablecer Directorio Completo
-          </button>
+    let navHtml = "";
+    if (matchingCategories.length === 0) {
+      navHtml = `
+        <div style="padding: 16px 12px; font-size: 0.82rem; color: #888; text-align: center;">
+          Sin coincidencias en rubros
         </div>
       `;
-      const resetBtn = document.getElementById("btnResetCategoriesFilter");
-      if (resetBtn) {
-        resetBtn.addEventListener("click", () => {
+    } else {
+      matchingCategories.forEach(cat => {
+        const isActive = (!query && cat.id === activeCatId) ? " active" : "";
+        navHtml += `
+          <button type="button" class="master-nav-item${isActive}" data-cat-id="${cat.id}">
+            <span class="master-nav-name">${highlightMatches(cat.displayName || cat.name, searchQuery)}</span>
+            <span class="master-nav-badge">${cat.count.toLocaleString('es-AR')}</span>
+            <i class="fa-solid fa-chevron-right master-nav-arrow"></i>
+          </button>
+        `;
+      });
+    }
+
+    sidebarNav.innerHTML = navHtml;
+
+    // Attach click listeners to sidebar items
+    const navItems = sidebarNav.querySelectorAll(".master-nav-item");
+    navItems.forEach(item => {
+      item.addEventListener("click", () => {
+        const catId = item.dataset.catId;
+        if (!catId) return;
+
+        activeCatId = catId;
+
+        // If user was searching, clear search to view selected category
+        if (searchQuery) {
+          searchQuery = "";
           if (searchInput) searchInput.value = "";
           if (clearBtn) clearBtn.style.display = "none";
-          currentSearch = "";
-          currentCategory = "ALL";
-          jumpBtns.forEach(b => b.classList.remove("active"));
-          const allBtn = jumpBar ? jumpBar.querySelector(".alpha-btn[data-cat='ALL']") : null;
-          if (allBtn) allBtn.classList.add("active");
-          renderCategoriesDirectory("", "ALL");
-        });
-      }
+        }
+
+        // Update URL state silently without full page reload
+        try {
+          const newUrl = new URL(window.location);
+          newUrl.searchParams.set('cat', activeCatId);
+          newUrl.searchParams.delete('q');
+          newUrl.searchParams.delete('search');
+          window.history.replaceState(null, '', newUrl.toString());
+        } catch (e) {}
+
+        // Re-render
+        renderMasterSidebar();
+        renderDetailPanel();
+
+        // Switch to detail view on mobile
+        if (sectionContainer) {
+          sectionContainer.classList.remove("mobile-step-categories");
+          sectionContainer.classList.add("mobile-step-detail");
+        }
+
+        // Smooth scroll to top of detail panel on mobile
+        if (window.innerWidth <= 992 && detailHero) {
+          detailHero.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      });
+    });
+  }
+
+  // Render Detail Panel
+  function renderDetailPanel() {
+    if (!detailHero || !detailSubgrid) return;
+    const query = searchQuery.toLowerCase();
+
+    // MODE 1: Search active across directory
+    if (query) {
+      renderSearchResults(query);
       return;
     }
 
-    // 4. Build Hierarchical Cards HTML (Columns for subsubs, No Emojis/Icons, No &)
-    let html = "";
-    matchingResults.forEach(cat => {
-      const subcats = cat.filteredSubcategories || [];
+    // MODE 2: Master-Detail view for activeCatId
+    const currentCat = sortedCategories.find(c => c.id === activeCatId) || sortedCategories[0];
+    if (!currentCat) return;
 
-      let subcategoriesHtml = "";
-      subcats.forEach(sub => {
-        const subsubs = sub.filteredSubsubcategories || [];
-        let columnsHtml = "";
-        if (subsubs.length > 0) {
-          columnsHtml = `
-            <div class="category-subsub-columns">
-              ${subsubs.map(sss => `
-                <a href="catalog.html?q=${encodeURIComponent(sss.name)}" class="category-subsub-item" title="Ver ${sss.count} productos de ${sss.name}">
-                  <span class="subsub-name">${sss.name}</span>
-                  <span class="subsub-count">(${sss.count})</span>
-                </a>
-              `).join('')}
-            </div>
-          `;
-        }
+    // 1. Hero / Header
+    const subcats = (currentCat.subcategories || []).slice().sort((a, b) => 
+      (a.displayName || a.name).localeCompare(b.displayName || b.name, 'es')
+    );
 
-        subcategoriesHtml += `
-          <div class="category-sub-block">
-            <div class="category-sub-header">
-              <a href="catalog.html?q=${encodeURIComponent(sub.name)}" class="category-sub-title" title="Ver productos de ${sub.displayName || sub.name}">
-                ${sub.displayName || sub.name}
+    detailHero.innerHTML = `
+      <div class="category-detail-hero-header">
+        <div style="flex-grow: 1;">
+          <h2 class="category-detail-hero-title">${currentCat.displayName || currentCat.name}</h2>
+          <p class="category-detail-hero-desc">${currentCat.description || 'Catálogo industrial de repuestos y equipos especializados.'}</p>
+        </div>
+      </div>
+      <div class="category-detail-hero-meta">
+        <div class="category-detail-hero-pills">
+          <span class="hero-pill">${subcats.length} subcategorías</span>
+          <span class="hero-pill hero-pill-highlight">${currentCat.count.toLocaleString('es-AR')} productos disponibles</span>
+        </div>
+        <a href="catalog.html?category=${currentCat.id}" class="btn btn-outline btn-sm btn-detail-full-catalog" title="Explorar todos los productos de ${currentCat.displayName || currentCat.name}">
+          Ver catálogo completo <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+    `;
+
+    // 2. Subcategories Grid with Progressive Disclosure
+    let subgridHtml = "";
+    subcats.forEach(sub => {
+      const subKey = `${currentCat.id}__${sub.slug || sub.name}`;
+      const isExpanded = expandedSubcategories.has(subKey);
+
+      const subsubsList = (sub.subsubcategories || []).slice().sort((a, b) => 
+        a.name.localeCompare(b.name, 'es')
+      );
+
+      const totalItems = subsubsList.length;
+      const visibleItems = (totalItems <= 5 || isExpanded) ? subsubsList : subsubsList.slice(0, 5);
+
+      let itemsHtml = "";
+      if (visibleItems.length > 0) {
+        itemsHtml = `
+          <div class="detail-subsub-list">
+            ${visibleItems.map(item => `
+              <a href="catalog.html?q=${encodeURIComponent(item.name)}" class="detail-subsub-item" title="Ver ${item.count} productos de ${item.name}">
+                <span class="detail-subsub-name">${item.name}</span>
+                <span class="detail-subsub-count">${item.count}</span>
               </a>
-              <span class="category-sub-count">${sub.count} productos</span>
-            </div>
-            ${columnsHtml}
+            `).join('')}
           </div>
         `;
-      });
+      } else {
+        itemsHtml = `
+          <div style="padding: 10px 8px; font-size: 0.80rem; color: #888;">
+            Productos de catálogo general
+          </div>
+        `;
+      }
 
-      html += `
-        <div class="category-group-card" id="cat-${cat.id}">
-          <div class="category-group-header">
-            <div class="category-group-title-box">
-              <h3 class="category-group-name">${cat.displayName || cat.name}</h3>
-              <p class="category-group-desc">${cat.description || ''}</p>
-            </div>
-            <div class="category-group-meta">
-              <span class="category-group-badge">${cat.subcategories.length} subcategorías</span>
-              <span class="category-group-count">${cat.count.toLocaleString('es-AR')} productos</span>
-              <a href="catalog.html?category=${cat.id}" class="btn btn-outline btn-sm category-group-btn" title="Ver catálogo completo de ${cat.displayName || cat.name}">
-                Ver catálogo <i class="fa-solid fa-arrow-right"></i>
+      let expandBtnHtml = "";
+      if (totalItems > 5) {
+        if (!isExpanded) {
+          const remaining = totalItems - 5;
+          expandBtnHtml = `
+            <button type="button" class="btn-expand-subsubs js-expand-subsubs" data-sub-key="${subKey}">
+              <span>+ Ver ${remaining} familias más</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+          `;
+        } else {
+          expandBtnHtml = `
+            <button type="button" class="btn-expand-subsubs js-expand-subsubs" data-sub-key="${subKey}">
+              <span>- Ver menos</span>
+              <i class="fa-solid fa-chevron-up"></i>
+            </button>
+          `;
+        }
+      }
+
+      subgridHtml += `
+        <div class="detail-sub-card">
+          <div class="detail-sub-card-header">
+            <div class="detail-sub-card-title-group">
+              <a href="catalog.html?q=${encodeURIComponent(sub.name)}" class="detail-sub-card-title" title="Ver productos de ${sub.displayName || sub.name}">
+                ${sub.displayName || sub.name}
               </a>
             </div>
+            <span class="detail-sub-card-count">${sub.count} prod.</span>
           </div>
-          <div class="category-group-body">
-            <div class="category-sub-grid">
-              ${subcategoriesHtml}
-            </div>
+          <div class="detail-sub-card-body">
+            ${itemsHtml}
+            ${expandBtnHtml}
           </div>
         </div>
       `;
     });
 
-    container.innerHTML = html;
+    detailSubgrid.innerHTML = subgridHtml;
+
+    // Update global counters
+    const totalInitialProducts = sortedCategories.reduce((sum, c) => sum + (c.count || 0), 0);
+    countPills.forEach(pill => {
+      pill.innerHTML = `<strong>${sortedCategories.length}</strong> rubros • <strong>${totalInitialProducts.toLocaleString('es-AR')}</strong> productos`;
+    });
   }
 
-  // Initial Render
-  renderCategoriesDirectory(currentSearch, currentCategory);
+  // Render Global Search Results
+  function renderSearchResults(query) {
+    const matchedCards = [];
+    let totalMatches = 0;
+
+    sortedCategories.forEach(cat => {
+      const catMatches = cat.name.toLowerCase().includes(query) || 
+        (cat.displayName && cat.displayName.toLowerCase().includes(query)) || 
+        (cat.description && cat.description.toLowerCase().includes(query));
+
+      const subcats = cat.subcategories || [];
+      subcats.forEach(sub => {
+        const subMatches = sub.name.toLowerCase().includes(query) || 
+          (sub.displayName && sub.displayName.toLowerCase().includes(query));
+
+        const matchedSubsubs = [];
+        const allSubsubs = sub.subsubcategories || [];
+        allSubsubs.forEach(sss => {
+          if (sss.name.toLowerCase().includes(query) || catMatches || subMatches) {
+            matchedSubsubs.push(sss);
+          }
+        });
+
+        if (catMatches || subMatches || matchedSubsubs.length > 0) {
+          matchedCards.push({
+            catId: cat.id,
+            catName: cat.displayName || cat.name,
+            subName: sub.displayName || sub.name,
+            subCount: sub.count,
+            items: matchedSubsubs.length > 0 ? matchedSubsubs : allSubsubs
+          });
+          totalMatches += sub.count;
+        }
+      });
+    });
+
+    // Empty state
+    if (matchedCards.length === 0) {
+      detailHero.innerHTML = `
+        <div class="search-results-hero">
+          <div>
+            <h3 class="search-results-hero-title">Búsqueda: "${searchQuery}"</h3>
+            <p style="margin: 4px 0 0 0; font-size: 0.85rem; color: #666;">Sin coincidencias en categorías ni familias de repuestos.</p>
+          </div>
+          <button type="button" class="btn btn-outline btn-sm" id="btnResetSearchHero">
+            <i class="fa-solid fa-rotate-left"></i> Restablecer Búsqueda
+          </button>
+        </div>
+      `;
+      detailSubgrid.innerHTML = `
+        <div class="brands-empty-state" style="grid-column: 1 / -1; background: #fff; border: 1px solid var(--color-gray-border); border-radius: var(--radius-md); padding: 40px 20px; text-align: center;">
+          <i class="fa-solid fa-circle-exclamation" style="font-size: 2.2rem; color: #aaa; margin-bottom: 12px;"></i>
+          <h4 style="margin-bottom: 8px;">No encontramos coincidencias para "${searchQuery}"</h4>
+          <p style="font-size: 0.88rem; color: #666; max-width: 480px; margin: 0 auto 20px auto;">
+            Revisá la ortografía o consultá directamente con nuestros asesores comerciales para cotizar repuestos o equipos a pedido.
+          </p>
+          <button type="button" class="btn btn-primary btn-sm" id="btnResetSearchAction">
+            <i class="fa-solid fa-layer-group"></i> Ver todos los rubros
+          </button>
+        </div>
+      `;
+
+      const resetBtns = [document.getElementById("btnResetSearchHero"), document.getElementById("btnResetSearchAction")];
+      resetBtns.forEach(btn => {
+        if (btn) {
+          btn.addEventListener("click", () => {
+            searchQuery = "";
+            if (searchInput) searchInput.value = "";
+            if (clearBtn) clearBtn.style.display = "none";
+            renderMasterSidebar();
+            renderDetailPanel();
+          });
+        }
+      });
+      return;
+    }
+
+    // Hero with search results
+    detailHero.innerHTML = `
+      <div class="search-results-hero">
+        <div>
+          <h3 class="search-results-hero-title">Resultados para "${highlightMatches(searchQuery, searchQuery)}"</h3>
+          <p style="margin: 4px 0 0 0; font-size: 0.88rem; color: #666;">Mostrando ${matchedCards.length} subcategorías que coinciden con tu búsqueda técnica.</p>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span class="search-results-badge">${matchedCards.length} grupos</span>
+          <button type="button" class="btn btn-outline btn-sm" id="btnResetSearchHero">
+            <i class="fa-solid fa-xmark"></i> Limpiar
+          </button>
+        </div>
+      </div>
+    `;
+
+    const heroReset = document.getElementById("btnResetSearchHero");
+    if (heroReset) {
+      heroReset.addEventListener("click", () => {
+        searchQuery = "";
+        if (searchInput) searchInput.value = "";
+        if (clearBtn) clearBtn.style.display = "none";
+        renderMasterSidebar();
+        renderDetailPanel();
+      });
+    }
+
+    // Subgrid with matched cards
+    let subgridHtml = "";
+    matchedCards.forEach(card => {
+      const items = card.items.slice(0, 8);
+      subgridHtml += `
+        <div class="detail-sub-card">
+          <div class="detail-sub-card-header">
+            <div class="detail-sub-card-title-group">
+              <span class="detail-sub-card-category-tag">${card.catName}</span>
+              <a href="catalog.html?q=${encodeURIComponent(card.subName)}" class="detail-sub-card-title" title="Ver ${card.subName}">
+                ${highlightMatches(card.subName, searchQuery)}
+              </a>
+            </div>
+            <span class="detail-sub-card-count">${card.subCount} prod.</span>
+          </div>
+          <div class="detail-sub-card-body">
+            <div class="detail-subsub-list">
+              ${items.map(item => `
+                <a href="catalog.html?q=${encodeURIComponent(item.name)}" class="detail-subsub-item" title="Ver ${item.name}">
+                  <span class="detail-subsub-name">${highlightMatches(item.name, searchQuery)}</span>
+                  <span class="detail-subsub-count">${item.count}</span>
+                </a>
+              `).join('')}
+            </div>
+            ${card.items.length > 8 ? `
+              <a href="catalog.html?q=${encodeURIComponent(card.subName)}" class="btn-expand-subsubs" style="text-decoration: none;">
+                <span>Ver ${card.items.length - 8} repuestos más en catálogo →</span>
+              </a>
+            ` : ''}
+          </div>
+        </div>
+      `;
+    });
+
+    detailSubgrid.innerHTML = subgridHtml;
+
+    // Update counters
+    countPills.forEach(pill => {
+      pill.innerHTML = `<strong>${matchedCards.length}</strong> subcategorías • <strong>${totalMatches.toLocaleString('es-AR')}</strong> productos`;
+    });
+  }
+
+  // Delegation: Progressive disclosure toggle
+  if (detailSubgrid) {
+    detailSubgrid.addEventListener("click", (e) => {
+      const btn = e.target.closest(".js-expand-subsubs");
+      if (!btn) return;
+
+      const subKey = btn.dataset.subKey;
+      if (!subKey) return;
+
+      if (expandedSubcategories.has(subKey)) {
+        expandedSubcategories.delete(subKey);
+      } else {
+        expandedSubcategories.add(subKey);
+      }
+
+      renderDetailPanel();
+    });
+  }
+
+  // Mobile Back to Categories (Step 2 -> Step 1)
+  if (mobileBackBtn) {
+    mobileBackBtn.addEventListener("click", () => {
+      if (sectionContainer) {
+        sectionContainer.classList.remove("mobile-step-detail");
+        sectionContainer.classList.add("mobile-step-categories");
+        sectionContainer.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    });
+  }
 
   // Search Input Handler
   if (searchInput) {
     searchInput.addEventListener("input", (e) => {
-      currentSearch = e.target.value;
+      searchQuery = e.target.value.trim();
       if (clearBtn) {
-        clearBtn.style.display = currentSearch.length > 0 ? "flex" : "none";
+        clearBtn.style.display = searchQuery.length > 0 ? "flex" : "none";
       }
-      // Reset fast jump bar to ALL when user types a search query
-      jumpBtns.forEach(b => b.classList.remove("active"));
-      const allBtn = jumpBar ? jumpBar.querySelector(".alpha-btn[data-cat='ALL']") : null;
-      if (allBtn) allBtn.classList.add("active");
-      currentCategory = "ALL";
 
-      renderCategoriesDirectory(currentSearch, "ALL");
+      renderMasterSidebar();
+      renderDetailPanel();
+
+      // On mobile: if searching and user enters text, show the detail panel with results
+      if (searchQuery.length >= 2 && window.innerWidth <= 992 && sectionContainer) {
+        sectionContainer.classList.remove("mobile-step-categories");
+        sectionContainer.classList.add("mobile-step-detail");
+      }
     });
   }
 
@@ -1191,20 +1429,15 @@ function initCategoriesPage() {
         searchInput.focus();
       }
       clearBtn.style.display = "none";
-      currentSearch = "";
-      renderCategoriesDirectory("", currentCategory);
+      searchQuery = "";
+      renderMasterSidebar();
+      renderDetailPanel();
     });
   }
 
-  // Fast Jump Bar Buttons
-  jumpBtns.forEach(btn => {
-    btn.addEventListener("click", () => {
-      jumpBtns.forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
-      currentCategory = btn.dataset.cat;
-      renderCategoriesDirectory(currentSearch, currentCategory);
-    });
-  });
+  // Initial Execution
+  renderMasterSidebar();
+  renderDetailPanel();
 }
 
 /* --------------------------------------------------------------------------

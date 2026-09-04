@@ -280,3 +280,31 @@ Mismo criterio: se rediseñó `snipplets/footer/footer.tpl` para acercarlo al `r
 - [x] **Color del footer hardcodeado a negro (`#000000`)** — el admin tenía cargado `#333333` en "Pie de página"; a pedido del usuario se fijó el negro directo en `static/css/style-async.scss` (`.footer-main`) en vez de tocar el color picker del admin. Trade-off aceptado: el footer ya no sigue el selector de color del tema para ese valor puntual.
 - [x] **Fix de contraste del logo** — al pasar a negro puro, el logo (oscuro) quedaba invisible. Se agregó una chapita blanca redondeada (`.footer-brand-logo`) detrás del logo para garantizar legibilidad sin depender del color del logo cargado en el admin. Verificado en vivo.
 
+---
+
+## 🗂️ Rediseño del Directorio de Categorías: Arquitectura Master-Detail (`categories.html`) (2026-09-04)
+
+Objetivo: Resolver la sobrecarga cognitiva y la "pared de texto" de más de 8.000px del directorio de categorías (`boceto_web/categories.html`), transformándolo en una interfaz industrial B2B con arquitectura Master-Detail en escritorio y navegación en 2 pasos (*Drill-Down*) en dispositivos móviles.
+
+- [x] **Arquitectura Master-Detail en Escritorio (`boceto_web/categories.html` & `boceto_web/css/styles.css`)**:
+  - **Sidebar Izquierda Fija (*Master*)**: Contenedor `sticky` a la izquierda con ancho de 310px. Muestra los 13 rubros industriales ordenados alfabéticamente de la A a la Z, con badges numéricos de stock por categoría (`cat.count`), buscador instantáneo integrado con botón de limpieza, y feedback visual de estado activo (acento verde `#2E7D32` y borde izquierdo de 3px).
+  - **Panel Derecho de Contenido (*Detail*)**: Muestra de forma limpia el rubro seleccionado. Hero card industrial con título en tipografía `Quedora`, descripción técnica, pills informativas de cantidad de subcategorías y productos disponibles, y botón directo *"Ver catálogo completo"*.
+  - **Grilla de Subcategorías (Nivel 2)**: Layout en grid de 2 a 3 columnas con tarjetas industriales `.detail-sub-card`, acento superior y enlaces directos al catálogo general.
+- [x] **Revelación Progresiva en Nivel 3 (*Progressive Disclosure*)**:
+  - En las subcategorías con más de 5 familias técnicas o repuestos (Nivel 3), se muestran por defecto las 5 primeras y un botón interactivo: `+ Ver X familias más ↓`.
+  - Al hacer clic, se despliega la lista completa dentro del bloque sin recargar ni alterar el scroll de la página. Permite volver a colapsar con `- Ver menos ↑`.
+- [x] **Buscador Reactivo y Vista Global de Resultados**:
+  - Si el usuario busca un término en el input de la sidebar (ej. `"bomba"`, `"disco"`):
+    - La sidebar filtra en tiempo real los rubros que contienen coincidencias.
+    - El panel derecho se transforma en una vista de *"Resultados de búsqueda"* agrupada, mostrando todas las subcategorías y repuestos que coinciden en toda la tienda, con etiquetas de rubro y resaltado visual `<mark class="search-highlight">`.
+    - Si no hay coincidencias, presenta un empty-state técnico con botón para restablecer el directorio completo.
+- [x] **Navegación Móvil Drill-Down en 2 Pasos**:
+  - **Paso 1 (`mobile-step-categories`)**: En pantallas menores a 992px, la sidebar ocupa el ancho total como selector táctil optimizado de los 13 rubros (targets táctiles $\ge 44$px).
+  - **Paso 2 (`mobile-step-detail`)**: Al tocar un rubro, la vista conmuta inmediatamente al panel de detalle de ese rubro, mostrando un botón superior prioritario: `← Volver a todos los rubros` que regresa al paso 1 sin perder el contexto.
+- [x] **Deep Linking y Persistencia en URL**:
+  - Soporte de URLs directas como `categories.html?cat=ferreteria` o `categories.html#ferreteria`. Al cargar la página, se selecciona y renderiza automáticamente dicho rubro (y en móviles abre directamente el paso 2).
+- [x] **Estética 100% B2B Minimalista**:
+  - Cero fotografías decorativas para máxima velocidad de lectura y sobriedad de catálogo industrial de maquinaria y herramientas.
+  - Tipografía `Quedora` para títulos y `Plus Jakarta Sans` para cuerpo y listas técnicas.
+
+

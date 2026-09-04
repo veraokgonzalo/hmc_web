@@ -10,7 +10,7 @@
   <!-- Google Fonts & Font Awesome 6 Pro -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,400;0,600;0,700;1,700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
   <!-- Stylesheet -->
@@ -39,49 +39,80 @@
   <!-- ========================================================================
        Categories Page Main Content
        ======================================================================== -->
-  <main class="categories-page-section" style="padding: 40px 0 80px 0;">
+  <main class="categories-page-section" style="padding: 32px 0 70px 0;">
     <div class="container">
 
-      <!-- Directorio Completo Jerárquico (13 Categorías Principales, 79 Subcategorías, 464 Subrubros) -->
-      <section class="categories-directory-section" id="directorioCategorias">
+      <!-- Directorio Jerárquico Master-Detail (13 Rubros, 79 Subcategorías, 464 Familias y Repuestos) -->
+      <section class="categories-directory-section mobile-step-categories" id="directorioCategorias">
         
-        <!-- Header & Control Bar -->
-        <div class="brands-directory-panel">
-          
-          <div class="directory-panel-top">
-            <div class="directory-panel-heading">
-              <i class="fa-solid fa-layer-group text-primary" style="font-size: 1.6rem;"></i>
-              <div>
-                <h2 class="directory-panel-title">Directorio de Categorías</h2>
-                <p class="directory-panel-desc">Explorá los 13 rubros industriales, subcategorías especializadas y subrubros técnicos de nuestro catálogo.</p>
-              </div>
+        <!-- Header Superior Informativo B2B -->
+        <div class="categories-page-header">
+          <div class="categories-header-main">
+            <div class="categories-header-icon">
+              <i class="fa-solid fa-layer-group"></i>
             </div>
+            <div class="categories-header-text">
+              <h1 class="categories-page-title">Directorio de Categorías</h1>
+              <p class="categories-page-subtitle">Explorá los 13 rubros industriales, 79 subcategorías especializadas y 464 familias técnicas de nuestro catálogo.</p>
+            </div>
+          </div>
+          <div class="categories-header-stats js-categories-page-count">
+            <strong>13</strong> rubros • <strong>3.242</strong> productos
+          </div>
+        </div>
+
+        <!-- Master-Detail Layout -->
+        <div class="categories-master-detail-layout" id="categoriesMasterDetailLayout">
+          
+          <!-- Sidebar Izquierda: Master (Lista de Rubros + Buscador) -->
+          <aside class="categories-master-sidebar" id="categoriesMasterSidebar" aria-label="Navegación de Rubros">
             
-            <div class="directory-search-wrapper">
-              <i class="fa-solid fa-magnifying-glass search-icon"></i>
-              <input type="text" id="categoriesPageSearchInput" class="js-categories-page-search" placeholder="Buscar categoría, subcategoría o repuesto" autocomplete="off">
-              <button type="button" class="btn-clear-search" id="categoriesPageClearSearch" title="Limpiar búsqueda" style="display: none;">
-                <i class="fa-solid fa-xmark"></i>
+            <!-- Buscador Integrado en Sidebar -->
+            <div class="master-search-card">
+              <div class="master-search-box">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" id="categoriesPageSearchInput" class="js-categories-page-search" placeholder="Buscar categoría o repuesto..." autocomplete="off">
+                <button type="button" class="btn-clear-search" id="categoriesPageClearSearch" title="Limpiar búsqueda" style="display: none;">
+                  <i class="fa-solid fa-xmark"></i>
+                </button>
+              </div>
+              <div class="master-search-hint">Buscá repuestos o filtrá rubros</div>
+            </div>
+
+            <div class="master-nav-heading">
+              <span>Rubros Principales</span>
+              <span class="master-nav-count-badge" id="categoriesSidebarCount">13</span>
+            </div>
+
+            <!-- Lista de 13 Rubros (Master Nav) -->
+            <nav class="master-categories-nav" id="categoriesMasterNavList" aria-label="Lista de rubros">
+              <!-- Dynamically populated by js/app.js -->
+            </nav>
+          </aside>
+
+          <!-- Panel Derecho: Detail (Subcategorías + Familias y Repuestos) -->
+          <main class="categories-detail-panel" id="categoriesDetailPanel">
+            
+            <!-- Mobile Back Bar (Paso 2 -> Paso 1 en móviles) -->
+            <div class="mobile-back-bar" id="mobileBackBar">
+              <button type="button" class="btn-mobile-back-rubros" id="btnMobileBackToRubros">
+                <i class="fa-solid fa-arrow-left"></i>
+                <span>Volver a todos los rubros</span>
               </button>
             </div>
 
-            <div class="directory-counter-box">
-              <span class="brands-counter-pill js-categories-page-count">
-                <strong>13</strong> rubros • <strong>3.242</strong> productos
-              </span>
+            <!-- Hero/Header del Rubro Activo -->
+            <div class="category-detail-hero" id="categoryDetailHero">
+              <!-- Dynamically populated by js/app.js -->
             </div>
-          </div>
 
-          <!-- Fast Jump Category Bar (Sorted Alphabetically, Generated Dynamically) -->
-          <div class="brands-alphabet-bar js-categories-page-alpha-bar" id="categoriesFastJumpBar">
-            <!-- Dynamically populated by js/app.js -->
-          </div>
+            <!-- Grilla de Subcategorías del Rubro Activo -->
+            <div class="category-subcategories-grid" id="categoryDetailSubgrid">
+              <!-- Dynamically populated by js/app.js -->
+            </div>
 
-        </div>
+          </main>
 
-        <!-- Render Target for Hierarchical Category Cards -->
-        <div class="categories-tree-container js-categories-page-container" id="categoriesTreeContainer">
-          <!-- Dynamically populated by js/app.js -->
         </div>
 
       </section>
