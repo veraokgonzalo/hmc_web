@@ -23,6 +23,10 @@ document.addEventListener('DOMContentLoaded', () => {
     initPromoPopup();
   }
 
+  if (document.querySelector('.js-brands-marquee, .brands-marquee-container')) {
+    initBrandsMarquee();
+  }
+
   if (document.getElementById('brandsPageLayout') || document.querySelector('.brands-page-section')) {
     initBrandsPage();
   }
@@ -735,6 +739,68 @@ const REAL_CATALOG_BRANDS = [
 ];
 
 const ALL_BRANDS_103 = REAL_CATALOG_BRANDS.map(b => b.name);
+
+/* --------------------------------------------------------------------------
+   0.2. Dynamic Brands Marquee Component (Configurable & Tiendanube-Ready)
+   -------------------------------------------------------------------------- */
+const MARQUEE_BRANDS_DATA = [
+  { name: "BOSCH", logo: "assets/images/brands/bosch.svg", alt: "Bosch Professional" },
+  { name: "DEWALT", logo: "assets/images/brands/dewalt.svg", alt: "DeWalt Industrial Tools" },
+  { name: "HUSQVARNA", logo: "assets/images/brands/husqvarna.svg", alt: "Husqvarna Maquinaria" },
+  { name: "STIHL", logo: "assets/images/brands/stihl.svg", alt: "Stihl Equipos Forestales" },
+  { name: "EINHELL", logo: "assets/images/brands/einhell.svg", alt: "Einhell Power X-Change" },
+  { name: "HONDA", logo: "assets/images/brands/honda.svg", alt: "Honda Motores & Generadores" },
+  { name: "GARDENA", logo: "assets/images/brands/gardena.svg", alt: "Gardena Jardinería & Riego" },
+  { name: "NIWA", logo: "assets/images/brands/niwa.svg", alt: "Niwa Maquinarias" },
+  { name: "SENSEI", logo: "assets/images/brands/sensei.png", alt: "Sensei Motores & Fuerza" },
+  { name: "OREGON", logo: "assets/images/brands/oregon.png", alt: "Oregon Cadenas & Espadas" },
+  { name: "DOWEN PAGIO", logo: "assets/images/brands/dowen-pagio.svg", alt: "Dowen Pagio Herramientas" },
+  { name: "MAKITA", logo: "assets/images/brands/makita.svg", alt: "Makita Herramientas Eléctricas" },
+  { name: "SHINDAIWA", logo: "assets/images/brands/shindaiwa.svg", alt: "Shindaiwa Japón" },
+  { name: "BAHCO", logo: "assets/images/brands/bahco.svg", alt: "Bahco Herramientas Manuales" },
+  { name: "STANLEY", logo: "assets/images/brands/stanley.svg", alt: "Stanley Tools" },
+  { name: "ECHO", logo: "assets/images/brands/echo.svg", alt: "Echo Maquinaria de Poda" },
+  { name: "LUSQTOFF", logo: "assets/images/brands/lusqtoff.svg", alt: "Lüsqtoff Soldadura & Fuerza" },
+  { name: "HUNTER", logo: "assets/images/brands/hunter.png", alt: "Hunter Irrigation" },
+  { name: "METABO", logo: "assets/images/brands/metabo.svg", alt: "Metabo Work. Don't play." },
+  { name: "DREMEL", logo: "assets/images/brands/dremel.svg", alt: "Dremel Herramientas Rotativas" },
+  { name: "KÄRCHER", logo: "assets/images/brands/karcher.svg", alt: "Kärcher Limpieza Industrial" }
+];
+
+function initBrandsMarquee() {
+  const marqueeContainers = document.querySelectorAll(".js-brands-marquee, .brands-marquee-container");
+  if (!marqueeContainers.length) return;
+
+  marqueeContainers.forEach(container => {
+    // 1. Configuración dinámica (velocidad en segundos, dirección)
+    const speed = parseInt(container.dataset.speed, 10) || 42;
+    const direction = container.dataset.direction || "left";
+
+    // 2. Generación dinámica de tarjetas individuales
+    const renderCard = (brand, isAriaHidden = false) => `
+      <a href="catalog.html?brand=${encodeURIComponent(brand.name)}" 
+         class="brand-marquee-card" 
+         title="Explorar productos ${brand.name}" 
+         ${isAriaHidden ? 'tabindex="-1" aria-hidden="true"' : ""}>
+        <img src="${brand.logo}" alt="${isAriaHidden ? "" : (brand.alt || brand.name)}" loading="lazy">
+      </a>
+    `;
+
+    const primaryHtml = MARQUEE_BRANDS_DATA.map(b => renderCard(b, false)).join("");
+    const duplicateHtml = MARQUEE_BRANDS_DATA.map(b => renderCard(b, true)).join("");
+
+    container.innerHTML = `
+      <div class="brands-marquee-track ${direction === "right" ? "marquee-reverse" : ""}" style="--marquee-speed: ${speed}s;">
+        <div class="brands-marquee-group">
+          ${primaryHtml}
+        </div>
+        <div class="brands-marquee-group" aria-hidden="true">
+          ${duplicateHtml}
+        </div>
+      </div>
+    `;
+  });
+}
 
 function initBrandsPage() {
   const container = document.getElementById("brandsAlphabetGrid") || document.querySelector(".js-brands-page-grid");

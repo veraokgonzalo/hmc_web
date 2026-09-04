@@ -223,6 +223,27 @@ Se rediseñó y modularizó el boceto web en páginas independientes interconect
 
 ---
 
+### 19. Marquee Infinito Dinámico de Marcas Oficiales (Opción A & Migrable a Tiendanube) - IMPLEMENTADO
+- **21 Logotipos Oficiales Vectoriales & Transparentes**:
+  - Se obtuvieron, normalizaron y optimizaron en `boceto_web/assets/images/brands/` y `assets/marcas/` los 21 logotipos de los fabricantes principales del catálogo: *BOSCH, DEWALT, HUSQVARNA, STIHL, EINHELL, HONDA, GARDENA, NIWA, SENSEI, OREGON, DOWEN PAGIO, MAKITA, SHINDAIWA, BAHCO, STANLEY, ECHO, LUSQTOFF, HUNTER, METABO, DREMEL y KÄRCHER*.
+  - Inyección de fills internos en SVGs (`shindaiwa.svg`, `echo.svg`) y recorte de márgenes transparentes en PNGs para un renderizado uniforme en cualquier contexto.
+- **Arquitectura de Inserción Dinámica (`MARQUEE_BRANDS_DATA` & `initBrandsMarquee()`)**:
+  - `boceto_web/js/app.js`: Base de datos centralizada con generación automática de la marquesina en tiempo real. Construye el grupo primario y su clon gemelo (`aria-hidden="true"`, `tabindex="-1"`) para un loop continuo invisible al -50%.
+  - Configuración reactiva de velocidad mediante data attributes (`data-speed="42"` o CSS variable `--marquee-speed: 42s;`) y dirección (`data-direction="left"`).
+- **Diseño Visual Opción A & Experiencia UX**:
+  - Logotipos a todo color oficial con tratamiento de opacidad/contraste armónico (`opacity: 0.88; filter: grayscale(10%)`).
+  - Al posar el mouse (`:hover`), la tarjeta se eleva (`translateY(-4px)`), la animación se congela suavemente (`animation-play-state: paused`), el logo alcanza 100% de saturación y proyecta sombra verde institucional.
+  - Máscaras lineales en los laterales (`linear-gradient(90deg, transparent, #000 64px, ...)`) para desvanecimiento suave de bordes.
+- **Portabilidad y Paridad 1 a 1 con Tiendanube Legacy (`web_ftp/`)**:
+  - `web_ftp/config/settings.txt`: Se añadió la opción `marquee = Marquesina continua (Marquee)` al selector `brands_format` y el nuevo dropdown `brands_marquee_speed` (Lenta 55s / Normal 42s / Rápida 25s).
+  - `web_ftp/snipplets/home/home-brands.tpl`: Se incorporó el bloque condicional que genera la marquesina continua iterando dinámicamente sobre `settings.brands`.
+  - `web_ftp/static/css/style-async.scss`: Estilos del marquee portados al tema productivo.
+- **Mobile First & Accesibilidad**:
+  - Tarjetas adaptadas a 135x68px en pantallas menores a 768px para interacción táctil sin desborde horizontal (`overflow: hidden`).
+  - Regla `@media (prefers-reduced-motion: reduce)` para usuarios con sensibilidad al movimiento.
+
+---
+
 ## 📋 Pendientes — Ajustes de Diseño y Copy (reportados 2026-09-02)
 
 1. **Mapa de Google Maps en Contacto** — IMPLEMENTADO: mapa embebido (Google Maps) en la sección de sucursal de `contact.html`, junto a la dirección de la sucursal Santa Rosa, con link "Cómo llegar".
