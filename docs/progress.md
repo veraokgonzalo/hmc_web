@@ -303,8 +303,10 @@ Objetivo: Resolver la sobrecarga cognitiva y la "pared de texto" de más de 8.00
   - **Paso 2 (`mobile-step-detail`)**: Al tocar un rubro, la vista conmuta inmediatamente al panel de detalle de ese rubro, mostrando un botón superior prioritario: `← Volver a todos los rubros` que regresa al paso 1 sin perder el contexto.
 - [x] **Deep Linking y Persistencia en URL**:
   - Soporte de URLs directas como `categories.html?cat=ferreteria` o `categories.html#ferreteria`. Al cargar la página, se selecciona y renderiza automáticamente dicho rubro (y en móviles abre directamente el paso 2).
-- [x] **Estética 100% B2B Minimalista**:
+- [x] **Estética 100% B2B Minimalista y Marco Unificado**:
   - Cero fotografías decorativas para máxima velocidad de lectura y sobriedad de catálogo industrial de maquinaria y herramientas.
   - Tipografía `Quedora` para títulos y `Plus Jakarta Sans` para cuerpo y listas técnicas.
+  - **Marco Unificado de Detalle**: La grilla de subcategorías y familias técnicas se ubica dentro del mismo contenedor (`.category-detail-hero`), directamente debajo del encabezado y descripción del rubro, y por encima del botón de enlace al catálogo (`Ver catálogo de {categoría} →`), consolidando la visual en un solo bloque estructurado.
+
 
 

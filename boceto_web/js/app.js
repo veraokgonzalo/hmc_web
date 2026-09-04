@@ -959,10 +959,9 @@ function initCategoriesPage() {
   const sectionContainer = document.getElementById("directorioCategorias") || document.querySelector(".categories-directory-section");
   const sidebarNav = document.getElementById("categoriesMasterNavList");
   const detailHero = document.getElementById("categoryDetailHero");
-  const detailSubgrid = document.getElementById("categoryDetailSubgrid");
 
   // Fallback check: if elements don't exist, exit
-  if (!sidebarNav && !detailSubgrid) return;
+  if (!sidebarNav || !detailHero) return;
 
   const categoriesTree = (typeof window !== 'undefined' && window.REAL_CATEGORIES_TREE && window.REAL_CATEGORIES_TREE.length > 0)
     ? window.REAL_CATEGORIES_TREE
@@ -1056,7 +1055,6 @@ function initCategoriesPage() {
         navHtml += `
           <button type="button" class="master-nav-item${isActive}" data-cat-id="${cat.id}">
             <span class="master-nav-name">${highlightMatches(cat.displayName || cat.name, searchQuery)}</span>
-            <span class="master-nav-badge">${cat.count.toLocaleString('es-AR')}</span>
             <i class="fa-solid fa-chevron-right master-nav-arrow"></i>
           </button>
         `;
@@ -1110,7 +1108,7 @@ function initCategoriesPage() {
 
   // Render Detail Panel
   function renderDetailPanel() {
-    if (!detailHero || !detailSubgrid) return;
+    if (!detailHero) return;
     const query = searchQuery.toLowerCase();
 
     // MODE 1: Search active across directory
@@ -1123,30 +1121,11 @@ function initCategoriesPage() {
     const currentCat = sortedCategories.find(c => c.id === activeCatId) || sortedCategories[0];
     if (!currentCat) return;
 
-    // 1. Hero / Header
     const subcats = (currentCat.subcategories || []).slice().sort((a, b) => 
       (a.displayName || a.name).localeCompare(b.displayName || b.name, 'es')
     );
 
-    detailHero.innerHTML = `
-      <div class="category-detail-hero-header">
-        <div style="flex-grow: 1;">
-          <h2 class="category-detail-hero-title">${currentCat.displayName || currentCat.name}</h2>
-          <p class="category-detail-hero-desc">${currentCat.description || 'Catálogo industrial de repuestos y equipos especializados.'}</p>
-        </div>
-      </div>
-      <div class="category-detail-hero-meta">
-        <div class="category-detail-hero-pills">
-          <span class="hero-pill">${subcats.length} subcategorías</span>
-          <span class="hero-pill hero-pill-highlight">${currentCat.count.toLocaleString('es-AR')} productos disponibles</span>
-        </div>
-        <a href="catalog.html?category=${currentCat.id}" class="btn btn-outline btn-sm btn-detail-full-catalog" title="Explorar todos los productos de ${currentCat.displayName || currentCat.name}">
-          Ver catálogo completo <i class="fa-solid fa-arrow-right"></i>
-        </a>
-      </div>
-    `;
-
-    // 2. Subcategories Grid with Progressive Disclosure
+    // 1. Build Subcategories Grid HTML with Progressive Disclosure
     let subgridHtml = "";
     subcats.forEach(sub => {
       const subKey = `${currentCat.id}__${sub.slug || sub.name}`;
@@ -1207,7 +1186,6 @@ function initCategoriesPage() {
                 ${sub.displayName || sub.name}
               </a>
             </div>
-            <span class="detail-sub-card-count">${sub.count} prod.</span>
           </div>
           <div class="detail-sub-card-body">
             ${itemsHtml}
@@ -1217,7 +1195,28 @@ function initCategoriesPage() {
       `;
     });
 
-    detailSubgrid.innerHTML = subgridHtml;
+    // 2. Render unified card: Header -> Subcategories Grid -> Catalog button footer
+    detailHero.innerHTML = `
+      <div class="category-detail-hero-header">
+        <div style="flex-grow: 1;">
+          <h2 class="category-detail-hero-title">${currentCat.displayName || currentCat.name}</h2>
+          <p class="category-detail-hero-desc">${currentCat.description || 'Catálogo industrial de repuestos y equipos especializados.'}</p>
+        </div>
+        <div class="category-detail-hero-pills">
+          <span class="hero-pill">${subcats.length} subcategorías</span>
+        </div>
+      </div>
+
+      <div class="category-subcategories-grid" id="categoryDetailSubgrid">
+        ${subgridHtml}
+      </div>
+
+      <div class="category-detail-hero-meta">
+        <a href="catalog.html?category=${currentCat.id}" class="btn btn-outline btn-sm btn-detail-full-catalog" title="Explorar todos los productos de ${currentCat.displayName || currentCat.name}">
+          Ver catálogo de ${currentCat.displayName || currentCat.name} <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </div>
+    `;
 
     // Update global counters
     const totalInitialProducts = sortedCategories.reduce((sum, c) => sum + (c.count || 0), 0);
@@ -1274,9 +1273,8 @@ function initCategoriesPage() {
             <i class="fa-solid fa-rotate-left"></i> Restablecer Búsqueda
           </button>
         </div>
-      `;
-      detailSubgrid.innerHTML = `
-        <div class="brands-empty-state" style="grid-column: 1 / -1; background: #fff; border: 1px solid var(--color-gray-border); border-radius: var(--radius-md); padding: 40px 20px; text-align: center;">
+
+        <div class="brands-empty-state" style="margin-top: 20px; background: #fff; border: 1px solid var(--color-gray-border); border-radius: var(--radius-md); padding: 40px 20px; text-align: center;">
           <i class="fa-solid fa-circle-exclamation" style="font-size: 2.2rem; color: #aaa; margin-bottom: 12px;"></i>
           <h4 style="margin-bottom: 8px;">No encontramos coincidencias para "${searchQuery}"</h4>
           <p style="font-size: 0.88rem; color: #666; max-width: 480px; margin: 0 auto 20px auto;">
@@ -1287,47 +1285,7 @@ function initCategoriesPage() {
           </button>
         </div>
       `;
-
-      const resetBtns = [document.getElementById("btnResetSearchHero"), document.getElementById("btnResetSearchAction")];
-      resetBtns.forEach(btn => {
-        if (btn) {
-          btn.addEventListener("click", () => {
-            searchQuery = "";
-            if (searchInput) searchInput.value = "";
-            if (clearBtn) clearBtn.style.display = "none";
-            renderMasterSidebar();
-            renderDetailPanel();
-          });
-        }
-      });
       return;
-    }
-
-    // Hero with search results
-    detailHero.innerHTML = `
-      <div class="search-results-hero">
-        <div>
-          <h3 class="search-results-hero-title">Resultados para "${highlightMatches(searchQuery, searchQuery)}"</h3>
-          <p style="margin: 4px 0 0 0; font-size: 0.88rem; color: #666;">Mostrando ${matchedCards.length} subcategorías que coinciden con tu búsqueda técnica.</p>
-        </div>
-        <div style="display: flex; align-items: center; gap: 10px;">
-          <span class="search-results-badge">${matchedCards.length} grupos</span>
-          <button type="button" class="btn btn-outline btn-sm" id="btnResetSearchHero">
-            <i class="fa-solid fa-xmark"></i> Limpiar
-          </button>
-        </div>
-      </div>
-    `;
-
-    const heroReset = document.getElementById("btnResetSearchHero");
-    if (heroReset) {
-      heroReset.addEventListener("click", () => {
-        searchQuery = "";
-        if (searchInput) searchInput.value = "";
-        if (clearBtn) clearBtn.style.display = "none";
-        renderMasterSidebar();
-        renderDetailPanel();
-      });
     }
 
     // Subgrid with matched cards
@@ -1343,7 +1301,6 @@ function initCategoriesPage() {
                 ${highlightMatches(card.subName, searchQuery)}
               </a>
             </div>
-            <span class="detail-sub-card-count">${card.subCount} prod.</span>
           </div>
           <div class="detail-sub-card-body">
             <div class="detail-subsub-list">
@@ -1364,7 +1321,25 @@ function initCategoriesPage() {
       `;
     });
 
-    detailSubgrid.innerHTML = subgridHtml;
+    // Hero with search results and subgrid
+    detailHero.innerHTML = `
+      <div class="search-results-hero">
+        <div>
+          <h3 class="search-results-hero-title">Resultados para "${highlightMatches(searchQuery, searchQuery)}"</h3>
+          <p style="margin: 4px 0 0 0; font-size: 0.88rem; color: #666;">Mostrando ${matchedCards.length} subcategorías que coinciden con tu búsqueda técnica.</p>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span class="search-results-badge">${matchedCards.length} grupos</span>
+          <button type="button" class="btn btn-outline btn-sm" id="btnResetSearchHero">
+            <i class="fa-solid fa-xmark"></i> Limpiar
+          </button>
+        </div>
+      </div>
+
+      <div class="category-subcategories-grid" id="categoryDetailSubgrid" style="margin-top: 20px;">
+        ${subgridHtml}
+      </div>
+    `;
 
     // Update counters
     countPills.forEach(pill => {
@@ -1372,22 +1347,31 @@ function initCategoriesPage() {
     });
   }
 
-  // Delegation: Progressive disclosure toggle
-  if (detailSubgrid) {
-    detailSubgrid.addEventListener("click", (e) => {
+  // Delegation on detailHero: Progressive disclosure toggle & search reset
+  if (detailHero) {
+    detailHero.addEventListener("click", (e) => {
       const btn = e.target.closest(".js-expand-subsubs");
-      if (!btn) return;
-
-      const subKey = btn.dataset.subKey;
-      if (!subKey) return;
-
-      if (expandedSubcategories.has(subKey)) {
-        expandedSubcategories.delete(subKey);
-      } else {
-        expandedSubcategories.add(subKey);
+      if (btn) {
+        const subKey = btn.dataset.subKey;
+        if (subKey) {
+          if (expandedSubcategories.has(subKey)) {
+            expandedSubcategories.delete(subKey);
+          } else {
+            expandedSubcategories.add(subKey);
+          }
+          renderDetailPanel();
+        }
+        return;
       }
 
-      renderDetailPanel();
+      const resetBtn = e.target.closest("#btnResetSearchHero, #btnResetSearchAction");
+      if (resetBtn) {
+        searchQuery = "";
+        if (searchInput) searchInput.value = "";
+        if (clearBtn) clearBtn.style.display = "none";
+        renderMasterSidebar();
+        renderDetailPanel();
+      }
     });
   }
 
