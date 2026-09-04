@@ -208,6 +208,21 @@ Se rediseñó y modularizó el boceto web en páginas independientes interconect
 
 ---
 
+### 18. Unificación y Paridad Total entre Navbar de Escritorio y Navegación Móvil - IMPLEMENTADO
+- **Paridad 1 a 1 de Estructura y Jerarquía**:
+  - Se homogeneizó el menú lateral deslizable (`#mobileDrawerMenu`) para seguir exactamente la misma secuencia comercial que la barra de escritorio:
+    `Inicio` $\rightarrow$ `Categorías` (Acordeón con 12 rubros principales y CTA a `categories.html`) $\rightarrow$ `Marcas` (Acordeón con las 8 marcas oficiales y CTA a `brands.html`) $\rightarrow$ `Ofertas` (con badge `OFF`) $\rightarrow$ `Nosotros` $\rightarrow$ `Contacto` $\rightarrow$ `Asesoría Técnica` (WhatsApp directo).
+  - Se eliminaron las discrepancias de nombres y copy: "Categorías" (en vez de "Categorías Principales"), "Marcas" (en vez de "Marcas Oficiales" con subtítulos obsoletos), "Ofertas" con píldora `OFF` (en vez de "Ofertas Especiales -16%"), "Contacto" (en vez de "Contacto & Sucursales").
+- **Modularización de Componentes de Marca (`getBrandsDropdownHtml` / `getMobileDrawerBrandsHtml`)**:
+  - Ambas vistas consumen la constante única `OFFICIAL_CORE_BRANDS` (`["OREGON", "NIWA", "BOSCH", "EINHELL", "HUSQVARNA", "GARDENA", "SENSEI", "HONDA"]`).
+  - El acordeón móvil de marcas ahora lista de forma limpia y moderna las marcas destacadas y cuenta con el botón directo *"Todas las marcas →"* hacia `brands.html`.
+- **Alineación de la Barra Inferior Móvil (`.mobile-bottom-nav`)**:
+  - Se sincronizaron los 5 accesos principales: `Inicio`, `Categorías` (`categories.html`), `Marcas` (`brands.html`), `Carrito` y `Menú`.
+- **Sincronización Integral de Estados Activos (`syncNavigationActiveState()`)**:
+  - El despachador activa en simultáneo: los links de la barra de escritorio (`.nav-list`), los ítems y cabeceras de acordeón del drawer móvil (`.mobile-drawer-nav`) y los botones de la barra inferior (`.mobile-bottom-nav`), garantizando consistencia total en cualquier resolución.
+
+---
+
 ## 📋 Pendientes — Ajustes de Diseño y Copy (reportados 2026-09-02)
 
 1. **Mapa de Google Maps en Contacto** — IMPLEMENTADO: mapa embebido (Google Maps) en la sección de sucursal de `contact.html`, junto a la dirección de la sucursal Santa Rosa, con link "Cómo llegar".

@@ -67,6 +67,8 @@ const REAL_STORE_CATEGORIES = [
   { id: "riego", name: "RIEGO", displayName: "Riego", count: 200 }
 ];
 
+const OFFICIAL_CORE_BRANDS = ["OREGON", "NIWA", "BOSCH", "EINHELL", "HUSQVARNA", "GARDENA", "SENSEI", "HONDA"];
+
 function getCategoriesDropdownHtml() {
   const source = (typeof window !== 'undefined' && window.REAL_CATEGORIES_TREE && window.REAL_CATEGORIES_TREE.length > 0)
     ? window.REAL_CATEGORIES_TREE
@@ -88,6 +90,16 @@ function getCategoriesDropdownHtml() {
   `).join('');
 }
 
+function getBrandsDropdownHtml() {
+  return OFFICIAL_CORE_BRANDS.map(brand => `
+    <a href="catalog.html?brand=${encodeURIComponent(brand)}" class="dropdown-brand-card" title="Ver catálogo oficial ${brand}">
+      <div class="dropdown-brand-name">
+        <span>${brand}</span>
+      </div>
+    </a>
+  `).join('');
+}
+
 function getMobileDrawerCategoriesHtml() {
   const source = (typeof window !== 'undefined' && window.REAL_CATEGORIES_TREE && window.REAL_CATEGORIES_TREE.length > 0)
     ? window.REAL_CATEGORIES_TREE
@@ -103,7 +115,18 @@ function getMobileDrawerCategoriesHtml() {
   `).join('');
 
   html += `
-    <a href="categories.html" class="mobile-subnav-link mobile-subnav-link-cta" style="font-weight: 700; color: var(--color-primary-dark); background: rgba(63, 170, 71, 0.1); border-radius: var(--radius-sm); margin-top: 6px; padding: 10px 12px;">Explorar todas las categorías (${source.length}) →</a>
+    <a href="categories.html" class="mobile-subnav-link mobile-subnav-link-cta">Todas las categorías →</a>
+  `;
+  return html;
+}
+
+function getMobileDrawerBrandsHtml() {
+  let html = OFFICIAL_CORE_BRANDS.map(brand => `
+    <a href="catalog.html?brand=${encodeURIComponent(brand)}" class="mobile-subnav-link">${brand}</a>
+  `).join('');
+
+  html += `
+    <a href="brands.html" class="mobile-subnav-link mobile-subnav-link-cta">Todas las marcas →</a>
   `;
   return html;
 }
@@ -271,46 +294,7 @@ function renderGlobalNavigation() {
 
               <!-- 8 Featured Brands Grid -->
               <div class="dropdown-brands-grid">
-                <a href="catalog.html?brand=OREGON" class="dropdown-brand-card">
-                  <div class="dropdown-brand-name">
-                    <span>OREGON</span>
-                  </div>
-                </a>
-                <a href="catalog.html?brand=NIWA" class="dropdown-brand-card">
-                  <div class="dropdown-brand-name">
-                    <span>NIWA</span>
-                  </div>
-                </a>
-                <a href="catalog.html?brand=BOSCH" class="dropdown-brand-card">
-                  <div class="dropdown-brand-name">
-                    <span>BOSCH</span>
-                  </div>
-                </a>
-                <a href="catalog.html?brand=EINHELL" class="dropdown-brand-card">
-                  <div class="dropdown-brand-name">
-                    <span>EINHELL</span>
-                  </div>
-                </a>
-                <a href="catalog.html?brand=HUSQVARNA" class="dropdown-brand-card">
-                  <div class="dropdown-brand-name">
-                    <span>HUSQVARNA</span>
-                  </div>
-                </a>
-                <a href="catalog.html?brand=GARDENA" class="dropdown-brand-card">
-                  <div class="dropdown-brand-name">
-                    <span>GARDENA</span>
-                  </div>
-                </a>
-                <a href="catalog.html?brand=SENSEI" class="dropdown-brand-card">
-                  <div class="dropdown-brand-name">
-                    <span>SENSEI</span>
-                  </div>
-                </a>
-                <a href="catalog.html?brand=HONDA" class="dropdown-brand-card">
-                  <div class="dropdown-brand-name">
-                    <span>HONDA</span>
-                  </div>
-                </a>
+                ${getBrandsDropdownHtml()}
               </div>
 
               <!-- Footer CTA Button: Explora todas nuestras marcas -->
@@ -364,38 +348,49 @@ function renderGlobalNavigation() {
       </form>
     </div>
     <div class="mobile-drawer-nav">
-      <a href="index.html" class="mobile-nav-link-item"><i class="fa-solid fa-house"></i> Inicio</a>
+      <!-- 1. Inicio -->
+      <a href="index.html" class="mobile-nav-link-item">
+        <span><i class="fa-solid fa-house"></i> Inicio</span>
+      </a>
       
-      <!-- Category Accordion -->
-      <div class="mobile-drawer-accordion-header js-drawer-accordion">
-        <span>Categorías Principales</span>
+      <!-- 2. Categorías -->
+      <div class="mobile-drawer-accordion-header js-drawer-accordion" data-nav="categories">
+        <span>Categorías</span>
         <i class="fa-solid fa-chevron-down"></i>
       </div>
       <div class="mobile-drawer-accordion-content">
         ${getMobileDrawerCategoriesHtml()}
       </div>
 
-      <a href="catalog.html?offers=true" class="mobile-nav-link-item"><span style="color: var(--color-danger);"><i class="fa-solid fa-bolt"></i> Ofertas Especiales</span> <span class="badge badge-discount">-16%</span></a>
-      
-      <!-- Marcas Accordion -->
-      <div class="mobile-drawer-accordion-header js-drawer-accordion">
-        <span><i class="fa-solid fa-certificate"></i> Marcas Oficiales</span>
+      <!-- 3. Marcas -->
+      <div class="mobile-drawer-accordion-header js-drawer-accordion" data-nav="brands">
+        <span>Marcas</span>
         <i class="fa-solid fa-chevron-down"></i>
       </div>
       <div class="mobile-drawer-accordion-content">
-        <a href="catalog.html?brand=OREGON" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> OREGON Líder Forestal</a>
-        <a href="catalog.html?brand=NIWA" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> NIWA Máquinas</a>
-        <a href="catalog.html?brand=BOSCH" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> BOSCH Professional</a>
-        <a href="catalog.html?brand=EINHELL" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> EINHELL Power X-Change</a>
-        <a href="catalog.html?brand=HUSQVARNA" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> HUSQVARNA Forestal</a>
-        <a href="catalog.html?brand=GARDENA" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> GARDENA Riego y Jardín</a>
-        <a href="catalog.html?brand=SENSEI" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> SENSEI Maquinaria</a>
-        <a href="catalog.html?brand=HONDA" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> HONDA Motores</a>
-        <a href="brands.html" class="mobile-subnav-link" style="font-weight: 700; color: var(--color-primary-dark); background: rgba(63, 170, 71, 0.1); border-radius: var(--radius-sm); margin-top: 6px; padding: 10px 12px;"><i class="fa-solid fa-grid-2"></i> Explorar todas nuestras marcas (113) →</a>
+        ${getMobileDrawerBrandsHtml()}
       </div>
 
-      <a href="about.html" class="mobile-nav-link-item"><i class="fa-solid fa-building"></i> Nosotros</a>
-      <a href="contact.html" class="mobile-nav-link-item"><i class="fa-solid fa-headset"></i> Contacto & Sucursales</a>
+      <!-- 4. Ofertas -->
+      <a href="catalog.html?offers=true" class="mobile-nav-link-item">
+        <span>Ofertas</span>
+        <span class="badge badge-discount">OFF</span>
+      </a>
+
+      <!-- 5. Nosotros -->
+      <a href="about.html" class="mobile-nav-link-item">
+        <span>Nosotros</span>
+      </a>
+
+      <!-- 6. Contacto -->
+      <a href="contact.html" class="mobile-nav-link-item">
+        <span>Contacto</span>
+      </a>
+
+      <!-- 7. Asesoría Técnica -->
+      <a href="https://wa.me/5492954696231?text=Hola%20HMC%20Hub,%20necesito%20asesoramiento%20t%C3%A9cnico" target="_blank" class="mobile-nav-link-item mobile-nav-support-link" style="color: var(--color-primary-dark); font-weight: 700;">
+        <span><i class="fa-brands fa-whatsapp" style="color: #25D366; margin-right: 6px;"></i> Asesoría Técnica</span>
+      </a>
     </div>
     <div class="mobile-drawer-footer">
       <a href="https://wa.me/5492954696231?text=Hola%20HMC%20Hub,%20necesito%20asesoramiento%20t%C3%A9cnico" target="_blank" class="mobile-drawer-wa-card">
@@ -410,26 +405,26 @@ function renderGlobalNavigation() {
 
   <!-- Mobile Bottom App Bar -->
   <div class="mobile-bottom-nav">
-    <a href="index.html" class="mobile-nav-btn">
+    <a href="index.html" class="mobile-nav-btn" data-page="index">
       <i class="fa-solid fa-house"></i>
       <span>Inicio</span>
     </a>
-    <a href="catalog.html" class="mobile-nav-btn">
+    <a href="categories.html" class="mobile-nav-btn" data-page="categories">
       <i class="fa-solid fa-layer-group"></i>
-      <span>Catálogo</span>
+      <span>Categorías</span>
     </a>
-    <a href="https://wa.me/5492954696231?text=Hola%20HMC%20Hub,%20necesito%20asesoramiento" target="_blank" class="mobile-nav-btn mobile-nav-wa">
-      <i class="fa-brands fa-whatsapp"></i>
-      <span>Asesoría</span>
+    <a href="brands.html" class="mobile-nav-btn" data-page="brands">
+      <i class="fa-solid fa-certificate"></i>
+      <span>Marcas</span>
     </a>
-    <button class="mobile-nav-btn js-open-cart">
+    <button class="mobile-nav-btn js-open-cart" data-page="cart">
       <div style="position: relative; display: inline-block;">
         <i class="fa-solid fa-cart-shopping"></i>
         <span class="cart-count-badge js-cart-count">1</span>
       </div>
       <span>Carrito</span>
     </button>
-    <button class="mobile-nav-btn js-open-mobile-menu">
+    <button class="mobile-nav-btn js-open-mobile-menu" data-page="menu">
       <i class="fa-solid fa-bars"></i>
       <span>Menú</span>
     </button>
@@ -546,8 +541,11 @@ function syncNavigationActiveState() {
 
   // Clear all desktop active nav items
   document.querySelectorAll('.nav-list .nav-item').forEach(item => item.classList.remove('active'));
-  // Clear all mobile drawer active links
+  // Clear all mobile drawer active links and headers
   document.querySelectorAll('.mobile-drawer-nav .mobile-nav-link-item').forEach(item => item.classList.remove('active'));
+  document.querySelectorAll('.mobile-drawer-accordion-header').forEach(item => item.classList.remove('active'));
+  // Clear all mobile bottom nav buttons
+  document.querySelectorAll('.mobile-bottom-nav .mobile-nav-btn').forEach(item => item.classList.remove('active'));
 
   if (pathname.includes('about.html')) {
     document.querySelectorAll('.nav-item a[href*="about.html"]').forEach(a => a.parentElement.classList.add('active'));
@@ -555,16 +553,20 @@ function syncNavigationActiveState() {
   } else if (pathname.includes('brands.html')) {
     document.querySelectorAll('.nav-item a[href*="brands.html"]').forEach(a => a.parentElement.classList.add('active'));
     document.querySelectorAll('.mobile-nav-link-item[href*="brands.html"]').forEach(a => a.classList.add('active'));
+    document.querySelectorAll('.mobile-drawer-accordion-header[data-nav="brands"]').forEach(h => h.classList.add('active'));
+    document.querySelectorAll('.mobile-bottom-nav a[href*="brands.html"], .mobile-bottom-nav [data-page="brands"]').forEach(a => a.classList.add('active'));
   } else if (pathname.includes('categories.html')) {
     document.querySelectorAll('.nav-item a[href*="categories.html"]').forEach(a => a.parentElement.classList.add('active'));
     document.querySelectorAll('.mobile-nav-link-item[href*="categories.html"]').forEach(a => a.classList.add('active'));
+    document.querySelectorAll('.mobile-drawer-accordion-header[data-nav="categories"]').forEach(h => h.classList.add('active'));
+    document.querySelectorAll('.mobile-bottom-nav a[href*="categories.html"], .mobile-bottom-nav [data-page="categories"]').forEach(a => a.classList.add('active'));
     const categoriesNavItem = document.querySelector('.mega-dropdown-categories-featured, .mega-dropdown:not(.mega-dropdown-brands-featured)')?.closest('.nav-item');
     if (categoriesNavItem) categoriesNavItem.classList.add('active');
   } else if (pathname.includes('contact.html')) {
     document.querySelectorAll('.nav-item a[href*="contact.html"]').forEach(a => a.parentElement.classList.add('active'));
     document.querySelectorAll('.mobile-nav-link-item[href*="contact.html"]').forEach(a => a.classList.add('active'));
   } else if (pathname.includes('cart.html')) {
-    // Full cart view
+    document.querySelectorAll('.mobile-bottom-nav [data-page="cart"], .mobile-bottom-nav .js-open-cart').forEach(btn => btn.classList.add('active'));
   } else if (pathname.includes('catalog.html')) {
     if (isOffers) {
       // 1. Activate "Ofertas" in desktop navbar
@@ -584,6 +586,8 @@ function syncNavigationActiveState() {
       // 1. Activate "Marcas" in navbar
       const brandsNavItem = document.querySelector('.mega-dropdown-brands-featured, .mega-dropdown-brands-2a, .mega-dropdown-brands')?.closest('.nav-item');
       if (brandsNavItem) brandsNavItem.classList.add('active');
+      document.querySelectorAll('.mobile-drawer-accordion-header[data-nav="brands"]').forEach(h => h.classList.add('active'));
+      document.querySelectorAll('.mobile-bottom-nav a[href*="brands.html"], .mobile-bottom-nav [data-page="brands"]').forEach(a => a.classList.add('active'));
       
       // 2. Update Title & Breadcrumbs
       document.title = `Equipos ${brandParam} Oficial | HMC HUB`;
@@ -593,6 +597,8 @@ function syncNavigationActiveState() {
       // Standard catalog / category view
       const categoriesNavItem = document.querySelector('.mega-dropdown-categories-featured, .mega-dropdown:not(.mega-dropdown-brands):not(.mega-dropdown-brands-2a):not(.mega-dropdown-brands-featured)')?.closest('.nav-item');
       if (categoriesNavItem) categoriesNavItem.classList.add('active');
+      document.querySelectorAll('.mobile-drawer-accordion-header[data-nav="categories"]').forEach(h => h.classList.add('active'));
+      document.querySelectorAll('.mobile-bottom-nav a[href*="categories.html"], .mobile-bottom-nav [data-page="categories"]').forEach(a => a.classList.add('active'));
       if (categoryParam) {
         const catProd = PRODUCT_CATALOG.find(p => p.category === categoryParam);
         const catName = catProd ? catProd.categoryName : categoryParam;
@@ -604,6 +610,7 @@ function syncNavigationActiveState() {
   } else if (pathname.includes('index.html') || pathname.endsWith('/') || pathname === '') {
     document.querySelectorAll('.nav-item a[href*="index.html"]').forEach(a => a.parentElement.classList.add('active'));
     document.querySelectorAll('.mobile-nav-link-item[href*="index.html"]').forEach(a => a.classList.add('active'));
+    document.querySelectorAll('.mobile-bottom-nav a[href*="index.html"], .mobile-bottom-nav [data-page="index"]').forEach(a => a.classList.add('active'));
   }
 }
 
@@ -728,8 +735,6 @@ const REAL_CATALOG_BRANDS = [
 ];
 
 const ALL_BRANDS_103 = REAL_CATALOG_BRANDS.map(b => b.name);
-
-const OFFICIAL_CORE_BRANDS = ["OREGON", "NIWA", "BOSCH", "EINHELL", "HUSQVARNA", "GARDENA", "SENSEI", "HONDA"];
 
 function initBrandsPage() {
   const container = document.getElementById("brandsAlphabetGrid") || document.querySelector(".js-brands-page-grid");
