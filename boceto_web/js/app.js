@@ -194,14 +194,9 @@ function renderGlobalNavigation() {
 
               <!-- 8 Featured Brands Grid -->
               <div class="dropdown-brands-grid">
-                <a href="catalog.html?brand=BOSCH" class="dropdown-brand-card">
+                <a href="catalog.html?brand=OREGON" class="dropdown-brand-card">
                   <div class="dropdown-brand-name">
-                    <span>BOSCH</span>
-                  </div>
-                </a>
-                <a href="catalog.html?brand=DEWALT" class="dropdown-brand-card">
-                  <div class="dropdown-brand-name">
-                    <span>DEWALT</span>
+                    <span>OREGON</span>
                   </div>
                 </a>
                 <a href="catalog.html?brand=NIWA" class="dropdown-brand-card">
@@ -209,24 +204,29 @@ function renderGlobalNavigation() {
                     <span>NIWA</span>
                   </div>
                 </a>
+                <a href="catalog.html?brand=BOSCH" class="dropdown-brand-card">
+                  <div class="dropdown-brand-name">
+                    <span>BOSCH</span>
+                  </div>
+                </a>
                 <a href="catalog.html?brand=EINHELL" class="dropdown-brand-card">
                   <div class="dropdown-brand-name">
                     <span>EINHELL</span>
                   </div>
                 </a>
-                <a href="catalog.html?brand=SHINDAIWA" class="dropdown-brand-card">
+                <a href="catalog.html?brand=HUSQVARNA" class="dropdown-brand-card">
                   <div class="dropdown-brand-name">
-                    <span>SHINDAIWA</span>
+                    <span>HUSQVARNA</span>
+                  </div>
+                </a>
+                <a href="catalog.html?brand=GARDENA" class="dropdown-brand-card">
+                  <div class="dropdown-brand-name">
+                    <span>GARDENA</span>
                   </div>
                 </a>
                 <a href="catalog.html?brand=SENSEI" class="dropdown-brand-card">
                   <div class="dropdown-brand-name">
                     <span>SENSEI</span>
-                  </div>
-                </a>
-                <a href="catalog.html?brand=STIHL" class="dropdown-brand-card">
-                  <div class="dropdown-brand-name">
-                    <span>STIHL</span>
                   </div>
                 </a>
                 <a href="catalog.html?brand=HONDA" class="dropdown-brand-card">
@@ -312,15 +312,15 @@ function renderGlobalNavigation() {
         <i class="fa-solid fa-chevron-down"></i>
       </div>
       <div class="mobile-drawer-accordion-content">
-        <a href="catalog.html?brand=BOSCH" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> BOSCH Professional</a>
-        <a href="catalog.html?brand=DEWALT" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> DEWALT Heavy Duty</a>
+        <a href="catalog.html?brand=OREGON" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> OREGON Líder Forestal</a>
         <a href="catalog.html?brand=NIWA" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> NIWA Máquinas</a>
+        <a href="catalog.html?brand=BOSCH" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> BOSCH Professional</a>
         <a href="catalog.html?brand=EINHELL" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> EINHELL Power X-Change</a>
-        <a href="catalog.html?brand=SHINDAIWA" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> SHINDAIWA Japón</a>
+        <a href="catalog.html?brand=HUSQVARNA" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> HUSQVARNA Forestal</a>
+        <a href="catalog.html?brand=GARDENA" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> GARDENA Riego & Jardín</a>
         <a href="catalog.html?brand=SENSEI" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> SENSEI Maquinaria</a>
-        <a href="catalog.html?brand=STIHL" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> STIHL Forestal</a>
         <a href="catalog.html?brand=HONDA" class="mobile-subnav-link"><i class="fa-solid fa-angle-right"></i> HONDA Motores</a>
-        <a href="brands.html" class="mobile-subnav-link" style="font-weight: 700; color: var(--color-primary-dark); background: rgba(63, 170, 71, 0.1); border-radius: var(--radius-sm); margin-top: 6px; padding: 10px 12px;"><i class="fa-solid fa-grid-2"></i> Explorar todas nuestras marcas (103) →</a>
+        <a href="brands.html" class="mobile-subnav-link" style="font-weight: 700; color: var(--color-primary-dark); background: rgba(63, 170, 71, 0.1); border-radius: var(--radius-sm); margin-top: 6px; padding: 10px 12px;"><i class="fa-solid fa-grid-2"></i> Explorar todas nuestras marcas (113) →</a>
       </div>
 
       <a href="about.html" class="mobile-nav-link-item"><i class="fa-solid fa-building"></i> Nosotros</a>
@@ -652,7 +652,7 @@ const REAL_CATALOG_BRANDS = [
 
 const ALL_BRANDS_103 = REAL_CATALOG_BRANDS.map(b => b.name);
 
-const OFFICIAL_CORE_BRANDS = ["BOSCH", "DEWALT", "NIWA", "EINHELL", "SHINDAIWA", "SENSEI", "STIHL", "HONDA"];
+const OFFICIAL_CORE_BRANDS = ["OREGON", "NIWA", "BOSCH", "EINHELL", "HUSQVARNA", "GARDENA", "SENSEI", "HONDA"];
 
 function initBrandsPage() {
   const container = document.getElementById("brandsAlphabetGrid") || document.querySelector(".js-brands-page-grid");
