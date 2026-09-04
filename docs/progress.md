@@ -8,6 +8,7 @@ Tracker de avance del trabajo de desarrollo sobre `web_ftp/` y prototipo interac
 
 Se rediseñó y modularizó el boceto web en páginas independientes interconectadas, siguiendo estrictamente la identidad de marca (`docs/design.md`), requerimientos funcionales (`docs/specs.md`) y mapeo directo 1-a-1 con las plantillas Tiendanube Legacy (`web_ftp/`):
 
+
 ### 1. Estructura de Páginas Creadas y Mapeo a Tiendanube
 1. **Home Page (`index.html`)** $\leftrightarrow$ `templates/home.tpl` & `snipplets/home/*.tpl`:
    - Hero Slider interactivo con 3 propuestas de valor.
@@ -307,6 +308,58 @@ Objetivo: Resolver la sobrecarga cognitiva y la "pared de texto" de más de 8.00
   - Cero fotografías decorativas para máxima velocidad de lectura y sobriedad de catálogo industrial de maquinaria y herramientas.
   - Tipografía `Quedora` para títulos y `Plus Jakarta Sans` para cuerpo y listas técnicas.
   - **Marco Unificado de Detalle**: La grilla de subcategorías y familias técnicas se ubica dentro del mismo contenedor (`.category-detail-hero`), directamente debajo del encabezado y descripción del rubro, y por encima del botón de enlace al catálogo (`Ver catálogo de {categoría} →`), consolidando la visual en un solo bloque estructurado.
+---
 
+## 🏷️ Marquesina Continua de Marcas (Infinite Marquee) — Boceto y Tiendanube (2026-09-04)
 
+Objetivo: Implementar un marquee continuo infinito de alto rendimiento para marcas de catálogo en `boceto_web/` y portarlo al tema productivo de Tiendanube (`web_ftp/`), reemplazando el carrusel de círculos previo por una marquesina industrial con 21 logos vectoriales oficiales normalizados y control dinámico de velocidad desde el Administrador de Tiendanube.
 
+### 1. Assets de Marcas
+- **21 marcas oficiales** descargadas, recortadas y normalizadas con proporciones consistentes y fondo transparente:
+  - Bosch, DeWalt, Husqvarna, Stihl, Einhell, Honda, Gardena, Niwa, Sensei, Oregon, Dowen Pagio, Makita, Shindaiwa, Bahco, Stanley, Echo, Lüsqtoff, Hunter, Metabo, Dremel, Kärcher.
+  - Almacenadas en:
+    - `boceto_web/assets/images/brands/`
+    - `assets/marcas/`
+    - `web_ftp/static/images/brands/` (sincronizadas por FTP a la CDN de Tiendanube).
+
+### 2. Implementación en Prototipo (`boceto_web/`)
+- **`boceto_web/index.html`**: Estructura `.brands-marquee-container` con `.brands-marquee-track` y `.brands-marquee-group` duplicado (`aria-hidden="true"` en el clon).
+- **`boceto_web/js/app.js`**: `initBrandsMarquee()` genera el markup dinámico con soporte de dataset `data-speed`.
+- **`boceto_web/css/styles.css`**: Tarjetas `.brand-marquee-card` (170x84px en desktop, 135x68px en mobile), resting contrast con opacidad 88% y grayscale 10%, elevación con `:hover`, sombras y acento verde `#3FAA47`. Pausa automática con `:hover` y `:focus-within`. Máscaras laterales suaves con `mask-image: linear-gradient()`.
+
+### 3. Implementación en Tema Tiendanube Legacy (`web_ftp/`)
+- **Configuración (`web_ftp/config/settings.txt`)**:
+  - `brands_format`: Añadida la opción `marquee = Marquesina continua (Marquee)`.
+  - `brands_marquee_speed`: Selector con opciones:
+    - `55 = Lenta (55s)`
+    - `42 = Normal (42s)`
+    - `25 = Rápida (25s)`
+- **Plantilla Principal (`web_ftp/snipplets/home/home-brands.tpl`)**:
+  - Se activa cuando `settings.brands_format != 'grid'`.
+  - Si el administrador cargó imágenes personalizadas en `settings.brands`, las utiliza preservando sus URLs (`settings_image_url('large')` y `lazyload`).
+  - Si no hay marcas cargadas en el admin, utiliza de fallback la lista completa de las 21 marcas oficiales con `static_url` apuntando a `images/brands/`.
+  - Track infinito con grupo clon idéntico para loop sin saltos.
+  - Velocidad asignada dinámicamente: `--marquee-speed: {{ settings.brands_marquee_speed | default(42) }}s;`.
+- **Plantilla Switch y Ayuda**:
+  - `web_ftp/snipplets/home/home-section-switch.tpl`: Renderiza `home-brands.tpl` para `section_select == 'brands'`.
+  - `web_ftp/snipplets/defaults/home/brands_help.tpl`: Redirige a `home-brands.tpl` para evitar el viejo placeholder de círculos en el previsualizador del admin.
+- **Estilos en `static/css/style-critical.scss` y `style-async.scss`**:
+  - `@keyframes hmc-brands-marquee` trasladando a `-50%`.
+  - Hardware acceleration (`translate3d`), pause-on-hover, desvanecimiento lateral y soporte para accesibilidad (`prefers-reduced-motion: reduce`).
+
+### 4. Instrucciones para Configuración en Tiendanube
+Para activar o ajustar la marquesina en la tienda:
+1. Ir al Administrador de Tiendanube $\rightarrow$ **Personalizar diseño actual**.
+2. Ir a **Página de inicio** $\rightarrow$ **Marcas**.
+3. En **"Mostrar como:"**, elegir **"Marquesina continua (Marquee)"**.
+4. En **"Velocidad de la marquesina:"**, seleccionar la velocidad deseada (**Normal (42s)**).
+5. En **Página de inicio** $\rightarrow$ **Orden de las secciones**, verificar que **"Marcas"** esté tildada y en la posición deseada.
+6. Guardar cambios y publicar.
+
+### 5. Procedimiento de Deploy por FTP
+```bash
+# Dentro del directorio web_ftp:
+npx -y @tiendanube/cli theme ftp push -y
+```
+- La CLI compara los archivos locales contra los remotos y solo sube los modificados (push incremental).
+- Las credenciales se gestionan de forma segura en `web_ftp/.nuvem`.

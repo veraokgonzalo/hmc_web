@@ -9,7 +9,7 @@
 {% set has_news_banners = settings.banner_news and settings.banner_news is not empty %}
 {% set has_featured_banners =  settings.banner_01_show or settings.banner_02_show or settings.banner_03_show or settings.banner_04_show %}
 {% set has_image_and_text_module = settings.module and settings.module is not empty %}
-{% set has_brands = settings.brands and settings.brands is not empty %}
+{% set has_brands = (settings.brands and settings.brands is not empty) or settings.brands_format == 'marquee' %}
 {% set has_new_block = settings.new_block and (settings.new_block_title or "new_block_image_01.jpg" | has_custom_image or "new_block_image_02.jpg" | has_custom_image) %}
 {% set has_informative_banners = settings.banner_services and (settings.banner_services_01_title or settings.banner_services_02_title or settings.banner_services_03_title or settings.banner_services_01_description or settings.banner_services_02_description or settings.banner_services_03_description) %}
 {% set has_instafeed = settings.show_instafeed and store.instagram and store.hasInstagramToken() %}

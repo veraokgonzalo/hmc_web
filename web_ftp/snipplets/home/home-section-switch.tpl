@@ -199,12 +199,8 @@
 
 {% elseif section_select == 'brands' %}
 
-	{#  **** Brands slider ****  #}
-	{% if show_help or (show_component_help and not has_brands) %}
-		{% snipplet 'defaults/home/brands_help.tpl' %}
-	{% else %}
-		{% include 'snipplets/home/home-brands.tpl' %}
-	{% endif %}
+	{#  **** Brands Marquee ****  #}
+	{% include 'snipplets/home/home-brands.tpl' %}
 
 {% elseif section_select == 'new_block' %}
 
