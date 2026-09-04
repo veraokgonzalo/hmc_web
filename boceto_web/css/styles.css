@@ -4710,14 +4710,16 @@ h6 { font-size: 0.95rem; }
 
 .dropdown-brand-card {
   display: flex;
-  flex-direction: column;
-  padding: 10px 12px;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 14px;
   background: var(--color-gray-ultra-light);
   border: 1px solid var(--color-gray-border);
   border-radius: var(--radius-sm);
   text-decoration: none;
   transition: all var(--transition-fast);
   position: relative;
+  min-height: 42px;
 }
 
 .dropdown-brand-card:hover {
@@ -4734,8 +4736,10 @@ h6 { font-size: 0.95rem; }
   color: var(--color-black);
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-bottom: 3px;
+  justify-content: center;
+  margin-bottom: 0;
+  width: 100%;
+  text-align: center;
 }
 
 .dropdown-brand-desc {

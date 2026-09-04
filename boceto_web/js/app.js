@@ -185,10 +185,8 @@ function renderGlobalNavigation() {
               <!-- Header -->
               <div class="dropdown-brands-header">
                 <div class="dropdown-brands-title">
-                  <i class="fa-solid fa-certificate text-primary"></i>
                   <div>
                     <h4>Marcas Destacadas</h4>
-                    <span>Distribuidores oficiales con respaldo técnico directo</span>
                   </div>
                 </div>
                 <span class="badge-official-pill"><i class="fa-solid fa-shield-check"></i> Garantía Oficial</span>
@@ -199,58 +197,42 @@ function renderGlobalNavigation() {
                 <a href="catalog.html?brand=BOSCH" class="dropdown-brand-card">
                   <div class="dropdown-brand-name">
                     <span>BOSCH</span>
-                    <span class="badge-official">Oficial</span>
                   </div>
-                  <span class="dropdown-brand-desc">Línea Profesional & Batería</span>
                 </a>
                 <a href="catalog.html?brand=DEWALT" class="dropdown-brand-card">
                   <div class="dropdown-brand-name">
                     <span>DEWALT</span>
-                    <span class="badge-official">Oficial</span>
                   </div>
-                  <span class="dropdown-brand-desc">Heavy Duty & Construcción</span>
                 </a>
                 <a href="catalog.html?brand=NIWA" class="dropdown-brand-card">
                   <div class="dropdown-brand-name">
                     <span>NIWA</span>
-                    <span class="badge-official">Oficial</span>
                   </div>
-                  <span class="dropdown-brand-desc">Bombas, Generadores & Jardín</span>
                 </a>
                 <a href="catalog.html?brand=EINHELL" class="dropdown-brand-card">
                   <div class="dropdown-brand-name">
                     <span>EINHELL</span>
-                    <span class="badge-official">Oficial</span>
                   </div>
-                  <span class="dropdown-brand-desc">Power X-Change 18V</span>
                 </a>
                 <a href="catalog.html?brand=SHINDAIWA" class="dropdown-brand-card">
                   <div class="dropdown-brand-name">
                     <span>SHINDAIWA</span>
-                    <span class="badge-official">Oficial</span>
                   </div>
-                  <span class="dropdown-brand-desc">Motoguadañas Japón</span>
                 </a>
                 <a href="catalog.html?brand=SENSEI" class="dropdown-brand-card">
                   <div class="dropdown-brand-name">
                     <span>SENSEI</span>
-                    <span class="badge-official">Oficial</span>
                   </div>
-                  <span class="dropdown-brand-desc">Maquinaria a Explosión</span>
                 </a>
                 <a href="catalog.html?brand=STIHL" class="dropdown-brand-card">
                   <div class="dropdown-brand-name">
                     <span>STIHL</span>
-                    <span class="badge-official">Oficial</span>
                   </div>
-                  <span class="dropdown-brand-desc">Línea Forestal & Parque</span>
                 </a>
                 <a href="catalog.html?brand=HONDA" class="dropdown-brand-card">
                   <div class="dropdown-brand-name">
                     <span>HONDA</span>
-                    <span class="badge-official">Oficial</span>
                   </div>
-                  <span class="dropdown-brand-desc">Motores & Generadores</span>
                 </a>
               </div>
 
@@ -261,7 +243,7 @@ function renderGlobalNavigation() {
                   <span>Representamos a más de <strong>100 fabricantes líderes</strong> con stock y repuestos.</span>
                 </div>
                 <a href="brands.html" class="btn btn-primary btn-sm btn-explore-brands">
-                  <i class="fa-solid fa-grid-2"></i> Explorar todas nuestras marcas →
+                  Todas las marcas →
                 </a>
               </div>
 
@@ -611,7 +593,7 @@ function initBrandsPage() {
 
     // Update Counter
     countPills.forEach(pill => {
-      pill.innerHTML = `<i class="fa-solid fa-tags"></i> <strong>${filtered.length}</strong> marcas disponibles`;
+      pill.innerHTML = `<strong>${filtered.length}</strong> marcas disponibles`;
     });
 
     // Handle Empty State
@@ -656,11 +638,9 @@ function initBrandsPage() {
       `;
 
       brandList.forEach(brand => {
-        const isOfficial = OFFICIAL_CORE_BRANDS.includes(brand.toUpperCase());
         html += `
-          <a href="catalog.html?brand=${encodeURIComponent(brand)}" class="brand-directory-item ${isOfficial ? "is-official" : ""}" title="Ver productos de ${brand} en el catálogo">
-            <span>${isOfficial ? `<strong>${brand}</strong>` : brand}</span>
-            ${isOfficial ? `<span class="badge-official">Oficial</span>` : `<i class="fa-solid fa-angle-right brand-item-arrow"></i>`}
+          <a href="catalog.html?brand=${encodeURIComponent(brand)}" class="brand-directory-item" title="Ver productos de ${brand} en el catálogo">
+            <span>${brand}</span>
           </a>
         `;
       });
