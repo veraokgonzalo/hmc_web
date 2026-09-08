@@ -184,7 +184,7 @@ function renderGlobalNavigation() {
       </div>
       <div class="top-bar-links">
         <a href="contact.html"><i class="fa-solid fa-location-dot"></i> Sucursal: Santa Rosa, La Pampa</a>
-        <a href="https://wa.me/5492954696231" target="_blank"><i class="fa-brands fa-whatsapp"></i> Ventas & Factura A</a>
+        <a href="https://wa.me/5492954696231" target="_blank"><i class="fa-brands fa-whatsapp"></i> Ventas y Factura A</a>
       </div>
     </div>
   </div>
@@ -216,7 +216,7 @@ function renderGlobalNavigation() {
 
       <!-- Header Utility Actions -->
       <div class="header-utilities">
-        <a href="contact.html" class="utility-btn" title="Mi Cuenta & Sucursales">
+        <a href="contact.html" class="utility-btn" title="Mi Cuenta y Sucursales">
           <i class="fa-regular fa-user"></i>
           <span class="d-none-mobile">Mi Cuenta</span>
         </a>

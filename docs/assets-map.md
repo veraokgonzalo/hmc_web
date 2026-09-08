@@ -74,3 +74,14 @@ Guía de referencia de archivos de imagen y recursos multimedia del proyecto `bo
 | Archivo | Sección en la Web | Descripción |
 |---|---|---|
 | `showcase.mp4` | Home Page → Video Showcase ("Equipos en Acción") | Video de demostración de maquinaria en obra |
+
+---
+
+## 6. Imágenes Institucionales & Sucursales (`assets/images/`)
+
+| Archivo | Sección en la Web | Descripción |
+|---|---|---|
+| `sucursal-foto-vertical.webp` | Home Page (`index.html`) & Nosotros (`about.html`) | Foto vertical de alta resolución del Showroom oficial y Casa Central HMC en Santa Rosa con maquinaria Husqvarna/Niwa y mostrador de atención. Utilizada como fondo con efecto Parallax. |
+| `about/about-us-we.webp` | Nosotros (`about.html`) | Foto institucional del equipo de trabajo de HMC HUB. |
+| `about/atendiendo-cliente.webp` | Nosotros (`about.html`) | Foto de asesoramiento técnico personalizado en mostrador. |
+

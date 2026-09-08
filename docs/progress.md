@@ -336,3 +336,26 @@ Objetivo: Resolver la sobrecarga cognitiva y la "pared de texto" de más de 8.00
   - **Breakpoint `<= 480px`**:
     - Tipografía de título ajustada a `1.35rem`, altura de foto de taller a `220px`, y números métricos a `1.85rem` para teléfonos compactos (320px–414px).
   - **Utilidad Global**: Se incorporó la clase `.text-primary` (`color: var(--color-primary) !important;`).
+
+---
+
+## 🏔️ Sistema Parallax HMC: Showroom & Casa Central Santa Rosa (1.3 - 2026-09-08)
+
+- [x] **Implementación en Home Page (`boceto_web/index.html`)**:
+  - Se incorporó la sección full-bleed `.hmc-parallax-section.home-showroom-parallax` (`#sucursal-central`) entre la sección de Video Showcase/Catálogo y los Testimonios de clientes.
+  - Utiliza `sucursal-foto-vertical.webp` como fondo con efecto parallax (`background-attachment: fixed` en desktop con hover) y overlay oscuro degradado (`rgba(14, 14, 14, 0.90)` a `rgba(20, 20, 20, 0.74)`) para máxima legibilidad WCAG.
+  - Título display *"Conocé Nuestra Casa Central en Santa Rosa"*, tag de marca, 3 pills translúcidas (*Showroom Oficial Husqvarna & Niwa*, *Servicio Técnico y Taller Propio*, *Stock Permanente de Repuestos*).
+  - 3 botones de acción directos: *"Cómo Llegar"* (Google Maps navigation), *"Conocer Instalaciones"* (link suave a `#sucursal-santa-rosa` en `about.html`), y *"Hablar con Mostrador"* (WhatsApp pre-cargado).
+- [x] **Implementación en Página "Nosotros" (`boceto_web/about.html`)**:
+  - Se transformó el bloque de sucursal en la sección full-width `.about-branch-parallax-section` (`#sucursal-santa-rosa`), eliminando la fotografía duplicada previa (`atendiendo-cliente.webp`).
+  - Layout responsive en 2 columnas:
+    - Columna izquierda: narrativa institucional, tag *"Punto de Encuentro & Showroom"*, título y 3 diferenciales en lista con íconos verificados.
+    - Columna derecha: tarjeta de vidrio esmerilado (*glassmorphism*) con borde verde primario (`#3FAA47`), dirección oficial, horarios completos de atención, beneficios de retiro con prueba de marcha y botones directos de contacto y mapa.
+- [x] **Motor de Estilos Mobile-First (`boceto_web/css/styles.css` - Sección 33)**:
+  - **Desktop ($\ge 992$px)**: `background-attachment: fixed`, `background-position: center 25%`, hardware-accelerated.
+  - **Mobile & Tablet ($< 992$px)**: `background-attachment: scroll !important`, `background-position: center top !important`, evitando el bug conocido de congelamiento y zoom de iOS Safari y Chrome móvil.
+  - **Mobile Breakpoint ($\le 768$px)**: apilamiento de grillas a 1 columna, botones táctiles al 100% de ancho con altura mínima $\ge 44$px, espaciado lateral seguro (`16px`).
+  - **Accesibilidad**: Soporte nativo para `prefers-reduced-motion: reduce` desactivando el efecto de scroll fijo.
+- [x] **Actualización de Documentación de Recursos (`docs/assets-map.md`)**:
+  - Se documentó la imagen `sucursal-foto-vertical.webp` en la nueva Sección 6 de Imágenes Institucionales & Sucursales.
+
