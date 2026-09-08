@@ -317,3 +317,22 @@ Objetivo: Resolver la sobrecarga cognitiva y la "pared de texto" de más de 8.00
 - [x] **Sincronización en Script Maestro (`boceto_web/js/app.js`)**:
   - Se implementó `checkStickyBuyBar()` escuchando eventos `scroll` y `resize`, gestionando la clase `sticky-buy-active` en `document.body` para garantizar compatibilidad total cross-browser.
   - El botón "Comprar" ahora cuenta con un área táctil 100% despejada en cualquier dispositivo móvil.
+
+---
+
+## 🛠️ Refactorización Responsive Completa de "Nosotros" (1.2 - 2026-09-08)
+
+- [x] **Eliminación de Estilos Inline y Clases Semánticas (`boceto_web/about.html`)**:
+  - Se eliminaron todos los atributos `style="..."` frágiles en los bloques de Hero, Identidad de Marca, Métricas y Sucursal.
+  - Se implementaron clases semánticas CSS: `.about-hero`, `.about-hero-content`, `.about-hero-tag`, `.about-hero-title`, `.about-hero-lead`, `.about-hero-actions`, `.about-hero-watermark`, `.about-identity-grid`, `.about-identity-text`, `.about-identity-media`, `.about-identity-img-wrapper`, `.about-identity-img`, `.about-workshop-badge`, `.about-metrics-card`, `.about-metrics-grid`, `.about-metric-item`, `.about-metric-number`, `.about-metric-label`, `.about-metric-sub`, `.about-branch-container`, `.about-branch-card`, `.about-branch-info`, `.about-branch-schedule`.
+  - Se actualizó la métrica oficial de marcas de `10` a `+100 Marcas Oficiales` para mantener coherencia con el directorio general (`brands.html`).
+- [x] **Reglas de Diseño y Breakpoints en `boceto_web/css/styles.css`**:
+  - **Sección 31b (`About Page Layout`)**: Reglas desktop completas para márgenes, gradientes, tipografías y sombras.
+  - **Breakpoint `<= 768px`**:
+    - `.about-identity-grid`: apilado en 1 sola columna (`1fr; gap: 28px;`), resolviendo las columnas aplastadas de 140px.
+    - `.about-workshop-badge`: reposicionado a flujo estático (`position: static;`) debajo de la imagen con fondo oscuro estilizado, evitando tapar la fotografía en móviles.
+    - `.about-metrics-grid`: reconfigurado a grilla 2x2 (`repeat(2, 1fr); gap: 20px 14px;`) con números escalados a `2.2rem`, eliminando el desbordamiento horizontal.
+    - `.about-hero`: padding reducido a `28px 18px`, título reducido a `1.6rem`, y botones de acción en ancho completo apilados.
+  - **Breakpoint `<= 480px`**:
+    - Tipografía de título ajustada a `1.35rem`, altura de foto de taller a `220px`, y números métricos a `1.85rem` para teléfonos compactos (320px–414px).
+  - **Utilidad Global**: Se incorporó la clase `.text-primary` (`color: var(--color-primary) !important;`).

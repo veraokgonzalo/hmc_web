@@ -15,7 +15,7 @@ Tareas de máxima prioridad que impactan directamente la navegación y conversi�
     - Elevar el `z-index` de la barra adhesiva o integrar un botón secundario de WhatsApp dentro de la propia barra para unificar acciones.
   - **Archivos:** `boceto_web/css/styles.css`, `boceto_web/js/app.js`.
 
-- [ ] **1.2. Refactorización Responsive Completa de "Nosotros" (`about.html` & `styles.css`)**
+- [x] **1.2. Refactorización Responsive Completa de "Nosotros" (`about.html` & `styles.css`)**
   - **Problema:** La vista carece de reglas en `styles.css` y usa estilos `style="..."` inline rígidos. En móviles, la sección de identidad queda en 2 columnas de 140px y las métricas en 4 columnas de `font-size: 3rem`, desbordando la pantalla.
   - **Acción:**
     - Eliminar todos los estilos inline y crear clases semánticas: `.about-hero`, `.about-identity-grid`, `.about-metrics-grid`, `.about-metric-card`.

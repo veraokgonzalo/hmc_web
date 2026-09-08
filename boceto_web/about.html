@@ -39,22 +39,22 @@
   <!-- ========================================================================
        5. About Page Main Content
        ======================================================================== -->
-  <main class="about-page-section" style="padding: 60px 0 80px 0;">
+  <main class="about-page-section">
     <div class="container">
       
       <!-- Intro Hero Banner -->
-      <div style="background: linear-gradient(135deg, var(--color-black) 0%, #1e241e 100%); border-radius: var(--radius-lg); padding: 60px 40px; color: var(--color-white); margin-bottom: 60px; position: relative; overflow: hidden; border-left: 6px solid var(--color-primary);">
-        <div style="max-width: 780px; position: relative; z-index: 2;">
-          <div class="section-tag" style="background: rgba(63, 170, 71, 0.2); color: var(--color-primary-light); margin-bottom: 16px;">
-            <i class="fa-solid fa-shield-check"></i> Trayectoria & Confianza Oficial
+      <div class="about-hero">
+        <div class="about-hero-content">
+          <div class="section-tag about-hero-tag">
+            <i class="fa-solid fa-shield-check"></i> Trayectoria & Confianza
           </div>
-          <h1 style="font-family: var(--font-headings); font-size: 2.6rem; line-height: 1.15; margin-bottom: 20px; color: var(--color-white);">
-            Todo lo que mueve tu obra, tu campo, tu casa <span style="color: var(--color-primary);">o tu negocio</span>
+          <h1 class="about-hero-title">
+            Todo lo que mueve tu obra, tu campo, tu casa <span class="text-primary">o tu negocio</span>
           </h1>
-          <p style="font-size: 1.15rem; line-height: 1.6; color: #ccc; margin-bottom: 28px; font-weight: 300;">
-            <strong style="color: var(--color-white);">HMC no compite por precio, compite por respaldo técnico, trayectoria y asesoramiento especializado antes y después de cada compra.</strong>
+          <p class="about-hero-lead">
+            <strong>HMC no compite por precio, compite por respaldo técnico, trayectoria y asesoramiento especializado antes y después de cada compra.</strong>
           </p>
-          <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+          <div class="about-hero-actions">
             <a href="https://wa.me/5492954696231?text=Hola%20HMC%20Hub,%20quiero%20conocer%20m%C3%A1s%20sobre%20sus%20servicios" target="_blank" class="btn btn-primary btn-lg">
               <i class="fa-brands fa-whatsapp"></i> Hablar con un Especialista
             </a>
@@ -63,41 +63,37 @@
             </a>
           </div>
         </div>
-        <div style="position: absolute; right: -20px; bottom: -30px; opacity: 0.08; font-size: 20rem; pointer-events: none; color: #fff;">
+        <div class="about-hero-watermark">
           <i class="fa-solid fa-gears"></i>
         </div>
       </div>
 
       <!-- Company Identity & Philosophy -->
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; margin-bottom: 70px;">
-        <div>
+      <div class="about-identity-grid">
+        <div class="about-identity-text">
           <div class="section-tag"><i class="fa-solid fa-building"></i> Nuestra Identidad</div>
-          <h2 style="font-family: var(--font-headings); font-size: 2rem; margin-bottom: 18px; color: var(--color-black);">
+          <h2 class="about-identity-title">
             Más que una tienda, tu socio técnico en cada proyecto
           </h2>
-          <p style="font-size: 1rem; line-height: 1.7; color: var(--color-gray-dark); margin-bottom: 16px;">
+          <p class="about-identity-desc">
             En <strong>1996</strong> iniciamos nuestro camino con un propósito claro: brindar un servicio técnico confiable, rápido y eficiente.
           </p>
-          <p style="font-size: 1rem; line-height: 1.7; color: var(--color-gray-dark); margin-bottom: 16px;">
+          <p class="about-identity-desc">
             Con el paso del tiempo, el avance de la tecnología y las exigencias del mercado, asumimos el desafío de ir un paso más allá. Nos fuimos profesionalizando, expandiendo nuestro conocimiento y equipamiento.
           </p>
-          <p style="font-size: 1rem; line-height: 1.7; color: var(--color-gray-dark);">
+          <p class="about-identity-desc">
             Esa evolución constante nos transformó en lo que somos hoy: <strong>HMC HUB</strong>, un centro integral que combina nuestra sólida experiencia técnica con la provisión de las mejores herramientas del mercado.
           </p>
         </div>
-        <div style="position: relative;">
-          <div style="border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg); border: 2px solid var(--color-gray-border);">
-            <img src="assets/images/hero/hero-slide-3-servicio-tecnico-taller.jpg" alt="Taller Oficial HMC HUB" style="width: 100%; height: 380px; object-fit: cover; display: block;">
-          </div>
-          <div style="position: absolute; bottom: 20px; left: 20px; right: 20px; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px); padding: 18px 22px; border-radius: var(--radius-md); color: var(--color-white); border-left: 4px solid var(--color-primary);">
-            <div style="font-weight: 700; font-size: 1rem; color: var(--color-primary); margin-bottom: 4px;"><i class="fa-solid fa-certificate"></i> Taller Oficial & Puesta en Marcha</div>
-            <div style="font-size: 0.85rem; color: #ccc;">Mecánicos capacitados por fábricas internacionales para diagnóstico y calibración.</div>
+        <div class="about-identity-media">
+          <div class="about-identity-img-wrapper">
+            <img src="assets/images/about/about-us-we.webp" alt="Equipo HMC HUB" class="about-identity-img">
           </div>
         </div>
       </div>
 
       <!-- 4 Pillars Grid -->
-      <div style="margin-bottom: 70px;">
+      <div class="about-section-spacer">
         <div class="section-header">
           <div class="section-tag"><i class="fa-solid fa-award"></i> Valores y Diferenciales</div>
           <h2 class="section-title">Por Qué Elegir HMC HUB</h2>
@@ -140,7 +136,7 @@
               <i class="fa-solid fa-truck-fast"></i>
             </div>
             <div>
-              <h4 class="value-prop-title">Logística Nacional & Factura A</h4>
+              <h4 class="value-prop-title">Logística Nacional y Factura A</h4>
               <p class="value-prop-desc">Envíos rápidos a todo el país con embalaje reforzado y facturación A inmediata para empresas.</p>
             </div>
           </div>
@@ -148,35 +144,34 @@
       </div>
 
       <!-- Metrics and Achievements -->
-      <div style="background: var(--color-gray-ultra-light); border-radius: var(--radius-lg); padding: 50px 30px; margin-bottom: 70px; border: 1px solid var(--color-gray-border);">
-        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; text-align: center;">
-          <div>
-            <div style="font-family: var(--font-headings); font-size: 3rem; font-weight: 700; color: var(--color-primary); line-height: 1;">+30</div>
-            <div style="font-size: 0.95rem; font-weight: 600; color: var(--color-black); margin-top: 8px;">Años de Trayectoria</div>
-            <div style="font-size: 0.82rem; color: #777;">En el mercado de maquinaria</div>
+      <div class="about-metrics-card">
+        <div class="about-metrics-grid">
+          <div class="about-metric-item">
+            <div class="about-metric-number">+30</div>
+            <div class="about-metric-label">Años de Trayectoria</div>
+            <div class="about-metric-sub">En el mercado de maquinaria</div>
           </div>
-          <div>
-            <div style="font-family: var(--font-headings); font-size: 3rem; font-weight: 700; color: var(--color-primary); line-height: 1;">+12.000</div>
-            <div style="font-size: 0.95rem; font-weight: 600; color: var(--color-black); margin-top: 8px;">Clientes Atendidos</div>
-            <div style="font-size: 0.82rem; color: #777;">Empresas, campo y profesionales</div>
+          <div class="about-metric-item">
+            <div class="about-metric-number">+12.000</div>
+            <div class="about-metric-label">Clientes Atendidos</div>
+            <div class="about-metric-sub">Empresas, campo y profesionales</div>
           </div>
-          <div>
-            <div style="font-family: var(--font-headings); font-size: 3rem; font-weight: 700; color: var(--color-primary); line-height: 1;">10</div>
-            <div style="font-size: 0.95rem; font-weight: 600; color: var(--color-black); margin-top: 8px;">Marcas Oficiales</div>
-            <div style="font-size: 0.82rem; color: #777;">Distribución y servicio directo</div>
+          <div class="about-metric-item">
+            <div class="about-metric-number">+100</div>
+            <div class="about-metric-label">Marcas Oficiales</div>
+            <div class="about-metric-sub">Distribución y servicio directo</div>
           </div>
-          <div>
-            <div style="font-family: var(--font-headings); font-size: 3rem; font-weight: 700; color: var(--color-primary); line-height: 1;">1</div>
-            <div style="font-size: 0.95rem; font-weight: 600; color: var(--color-black); margin-top: 8px;">Sucursal Física</div>
-            <div style="font-size: 0.82rem; color: #777;">Santa Rosa, La Pampa</div>
+          <div class="about-metric-item">
+            <div class="about-metric-number">1</div>
+            <div class="about-metric-label">Sucursal Física</div>
+            <div class="about-metric-sub">Santa Rosa, La Pampa</div>
           </div>
         </div>
       </div>
 
       <!-- Official Brands Strip -->
-      <div style="margin-bottom: 70px;">
-        <div class="section-header" style="margin-bottom: 28px;">
-          <div class="section-tag"><i class="fa-solid fa-certificate"></i> Alianzas Estratégicas</div>
+      <div class="about-section-spacer">
+        <div class="section-header about-brands-header">
           <h2 class="section-title">Distribuidores Oficiales</h2>
           <p class="section-subtitle">Garantía directa de fábrica y repuestos originales en todas nuestras líneas.</p>
         </div>
@@ -196,18 +191,46 @@
       </div>
 
       <!-- Physical Presence & Branch CTA -->
-      <div style="display: grid; grid-template-columns: 1fr; gap: 24px;">
-        <div class="branch-card" style="margin-bottom: 0;">
-          <h4><i class="fa-solid fa-store text-primary"></i> Sucursal HMC HUB — Santa Rosa</h4>
-          <p style="font-size: 0.9rem; color: #555; margin-bottom: 8px;">
-            <strong>Dirección:</strong> Av. Santiago Marzo (Norte) 171, Santa Rosa, La Pampa, Argentina.
-          </p>
-          <p style="font-size: 0.9rem; color: #555; margin-bottom: 16px;">
-            <strong>Horarios:</strong> Lunes a Viernes de 8:30 a 12:30 hs. y de 15:30 a 19:30 hs. | Sábados de 8:30 a 13:00 hs.
-          </p>
-          <a href="https://wa.me/5492954696231?text=Hola%20HMC%20Hub,%20quiero%20consultar%20por%20retiro" target="_blank" class="btn btn-dark btn-sm">
-            <i class="fa-brands fa-whatsapp"></i> Contactar Sucursal
-          </a>
+      <div class="about-section-spacer">
+        <div class="section-header">
+          <h2 class="section-title">Nuestra Casa Central en Santa Rosa</h2>
+          <p class="section-subtitle">Vení a conocer nuestro showroom, asesorarte cara a cara con especialistas y retirar tus compras con puesta en marcha oficial.</p>
+        </div>
+
+        <div class="about-branch-layout">
+          <div class="about-branch-media">
+            <div class="about-branch-img-wrapper">
+              <img src="assets/images/about/atendiendo-cliente.webp" alt="Atención técnica personalizada en HMC HUB" class="about-branch-img">
+            </div>
+          </div>
+          <div class="branch-card about-branch-card">
+            <h4><i class="fa-solid fa-store text-primary"></i> Sucursal HMC HUB — Santa Rosa</h4>
+            <p class="about-branch-info">
+              <strong>Dirección:</strong> Av. Santiago Marzo (Norte) 171, Santa Rosa, La Pampa, Argentina.
+            </p>
+            <p class="about-branch-schedule">
+              <strong>Horarios:</strong> Lunes a Viernes de 8:30 a 12:30 hs. y de 15:30 a 19:30 hs. | Sábados de 8:30 a 13:00 hs.
+            </p>
+            <div class="about-branch-highlights">
+              <div class="about-branch-highlight-item">
+                <i class="fa-solid fa-circle-check text-primary"></i> Showroom con maquinaria en exhibición y prueba de arranque.
+              </div>
+              <div class="about-branch-highlight-item">
+                <i class="fa-solid fa-circle-check text-primary"></i> Mostrador de repuestos legítimos y consumibles oficiales.
+              </div>
+              <div class="about-branch-highlight-item">
+                <i class="fa-solid fa-circle-check text-primary"></i> Retiro inmediato sin costo para compras realizadas en la tienda web.
+              </div>
+            </div>
+            <div class="about-branch-actions">
+              <a href="https://wa.me/5492954696231?text=Hola%20HMC%20Hub,%20quiero%20consultar%20por%20retiro" target="_blank" class="btn btn-primary btn-sm">
+                <i class="fa-brands fa-whatsapp"></i> Contactar Sucursal
+              </a>
+              <a href="https://www.google.com/maps/dir/?api=1&destination=Av.+Santiago+Marzo+(Norte)+171,+Santa+Rosa,+La+Pampa,+Argentina" target="_blank" class="btn btn-secondary btn-sm">
+                <i class="fa-solid fa-diamond-turn-right"></i> Cómo Llegar
+              </a>
+            </div>
+          </div>
         </div>
       </div>
 
