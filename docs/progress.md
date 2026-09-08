@@ -359,3 +359,27 @@ Objetivo: Resolver la sobrecarga cognitiva y la "pared de texto" de más de 8.00
 - [x] **Actualización de Documentación de Recursos (`docs/assets-map.md`)**:
   - Se documentó la imagen `sucursal-foto-vertical.webp` en la nueva Sección 6 de Imágenes Institucionales & Sucursales.
 
+---
+
+## 🛠️ Unificación Taxonómica, Corrección de Chips y Enlaces Home (2.2, 2.3, 2.4 - 2026-09-08)
+
+- [x] **2.2. Unificación Taxonómica de Categorías (Slugs y Filtros)**:
+  - Se implementó el diccionario bidireccional de sinónimos y alias `CATEGORY_SLUG_MAP` en `boceto_web/js/app.js` conectando los identificadores de la tienda real Tiendanube (`agua`, `consumibles-e-insumos`, `maquina-a-bateria`, `maquina-a-explosion`, `generacion-energia`, `jardin`) con los slugs del catálogo mock (`agua-bombeo`, `accesorios-insumos`, `herramientas-bateria`, `maquinas-explosion`).
+  - Se crearon las funciones `resolveCategorySlug(slug)` y `getCategoryDisplayName(slug)` disponibles globalmente en `window`.
+  - Se actualizaron los checkboxes de categorías en `catalog.html` con atributos `data-alias` y soporte dinámico en `initCatalogPage()` tanto para coincidencia exacta como por alias.
+  - Se añadió persistencia de `urlCategoryFilter` para rubros sin checkbox en el sidebar, mostrando el estado vacío descriptivo y chip de remoción.
+  - Sincronización del título del documento y migas de pan en `highlightActiveNavigation()`.
+
+- [x] **2.3. Corrección de Error de Sintaxis en Chips Activos de Marca (`catalog.html` y `app.js`)**:
+  - Se corrigió la vulnerabilidad de `querySelector('.js-filter-brand[value=' + b + ']')` que lanzaba un error fatal `DOMException: Failed to execute 'querySelector'` cuando la marca seleccionada contenía espacios (ej. `DOWEN PAGIO`, `RAIN BIRD`) o caracteres especiales.
+  - Se refactorizó `renderActiveFilterChips()` para generar chips seguros con `data-chip-action` y `data-value` escapados vía la nueva función utilitaria `escapeHtml(str)`.
+  - Se implementó delegación de eventos (`activeChipsContainer.addEventListener('click')`) para la eliminación atómica y segura de chips (búsqueda, categoría, marca, envío gratis, oferta, o limpiar todo).
+  - Los chips de marcas de la URL que no forman parte de los checkboxes del sidebar ahora se filtran y eliminan correctamente sin recargar la página.
+  - Los chips de categorías ahora muestran su nombre amigable (`Agua`, `Consumibles e Insumos`, etc.) en lugar del slug en minúsculas.
+
+- [x] **2.4. Sincronización de Enlaces Rotos o Inconsistentes en Home (`index.html`)**:
+  - **Slide 2 (Hero)**: El botón "Conocenos" se actualizó de `href="#nosotros"` a `href="about.html"`.
+  - **Slide 3 (Hero)**: El botón "Nuestras Marcas" se actualizó de `href="catalog.html?brand=STIHL"` (que mostraba 0 resultados sin contexto) a `href="brands.html"` (directorio oficial completo de las 113 marcas).
+  - **Slide 3 (Hero)**: Se corrigió el título display reemplazando `&` por `y`: `Servicio Técnico Oficial <span>y Repuestos Originales</span>`.
+  - **Cumplimiento estricto de la regla del usuario**: Se sustituyó el carácter `&` por la conjunción `y` en todos los textos visibles en español a lo largo de `index.html`, `catalog.html` y componentes globales en `app.js`.
+

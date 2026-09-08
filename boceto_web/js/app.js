@@ -71,6 +71,89 @@ const REAL_STORE_CATEGORIES = [
   { id: "riego", name: "RIEGO", displayName: "Riego", count: 200 }
 ];
 
+/* --------------------------------------------------------------------------
+   -1.4. Category Taxonomy Mapping & Resolver (Task 2.2)
+   -------------------------------------------------------------------------- */
+const CATEGORY_SLUG_MAP = {
+  'agua': 'agua-bombeo',
+  'agua-bombeo': 'agua-bombeo',
+  'bomba-superficie': 'agua-bombeo',
+  'bombas-sumergibles': 'agua-bombeo',
+  'construccion': 'construccion',
+  'consumibles-e-insumos': 'accesorios-insumos',
+  'accesorios-insumos': 'accesorios-insumos',
+  'consumibles-insumos': 'accesorios-insumos',
+  'ferreteria': 'ferreteria',
+  'ferreteria-industrial': 'ferreteria',
+  'maquina-a-bateria': 'herramientas-bateria',
+  'herramientas-bateria': 'herramientas-bateria',
+  'maquinas-a-bateria': 'herramientas-bateria',
+  'maquinas-bateria': 'herramientas-bateria',
+  'maquina-a-explosion': 'maquinas-explosion',
+  'maquinas-explosion': 'maquinas-explosion',
+  'maquinas-a-explosion': 'maquinas-explosion',
+  'jardin': 'maquinas-explosion',
+  'jardineria': 'maquinas-explosion',
+  'generacion-energia': 'maquinas-explosion',
+  'generadores': 'maquinas-explosion',
+  'motosierras': 'maquinas-explosion',
+  'desmalezadoras': 'maquinas-explosion',
+  'hidrolavadoras': 'agua-bombeo'
+};
+
+function resolveCategorySlug(slug) {
+  if (!slug) return '';
+  const normalized = String(slug).toLowerCase().trim();
+  return CATEGORY_SLUG_MAP[normalized] || normalized;
+}
+
+const CATEGORY_DISPLAY_NAMES = {
+  'agua-bombeo': 'Agua',
+  'agua': 'Agua',
+  'construccion': 'Construcción',
+  'accesorios-insumos': 'Consumibles e Insumos',
+  'consumibles-e-insumos': 'Consumibles e Insumos',
+  'consumibles-insumos': 'Consumibles e Insumos',
+  'ferreteria': 'Ferretería',
+  'herramientas-bateria': 'Herramientas a Batería',
+  'maquina-a-bateria': 'Máquinas a Batería',
+  'maquinas-a-bateria': 'Máquinas a Batería',
+  'maquinas-explosion': 'Máquinas a Explosión',
+  'maquina-a-explosion': 'Máquinas a Explosión',
+  'generacion-energia': 'Generación Energía',
+  'generadores': 'Generación Energía',
+  'jardin': 'Jardín',
+  'jardineria': 'Jardinería',
+  'maquina-electrica': 'Máquinas Eléctricas',
+  'maquina-manual': 'Máquinas Manuales',
+  'producto-de-fuerza': 'Productos de Fuerza',
+  'repuestos': 'Repuestos',
+  'riego': 'Riego'
+};
+
+function getCategoryDisplayName(slug) {
+  if (!slug) return '';
+  const normalized = String(slug).toLowerCase().trim();
+  if (CATEGORY_DISPLAY_NAMES[normalized]) return CATEGORY_DISPLAY_NAMES[normalized];
+  const canonical = resolveCategorySlug(normalized);
+  if (CATEGORY_DISPLAY_NAMES[canonical]) return CATEGORY_DISPLAY_NAMES[canonical];
+  
+  if (typeof PRODUCT_CATALOG !== 'undefined' && Array.isArray(PRODUCT_CATALOG)) {
+    const prod = PRODUCT_CATALOG.find(p => p.category === canonical || p.category === normalized);
+    if (prod && prod.categoryName) return prod.categoryName;
+  }
+  if (typeof REAL_STORE_CATEGORIES !== 'undefined' && Array.isArray(REAL_STORE_CATEGORIES)) {
+    const real = REAL_STORE_CATEGORIES.find(c => c.id === normalized || c.id === canonical);
+    if (real && real.displayName) return real.displayName;
+  }
+  return slug;
+}
+
+if (typeof window !== 'undefined') {
+  window.resolveCategorySlug = resolveCategorySlug;
+  window.getCategoryDisplayName = getCategoryDisplayName;
+}
+
 const OFFICIAL_CORE_BRANDS = ["OREGON", "NIWA", "BOSCH", "EINHELL", "HUSQVARNA", "GARDENA", "SENSEI", "HONDA"];
 
 function getCategoriesDropdownHtml() {
@@ -470,7 +553,7 @@ function renderGlobalFooter() {
             <li><a href="categories.html"><i class="fa-solid fa-chevron-right"></i> Directorio de Categorías</a></li>
             <li><a href="catalog.html?offers=true"><i class="fa-solid fa-chevron-right"></i> Ofertas Especiales</a></li>
             <li><a href="brands.html"><i class="fa-solid fa-chevron-right"></i> Marcas Oficiales</a></li>
-            <li><a href="about.html"><i class="fa-solid fa-chevron-right"></i> Nosotros & Respaldo</a></li>
+            <li><a href="about.html"><i class="fa-solid fa-chevron-right"></i> Nosotros y Respaldo</a></li>
             <li><a href="contact.html"><i class="fa-solid fa-chevron-right"></i> Contacto y Sucursales</a></li>
           </ul>
         </div>
@@ -496,7 +579,7 @@ function renderGlobalFooter() {
             </li>
             <li>
               <i class="fa-brands fa-whatsapp"></i>
-              <span>+54 9 2954 69-6231 (Ventas & Asesoría)</span>
+              <span>+54 9 2954 69-6231 (Ventas y Asesoría)</span>
             </li>
             <li>
               <i class="fa-solid fa-envelope"></i>
@@ -579,7 +662,7 @@ function syncNavigationActiveState() {
       document.querySelectorAll('.mobile-nav-link-item[href*="offers=true"]').forEach(a => a.classList.add('active'));
       
       // 3. Update Title & Breadcrumbs
-      document.title = 'Ofertas Especiales & Oportunidades | HMC HUB';
+      document.title = 'Ofertas Especiales y Oportunidades | HMC HUB';
       const breadcrumbEl = document.getElementById('catalogBreadcrumbCurrent');
       if (breadcrumbEl) breadcrumbEl.textContent = 'Ofertas Especiales';
 
@@ -596,7 +679,7 @@ function syncNavigationActiveState() {
       // 2. Update Title & Breadcrumbs
       document.title = `Equipos ${brandParam} Oficial | HMC HUB`;
       const breadcrumbEl = document.getElementById('catalogBreadcrumbCurrent');
-      if (breadcrumbEl) breadcrumbEl.textContent = `Marcas: ${brandParam}`;
+      if (breadcrumbEl) breadcrumbEl.textContent = `Marca: ${brandParam}`;
     } else {
       // Standard catalog / category view
       const categoriesNavItem = document.querySelector('.mega-dropdown-categories-featured, .mega-dropdown:not(.mega-dropdown-brands):not(.mega-dropdown-brands-2a):not(.mega-dropdown-brands-featured)')?.closest('.nav-item');
@@ -604,8 +687,8 @@ function syncNavigationActiveState() {
       document.querySelectorAll('.mobile-drawer-accordion-header[data-nav="categories"]').forEach(h => h.classList.add('active'));
       document.querySelectorAll('.mobile-bottom-nav a[href*="categories.html"], .mobile-bottom-nav [data-page="categories"]').forEach(a => a.classList.add('active'));
       if (categoryParam) {
-        const catProd = PRODUCT_CATALOG.find(p => p.category === categoryParam);
-        const catName = catProd ? catProd.categoryName : categoryParam;
+        const canonicalCat = resolveCategorySlug(categoryParam);
+        const catName = getCategoryDisplayName(canonicalCat);
         document.title = `${catName} | HMC HUB`;
         const breadcrumbEl = document.getElementById('catalogBreadcrumbCurrent');
         if (breadcrumbEl) breadcrumbEl.textContent = catName;
@@ -744,16 +827,16 @@ const ALL_BRANDS_103 = REAL_CATALOG_BRANDS.map(b => b.name);
    0.2. Dynamic Brands Marquee Component (Configurable & Tiendanube-Ready)
    -------------------------------------------------------------------------- */
 const MARQUEE_BRANDS_DATA = [
-  { name: "HONDA", logo: "assets/images/brands/honda.svg", alt: "Honda Motores & Generadores" },
+  { name: "HONDA", logo: "assets/images/brands/honda.svg", alt: "Honda Motores y Generadores" },
   { name: "HUSQVARNA", logo: "assets/images/brands/husqvarna.svg", alt: "Husqvarna Maquinaria" },
   { name: "ECHO", logo: "assets/images/brands/echo.svg", alt: "Echo Maquinaria de Poda" },
   { name: "MOTORARG", logo: null, alt: "Motorarg" }, // TODO: falta logo real, usa wordmark de texto
   { name: "HUNTER", logo: "assets/images/brands/hunter.png", alt: "Hunter Irrigation" },
   { name: "TORO", logo: null, alt: "Toro" }, // TODO: falta logo real, usa wordmark de texto
-  { name: "OREGON", logo: "assets/images/brands/oregon.png", alt: "Oregon Cadenas & Espadas" },
+  { name: "OREGON", logo: "assets/images/brands/oregon.png", alt: "Oregon Cadenas y Espadas" },
   { name: "KOHLER", logo: null, alt: "Kohler" }, // TODO: falta logo real, usa wordmark de texto
   { name: "RAIN BIRD", logo: null, alt: "Rain Bird" }, // TODO: falta logo real, usa wordmark de texto
-  { name: "GARDENA", logo: "assets/images/brands/gardena.svg", alt: "Gardena Jardinería & Riego" }
+  { name: "GARDENA", logo: "assets/images/brands/gardena.svg", alt: "Gardena Jardinería y Riego" }
 ];
 
 function initBrandsMarquee() {
@@ -1927,6 +2010,16 @@ function formatCurrency(amount) {
   return '$' + Number(amount).toLocaleString('es-AR', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
 }
 
+function escapeHtml(str) {
+  if (str === null || str === undefined) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+
 function renderCart() {
   const container = document.getElementById('cartItemsContainer');
   const subtotalEl = document.getElementById('cartSubtotal');
@@ -2358,21 +2451,45 @@ function initCatalogPage() {
   
   // Read URL query params
   const urlParams = new URLSearchParams(window.location.search);
-  const paramCategory = urlParams.get('category') || urlParams.get('cat');
-  const paramBrand = urlParams.get('brand');
-  const paramSearch = urlParams.get('q');
+  const rawCategory = urlParams.get('category') || urlParams.get('cat');
+  const rawBrand = urlParams.get('brand');
+  let searchQuery = (urlParams.get('q') || '').trim();
   const paramOffers = urlParams.get('offers');
 
-  if (paramCategory) {
+  // Track categories/brands that came from URL even if they don't have a sidebar checkbox
+  let urlCategoryFilter = null;
+  let urlBrandFilter = null;
+
+  if (rawCategory) {
+    const canonicalCategory = resolveCategorySlug(rawCategory);
+    let matchedCb = false;
     categoryCheckboxes.forEach(cb => {
-      if (cb.value === paramCategory) cb.checked = true;
+      const cbAlias = cb.getAttribute('data-alias');
+      if (
+        cb.value.toLowerCase() === rawCategory.toLowerCase() ||
+        resolveCategorySlug(cb.value) === canonicalCategory ||
+        (cbAlias && cbAlias.toLowerCase() === rawCategory.toLowerCase())
+      ) {
+        cb.checked = true;
+        matchedCb = true;
+      }
     });
+    if (!matchedCb) {
+      urlCategoryFilter = canonicalCategory;
+    }
   }
 
-  if (paramBrand) {
+  if (rawBrand) {
+    let matchedBrand = false;
     brandCheckboxes.forEach(cb => {
-      if (cb.value.toUpperCase() === paramBrand.toUpperCase()) cb.checked = true;
+      if (cb.value.toUpperCase() === rawBrand.toUpperCase()) {
+        cb.checked = true;
+        matchedBrand = true;
+      }
     });
+    if (!matchedBrand) {
+      urlBrandFilter = rawBrand.trim();
+    }
   }
 
   if (paramOffers === 'true') {
@@ -2380,27 +2497,40 @@ function initCatalogPage() {
   }
 
   function applyFilters() {
-    const selectedCategories = Array.from(categoryCheckboxes).filter(cb => cb.checked).map(cb => cb.value);
-    const selectedBrands = Array.from(brandCheckboxes).filter(cb => cb.checked).map(cb => cb.value.toUpperCase());
+    const selectedCategories = Array.from(categoryCheckboxes)
+      .filter(cb => cb.checked)
+      .map(cb => resolveCategorySlug(cb.value));
+    if (urlCategoryFilter && !selectedCategories.includes(urlCategoryFilter)) {
+      selectedCategories.push(urlCategoryFilter);
+    }
+
+    const selectedBrands = Array.from(brandCheckboxes)
+      .filter(cb => cb.checked)
+      .map(cb => cb.value.toUpperCase());
+    if (urlBrandFilter && !selectedBrands.includes(urlBrandFilter.toUpperCase())) {
+      selectedBrands.push(urlBrandFilter.toUpperCase());
+    }
+
     const onlyFreeShipping = freeShipCheckbox ? freeShipCheckbox.checked : false;
     const onlyInStock = inStockCheckbox ? inStockCheckbox.checked : false;
     const onlyOffers = offersCheckbox ? offersCheckbox.checked : false;
     const minP = minPriceInput && minPriceInput.value ? Number(minPriceInput.value) : 0;
     const maxP = maxPriceInput && maxPriceInput.value ? Number(maxPriceInput.value) : Infinity;
-    const searchQuery = (paramSearch || '').toLowerCase();
+    const qLower = searchQuery.toLowerCase();
 
     let results = PRODUCT_CATALOG.filter(item => {
-      if (selectedCategories.length > 0 && !selectedCategories.includes(item.category)) return false;
+      const itemCanonicalCat = resolveCategorySlug(item.category);
+      if (selectedCategories.length > 0 && !selectedCategories.includes(itemCanonicalCat)) return false;
       if (selectedBrands.length > 0 && !selectedBrands.includes(item.brand.toUpperCase())) return false;
       if (onlyFreeShipping && !item.freeShipping) return false;
       if (onlyInStock && !item.inStock) return false;
       if (onlyOffers && (!item.discount || item.discount <= 0)) return false;
       if (item.price < minP || item.price > maxP) return false;
-      if (searchQuery) {
-        const matches = item.name.toLowerCase().includes(searchQuery) ||
-                        item.brand.toLowerCase().includes(searchQuery) ||
-                        item.categoryName.toLowerCase().includes(searchQuery) ||
-                        item.sku.toLowerCase().includes(searchQuery);
+      if (qLower) {
+        const matches = item.name.toLowerCase().includes(qLower) ||
+                        item.brand.toLowerCase().includes(qLower) ||
+                        item.categoryName.toLowerCase().includes(qLower) ||
+                        item.sku.toLowerCase().includes(qLower);
         if (!matches) return false;
       }
       return true;
@@ -2457,7 +2587,7 @@ function initCatalogPage() {
         </button>
         <div class="product-image-box">
           <a href="product.html?id=${prod.id}">
-            <img src="${prod.image}" alt="${prod.name}" class="product-img" loading="lazy">
+            <img src="${prod.image}" alt="${escapeHtml(prod.name)}" class="product-img" loading="lazy">
           </a>
           <div class="product-quick-actions">
             <button class="btn-quick-view" onclick="hmcOpenQuickView(${prod.id})">
@@ -2466,9 +2596,9 @@ function initCatalogPage() {
           </div>
         </div>
         <div class="product-details">
-          <div class="product-brand">${prod.brand}</div>
-          <h4 class="product-name" title="${prod.name}">
-            <a href="product.html?id=${prod.id}">${prod.name}</a>
+          <div class="product-brand">${escapeHtml(prod.brand)}</div>
+          <h4 class="product-name" title="${escapeHtml(prod.name)}">
+            <a href="product.html?id=${prod.id}">${escapeHtml(prod.name)}</a>
           </h4>
           <div class="product-price-box">
             <div>
@@ -2492,27 +2622,106 @@ function initCatalogPage() {
     let chipsHtml = '';
 
     if (search) {
-      chipsHtml += `<span class="filter-chip">Búsqueda: "${search}" <button onclick="window.location.href='catalog.html'">✕</button></span>`;
+      chipsHtml += `<span class="filter-chip">Búsqueda: "${escapeHtml(search)}" <button type="button" data-chip-action="remove-search" title="Quitar búsqueda">✕</button></span>`;
     }
     categories.forEach(c => {
-      chipsHtml += `<span class="filter-chip">Categoría: ${c} <button onclick="document.querySelector('.js-filter-category[value=${c}]').click()">✕</button></span>`;
+      const displayName = getCategoryDisplayName(c);
+      chipsHtml += `<span class="filter-chip">Categoría: ${escapeHtml(displayName)} <button type="button" data-chip-action="remove-category" data-value="${escapeHtml(c)}" title="Quitar filtro de categoría">✕</button></span>`;
     });
     brands.forEach(b => {
-      chipsHtml += `<span class="filter-chip">Marca: ${b} <button onclick="document.querySelector('.js-filter-brand[value=${b}]').click()">✕</button></span>`;
+      chipsHtml += `<span class="filter-chip">Marca: ${escapeHtml(b)} <button type="button" data-chip-action="remove-brand" data-value="${escapeHtml(b)}" title="Quitar filtro de marca">✕</button></span>`;
     });
     if (freeShip) {
-      chipsHtml += `<span class="filter-chip">Envío Gratis <button onclick="document.getElementById('filterFreeShipping').click()">✕</button></span>`;
+      chipsHtml += `<span class="filter-chip">Envío Gratis <button type="button" data-chip-action="remove-freeship" title="Quitar filtro de envío">✕</button></span>`;
     }
     if (offers) {
-      chipsHtml += `<span class="filter-chip">En Oferta <button onclick="document.getElementById('filterOffers').click()">✕</button></span>`;
+      chipsHtml += `<span class="filter-chip">En Oferta <button type="button" data-chip-action="remove-offers" title="Quitar filtro de ofertas">✕</button></span>`;
     }
 
     if (chipsHtml) {
-      chipsHtml += `<button class="clear-filters-btn" onclick="window.location.href='catalog.html'">Limpiar todo</button>`;
+      chipsHtml += `<button type="button" class="clear-filters-btn" data-chip-action="clear-all">Limpiar todo</button>`;
       activeChipsContainer.innerHTML = chipsHtml;
     } else {
       activeChipsContainer.innerHTML = '';
     }
+  }
+
+  // Filter Chips Interactive Actions (Safe from DOMException / Selector Syntax Errors)
+  if (activeChipsContainer) {
+    activeChipsContainer.addEventListener('click', (e) => {
+      const btn = e.target.closest('button[data-chip-action]');
+      if (!btn) return;
+      e.preventDefault();
+      const action = btn.getAttribute('data-chip-action');
+      const val = btn.getAttribute('data-value');
+
+      if (action === 'clear-all') {
+        window.location.href = 'catalog.html';
+        return;
+      }
+      if (action === 'remove-search') {
+        searchQuery = '';
+        const url = new URL(window.location.href);
+        url.searchParams.delete('q');
+        window.history.replaceState({}, '', url.toString());
+        applyFilters();
+        return;
+      }
+      if (action === 'remove-category') {
+        categoryCheckboxes.forEach(cb => {
+          if (
+            cb.value === val ||
+            resolveCategorySlug(cb.value) === resolveCategorySlug(val) ||
+            cb.getAttribute('data-alias') === val
+          ) {
+            cb.checked = false;
+          }
+        });
+        if (urlCategoryFilter && (urlCategoryFilter === val || resolveCategorySlug(urlCategoryFilter) === resolveCategorySlug(val))) {
+          urlCategoryFilter = null;
+        }
+        const url = new URL(window.location.href);
+        if (url.searchParams.has('category') || url.searchParams.has('cat')) {
+          url.searchParams.delete('category');
+          url.searchParams.delete('cat');
+          window.history.replaceState({}, '', url.toString());
+        }
+        applyFilters();
+        return;
+      }
+      if (action === 'remove-brand') {
+        brandCheckboxes.forEach(cb => {
+          if (cb.value.toUpperCase() === (val || '').toUpperCase()) {
+            cb.checked = false;
+          }
+        });
+        if (urlBrandFilter && urlBrandFilter.toUpperCase() === (val || '').toUpperCase()) {
+          urlBrandFilter = null;
+        }
+        const url = new URL(window.location.href);
+        if (url.searchParams.has('brand')) {
+          url.searchParams.delete('brand');
+          window.history.replaceState({}, '', url.toString());
+        }
+        applyFilters();
+        return;
+      }
+      if (action === 'remove-freeship') {
+        if (freeShipCheckbox) freeShipCheckbox.checked = false;
+        applyFilters();
+        return;
+      }
+      if (action === 'remove-offers') {
+        if (offersCheckbox) offersCheckbox.checked = false;
+        const url = new URL(window.location.href);
+        if (url.searchParams.has('offers')) {
+          url.searchParams.delete('offers');
+          window.history.replaceState({}, '', url.toString());
+        }
+        applyFilters();
+        return;
+      }
+    });
   }
 
   // Listeners

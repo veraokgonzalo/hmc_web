@@ -53,20 +53,20 @@ Tareas de mantenimiento, escalabilidad y eliminación de deuda técnica.
     - Centralizar el markup en una única fuente de verdad y reemplazar las 200+ líneas repetidas en los 8 HTML por un contenedor `<div id="globalModals"></div>`.
   - **Archivos:** `boceto_web/js/app.js`, y los 8 archivos `.html`.
 
-- [ ] **2.2. Unificación Taxonómica de Categorías (Slugs & Filtros)**
+- [x] **2.2. Unificación Taxonómica de Categorías (Slugs y Filtros)**
   - **Problema:** Desajuste entre los IDs del mega-menú (`agua`, `consumibles-e-insumos`, `maquina-a-bateria`, `maquina-a-explosion`) y los valores en `catalog.html` y `PRODUCT_CATALOG` (`agua-bombeo`, `accesorios-insumos`, `herramientas-bateria`, `maquinas-explosion`). Al entrar desde el menú a una categoría, los filtros no coinciden.
   - **Acción:**
     - Normalizar una única convención de slugs (ej. `agua-bombeo`, `consumibles-insumos`, etc.) o hacer que `initCatalogPage()` soporte alias/sinónimos en la lectura del query param `?category=`.
     - Sincronizar checkboxes de `catalog.html`, enlaces en `index.html` y `REAL_STORE_CATEGORIES` en `app.js`.
   - **Archivos:** `boceto_web/js/app.js`, `boceto_web/catalog.html`, `boceto_web/index.html`.
 
-- [ ] **2.3. Corrección de Error de Sintaxis en Chips Activos de Marca (`catalog.html`)**
+- [x] **2.3. Corrección de Error de Sintaxis en Chips Activos de Marca (`catalog.html`)**
   - **Problema:** En `renderActiveFilterChips` (`app.js:2510`), `document.querySelector('.js-filter-brand[value=' + b + ']')` rompe con error fatal si la marca tiene espacios (ej. `DOWEN PAGIO`).
   - **Acción:**
     - Envolver el valor en comillas escapadas: `[value="${b.replace(/"/g, '\\"')}"]` o asignar la remoción mediante un listener limpio sin string de selector.
   - **Archivos:** `boceto_web/js/app.js`.
 
-- [ ] **2.4. Sincronización de Enlaces Rotos o Inconsistentes en Home (`index.html`)**
+- [x] **2.4. Sincronización de Enlaces Rotos o Inconsistentes en Home (`index.html`)**
   - **Problema:**
     - Slide 2: El botón "Conocenos" tiene `href="#nosotros"` (salta a testimonios de la misma página en lugar de `about.html`).
     - Slide 3: El botón "Nuestras Marcas" tiene `href="catalog.html?brand=STIHL"` (muestra 0 productos).
