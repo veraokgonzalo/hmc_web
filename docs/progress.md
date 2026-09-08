@@ -383,3 +383,19 @@ Objetivo: Resolver la sobrecarga cognitiva y la "pared de texto" de más de 8.00
   - **Slide 3 (Hero)**: Se corrigió el título display reemplazando `&` por `y`: `Servicio Técnico Oficial <span>y Repuestos Originales</span>`.
   - **Cumplimiento estricto de la regla del usuario**: Se sustituyó el carácter `&` por la conjunción `y` en todos los textos visibles en español a lo largo de `index.html`, `catalog.html` y componentes globales en `app.js`.
 
+---
+
+## 🔍 Acceso Rápido a Buscador en Cabecera Móvil (3.3 - 2026-09-08)
+
+- [x] **3.3. Acceso Rápido a Buscador en Cabecera Móvil (`boceto_web/js/app.js` y `boceto_web/css/styles.css`)**:
+  - **Botón de Búsqueda en Cabecera Móvil (`#btnMobileSearchToggle`)**:
+    - Se integró un botón con ícono de lupa (`fa-magnifying-glass`) en el bloque `.header-utilities` dentro de la cabecera principal (`renderGlobalNavigation()`).
+    - En pantallas desktop (`> 992px`) permanece oculto para preservar el buscador central tradicional. En pantallas móviles y tabletas (`<= 992px`) se muestra con un área táctil óptima de 44x44px.
+  - **Barra de Búsqueda Deslizable (`#mobileSearchBar`)**:
+    - Se incorporó un contenedor deslizable pegado a la cabecera fija (`header.header-main`) con animación suave de entrada (`mobileSearchSlideDown`).
+    - Incluye campo de texto con autoenfoque (`autofocus`), ícono de lupa, botón de limpieza instantánea (`#mobileSearchClearBtn` con `fa-xmark`) y botón "Cancelar" para descartar la búsqueda con un solo toque.
+    - Soporte completo para descarte con tecla `Escape`, clic fuera del área y alternancia de ícono en el botón de la cabecera (lupa / cruz).
+  - **Motor de Búsqueda Modular Unificado (`setupSearchEngine`)**:
+    - Se refactorizó la lógica de búsqueda en vivo en una función modular reutilizable que alimenta tanto al buscador de escritorio como al desplegable móvil.
+    - Despliegue de sugerencias en tiempo real (`#mobileSearchDropdown`) con imágenes, marcas, precios y enlace a catálogo completo (`catalog.html?q=...`), con sanitización mediante `escapeHtml()`.
+

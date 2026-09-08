@@ -299,6 +299,9 @@ function renderGlobalNavigation() {
 
       <!-- Header Utility Actions -->
       <div class="header-utilities">
+        <button type="button" class="utility-btn btn-mobile-search-toggle js-toggle-mobile-search" id="btnMobileSearchToggle" title="Buscar productos" aria-label="Abrir buscador">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
         <a href="contact.html" class="utility-btn" title="Mi Cuenta y Sucursales">
           <i class="fa-regular fa-user"></i>
           <span class="d-none-mobile">Mi Cuenta</span>
@@ -313,6 +316,28 @@ function renderGlobalNavigation() {
         </button>
       </div>
 
+    </div>
+
+    <!-- Mobile Slide-Down Search Bar (Task 3.3) -->
+    <div class="mobile-search-bar" id="mobileSearchBar">
+      <div class="container mobile-search-container">
+        <form class="mobile-search-form" id="mobileHeaderSearchForm" onsubmit="event.preventDefault();">
+          <div class="mobile-search-input-box">
+            <i class="fa-solid fa-magnifying-glass mobile-search-icon"></i>
+            <input type="text" id="mobileHeaderSearchInput" class="mobile-search-input" placeholder="Buscar herramientas, bombas, repuestos..." autocomplete="off">
+            <button type="button" class="mobile-search-clear" id="mobileSearchClearBtn" title="Limpiar texto" style="display: none;">
+              <i class="fa-solid fa-xmark"></i>
+            </button>
+          </div>
+          <button type="button" class="mobile-search-close-btn" id="mobileSearchCloseBtn" title="Cerrar buscador">
+            Cancelar
+          </button>
+        </form>
+        <div id="mobileSearchDropdown" class="search-dropdown mobile-search-dropdown">
+          <div class="search-dropdown-header">Sugerencias destacadas</div>
+          <div id="mobileSearchResultsList"></div>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -2097,12 +2122,7 @@ function renderCart() {
 /* --------------------------------------------------------------------------
    3. Live Search Bar & Suggestions
    -------------------------------------------------------------------------- */
-function initLiveSearch() {
-  const searchInput = document.getElementById('mainSearchInput');
-  const dropdown = document.getElementById('searchDropdown');
-  const resultsContainer = document.getElementById('searchResultsList');
-  const searchForm = document.querySelector('.search-form');
-  
+function setupSearchEngine(searchInput, dropdown, resultsContainer, searchForm, clearBtn) {
   if (!searchInput) return;
 
   if (searchForm) {
@@ -2114,51 +2134,138 @@ function initLiveSearch() {
       }
     });
   }
-  
+
+  if (clearBtn) {
+    clearBtn.addEventListener('click', () => {
+      searchInput.value = '';
+      clearBtn.style.display = 'none';
+      if (dropdown) dropdown.classList.remove('active');
+      searchInput.focus();
+    });
+  }
+
   if (!dropdown || !resultsContainer) return;
-  
+
   searchInput.addEventListener('input', (e) => {
     const query = e.target.value.trim().toLowerCase();
+    if (clearBtn) {
+      clearBtn.style.display = query.length > 0 ? 'flex' : 'none';
+    }
     if (query.length < 2) {
       dropdown.classList.remove('active');
       return;
     }
-    
+
     const matches = PRODUCT_CATALOG.filter(p => 
       p.name.toLowerCase().includes(query) || 
       p.brand.toLowerCase().includes(query) ||
       p.categoryName.toLowerCase().includes(query) ||
       p.sku.toLowerCase().includes(query)
     ).slice(0, 5);
-    
+
     if (matches.length > 0) {
       resultsContainer.innerHTML = matches.map(p => `
         <div class="search-result-item" onclick="window.location.href='product.html?id=${p.id}'">
-          <img src="${p.image}" alt="${p.name}">
+          <img src="${p.image}" alt="${escapeHtml(p.name)}">
           <div class="search-result-info">
-            <h5>${p.name}</h5>
-            <span>${formatCurrency(p.price)} • <strong style="color: var(--color-primary);">${p.brand}</strong></span>
+            <h5>${escapeHtml(p.name)}</h5>
+            <span>${formatCurrency(p.price)} • <strong style="color: var(--color-primary);">${escapeHtml(p.brand)}</strong></span>
           </div>
         </div>
       `).join('') + `
         <div style="padding: 10px 16px; background: #fafafa; border-top: 1px solid #eee; text-align: center;">
           <a href="catalog.html?q=${encodeURIComponent(query)}" style="font-size: 0.85rem; font-weight: 700; color: var(--color-primary-dark);">
-            Ver todos los resultados para "${query}" →
+            Ver todos los resultados para "${escapeHtml(query)}" →
           </a>
         </div>
       `;
       dropdown.classList.add('active');
     } else {
-      resultsContainer.innerHTML = `<div style="padding: 16px; font-size: 0.88rem; color: #777;">No se encontraron productos para "${query}"</div>`;
+      resultsContainer.innerHTML = `<div style="padding: 16px; font-size: 0.88rem; color: #777;">No se encontraron productos para "${escapeHtml(query)}"</div>`;
       dropdown.classList.add('active');
     }
   });
-  
+
   document.addEventListener('click', (e) => {
     if (!searchInput.contains(e.target) && !dropdown.contains(e.target)) {
       dropdown.classList.remove('active');
     }
   });
+}
+
+function initLiveSearch() {
+  // 1. Desktop Search Engine
+  setupSearchEngine(
+    document.getElementById('mainSearchInput'),
+    document.getElementById('searchDropdown'),
+    document.getElementById('searchResultsList'),
+    document.querySelector('.search-form')
+  );
+
+  // 2. Mobile Slide-Down Search Engine (Task 3.3)
+  const mobileSearchToggle = document.getElementById('btnMobileSearchToggle');
+  const mobileSearchBar = document.getElementById('mobileSearchBar');
+  const mobileSearchInput = document.getElementById('mobileHeaderSearchInput');
+  const mobileSearchCloseBtn = document.getElementById('mobileSearchCloseBtn');
+  const mobileSearchClearBtn = document.getElementById('mobileSearchClearBtn');
+  const mobileSearchForm = document.getElementById('mobileHeaderSearchForm');
+  const mobileDropdown = document.getElementById('mobileSearchDropdown');
+  const mobileResults = document.getElementById('mobileSearchResultsList');
+
+  if (mobileSearchToggle && mobileSearchBar) {
+    function toggleMobileSearch(forceState) {
+      const willOpen = typeof forceState === 'boolean' ? forceState : !mobileSearchBar.classList.contains('active');
+      if (willOpen) {
+        mobileSearchBar.classList.add('active');
+        mobileSearchToggle.classList.add('active');
+        mobileSearchToggle.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+        if (mobileSearchInput) {
+          setTimeout(() => mobileSearchInput.focus(), 120);
+        }
+      } else {
+        mobileSearchBar.classList.remove('active');
+        mobileSearchToggle.classList.remove('active');
+        mobileSearchToggle.innerHTML = '<i class="fa-solid fa-magnifying-glass"></i>';
+        if (mobileDropdown) mobileDropdown.classList.remove('active');
+      }
+    }
+
+    mobileSearchToggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      toggleMobileSearch();
+    });
+
+    if (mobileSearchCloseBtn) {
+      mobileSearchCloseBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        toggleMobileSearch(false);
+      });
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && mobileSearchBar.classList.contains('active')) {
+        toggleMobileSearch(false);
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (
+        mobileSearchBar.classList.contains('active') &&
+        !mobileSearchBar.contains(e.target) &&
+        !mobileSearchToggle.contains(e.target)
+      ) {
+        toggleMobileSearch(false);
+      }
+    });
+
+    setupSearchEngine(
+      mobileSearchInput,
+      mobileDropdown,
+      mobileResults,
+      mobileSearchForm,
+      mobileSearchClearBtn
+    );
+  }
 }
 
 /* --------------------------------------------------------------------------

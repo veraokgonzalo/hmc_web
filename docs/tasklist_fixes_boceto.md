@@ -102,7 +102,7 @@ Mejoras en interacción táctil, ergonomía y accesibilidad conforme a `docs/des
     - En `initCatalogPage()` (`app.js`), agregar listener a `#mobileDrawerOverlay` para ejecutar `closeMobileFilters()`.
   - **Archivos:** `boceto_web/js/app.js`.
 
-- [ ] **3.3. Acceso Rápido a Buscador en Cabecera Móvil**
+- [x] **3.3. Acceso Rápido a Buscador en Cabecera Móvil**
   - **Problema:** La búsqueda está oculta en móvil y solo se encuentra abriendo el menú lateral.
   - **Acción:**
     - Añadir un ícono de lupa en `.header-utilities` en móvil que despliegue un campo de búsqueda deslizable bajo el header, o agregar acceso a búsqueda en `.mobile-bottom-nav`.
