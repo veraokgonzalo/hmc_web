@@ -73,7 +73,8 @@ Guía de referencia de archivos de imagen y recursos multimedia del proyecto `bo
 
 | Archivo | Sección en la Web | Descripción |
 |---|---|---|
-| `showcase.mp4` | Home Page → Video Showcase ("Equipos en Acción") | Video de demostración de maquinaria en obra |
+| `hmc_mantenimientos.mp4` | Home Page → Video Showcase ("Taller Propio y Mantenimiento de Maquinaria") | Video vertical 9:16 (720x1280) con tomas reales del servicio técnico: uso de herramientas, desarme y calibración de motosierra, diagnóstico a generador de electricidad y vista panorámica de taller. |
+| `poster.jpg` | Home Page → Video Showcase Poster | Fotograma inicial oficial (720x1280) como póster de carga para el reproductor de video. |
 
 ---
 
