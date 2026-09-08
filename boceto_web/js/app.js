@@ -2751,13 +2751,19 @@ function initProductPage() {
       };
     }
 
-    window.addEventListener('scroll', () => {
+    const checkStickyBuyBar = () => {
       if (window.scrollY > 380 && window.innerWidth <= 768) {
         stickyBuyBar.classList.add('active');
+        document.body.classList.add('sticky-buy-active');
       } else {
         stickyBuyBar.classList.remove('active');
+        document.body.classList.remove('sticky-buy-active');
       }
-    }, { passive: true });
+    };
+
+    window.addEventListener('scroll', checkStickyBuyBar, { passive: true });
+    window.addEventListener('resize', checkStickyBuyBar, { passive: true });
+    checkStickyBuyBar();
   }
 }
 

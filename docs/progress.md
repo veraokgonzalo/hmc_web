@@ -307,6 +307,13 @@ Objetivo: Resolver la sobrecarga cognitiva y la "pared de texto" de más de 8.00
   - Cero fotografías decorativas para máxima velocidad de lectura y sobriedad de catálogo industrial de maquinaria y herramientas.
   - Tipografía `Quedora` para títulos y `Plus Jakarta Sans` para cuerpo y listas técnicas.
   - **Marco Unificado de Detalle**: La grilla de subcategorías y familias técnicas se ubica dentro del mismo contenedor (`.category-detail-hero`), directamente debajo del encabezado y descripción del rubro, y por encima del botón de enlace al catálogo (`Ver catálogo de {categoría} →`), consolidando la visual en un solo bloque estructurado.
+---
 
+## 🛠️ Corrección de Solapamiento Táctil en Ficha de Producto (1.1 - 2026-09-08)
 
-
+- [x] **Ajuste de Posición Dinámica de WhatsApp en Mobile (`boceto_web/css/styles.css`)**:
+  - Se configuró la elevación automática de `.floating-whatsapp` a `bottom: 136px` cuando la barra adhesiva de compra se activa (`body:has(.mobile-sticky-buy-bar.active)` y `body.sticky-buy-active`), con transición suave de `0.25s`.
+  - Se elevó el `z-index` de `.mobile-sticky-buy-bar` a `calc(var(--z-sticky) + 1)` para evitar interferencias de capas.
+- [x] **Sincronización en Script Maestro (`boceto_web/js/app.js`)**:
+  - Se implementó `checkStickyBuyBar()` escuchando eventos `scroll` y `resize`, gestionando la clase `sticky-buy-active` en `document.body` para garantizar compatibilidad total cross-browser.
+  - El botón "Comprar" ahora cuenta con un área táctil 100% despejada en cualquier dispositivo móvil.
