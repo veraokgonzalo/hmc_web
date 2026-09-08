@@ -1833,6 +1833,24 @@ h6 { font-size: 0.95rem; }
   transform: scale(1.05);
 }
 
+/* Wordmark fallback for official brands pending a real logo file */
+.brand-marquee-wordmark {
+  font-family: var(--font-headings);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+  color: var(--color-gray-dark);
+  text-align: center;
+  text-transform: uppercase;
+  opacity: 0.88;
+  transition: all var(--transition-fast);
+}
+
+.brand-marquee-card:hover .brand-marquee-wordmark {
+  opacity: 1;
+  color: var(--color-primary-dark);
+}
+
 @keyframes hmc-brands-marquee {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }
@@ -1870,6 +1888,9 @@ h6 { font-size: 0.95rem; }
   }
   .brand-marquee-card img {
     max-height: 34px;
+  }
+  .brand-marquee-wordmark {
+    font-size: 0.82rem;
   }
 }
 
