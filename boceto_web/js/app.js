@@ -2497,21 +2497,50 @@ function initCatalogTabs() {
 function initVideoPlayer() {
   const video = document.getElementById('showcaseVideo');
   const playBtn = document.getElementById('videoPlayBtn');
+  const soundBtn = document.getElementById('videoSoundBtn');
   
-  if (!video || !playBtn) return;
+  if (!video) return;
   
-  playBtn.addEventListener('click', () => {
+  function togglePlay() {
     if (video.paused) {
-      video.play();
-      playBtn.classList.add('playing');
+      video.play().catch(() => {});
     } else {
       video.pause();
-      playBtn.classList.remove('playing');
     }
+  }
+
+  if (playBtn) {
+    playBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      togglePlay();
+    });
+  }
+
+  video.addEventListener('click', togglePlay);
+
+  video.addEventListener('play', () => {
+    if (playBtn) playBtn.classList.add('playing');
   });
-  
-  video.addEventListener('play', () => playBtn.classList.add('playing'));
-  video.addEventListener('pause', () => playBtn.classList.remove('playing'));
+
+  video.addEventListener('pause', () => {
+    if (playBtn) playBtn.classList.remove('playing');
+  });
+
+  if (soundBtn) {
+    soundBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      video.muted = !video.muted;
+      soundBtn.innerHTML = video.muted 
+        ? '<i class="fa-solid fa-volume-xmark"></i>' 
+        : '<i class="fa-solid fa-volume-high"></i>';
+      soundBtn.setAttribute('title', video.muted ? 'Activar sonido' : 'Silenciar sonido');
+    });
+  }
+
+  // Check if video is already playing via autoplay
+  if (!video.paused && playBtn) {
+    playBtn.classList.add('playing');
+  }
 }
 
 function initPromoPopup() {
