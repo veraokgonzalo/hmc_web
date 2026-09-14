@@ -14,6 +14,13 @@
         <link rel="preload" href="{{ 'css/style-critical.scss' | static_url }}" as="style" />
         <link rel="preload" href="{{ 'css/style-colors.scss' | static_url }}" as="style" />
 
+        {# Preload brand fonts #}
+        <link rel="preload" href="{{ 'fonts/quedora-bold.otf' | static_url }}" as="font" type="font/otf" crossorigin />
+        <link rel="preload" href="{{ 'fonts/PlusJakartaSans-Medium.ttf' | static_url }}" as="font" type="font/ttf" crossorigin />
+
+        {# FontAwesome 6 Icons #}
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
         {# Preload LCP home, category and product page elements #}
 
         {% snipplet 'preload-images.tpl' %}
@@ -25,6 +32,93 @@
         ==============================================================================*/#}
 
         <style>
+            {# Local Brand Fonts: Quedora (Headings) & Plus Jakarta Sans (Body & UI) #}
+            @font-face {
+                font-family: 'Quedora';
+                src: url("{{ 'fonts/quedora-regular.otf' | static_url }}") format('opentype');
+                font-weight: 400;
+                font-style: normal;
+                font-display: swap;
+            }
+            @font-face {
+                font-family: 'Quedora';
+                src: url("{{ 'fonts/quedora-medium.otf' | static_url }}") format('opentype');
+                font-weight: 500;
+                font-style: normal;
+                font-display: swap;
+            }
+            @font-face {
+                font-family: 'Quedora';
+                src: url("{{ 'fonts/quedora-semibold.otf' | static_url }}") format('opentype');
+                font-weight: 600;
+                font-style: normal;
+                font-display: swap;
+            }
+            @font-face {
+                font-family: 'Quedora';
+                src: url("{{ 'fonts/quedora-bold.otf' | static_url }}") format('opentype');
+                font-weight: 700;
+                font-style: normal;
+                font-display: swap;
+            }
+            @font-face {
+                font-family: 'Quedora';
+                src: url("{{ 'fonts/quedora-extrabold.otf' | static_url }}") format('opentype');
+                font-weight: 800;
+                font-style: normal;
+                font-display: swap;
+            }
+
+            @font-face {
+                font-family: 'Plus Jakarta Sans';
+                src: url("{{ 'fonts/PlusJakartaSans-Medium.ttf' | static_url }}") format('truetype');
+                font-weight: 400 500;
+                font-style: normal;
+                font-display: swap;
+            }
+            @font-face {
+                font-family: 'Plus Jakarta Sans';
+                src: url("{{ 'fonts/PlusJakartaSans-Italic.ttf' | static_url }}") format('truetype');
+                font-weight: 400 500;
+                font-style: italic;
+                font-display: swap;
+            }
+            @font-face {
+                font-family: 'Plus Jakarta Sans';
+                src: url("{{ 'fonts/PlusJakartaSans-SemiBold.ttf' | static_url }}") format('truetype');
+                font-weight: 600;
+                font-style: normal;
+                font-display: swap;
+            }
+            @font-face {
+                font-family: 'Plus Jakarta Sans';
+                src: url("{{ 'fonts/PlusJakartaSans-SemiBoldItalic.ttf' | static_url }}") format('truetype');
+                font-weight: 600;
+                font-style: italic;
+                font-display: swap;
+            }
+            @font-face {
+                font-family: 'Plus Jakarta Sans';
+                src: url("{{ 'fonts/PlusJakartaSans-Bold.ttf' | static_url }}") format('truetype');
+                font-weight: 700;
+                font-style: normal;
+                font-display: swap;
+            }
+            @font-face {
+                font-family: 'Plus Jakarta Sans';
+                src: url("{{ 'fonts/PlusJakartaSans-BoldItalic.ttf' | static_url }}") format('truetype');
+                font-weight: 700;
+                font-style: italic;
+                font-display: swap;
+            }
+            @font-face {
+                font-family: 'Plus Jakarta Sans';
+                src: url("{{ 'fonts/PlusJakartaSans-ExtraBold.ttf' | static_url }}") format('truetype');
+                font-weight: 800;
+                font-style: normal;
+                font-display: swap;
+            }
+
             {# Font families #}
 
             {{ component(

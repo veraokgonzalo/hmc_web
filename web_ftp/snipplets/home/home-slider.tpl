@@ -1,92 +1,167 @@
-{% set has_main_slider = settings.slider and settings.slider is not empty %}
-{% set has_mobile_slider = settings.toggle_slider_mobile and settings.slider_mobile and settings.slider_mobile is not empty %}
-{% set slider_align = settings.slider_align %}
-{% set slider_animation = settings.slider_animation ? 'true' : 'false' %}
+{% set has_custom_slider = settings.slider and settings.slider is not empty %}
 
-{% if not mobile %}
-<div class="js-home-main-slider-container {% if not has_main_slider and not params.preview %}hidden{% endif %}">
+{% if has_custom_slider %}
+    {% set slider_items = settings.slider %}
+{% else %}
+    {% set default_slides = [
+        {
+            'title': 'Hacé tu compra <span>online</span>',
+            'image': 'images/hero/hero-slide-2-respaldo-generadores.jpg',
+            'alt': 'Respaldo técnico HMC Hub',
+            'button': 'Accedé a la tienda',
+            'link': (store.products_url ? store.products_url : '/productos'),
+            'icon': 'fa-solid fa-cart-shopping',
+            'target_blank': false
+        },
+        {
+            'title': 'Potencia y Rendimiento Para <span>Tu Trabajo</span>',
+            'image': 'images/hero/hero-slide-1-ofertas-motosierras.jpg',
+            'alt': 'Ofertas de temporada HMC Hub',
+            'button': 'Ofertas',
+            'link': (store.products_url ? (store.products_url ~ '?offers=true') : '/productos?offers=true'),
+            'icon': 'fa-solid fa-tag',
+            'target_blank': false
+        },
+        {
+            'title': 'Servicio Técnico Oficial <span>y Repuestos Originales</span>',
+            'image': 'images/hero/hero-slide-3-servicio-tecnico-taller.jpg',
+            'alt': 'Servicio Técnico Oficial HMC Hub',
+            'button': 'Solicitar Asistencia',
+            'link': (store.whatsapp ? ('https://wa.me/' ~ store.whatsapp) : 'https://wa.me/5492954696231'),
+            'icon': 'fa-solid fa-phone',
+            'target_blank': true
+        }
+    ] %}
+    {% set slider_items = default_slides %}
 {% endif %}
-	<div class="{% if mobile %}js-home-mobile-slider{% else %}js-home-main-slider{% endif %}-visibility {% if has_main_slider and has_mobile_slider %}{% if mobile %}d-md-none{% else %}d-none d-md-block{% endif %}{% elseif not settings.toggle_slider_mobile and mobile %}hidden{% endif %}{% if not settings.slider_full %} mt-4{% endif %}">
-		<div class="section-slider position-relative">
-			<div class="js-home-slider-container container{% if settings.slider_full %}-fluid p-0{% endif %}">
-				<div class="js-home-slider-row row{% if settings.slider_full %} no-gutters{% endif %}">
-					<div class="col-12">
-						<div class="js-home-slider{% if mobile %}-mobile{% endif %} h-100 swiper-container swiper-container-horizontal" data-align="{{ slider_align }}" data-animation="{{ slider_animation }}">
-							<div class="swiper-wrapper">
-								{% if mobile %}
-									{% set slider = settings.slider_mobile %}
-								{% else %}
-									{% set slider = settings.slider %}
-								{% endif %}
-								{% for slide in slider %}
-									{% set has_text = slide.title or slide.description or slide.button %}
-									<div class="swiper-slide slide-container swiper-{{ slide.color }}">
-										{% if slide.link %}
-											<a href="{{ slide.link | setting_url }}" aria-label="{{ 'Carrusel' | translate }} {{ loop.index }}">
-										{% endif %}
-										<div class="slider-slide">
 
-											{% set apply_lazy_load = 
-												settings.home_order_position_1 != 'slider' 
-												or not (
-													loop.first and (
-														(has_main_slider and not has_mobile_slider) or 
-														(has_mobile_slider and mobile)
-													)
-												) 
-											%}
-					
-											{% if apply_lazy_load %}
-												{% set slide_src = 'data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==' %}
-											{% else %}
-												{% set slide_src = slide.image | static_url | settings_image_url('large') %}
-											{% endif %}
+<section class="hero-slider-section" data-store="home-slider">
+    <div class="hero-slider-wrapper">
+        {% for slide in slider_items %}
+            {% set is_active = loop.first %}
+            <div class="hero-slide{% if is_active %} active{% endif %}" data-slide-index="{{ loop.index0 }}">
+                {% if has_custom_slider %}
+                    <img src="{{ 'images/empty-placeholder.png' | static_url }}" data-src="{{ slide.image | static_url | settings_image_url('1080p') }}" alt="{{ slide.title ? (slide.title | striptags) : ('Slide ' ~ loop.index) }}" class="hero-slide-bg lazyload">
+                {% else %}
+                    <img src="{{ slide.image | static_url }}" alt="{{ slide.alt }}" class="hero-slide-bg" {% if loop.first %}fetchpriority="high"{% else %}loading="lazy"{% endif %}>
+                {% endif %}
+                <div class="hero-slide-overlay"></div>
+                <div class="container">
+                    <div class="hero-content">
+                        {% if slide.title %}
+                            <h1 class="hero-title">{{ slide.title | raw }}</h1>
+                        {% endif %}
+                        {% if slide.description %}
+                            <p class="hero-description">{{ slide.description }}</p>
+                        {% endif %}
+                        {% if slide.button and slide.link %}
+                            <div class="hero-buttons">
+                                <a href="{{ has_custom_slider ? (slide.link | setting_url) : slide.link }}" class="btn btn-primary btn-lg" {% if slide.target_blank %}target="_blank" rel="noopener noreferrer"{% endif %}>
+                                    {% if slide.icon %}
+                                        <i class="{{ slide.icon }}"></i>
+                                    {% endif %}
+                                    {{ slide.button }}
+                                </a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 
-											<img 
-												{% if not apply_lazy_load %}fetchpriority="high"{% endif %}
-												{% if slide.width and slide.height %} width="{{ slide.width }}" height="{{ slide.height }}" {% endif %}
-												{% if apply_lazy_load %}data-{% endif %}src="{{ slide_src }}"
-												{% if apply_lazy_load %}data-{% endif %}srcset="{{ slide.image | static_url | settings_image_url('large') }} 480w, {{ slide.image | static_url | settings_image_url('huge') }} 640w, {{ slide.image | static_url | settings_image_url('original') }} 1024w, {{ slide.image | static_url | settings_image_url('1080p') }} 1920w"  
-												class="js-slider-image slider-image {% if settings.slider_animation %}slider-image-animation{% endif %} {% if apply_lazy_load %}swiper-lazy fade-in{% endif %}{% if not settings.slider_full %} card{% endif %}" alt="{{ 'Carrusel' | translate }} {{ loop.index }}"
-											/>
-											<div class="placeholder-fade"></div>
-											{% if has_text %}
-												<div class="js-swiper-text swiper-text{% if slider_align == 'center' %} swiper-text-centered{% endif %} swiper-text-{{ slide.color }}">
-													{% if slide.title %}
-														<div class="h1-huge mb-2">{{ slide.title }}</div>
-													{% endif %}
-													{% if slide.description %}
-														<p class="mb-2">{{ slide.description }}</p>
-													{% endif %}
-													{% if slide.button and slide.link %}
-														<div class="btn btn-default btn-small d-inline-block">{{ slide.button }}</div>
-													{% endif %}
-												</div>
-											{% endif %}
-										</div>
-										{% if slide.link %}
-											</a>
-										{% endif %}
-									</div>
-								{% endfor %}
-							</div>
-						</div>
-						<div class="{% if settings.slider_full %}js-swiper-home-arrows {% endif %}d-none d-md-block">
-							<div class="js-swiper-home-control js-swiper-home-prev{% if mobile %}-mobile{% endif %} swiper-button-prev{% if not settings.slider_full %} swiper-button-outside{% endif %} svg-icon-text">{% include "snipplets/svg/chevron-left.tpl" with {svg_custom_class: "icon-inline icon-lg"} %}</div>
-							<div class="js-swiper-home-control js-swiper-home-next{% if mobile %}-mobile{% endif %} swiper-button-next{% if not settings.slider_full %} swiper-button-outside{% endif %} svg-icon-text">{% include "snipplets/svg/chevron-right.tpl" with {svg_custom_class: "icon-inline icon-lg"} %}</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="js-swiper-home-control js-swiper-home-pagination{% if mobile %}-mobile{% endif %} swiper-pagination swiper-pagination-bullets position-relative my-3">
-				{% if slider | length > 1 and not params.preview %}
-					{% for slide in slider %}
-						<span class="swiper-pagination-bullet"></span>
-					{% endfor %}
-				{% endif %}
-			</div>
-		</div>
-	</div>
-{% if not mobile %}
-</div>
-{% endif %}
+    {% if slider_items | length > 1 %}
+        <!-- Slider Navigation Buttons -->
+        <div class="hero-slider-nav">
+            <button class="hero-slider-btn hero-prev-btn" title="Anterior" aria-label="Anterior"><i class="fa-solid fa-chevron-left"></i></button>
+            <button class="hero-slider-btn hero-next-btn" title="Siguiente" aria-label="Siguiente"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+
+        <!-- Slider Dots -->
+        <div class="hero-slider-dots">
+            {% for slide in slider_items %}
+                <div class="hero-dot{% if loop.first %} active{% endif %}" data-dot-index="{{ loop.index0 }}" aria-label="Slide {{ loop.index }}"></div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</section>
+
+<script>
+(function() {
+    function initHmcHeroSlider() {
+        var sliderEl = document.querySelector('.hero-slider-wrapper');
+        var slides = document.querySelectorAll('.hero-slide');
+        var dots = document.querySelectorAll('.hero-dot');
+        var prevBtn = document.querySelector('.hero-prev-btn');
+        var nextBtn = document.querySelector('.hero-next-btn');
+
+        if (!slides.length || !sliderEl) return;
+
+        var currentSlide = 0;
+        var slideInterval = null;
+
+        function showSlide(index) {
+            for (var i = 0; i < slides.length; i++) {
+                slides[i].classList.toggle('active', i === index);
+            }
+            for (var j = 0; j < dots.length; j++) {
+                dots[j].classList.toggle('active', j === index);
+            }
+            currentSlide = index;
+        }
+
+        function nextSlide() {
+            var next = (currentSlide + 1) % slides.length;
+            showSlide(next);
+        }
+
+        function prevSlide() {
+            var prev = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(prev);
+        }
+
+        function startAutoplay() {
+            stopAutoplay();
+            slideInterval = setInterval(nextSlide, 8500);
+        }
+
+        function stopAutoplay() {
+            if (slideInterval) clearInterval(slideInterval);
+        }
+
+        if (nextBtn) nextBtn.addEventListener('click', function() { nextSlide(); startAutoplay(); });
+        if (prevBtn) prevBtn.addEventListener('click', function() { prevSlide(); startAutoplay(); });
+
+        dots.forEach(function(dot, idx) {
+            dot.addEventListener('click', function() {
+                showSlide(idx);
+                startAutoplay();
+            });
+        });
+
+        var touchStartX = 0;
+        var touchEndX = 0;
+        sliderEl.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+        sliderEl.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            if (touchStartX - touchEndX > 45) {
+                nextSlide();
+                startAutoplay();
+            } else if (touchEndX - touchStartX > 45) {
+                prevSlide();
+                startAutoplay();
+            }
+        }, { passive: true });
+
+        startAutoplay();
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initHmcHeroSlider);
+    } else {
+        initHmcHeroSlider();
+    }
+})();
+</script>

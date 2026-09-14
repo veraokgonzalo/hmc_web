@@ -188,14 +188,32 @@
   --warning: #dc8f38;
   --info: #3d9ccc;
 
+  {# Brand Color Tokens (HMC Hub Identity) #}
+  --color-primary: #3FAA47;
+  --color-primary-dark: #2E8B35;
+  --color-primary-light: #EBF7EC;
+  --color-primary-glow: rgba(63, 170, 71, 0.25);
+  --color-black: #000000;
+  --color-dark: #121212;
+  --color-surface-dark: #1A1A1A;
+  --color-gray-dark: #494848;
+  --color-gray-medium: #757575;
+  --color-gray-light: #CCCCCC;
+  --color-gray-border: #E0E0E0;
+  --color-white: #FFFFFF;
+
   {#/*============================================================================
     #Fonts
   ==============================================================================*/#}
 
   {# Font families #}
 
-  --heading-font: {{ settings.font_headings | raw }};
-  --body-font: {{ settings.font_rest | raw }};
+  --font-headings: 'Quedora', 'Plus Jakarta Sans', {{ settings.font_headings | raw }};
+  --font-body: 'Plus Jakarta Sans', {{ settings.font_rest | raw }};
+  --font-secondary: 'Plus Jakarta Sans', {{ settings.font_rest | raw }};
+
+  --heading-font: var(--font-headings);
+  --body-font: var(--font-body);
 
   {# Font sizes #}
 

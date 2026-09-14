@@ -399,3 +399,46 @@ Objetivo: Resolver la sobrecarga cognitiva y la "pared de texto" de más de 8.00
     - Se refactorizó la lógica de búsqueda en vivo en una función modular reutilizable que alimenta tanto al buscador de escritorio como al desplegable móvil.
     - Despliegue de sugerencias en tiempo real (`#mobileSearchDropdown`) con imágenes, marcas, precios y enlace a catálogo completo (`catalog.html?q=...`), con sanitización mediante `escapeHtml()`.
 
+---
+
+## 🚀 Migración de Boceto a Tiendanube FTP — Fuentes y Primeras 2 Secciones del Home (2026-09-13)
+
+Objetivo: Iniciar la transferencia del prototipo interactivo modular (`boceto_web/`) a la tienda productiva Tiendanube Legacy (`web_ftp/`) vía FTP, desplegando el sistema tipográfico de marca y las 2 primeras secciones de la página de inicio (Hero Slider y Propuesta de Valor / 4 Pilares).
+
+- [x] **1. Portado del Sistema Tipográfico Oficial (`web_ftp/static/fonts/` & `web_ftp/layouts/layout.tpl`)**:
+  - Se transfirieron los 13 archivos de fuente locales desde `boceto_web/assets/fonts/` hacia `web_ftp/static/fonts/`:
+    - Familia primaria **Quedora** (*Regular, Medium, SemiBold, Bold, ExtraBold*).
+    - Familia secundaria **Plus Jakarta Sans** (*Medium 500, SemiBold 600, Bold 700, ExtraBold 800 e Itálicas*).
+  - En `layouts/layout.tpl`, se inyectaron las declaraciones `@font-face` nativas utilizando la función de CDN de Tiendanube (`static_url`), junto con preloads estratégicos (`quedora-bold.otf`, `PlusJakartaSans-Medium.ttf`) y la librería de íconos FontAwesome 6 para garantizar soporte tipográfico y de glifos en todo el sitio sin FOUT ni dependencias rotas.
+  - En `static/css/style-tokens.tpl`, se vincularon los tokens globales `--font-headings: 'Quedora', ...` y `--font-body: 'Plus Jakarta Sans', ...`, aplicando la identidad tipográfica a toda la tienda de forma retrocompatible con los ajustes del panel admin.
+
+- [x] **2. Sección 1: Hero Slider Principal (`web_ftp/snipplets/home/home-slider.tpl`)**:
+  - Se migraron las 3 imágenes de alta resolución desde `boceto_web/assets/images/hero/` hacia `web_ftp/static/images/hero/`:
+    - Slide 1: `hero-slide-2-respaldo-generadores.jpg` ("Hacé tu compra online" con CTA a la tienda).
+    - Slide 2: `hero-slide-1-ofertas-motosierras.jpg` ("Potencia y Rendimiento Para Tu Trabajo" con CTA a ofertas).
+    - Slide 3: `hero-slide-3-servicio-tecnico-taller.jpg` ("Servicio Técnico Oficial y Repuestos Originales" con CTA a WhatsApp).
+  - Rediseño arquitectónico de `snipplets/home/home-slider.tpl`:
+    - Compatible con diapositivas cargadas en el panel admin (`settings.slider`), manteniendo fallback curado 1-a-1 con el diseño del boceto si aún no se han configurado diapositivas personalizadas.
+    - Controles táctiles y visuales: flechas previa/siguiente, píldoras indicadoras interactivas (*dots*).
+    - Motor JavaScript ligero integrado con rotación suave (8.5s), transiciones CSS de escala/opacidad y soporte gestual táctil (*touch swipe*) para dispositivos móviles.
+  - Se actualizó `home-section-switch.tpl` para incluir `home-slider.tpl` directamente sin bloqueos de onboarding.
+
+- [x] **3. Sección 2: Propuesta de Valor / 4 Pilares (`web_ftp/snipplets/banner-services/banner-services.tpl`)**:
+  - Rediseño de la sección de servicios para replicar la tira compacta de 4 pilares:
+    1. *Garantía y Service Oficial* (`fa-shield-halved`).
+    2. *Envíos a Todo el País* (`fa-truck-ramp-box`).
+    3. *Todos los Medios de Pago* (`fa-credit-card`).
+    4. *Asesoramiento Técnico* (`fa-headset`).
+  - Responsividad Mobile-First estricta:
+    - En Desktop ($\ge 992$px): fila horizontal continua con divisores verticales limpios.
+    - En Tablet y Mobile ($\le 768$px y $\le 480$px): cuadrícula compacta 2x2 con divisores sutiles y áreas táctiles garantizadas ($\ge 44$px).
+  - Retrocompatible: si el cliente carga banners informativos personalizados desde el admin de Tiendanube (`settings.banner_services`), el template respeta sus textos e íconos.
+
+- [x] **4. Motor de Estilos & Tokens (`web_ftp/static/css/style-async.scss` & `style-tokens.tpl`)**:
+  - Se incorporaron las variables de marca `--color-primary`, `--color-primary-dark`, `--color-primary-light`, `--color-black`, etc. en `style-tokens.tpl`.
+  - Se migraron los estilos completos de Hero Slider y Value Props Strip a `style-async.scss` con todos sus breakpoints responsive (desktop, tablet, mobile $\le 768$px y mobile $\le 480$px).
+
+- [x] **5. Sincronización y Despliegue FTP Exitoso**:
+  - Se ejecutó `tiendanube theme ftp push -y`.
+  - Resultado: **18 archivos creados** (13 fuentes + 5 imágenes hero), **8 archivos actualizados** (`layout.tpl`, `home.tpl`, `defaults.txt`, `style-async.scss`, `style-tokens.tpl`, `home-section-switch.tpl`, `home-slider.tpl`, `banner-services.tpl`), **0 errores**.
+

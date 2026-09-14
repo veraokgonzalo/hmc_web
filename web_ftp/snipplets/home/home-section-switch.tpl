@@ -1,16 +1,7 @@
 {% if section_select == 'slider' %}
 	{#  **** Home slider ****  #}
 
-		<section class="section-slider-home" data-store="home-slider" data-transition="fade-in">
-			{% if show_help or (show_component_help and not (has_main_slider or has_mobile_slider)) %}
-				{% snipplet 'defaults/home/slider_help.tpl' %}
-			{% else %}
-				{% include 'snipplets/home/home-slider.tpl' %}
-				{% if has_mobile_slider %}
-					{% include 'snipplets/home/home-slider.tpl' with {mobile: true} %}
-				{% endif %}
-			{% endif %}
-		</section>
+	{% include 'snipplets/home/home-slider.tpl' %}
 
 {% elseif section_select == 'main_categories' %}
 
@@ -92,12 +83,8 @@
 
 {% elseif section_select == 'informatives' %}
 
-	{#  **** Informative banners ****  #}
-	{% if show_help or (show_component_help and not has_informative_banners) %}
-		{% snipplet 'defaults/home/informative_banners_help.tpl' %}
-	{% else %}
-		{% include 'snipplets/banner-services/banner-services.tpl' %}
-	{% endif %}
+	{#  **** Informative banners / Value Props ****  #}
+	{% include 'snipplets/banner-services/banner-services.tpl' %}
 
 {% elseif section_select == 'categories' %}
 
@@ -199,12 +186,8 @@
 
 {% elseif section_select == 'brands' %}
 
-	{#  **** Brands slider ****  #}
-	{% if show_help or (show_component_help and not has_brands) %}
-		{% snipplet 'defaults/home/brands_help.tpl' %}
-	{% else %}
-		{% include 'snipplets/home/home-brands.tpl' %}
-	{% endif %}
+	{#  **** Brands Marquee ****  #}
+	{% include 'snipplets/home/home-brands.tpl' %}
 
 {% elseif section_select == 'new_block' %}
 
