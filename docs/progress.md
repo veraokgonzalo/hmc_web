@@ -442,3 +442,35 @@ Objetivo: Iniciar la transferencia del prototipo interactivo modular (`boceto_we
   - Se ejecutó `tiendanube theme ftp push -y`.
   - Resultado: **18 archivos creados** (13 fuentes + 5 imágenes hero), **8 archivos actualizados** (`layout.tpl`, `home.tpl`, `defaults.txt`, `style-async.scss`, `style-tokens.tpl`, `home-section-switch.tpl`, `home-slider.tpl`, `banner-services.tpl`), **0 errores**.
 
+---
+
+## 🚀 Migración de Boceto a Tiendanube FTP — Fases 1.1 y 1.2 (2026-09-18)
+
+Objetivo: Continuar con la Fase 1 del Plan Maestro, migrando las secciones de Categorías Destacadas (`#categorias`) y Ofertas Especiales con Countdown Timer (`#ofertas`) a `web_ftp/`, conectadas a la base de datos de Tiendanube y con fallbacks curados.
+
+- [x] **1.1. Categorías Destacadas (`web_ftp/snipplets/home/home-categories.tpl`)**:
+  - Se migraron las 6 imágenes WebP desde `boceto_web/assets/images/categories/` a `web_ftp/static/images/categories/` (`categoria-1-ferreteria.webp`, `categoria-2-maquinas-explosion.webp`, `categoria-3-agua-bombeo.webp`, `categoria-4-construccion.webp`, `categoria-5-herramientas-bateria.webp`, `categoria-6-accesorios-insumos.webp`).
+  - Rediseño de `snipplets/home/home-categories.tpl`:
+    - Conexión dinámica con la base de datos de Tiendanube (`categories`): resuelve automáticamente la URL canónica (`cat.url`) y el contador real de productos de cada rubro (`cat.products_count`).
+    - Soporte para categorías personalizadas administradas desde el panel (`settings.slider_categories`).
+    - Grilla responsive `.categories-grid` (6 columnas desktop, 3 columnas tablet $\le 992$px, 2 columnas mobile $\le 768$px).
+    - Botón central de llamada a la acción: *"Explorar Catálogo"* apuntando a `store.products_url`.
+  - Actualización en `home.tpl` (`has_main_categories = true`), `home-section-switch.tpl` y `defaults.txt` (`main_categories_title_es = Categorías Destacadas`).
+
+- [x] **1.2. Ofertas Especiales con Countdown Timer (`web_ftp/snipplets/home/home-sale-offers.tpl`)**:
+  - Se creó el snipplet dedicado `snipplets/home/home-sale-offers.tpl`.
+  - **Banner de Cuenta Regresiva (`.timer-banner`)**:
+    - Título "Ofertas Especiales", subtítulo y badges destacados ("Liquidación", "Tiempo Limitado").
+    - Reloj regresivo en 4 cajas display (`#cd-days`, `#cd-hours`, `#cd-mins`, `#cd-secs`) con segundero en vivo.
+    - Script JavaScript integrado con persistencia en `localStorage['hmc_offers_countdown_target']` para evitar reinicios de tiempo al recargar página.
+  - **Grilla de Productos de Oferta**:
+    - Conectada directamente a la base de datos real de Tiendanube: toma `sections.sale.products` o `sections.primary.products` usando `snipplets/grid/item.tpl`.
+    - Fallback curado con 4 productos de alta fidelidad del catálogo real (`Bomba Niwa`, `Taladro Einhell`, `Demoledor Bosch`, `Motoguadaña Shindaiwa`) con sus imágenes WebP en `web_ftp/static/images/products/` para garantizar que la sección nunca quede vacía.
+  - **Botón CTA de Cierre**: Botón directo *"Ver todas las Ofertas"* hacia `store.products_url ~ '?offers=true'`.
+  - Enrutado en `home-section-switch.tpl` al seleccionar `sale`, y actualización en `defaults.txt` (`sale_products_title_es = Ofertas Especiales`).
+
+- [x] **Motor de Estilos Mobile-First (`web_ftp/static/css/style-async.scss`)**:
+  - Se incorporaron las secciones completas de CSS para `.categories-section`, `.categories-grid`, `.category-card`, `.timer-offers-section`, `.timer-banner`, `.countdown-clock`, `.offers-grid`, badges y cards.
+  - Breakpoints rigurosos para desktop, tablet ($\le 992$px), mobile ($\le 768$px) y smartphones compactos ($\le 480$px).
+
+

@@ -6,11 +6,7 @@
 {% elseif section_select == 'main_categories' %}
 
 	{#  **** Main categories ****  #}
-	{% if show_help or (show_component_help and not has_main_categories) %}
-		{% snipplet 'defaults/home/main_categories_help.tpl' %}
-	{% else %}
-		{% include 'snipplets/home/home-categories.tpl' %}
-	{% endif %}
+	{% include 'snipplets/home/home-categories.tpl' %}
 
 {% elseif section_select == 'welcome' %}
 
@@ -56,12 +52,8 @@
 
 {% elseif section_select == 'sale' %}
 
-	{#  **** Sale products ****  #}
-	{% if show_help or (show_component_help and not has_products) %}
-        {% include 'snipplets/defaults/home/featured_products_help.tpl' with { products_title: 'Ofertas' | translate, section_id: 'sale' }  %}
-    {% else %}
-		{% include 'snipplets/home/home-featured-products.tpl' with {'has_sale': true} %}
-	{% endif %}
+	{#  **** Sale products / Ofertas con Countdown (HMC HUB) ****  #}
+	{% include 'snipplets/home/home-sale-offers.tpl' %}
 
 {% elseif section_select == 'promotion' %}
 

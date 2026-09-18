@@ -2507,3 +2507,424 @@ footer {
   }
 }
 
+/* ==========================================================================
+   HMC HUB - Section 3: Categorías Destacadas (Fase 1.1)
+   ========================================================================== */
+.categories-section {
+  background-color: var(--color-gray-ultra-light, #F8F9FA);
+  padding: 56px 0;
+}
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 20px;
+}
+
+.category-card {
+  background: #FFFFFF;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--color-gray-border, #E2E8F0);
+  text-align: center;
+  padding: 16px;
+  transition: all 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.category-card:hover {
+  border-color: var(--color-primary, #3FAA47);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  transform: translateY(-6px);
+}
+
+.category-img-wrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #EEEEEE;
+  margin-bottom: 14px;
+}
+
+.category-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.category-card:hover .category-img {
+  transform: scale(1.08);
+}
+
+.category-name {
+  font-family: var(--font-headings, 'Quedora', sans-serif);
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+  color: var(--color-black, #111111);
+  transition: color 0.2s ease;
+}
+
+.category-card:hover .category-name {
+  color: var(--color-primary, #3FAA47);
+}
+
+.category-count {
+  font-size: 0.8rem;
+  color: var(--color-gray-medium, #71717A);
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   HMC HUB - Section 4: Ofertas con Countdown (Fase 1.2)
+   ========================================================================== */
+.timer-offers-section {
+  background-color: #FFFFFF;
+  color: var(--color-black, #111111);
+  position: relative;
+  overflow: hidden;
+  padding: 56px 0;
+  border-bottom: 1px solid var(--color-gray-border, #E2E8F0);
+}
+
+.timer-banner {
+  background: linear-gradient(135deg, #181b1e 0%, #111315 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 28px 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 32px;
+  margin-bottom: 36px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+.timer-banner-info h3 {
+  font-size: 1.8rem;
+  color: #FFFFFF;
+  margin-bottom: 4px;
+  font-family: var(--font-headings, 'Quedora', sans-serif);
+  font-weight: 700;
+}
+
+.timer-banner-info p {
+  color: #C5C5C5;
+  font-size: 0.95rem;
+}
+
+/* Countdown Clock */
+.countdown-clock {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.countdown-segment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.countdown-box {
+  background: var(--color-primary, #3FAA47);
+  color: #FFFFFF;
+  font-family: var(--font-headings, 'Quedora', sans-serif);
+  font-size: 1.75rem;
+  font-weight: 800;
+  width: 62px;
+  height: 62px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 14px rgba(63, 170, 71, 0.4);
+}
+
+.countdown-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #A1A1AA;
+  margin-top: 6px;
+}
+
+.countdown-sep {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--color-primary, #3FAA47);
+  margin-bottom: 20px;
+}
+
+/* Badges */
+.product-badge-group {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 5;
+}
+
+.badge {
+  font-family: var(--font-headings, 'Quedora', sans-serif);
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 10px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.badge-discount {
+  background: #E53935;
+  color: #FFFFFF;
+}
+
+.badge-shipping {
+  background: var(--color-primary, #3FAA47);
+  color: #FFFFFF;
+}
+
+/* Offers Grid */
+.offers-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+/* Product Card */
+.product-card {
+  background: #FFFFFF;
+  border-radius: 12px;
+  border: 1px solid var(--color-gray-border, #E2E8F0);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.25s ease;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.product-card:hover {
+  border-color: var(--color-primary, #3FAA47);
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+}
+
+.product-image-box {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.product-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-img {
+  transform: scale(1.06);
+}
+
+.product-details {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.product-brand {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-gray-medium, #71717A);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.product-name {
+  font-size: 0.92rem;
+  font-weight: 600;
+  line-height: 1.35;
+  margin-bottom: 8px;
+  min-height: 40px;
+}
+
+.product-name a {
+  color: var(--color-black, #111111);
+  text-decoration: none;
+}
+
+.product-price-box {
+  margin-top: auto;
+  margin-bottom: 12px;
+}
+
+.price-old {
+  font-size: 0.85rem;
+  color: #9CA3AF;
+  text-decoration: line-through;
+  margin-right: 8px;
+}
+
+.price-current {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--color-black, #111111);
+}
+
+.installments-info {
+  font-size: 0.8rem;
+  color: var(--color-primary, #3FAA47);
+  margin-top: 4px;
+}
+
+.btn-add-to-cart {
+  width: 100%;
+  padding: 10px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  border-radius: 8px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Responsive Media Queries (Categories & Offers) */
+@media (max-width: 992px) {
+  .categories-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .offers-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .categories-section,
+  .timer-offers-section {
+    padding: 36px 0;
+  }
+
+  .categories-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .category-card {
+    padding: 12px 8px;
+    min-width: 0;
+  }
+
+  .category-name {
+    font-size: 0.85rem;
+  }
+
+  .timer-banner {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px 16px;
+    gap: 18px;
+    margin-bottom: 24px;
+  }
+
+  .timer-banner-info {
+    text-align: center;
+  }
+
+  .timer-banner-info h3 {
+    font-size: 1.4rem;
+  }
+
+  .countdown-box {
+    width: 52px;
+    height: 52px;
+    font-size: 1.4rem;
+  }
+
+  .countdown-label {
+    font-size: 0.65rem;
+  }
+
+  .countdown-sep {
+    font-size: 1.3rem;
+    margin-bottom: 16px;
+  }
+
+  .offers-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .product-details {
+    padding: 12px 10px;
+  }
+
+  .product-name {
+    font-size: 0.82rem;
+    min-height: 34px;
+  }
+
+  .price-current {
+    font-size: 1.05rem;
+  }
+
+  .price-old {
+    font-size: 0.78rem;
+  }
+
+  .installments-info {
+    font-size: 0.72rem;
+  }
+
+  .btn-add-to-cart {
+    font-size: 0.78rem;
+    padding: 8px 6px;
+  }
+}
+
+@media (max-width: 480px) {
+  .category-img-wrapper {
+    margin-bottom: 8px;
+  }
+
+  .countdown-clock {
+    gap: 8px;
+  }
+
+  .countdown-box {
+    width: 44px;
+    height: 44px;
+    font-size: 1.2rem;
+    border-radius: 8px;
+  }
+
+  .countdown-sep {
+    font-size: 1.1rem;
+    margin-bottom: 14px;
+  }
+}
+

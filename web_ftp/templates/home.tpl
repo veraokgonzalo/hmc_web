@@ -3,7 +3,7 @@
 {% set has_main_slider = true %}
 {% set has_mobile_slider = settings.toggle_slider_mobile and settings.slider_mobile and settings.slider_mobile is not empty %}
 {% set has_video = settings.video_embed %}
-{% set has_main_categories = settings.main_categories and settings.slider_categories and settings.slider_categories is not empty %}
+{% set has_main_categories = true %}
 {% set has_banners = settings.banner and settings.banner is not empty %}
 {% set has_promotional_banners = settings.banner_promotional and settings.banner_promotional is not empty %}
 {% set has_news_banners = settings.banner_news and settings.banner_news is not empty %}
