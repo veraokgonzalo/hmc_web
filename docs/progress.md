@@ -496,6 +496,5 @@ Objetivo: Completar el 100% de la Fase 1 del Plan Maestro para tener la página 
   - `defaults.txt` configurado con la secuencia idéntica al boceto: `slider` $\rightarrow$ `informatives` $\rightarrow$ `video` $\rightarrow$ `sale` $\rightarrow$ `institutional` $\rightarrow$ `main_categories` $\rightarrow$ `brands` $\rightarrow$ `testimonials` $\rightarrow$ `new_block`.
 - [x] **Motor de Estilos en `style-async.scss`**:
   - Se agregaron las reglas de `.video-section-bleed`, `.hmc-parallax-section`, `.testimonials-section` y sus media queries mobile-first.
-
-
-
+- [x] **Plan Maestro de Migración versionado en el repositorio**:
+  - Se formalizó y versionó la hoja de ruta integral en [`docs/plan_migracion_boceto_tiendanube_ftp.md`](file:///mnt/0076ECF676ECED7A/1_FABRICCKK/1_Trabajo/WEB/HMC_WEB/hmc_web/docs/plan_migracion_boceto_tiendanube_ftp.md), detallando las 7 fases, la matriz de integración server-side con la base de datos de Tiendanube y el estado de avance.
