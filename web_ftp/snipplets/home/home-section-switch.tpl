@@ -22,15 +22,8 @@
 
 {% elseif section_select == 'institutional' %}
 
-	{#  **** Institutional message ****  #}
-
-	<section data-store="home-institutional-message">
-		{% if show_help or (show_component_help and not has_institutional_message) %}
-			{% include 'snipplets/defaults/home/institutional_message_help.tpl' with { section_name: 'institutional-message', title: 'Mensaje institucional'| translate}  %}
-		{% else %}
-			{% include 'snipplets/home/home-institutional-message.tpl' %}
-		{% endif %}
-	</section>
+	{#  **** Institutional / Parallax Casa Central Santa Rosa (HMC HUB) ****  #}
+	{% include 'snipplets/home/home-showroom-parallax.tpl' %}
 
 {% elseif section_select == 'products' %}
 
@@ -104,12 +97,8 @@
 
 {% elseif section_select == 'video' %}
 
-	{#  **** Video embed ****  #}
-	{% if show_help or (show_component_help and not has_video) %}
-		{% snipplet 'defaults/home/video_help.tpl' %}
-	{% else %}
-		{% include 'snipplets/home/home-video.tpl' %}
-	{% endif %}
+	{#  **** Video Showcase / Bleed Cinematic Layout (HMC HUB) ****  #}
+	{% include 'snipplets/home/home-video.tpl' %}
 
 {% elseif section_select == 'newsletter' %}
 
@@ -192,14 +181,7 @@
 
 {% elseif section_select == 'testimonials' %}
 
-	{#  **** Testimonials slider ****  #}
-
-	<section data-store="home-testimonials">
-		{% if show_help or (show_component_help and not has_testimonials) %}
-			{% snipplet 'defaults/home/testimonials_help.tpl' %}
-		{% else %}
-			{% include 'snipplets/home/home-testimonials.tpl' %}
-		{% endif %}
-	</section>
+	{#  **** Testimonials / Google Reviews 5.0 (HMC HUB) ****  #}
+	{% include 'snipplets/home/home-testimonials.tpl' %}
 
 {% endif %}

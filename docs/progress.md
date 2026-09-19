@@ -473,4 +473,29 @@ Objetivo: Continuar con la Fase 1 del Plan Maestro, migrando las secciones de Ca
   - Se incorporaron las secciones completas de CSS para `.categories-section`, `.categories-grid`, `.category-card`, `.timer-offers-section`, `.timer-banner`, `.countdown-clock`, `.offers-grid`, badges y cards.
   - Breakpoints rigurosos para desktop, tablet ($\le 992$px), mobile ($\le 768$px) y smartphones compactos ($\le 480$px).
 
+---
+
+## 🚀 Migración de Boceto a Tiendanube FTP — Cierre de Fase 1 (1.3 a 1.6 - 2026-09-18)
+
+Objetivo: Completar el 100% de la Fase 1 del Plan Maestro para tener la página de inicio (Home Page) completamente migrada y alineada 1-a-1 con `boceto_web/index.html`.
+
+- [x] **1.3. Video Showcase Bleed (`web_ftp/snipplets/home/home-video.tpl`)**:
+  - Rediseño arquitectónico del bloque de video: soporte dual para embed de YouTube (`settings.video_embed`) o modo cinemático ambient video bleed con `images/video-poster.jpg`.
+  - Título "Taller Propio y Mantenimiento de Maquinaria", bajada institucional y CTA directo a WhatsApp Taller (`store.whatsapp_number`).
+  - Script integrado de play/pause reactivo con botón flotante `.video-play-btn`.
+- [x] **1.4. Showcase B2B Línea Pesada & Jardín (`web_ftp/snipplets/home/home-new-block.tpl`)**:
+  - Módulo de 2 imágenes de alto impacto (`banner-showcase-1-linea-pesada.jpg` y `banner-showcase-2-linea-jardin.jpg`) integrado en la secuencia del home.
+- [x] **1.5. Parallax Showroom & Casa Central Santa Rosa (`web_ftp/snipplets/home/home-showroom-parallax.tpl`)**:
+  - Módulo full-bleed con fondo de sucursal (`sucursal-foto-vertical.webp`), overlay degradado WCAG, tag institucional, pills informativas de dirección y horario, y botones directos: *"Cómo Llegar"* (Google Maps) y *"Hablar con Mostrador"* (WhatsApp).
+  - Enrutado dinámico en `home-section-switch.tpl` al seleccionar `institutional`.
+- [x] **1.6. Testimonios de Clientes Google Reviews (`web_ftp/snipplets/home/home-testimonials.tpl`)**:
+  - Grilla de 3 cards con las reseñas reales 5.0 ★ de Google de HMC HUB (Milena Ormeño, Ricardo Dimartino, Luis Rodrigo Wiggenhuaser).
+  - Integración de avatares oficiales (`logos/logo-circular-green.png`, `dark.png`, `badge.png`) y badge de *"Cliente verificado · Google Reviews"*.
+  - Compatible con testimonios configurados desde el admin de Tiendanube (`settings.testimonial_*`).
+- [x] **Secuencia y defaults actualizados**:
+  - `defaults.txt` configurado con la secuencia idéntica al boceto: `slider` $\rightarrow$ `informatives` $\rightarrow$ `video` $\rightarrow$ `sale` $\rightarrow$ `institutional` $\rightarrow$ `main_categories` $\rightarrow$ `brands` $\rightarrow$ `testimonials` $\rightarrow$ `new_block`.
+- [x] **Motor de Estilos en `style-async.scss`**:
+  - Se agregaron las reglas de `.video-section-bleed`, `.hmc-parallax-section`, `.testimonials-section` y sus media queries mobile-first.
+
+
 

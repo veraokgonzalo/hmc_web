@@ -1,49 +1,102 @@
-{% set has_home_testimonials = false %}
-{% set num_testimonials = 0 %}
-{% for testimonial in ['testimonial_01', 'testimonial_02', 'testimonial_03'] %}
-	{% set testimonial_image = "#{testimonial}.jpg" | has_custom_image %}
-	{% set testimonial_name = attribute(settings,"#{testimonial}_name") %}
-	{% set testimonial_description = attribute(settings,"#{testimonial}_description") %}
-	{% set has_testimonial = testimonial_name or testimonial_description or testimonial_image %}
-	{% if has_testimonial %}
-		{% set has_home_testimonials = true %}
-		{% set num_testimonials = num_testimonials + 1 %}
-	{% endif %}
-{% endfor %}
+{# /*============================================================================
+  #Home Testimonials & Reviews (HMC HUB - Google Reviews 5.0 ★)
+==============================================================================*/ #}
 
-{% if has_home_testimonials or params.preview %}
-	<div class="js-section-testimonials section-testimonials-home overflow-none">
-		<div class="container">
-			<div class="row align-items-center">
-				<div class="js-testimonial-title-container {% if num_testimonials == 3 %}col-12{% else %}col-md-2{% endif %}" {% if not settings.testimonials_title %}style="display: none"{% endif %}>
-					<h2 class="js-testimonial-title h6 mb-3">{{ settings.testimonials_title }}</h2>
-				</div>
-				<div class="js-testimonial-container {% if num_testimonials == 3 %}col-12{% else %}col-md-10{% endif %}{% if num_testimonials > 1 %} p-0 px-md-3{% endif %}">
-					<div class="js-swiper-testimonials swiper-testimonials swiper-container p-1">
-						<div class="swiper-wrapper">
-							{% for testimonial in ['testimonial_01', 'testimonial_02', 'testimonial_03'] %}
-								{% set testimonial_image = "#{testimonial}.jpg" | has_custom_image %}
-								{% set testimonial_name = attribute(settings,"#{testimonial}_name") %}
-								{% set testimonial_description = attribute(settings,"#{testimonial}_description") %}
-								{% set has_testimonial = testimonial_name or testimonial_description or testimonial_image %}
-								
-								<div class="js-testimonial-slide {% if loop.last %}js-last-testimonial-slide mr-md-0{% endif %} swiper-slide {% if num_testimonials == 1 %} col-md-6 m-0{% else %} col-md{% endif %} p-0" {% if not has_testimonial %}style="display: none;"{% endif %}>
-									<div class="card p-3 text-center">
-										<div class="js-testimonial-img-container testimonials-image mb-2" {% if not testimonial_image %}style="display: none"{% endif %}>
-											<img class="js-testimonial-img js-testimonial-img-{{ loop.index }} testimonials-image-background lazyload" {% if testimonial_image %}src="{{ 'images/empty-placeholder.png' | static_url }}" data-src='{{ "#{testimonial}.jpg" | static_url | settings_image_url("small") }}'{% endif %} {% if testimonial_name %}alt="{{ testimonial_name }}"{% else %}alt="{{ 'Testimonio de' | translate }} {{ store.name }}"{% endif %} />
-											<div class="placeholder-fade"></div>
-										</div>
-										
-										<h3 class="js-testimonial-name js-testimonial-name-{{ loop.index }} font-smallest font-weight-bold mb-2" {% if not testimonial_name %}style="display: none"{% endif %}>{{ testimonial_name }}</h3>
-										<p class="js-testimonial-description js-testimonial-description-{{ loop.index }} font-small mb-2" {% if not testimonial_description %}style="display: none"{% endif %}>{{ testimonial_description }}</p>
-									</div>
+{% set has_custom_testimonials = settings.testimonial_01_description or settings.testimonial_01_name %}
+
+<section class="section-padding testimonials-section" id="nosotros" data-store="home-testimonials">
+	<div class="container">
+		<div class="section-header text-center mb-4">
+			<div class="d-inline-flex align-items-center mb-2 text-warning">
+				<i class="fa-solid fa-star mr-1"></i>
+				<i class="fa-solid fa-star mr-1"></i>
+				<i class="fa-solid fa-star mr-1"></i>
+				<i class="fa-solid fa-star mr-1"></i>
+				<i class="fa-solid fa-star mr-2"></i>
+				<span class="text-muted font-small font-weight-bold">5.0 / 5.0 Google Reviews</span>
+			</div>
+			<h2 class="section-title h2 font-weight-bold mb-2">{{ settings.testimonials_title | default('La Opinión de Quienes Confiaron en Nosotros' | translate) }}</h2>
+			<p class="section-subtitle text-muted">{{ 'Experiencias reales de clientes en obra, campo y taller.' | translate }}</p>
+		</div>
+
+		<div class="testimonials-grid">
+			{% if has_custom_testimonials %}
+				{% for testimonial in ['testimonial_01', 'testimonial_02', 'testimonial_03'] %}
+					{% set testimonial_image = "#{testimonial}.jpg" | has_custom_image %}
+					{% set testimonial_name = attribute(settings, "#{testimonial}_name") %}
+					{% set testimonial_description = attribute(settings, "#{testimonial}_description") %}
+					{% if testimonial_name or testimonial_description %}
+						<div class="testimonial-card">
+							<div>
+								<div class="testimonial-rating">
+									<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
 								</div>
-							{% endfor %}
+								<p class="testimonial-quote">"{{ testimonial_description }}"</p>
+							</div>
+							<div class="testimonial-author">
+								{% if testimonial_image %}
+									<img src="{{ "#{testimonial}.jpg" | static_url | settings_image_url('small') }}" alt="{{ testimonial_name }}" class="author-avatar" loading="lazy">
+								{% else %}
+									<img src="{{ 'images/logos/logo-circular-green.png' | static_url }}" alt="{{ testimonial_name }}" class="author-avatar" loading="lazy">
+								{% endif %}
+								<div class="author-info">
+									<h5 class="m-0 font-weight-bold">{{ testimonial_name }}</h5>
+									<span class="text-muted font-smallest">{{ 'Cliente verificado' | translate }}</span>
+								</div>
+							</div>
+						</div>
+					{% endif %}
+				{% endfor %}
+			{% else %}
+				{# 3 Google Reviews Verificadas de HMC HUB #}
+				<div class="testimonial-card">
+					<div>
+						<div class="testimonial-rating">
+							<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+						</div>
+						<p class="testimonial-quote">"Fuimos por una cortadora de pasto y bordeadora y la atención fue excelente. La chica que nos atendió nos informó muy bien sobre cada característica de las máquinas y también nos aconsejó para su buen uso. Antes de entregar las máquinas, las probaron para ver que funcionen bien. También ofrecen garantía y service."</p>
+					</div>
+					<div class="testimonial-author">
+						<img src="{{ 'images/logos/logo-circular-green.png' | static_url }}" alt="Milena Ormeño" class="author-avatar" loading="lazy">
+						<div class="author-info">
+							<h5 class="m-0 font-weight-bold">Milena Ormeño</h5>
+							<span class="text-muted font-smallest">Cliente verificado · Google Reviews</span>
 						</div>
 					</div>
-					<div class="js-swiper-testimonials-pagination swiper-pagination swiper-pagination-bullets position-relative d-block d-md-none"></div>
 				</div>
-			</div>
+
+				<div class="testimonial-card">
+					<div>
+						<div class="testimonial-rating">
+							<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+						</div>
+						<p class="testimonial-quote">"Excelente atención. Gran variedad de productos y repuestos del rubro. Muy buen taller de reparaciones. Totalmente recomendable."</p>
+					</div>
+					<div class="testimonial-author">
+						<img src="{{ 'images/logos/logo-circular-dark.png' | static_url }}" alt="Ricardo Dimartino" class="author-avatar" loading="lazy">
+						<div class="author-info">
+							<h5 class="m-0 font-weight-bold">Ricardo Dimartino</h5>
+							<span class="text-muted font-smallest">Cliente verificado · Google Reviews</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="testimonial-card">
+					<div>
+						<div class="testimonial-rating">
+							<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+						</div>
+						<p class="testimonial-quote">"Excelente atención y muy buenos precios, y variedad en repuestos, recomendable."</p>
+					</div>
+					<div class="testimonial-author">
+						<img src="{{ 'images/logos/logo-circular-badge.png' | static_url }}" alt="Luis Rodrigo Wiggenhuaser" class="author-avatar" loading="lazy">
+						<div class="author-info">
+							<h5 class="m-0 font-weight-bold">Luis Rodrigo Wiggenhuaser</h5>
+							<span class="text-muted font-smallest">Cliente verificado · Google Reviews</span>
+						</div>
+					</div>
+				</div>
+			{% endif %}
 		</div>
 	</div>
-{% endif %}
+</section>
