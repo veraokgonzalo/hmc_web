@@ -6,17 +6,8 @@
 
 <section class="section-padding testimonials-section" id="nosotros" data-store="home-testimonials">
 	<div class="container">
-		<div class="section-header text-center mb-4">
-			<div class="d-inline-flex align-items-center mb-2 text-warning">
-				<i class="fa-solid fa-star mr-1"></i>
-				<i class="fa-solid fa-star mr-1"></i>
-				<i class="fa-solid fa-star mr-1"></i>
-				<i class="fa-solid fa-star mr-1"></i>
-				<i class="fa-solid fa-star mr-2"></i>
-				<span class="text-muted font-small font-weight-bold">5.0 / 5.0 Google Reviews</span>
-			</div>
-			<h2 class="section-title h2 font-weight-bold mb-2">{{ settings.testimonials_title | default('La Opinión de Quienes Confiaron en Nosotros' | translate) }}</h2>
-			<p class="section-subtitle text-muted">{{ 'Experiencias reales de clientes en obra, campo y taller.' | translate }}</p>
+		<div class="section-header">
+			<h2 class="section-title">{{ settings.testimonials_title | default('La Opinión de Quienes Confiaron en Nosotros' | translate) }}</h2>
 		</div>
 
 		<div class="testimonials-grid">

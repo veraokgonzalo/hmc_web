@@ -498,3 +498,30 @@ Objetivo: Completar el 100% de la Fase 1 del Plan Maestro para tener la página 
   - Se agregaron las reglas de `.video-section-bleed`, `.hmc-parallax-section`, `.testimonials-section` y sus media queries mobile-first.
 - [x] **Plan Maestro de Migración versionado en el repositorio**:
   - Se formalizó y versionó la hoja de ruta integral en [`docs/plan_migracion_boceto_tiendanube_ftp.md`](file:///mnt/0076ECF676ECED7A/1_FABRICCKK/1_Trabajo/WEB/HMC_WEB/hmc_web/docs/plan_migracion_boceto_tiendanube_ftp.md), detallando las 7 fases, la matriz de integración server-side con la base de datos de Tiendanube y el estado de avance.
+
+---
+
+## 🎯 Corrección y Ajuste de Fidelidad 1-a-1 con el Boceto (2026-09-18)
+
+Auditoría exhaustiva y resolución de discrepancias visuales reportadas frente al prototipo interactivo (`boceto_web/`):
+
+- [x] **Depuración de Plantillas (Cero elementos inventados)**:
+  - `web_ftp/snipplets/home/home-video.tpl`: Se eliminó el tag *"Servicio Técnico Especializado"* y el párrafo descriptivo inventado. Se dejó únicamente el `<h2>` y el botón *"Consultar al Taller"*.
+  - `web_ftp/snipplets/home/home-sale-offers.tpl`: Se eliminaron los badges *"Liquidación"* y *"Tiempo Limitado"* sobre el banner.
+  - `web_ftp/snipplets/home/home-showroom-parallax.tpl`: Se eliminó el tag *"Casa Central & Showroom"*, la píldora extra de horario y el botón secundario de WhatsApp. Quedó únicamente la píldora de dirección y el botón *"Cómo Llegar"*.
+  - `web_ftp/snipplets/home/home-testimonials.tpl`: Se eliminó el bloque de estrellas doradas y el subtítulo del encabezado.
+- [x] **Reproductor de Video HTML5 en Vivo**:
+  - Se integró la etiqueta nativa `<video id="showcaseVideo" poster="..." autoplay muted loop playsinline preload="metadata">` con fuentes `.webm` y `.mp4` optimizadas en `web_ftp/static/videos/`.
+  - Script reactivo idéntico al boceto (`initVideoPlayer`) que maneja eventos `play`, `pause`, click en contenedor y click en botón play flotante.
+- [x] **Tipografía y Escala de Encabezados**:
+  - Se implementó `font-size: clamp(2.2rem, 5vw, 3.6rem)` en `.hero-title` para alcanzar los 58px en escritorio.
+  - Se homogeneizó la escala tipográfica global `h1`-`h6` y `.section-title` con `clamp()` y `letter-spacing: -0.02em`.
+  - Se enlazaron Google Fonts (`Plus Jakarta Sans`, `Chakra Petch`, `Inter`) en el `<head>` de `layout.tpl` como respaldo inmediato de alta disponibilidad.
+- [x] **Sistema Maestro de Botones y Color de Marca**:
+  - Se definió el sistema global `.btn`, `.btn-primary`, `.btn-secondary`, `.btn-outline-primary`, `.btn-outline-white`, `.btn-lg` en `style-async.scss` con tipografía Quedora en mayúsculas (`text-transform: uppercase; font-weight: 700;`), color verde de marca `#3FAA47`, hover `#2E8B35`, bordes redondeados de 8px y sombra `0 4px 14px rgba(63, 170, 71, 0.35)`.
+  - Se actualizaron las variables por defecto en `defaults.txt` (`button_background_color = #3FAA47`, `accent_color = #3FAA47`, `header_background_color = #000000`).
+- [x] **Optimización y Nitidez del Video Showcase (`home-video.tpl`)**:
+  - Se resolvió el renderizado nativo removiendo `mask-image` en favor de un overlay de gradiente sin cuello de botella en la GPU.
+  - Video nativo HD (`hmc_mantenimientos_v2.mp4` / `.webm`) y poster 4K (`poster_v2.jpg`) con decodificación acelerada por hardware.
+  - Botón de Play/Pausa reactivo: se oculta automáticamente al reproducir (`visibility: hidden; opacity: 0;`), reaparece suavemente al pausar o pasar el cursor, y responde a clics en toda la zona del video.
+

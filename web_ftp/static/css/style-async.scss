@@ -2237,23 +2237,25 @@ footer {
 
 .hero-title {
   color: #FFFFFF;
-  font-family: var(--heading-font);
-  font-size: 2.8rem;
+  font-family: var(--font-headings, 'Quedora', 'Plus Jakarta Sans', sans-serif);
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
   font-weight: 700;
   margin-bottom: 18px;
   line-height: 1.15;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
 }
 
 .hero-title span {
-  color: var(--accent-color, #3FAA47);
+  color: var(--color-primary, #3FAA47);
 }
 
 .hero-description {
-  font-family: var(--body-font);
+  font-family: var(--font-body, 'Plus Jakarta Sans', sans-serif);
   font-size: 1.2rem;
   color: #E0E0E0;
   margin-bottom: 32px;
-  font-weight: 400;
+  font-weight: 300;
   line-height: 1.6;
 }
 
@@ -2263,31 +2265,142 @@ footer {
   gap: 16px;
 }
 
-.hero-buttons .btn {
+/* --------------------------------------------------------------------------
+   HMC HUB - Master Buttons & Interactive Elements (Global - Idéntico a boceto)
+   -------------------------------------------------------------------------- */
+.btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
-  font-family: var(--body-font);
-  font-weight: 600;
-  border-radius: 6px;
+  font-family: var(--font-headings, 'Quedora', 'Plus Jakarta Sans', sans-serif) !important;
+  font-weight: 700 !important;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase !important;
   padding: 14px 28px;
-  font-size: 1rem;
-  transition: all 0.2s ease-in-out;
+  border-radius: 8px !important;
+  transition: all 0.18s ease;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  user-select: none;
+  border: none;
   text-decoration: none;
+  cursor: pointer;
 }
 
-.hero-buttons .btn-primary {
-  background-color: var(--accent-color, #3FAA47);
-  border-color: var(--accent-color, #3FAA47);
-  color: #FFFFFF;
+.btn-primary,
+.btn-primary:not(:disabled):not(.disabled) {
+  background-color: var(--color-primary, #3FAA47) !important;
+  border-color: var(--color-primary, #3FAA47) !important;
+  color: #FFFFFF !important;
+  fill: #FFFFFF !important;
+  box-shadow: 0 4px 14px rgba(63, 170, 71, 0.35);
 }
 
-.hero-buttons .btn-primary:hover {
-  background-color: #2E8B35;
-  border-color: #2E8B35;
-  color: #FFFFFF;
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:not(:disabled):not(.disabled):hover,
+.btn-primary:not(:disabled):not(.disabled):focus {
+  background-color: var(--color-primary-dark, #2E8B35) !important;
+  border-color: var(--color-primary-dark, #2E8B35) !important;
+  color: #FFFFFF !important;
+  fill: #FFFFFF !important;
+  box-shadow: 0 6px 20px rgba(63, 170, 71, 0.5);
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(63, 170, 71, 0.35);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background-color: transparent !important;
+  color: #FFFFFF !important;
+  border: 2px solid #FFFFFF !important;
+}
+
+.btn-secondary:hover {
+  background-color: #FFFFFF !important;
+  color: #000000 !important;
+  transform: translateY(-2px);
+}
+
+.btn-outline-primary {
+  background-color: transparent !important;
+  color: var(--color-primary, #3FAA47) !important;
+  border: 2px solid var(--color-primary, #3FAA47) !important;
+}
+
+.btn-outline-primary:hover {
+  background-color: var(--color-primary, #3FAA47) !important;
+  color: #FFFFFF !important;
+  transform: translateY(-2px);
+}
+
+.btn-outline-white {
+  background-color: transparent !important;
+  color: #FFFFFF !important;
+  border: 2px solid #FFFFFF !important;
+}
+
+.btn-outline-white:hover {
+  background-color: #FFFFFF !important;
+  color: #000000 !important;
+  transform: translateY(-2px);
+}
+
+.btn-outline-dark {
+  background-color: transparent !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+}
+
+.btn-outline-dark:hover {
+  background-color: #000000 !important;
+  color: #FFFFFF !important;
+  transform: translateY(-2px);
+}
+
+.btn-dark {
+  background-color: #000000 !important;
+  color: #FFFFFF !important;
+}
+
+.btn-lg {
+  padding: 16px 36px !important;
+  font-size: 1.05rem !important;
+}
+
+.btn-sm {
+  padding: 8px 16px !important;
+  font-size: 0.82rem !important;
+}
+
+/* --------------------------------------------------------------------------
+   HMC HUB - Global Headings Scale (Global - Idéntico a boceto)
+   -------------------------------------------------------------------------- */
+.section-header {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 48px;
+}
+
+.section-title {
+  font-family: var(--font-headings, 'Quedora', 'Plus Jakarta Sans', sans-serif) !important;
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem) !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: -0.02em !important;
+  margin-bottom: 14px !important;
+}
+
+.section-subtitle {
+  color: var(--color-gray-dark, #494848);
+  font-size: 1.05rem;
+  font-weight: 400;
+  line-height: 1.5;
 }
 
 /* Slider Controls */
@@ -2951,11 +3064,9 @@ footer {
   right: auto;
   width: 62%;
   height: 100%;
-  z-index: 1;
+  z-index: 2;
   overflow: hidden;
   cursor: pointer;
-  -webkit-mask-image: linear-gradient(to left, transparent 0%, rgba(0, 0, 0, 0.25) 12%, rgba(0, 0, 0, 0.85) 35%, black 58%);
-  mask-image: linear-gradient(to left, transparent 0%, rgba(0, 0, 0, 0.25) 12%, rgba(0, 0, 0, 0.85) 35%, black 58%);
 }
 
 .video-ambient-poster,
@@ -2970,37 +3081,51 @@ footer {
 .video-ambient-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to left, #101214 0%, rgba(16, 18, 20, 0.65) 20%, transparent 50%),
-              linear-gradient(to bottom, rgba(16, 18, 20, 0.35) 0%, transparent 18%, transparent 82%, rgba(16, 18, 20, 0.45) 100%);
+  background: linear-gradient(to left, #101214 0%, rgba(16, 18, 20, 0.82) 22%, rgba(16, 18, 20, 0.35) 50%, transparent 75%),
+              linear-gradient(to bottom, rgba(16, 18, 20, 0.4) 0%, transparent 18%, transparent 82%, rgba(16, 18, 20, 0.5) 100%);
   pointer-events: none;
-  z-index: 2;
+  z-index: 3;
 }
 
 .video-play-btn {
   position: absolute;
   top: 50%;
-  left: 45%;
+  left: 50%;
   transform: translate(-50%, -50%);
-  width: 72px;
-  height: 72px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
-  background: rgba(63, 170, 71, 0.9);
-  color: #FFFFFF;
-  border: 3px solid rgba(255, 255, 255, 0.4);
-  font-size: 1.5rem;
-  display: flex;
+  background: var(--color-primary, #3FAA47) !important;
+  color: #FFFFFF !important;
+  display: flex !important;
   align-items: center;
   justify-content: center;
+  font-size: 1.55rem;
+  box-shadow: 0 0 0 10px rgba(63, 170, 71, 0.28);
+  transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
   cursor: pointer;
-  transition: all 0.3s ease;
-  z-index: 3;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+  z-index: 10;
+  border: none;
+  pointer-events: auto;
+  opacity: 1;
+  visibility: visible;
 }
 
 .video-play-btn:hover {
-  transform: translate(-50%, -50%) scale(1.1);
-  background: var(--color-primary, #3FAA47);
-  box-shadow: 0 0 35px rgba(63, 170, 71, 0.8);
+  transform: translate(-50%, -50%) scale(1.08);
+  background: var(--color-primary-dark, #2E8B35) !important;
+}
+
+.video-play-btn.playing {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+.video-ambient-bleed:hover .video-play-btn.playing {
+  opacity: 0.85 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
 }
 
 .video-bleed-container {
@@ -3011,11 +3136,13 @@ footer {
   padding-bottom: 64px;
   display: flex;
   justify-content: flex-end;
+  pointer-events: none;
 }
 
 .video-info-bleed {
   max-width: 530px;
   width: 100%;
+  pointer-events: auto;
 }
 
 .video-section-tag {

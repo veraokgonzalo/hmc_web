@@ -11,12 +11,8 @@
 		{# Countdown Banner Header #}
 		<div class="timer-banner">
 			<div class="timer-banner-info">
-				<div class="d-flex align-items-center mb-2">
-					<span class="badge badge-discount mr-2"><i class="fa-solid fa-bolt"></i> {{ 'Liquidación' | translate }}</span>
-					<span class="badge badge-shipping"><i class="fa-solid fa-clock"></i> {{ 'Tiempo Limitado' | translate }}</span>
-				</div>
-				<h3 class="m-0">{{ settings.sale_products_title | default('Ofertas Especiales' | translate) }}</h3>
-				<p class="m-0 mt-1 text-muted-light">{{ 'Aprovechá descuentos exclusivos por tiempo limitado en equipos seleccionados.' | translate }}</p>
+				<h3>{{ settings.sale_products_title | default('Ofertas Especiales de Temporada' | translate) }}</h3>
+				<p>{{ 'Aprovechá descuentos exclusivos y financiación en cuotas fijas antes de que finalice la promoción.' | translate }}</p>
 			</div>
 
 			<div class="countdown-clock" id="js-offers-countdown">

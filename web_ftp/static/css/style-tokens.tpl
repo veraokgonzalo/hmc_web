@@ -208,9 +208,9 @@
 
   {# Font families #}
 
-  --font-headings: 'Quedora', 'Plus Jakarta Sans', {{ settings.font_headings | raw }};
-  --font-body: 'Plus Jakarta Sans', {{ settings.font_rest | raw }};
-  --font-secondary: 'Plus Jakarta Sans', {{ settings.font_rest | raw }};
+  --font-headings: 'Quedora', 'Plus Jakarta Sans', 'Chakra Petch', 'Rajdhani', {{ settings.font_headings | raw }};
+  --font-body: 'Plus Jakarta Sans', 'Inter', {{ settings.font_rest | raw }};
+  --font-secondary: 'Plus Jakarta Sans', 'Inter', {{ settings.font_rest | raw }};
 
   --heading-font: var(--font-headings);
   --body-font: var(--font-body);

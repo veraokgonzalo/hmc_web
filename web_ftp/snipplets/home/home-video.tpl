@@ -30,28 +30,26 @@
 	</section>
 {% else %}
 	<section class="video-section-bleed" id="video-showcase" data-store="home-video-showcase">
-		{# Ambient Video Bleed #}
+		{# Ambient Video Bleed (Right >50% of screen with leftward feather fade) #}
 		<div class="video-ambient-bleed" id="videoAmbientWrapper">
 			<div class="video-ambient-overlay"></div>
-			<img src="{{ 'images/video-poster.jpg' | static_url }}" alt="HMC Taller y Mantenimiento" class="video-ambient-poster" id="showcaseVideoPoster" loading="lazy">
+			<video id="showcaseVideo" poster="{{ 'videos/poster_v2.jpg' | static_url }}" autoplay muted loop playsinline preload="auto">
+				<source src="{{ 'videos/hmc_mantenimientos_v2.mp4' | static_url }}" type="video/mp4">
+				<source src="{{ 'videos/hmc_mantenimientos_v2.webm' | static_url }}" type="video/webm">
+				{{ 'Tu navegador no soporta video HTML5.' | translate }}
+			</video>
 			<button class="video-play-btn" id="videoPlayBtn" title="{{ 'Reproducir / Pausar video' | translate }}" aria-label="{{ 'Reproducir o pausar video' | translate }}">
 				<i class="fa-solid fa-play"></i>
 			</button>
 		</div>
 
-		{# Text Content Container #}
+		{# Text Content Container (Left side floating over seamless dark background) #}
 		<div class="container video-bleed-container">
 			<div class="video-info-bleed">
-				<div class="video-section-tag">
-					<i class="fa-solid fa-screwdriver-wrench mr-1"></i> {{ 'Servicio Técnico Especializado' | translate }}
-				</div>
 				<h2 class="video-title">{{ settings.video_title | default('Taller Propio y Mantenimiento de Maquinaria' | translate) }}</h2>
-				<p class="video-desc">
-					{{ settings.video_text | default('Diagnóstico oficial, puesta en marcha garantizada y provisión de repuestos legítimos para todas las líneas de herramientas industriales y de jardín.' | translate) }}
-				</p>
 				<div class="video-actions">
 					<a href="{{ whatsapp_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">
-						<i class="fa-brands fa-whatsapp mr-2"></i> {{ 'Consultar al Taller' | translate }}
+						<i class="fa-brands fa-whatsapp"></i> {{ 'Consultar al Taller' | translate }}
 					</a>
 				</div>
 			</div>
@@ -61,33 +59,63 @@
 	<script>
 	(function() {
 		function initHmcVideoBleed() {
+			var video = document.getElementById('showcaseVideo');
 			var playBtn = document.getElementById('videoPlayBtn');
 			var wrapper = document.getElementById('videoAmbientWrapper');
-			if (!playBtn && !wrapper) return;
+			if (!video) return;
 
-			var isPlaying = false;
-			function toggleVideoState() {
-				isPlaying = !isPlaying;
-				if (playBtn) {
-					if (isPlaying) {
-						playBtn.classList.add('playing');
-						playBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
-					} else {
-						playBtn.classList.remove('playing');
-						playBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
-					}
+			function updateButton() {
+				if (!playBtn) return;
+				if (video.paused) {
+					playBtn.classList.remove('playing');
+					playBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+				} else {
+					playBtn.classList.add('playing');
+					playBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
 				}
 			}
 
-			if (playBtn) {
-				playBtn.addEventListener('click', function(e) {
+			function togglePlay(e) {
+				if (e) {
+					e.preventDefault();
 					e.stopPropagation();
-					toggleVideoState();
+				}
+				if (video.paused) {
+					var p = video.play();
+					if (p && p.catch) {
+						p.catch(function() {});
+					}
+				} else {
+					video.pause();
+				}
+				updateButton();
+			}
+
+			if (playBtn) {
+				playBtn.addEventListener('click', togglePlay);
+			}
+
+			if (wrapper) {
+				wrapper.addEventListener('click', function(e) {
+					if (e.target !== playBtn && (!playBtn || !playBtn.contains(e.target))) {
+						togglePlay(e);
+					}
 				});
 			}
-			if (wrapper) {
-				wrapper.addEventListener('click', toggleVideoState);
-			}
+
+			video.addEventListener('play', updateButton);
+			video.addEventListener('playing', updateButton);
+			video.addEventListener('pause', updateButton);
+			video.addEventListener('timeupdate', function() {
+				if (!video.paused && playBtn && !playBtn.classList.contains('playing')) {
+					updateButton();
+				}
+			});
+
+			// Sincronización tras el arranque de autoplay
+			setTimeout(updateButton, 200);
+			setTimeout(updateButton, 800);
+			setTimeout(updateButton, 2000);
 		}
 
 		if (document.readyState === 'loading') {

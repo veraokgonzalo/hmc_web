@@ -10,29 +10,20 @@
 	<div class="hmc-parallax-overlay"></div>
 	<div class="container hmc-parallax-container">
 		<div class="hmc-parallax-content">
-			<div class="section-tag-light mb-3">
-				<i class="fa-solid fa-store mr-1"></i> {{ 'Casa Central & Showroom' | translate }}
-			</div>
-			<h2 class="hmc-parallax-title">Conocé Nuestra Casa Central en Santa Rosa</h2>
+			<h2 class="hmc-parallax-title">{{ settings.institutional_title | default('Conocé Nuestra Casa Central en Santa Rosa' | translate) }}</h2>
 			<p class="hmc-parallax-desc">
-				Más de 30 años respaldando el trabajo en obra y campo. Showroom oficial Husqvarna y Niwa, taller propio de puesta en marcha y stock permanente de repuestos legítimos.
+				{{ settings.institutional_description | default('Más de 30 años respaldando el trabajo en obra y campo.' | translate) }}
 			</p>
 
 			<div class="hmc-parallax-pills">
 				<span class="parallax-pill">
-					<i class="fa-solid fa-location-dot"></i> Av. Santiago Marzo (Norte) 171, Santa Rosa, La Pampa
-				</span>
-				<span class="parallax-pill">
-					<i class="fa-solid fa-clock"></i> Lunes a Viernes 8:00 a 18:00 hs
+					<i class="fa-solid fa-location-dot"></i> {{ store.address ? store.address : 'Av. Santiago Marzo (Norte) 171, Santa Rosa, La Pampa' }}
 				</span>
 			</div>
 
 			<div class="hmc-parallax-actions">
 				<a href="https://www.google.com/maps/dir/?api=1&amp;destination=Av.+Santiago+Marzo+(Norte)+171,+Santa+Rosa,+La+Pampa,+Argentina" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">
-					<i class="fa-solid fa-map mr-2"></i> {{ 'Cómo Llegar' | translate }}
-				</a>
-				<a href="{{ whatsapp_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline-white btn-lg">
-					<i class="fa-brands fa-whatsapp mr-2"></i> {{ 'Hablar con Mostrador' | translate }}
+					<i class="fa-solid fa-map"></i> {{ 'Cómo Llegar' | translate }}
 				</a>
 			</div>
 		</div>
