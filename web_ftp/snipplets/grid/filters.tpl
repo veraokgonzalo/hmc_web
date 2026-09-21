@@ -3,21 +3,25 @@
     {# Applied filters chips #}
 
     {% if has_applied_filters %}
-        <div class="font-weight-bold font-small d-none d-md-inline mr-2">{{ 'Filtro aplicado:' | translate }}</div>
-        {% for product_filter in product_filters %}
-            {% for value in product_filter.values %}
+        <div class="active-filter-chips d-flex flex-wrap align-items-center">
+            <span class="font-weight-bold font-small d-none d-md-inline mr-2 text-muted">{{ 'Filtros aplicados:' | translate }}</span>
+            {% for product_filter in product_filters %}
+                {% for value in product_filter.values %}
 
-                {# List applied filters as tags #}
-                
-                {% if value.selected %}
-                    <button class="js-remove-filter chip" data-filter-name="{{ product_filter.key }}" data-filter-value="{{ value.name }}" data-component="filter.pill-{{ product_filter.type }}" data-component-value="{{ product_filter.key }}">
-                        {{ value.pill_label }}
-                        {% include "snipplets/svg/times.tpl" with {svg_custom_class: "icon-inline chip-remove-icon"} %}
-                    </button>
-                {% endif %}
+                    {# List applied filters as tags #}
+                    
+                    {% if value.selected %}
+                        <button class="js-remove-filter chip filter-chip" data-filter-name="{{ product_filter.key }}" data-filter-value="{{ value.name }}" data-component="filter.pill-{{ product_filter.type }}" data-component-value="{{ product_filter.key }}" title="{{ 'Eliminar filtro' | translate }}">
+                            <span>{{ value.pill_label }}</span>
+                            {% include "snipplets/svg/times.tpl" with {svg_custom_class: "icon-inline chip-remove-icon ml-1"} %}
+                        </button>
+                    {% endif %}
+                {% endfor %}
             {% endfor %}
-        {% endfor %}
-        <a href="#" class="js-remove-all-filters btn-link d-inline-block mt-1 mt-md-0 font-small" data-component="filter-delete">{{ 'Borrar filtros' | translate }}</a> 
+            <a href="#" class="js-remove-all-filters clear-filters-btn btn-link d-inline-block ml-md-2 mt-1 mt-md-0 font-small" data-component="filter-delete">
+                <i class="fa-solid fa-trash-can mr-1"></i> {{ 'Borrar filtros' | translate }}
+            </a> 
+        </div>
     {% endif %}
 {% else %}
     {% if product_filters is not empty %}
@@ -71,7 +75,7 @@
                                             <span class="checkbox {% if loop.last and product_filter.values_with_products < 8 %}mb-0{% endif %}">
                                                 <span class="checkbox-icon"></span>
                                                 <span class="checkbox-text">
-                                                    {{ value.name }} <span class="ml-1">({{ value.product_count }})</span>
+                                                    {{ value.name }} <span class="filter-badge ml-1">({{ value.product_count }})</span>
                                                 </span>
                                             </span>
                                         </label>

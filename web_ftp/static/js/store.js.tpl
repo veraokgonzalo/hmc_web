@@ -3757,4 +3757,43 @@ stream_videos.forEach(function(player){
 
     syncNavigationActiveState();
 
+    /* ==========================================================================
+       HMC HUB Phase 3: Catalog View Modes & Promotional Banner Reactivity
+       ========================================================================== */
+
+    // 1. Grid vs. List View Toggle
+    try {
+        var savedViewMode = localStorage.getItem("hmc_catalog_view") || "grid";
+        if (savedViewMode === "list") {
+            jQueryNuvem(".js-product-table").addClass("list-view");
+            jQueryNuvem('.js-view-mode[data-view="list"]').addClass("active");
+            jQueryNuvem('.js-view-mode[data-view="grid"]').removeClass("active");
+        }
+
+        jQueryNuvem(document).on("click", ".js-view-mode", function(e) {
+            e.preventDefault();
+            var $btn = jQueryNuvem(this);
+            var view = $btn.data("view");
+            
+            jQueryNuvem(".js-view-mode").removeClass("active");
+            $btn.addClass("active");
+            
+            if (view === "list") {
+                jQueryNuvem(".js-product-table").addClass("list-view");
+                localStorage.setItem("hmc_catalog_view", "list");
+            } else {
+                jQueryNuvem(".js-product-table").removeClass("list-view");
+                localStorage.setItem("hmc_catalog_view", "grid");
+            }
+        });
+    } catch(e) {}
+
+    // 2. Promotional Offers Banner Visibility
+    try {
+        var catalogUrlParams = new URLSearchParams(window.location.search);
+        if (catalogUrlParams.get("offers") === "true") {
+            jQueryNuvem("#catalogOffersPromoBanner").show();
+        }
+    } catch(e) {}
+
 });

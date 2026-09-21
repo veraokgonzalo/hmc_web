@@ -178,7 +178,10 @@
 
                     {{ component('nubesdk-slot', { type: "before_product_grid_item_name" }) }}
 
-                    <div class="js-item-name item-name {% if horizontal_item or reduced_item %}mb-2{% else %}mt-1 mb-3{% endif %} opacity-80" data-store="product-item-name-{{ product.id }}">{{ product.name }}</div>
+                    {% if product.brand %}
+                        <div class="product-brand mb-1">{{ product.brand }}</div>
+                    {% endif %}
+                    <div class="js-item-name item-name {% if horizontal_item or reduced_item %}mb-2{% else %}mt-1 mb-3{% endif %}" data-store="product-item-name-{{ product.id }}">{{ product.name }}</div>
 
                     {{ component('nubesdk-slot', { type: "after_product_grid_item_name" }) }}
 

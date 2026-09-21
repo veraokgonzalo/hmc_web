@@ -550,3 +550,31 @@ Objetivo: Trasladar al 100% la arquitectura de navegación unificada, mega-menú
   - `web_ftp/static/css/style-async.scss`: Más de 1.200 líneas de estilos modulares portados desde `boceto_web/css/styles.css` con soporte completo para desktop, tablet ($\le 992$px), móviles ($\le 768$px) y pantallas compactas ($\le 480$px).
   - `web_ftp/static/js/store.js.tpl`: Controladores de apertura/cierre de drawer, slide-down search móvil, acordeones táctiles y despachador de navegación activa (`syncNavigationActiveState()`).
 
+---
+
+## ⚡ Migración de Boceto a Tiendanube FTP — Fase 3 Completa: Catálogo, Búsqueda y Filtros Técnicos (2026-09-21)
+
+Objetivo: Trasladar la experiencia del catálogo técnico de `boceto_web/catalog.html` a las plantillas `web_ftp/templates/category.tpl`, `search.tpl` y sus componentes asociados, integrando filtros AJAX nativos, chips activos, banners promocionales y vistas dinámicas.
+
+- [x] **3.1. Banner Promocional de Ofertas Especiales (`#catalogOffersPromoBanner`)**:
+  - Implementado en `templates/category.tpl` y `templates/search.tpl`.
+  - Diseño premium oscuro con acento en rojo (#dc2626), tag "Oportunidades por Tiempo Limitado", badge "Precios Promocionales" y detalle de 16% OFF y 6 cuotas fijas.
+  - Activación automática si `offers=true` en URL, si la categoría visitada es de liquidación, o detectada dinámicamente por JavaScript.
+- [x] **3.2. Barra Lateral de Filtros & Chips Activos**:
+  - `snipplets/grid/filters-sidebar.tpl`: Encabezado industrial `.catalog-sidebar-title` con icono `<i class="fa-solid fa-sliders"></i>`.
+  - `snipplets/grid/filters.tpl`:
+    - Chips activos de filtros (`.filter-chip`) con fondo verde tenue institucional, borde sutil, icono de cruz táctil y botón de borrado masivo (`.clear-filters-btn`).
+    - Checkboxes con `accent-color: #3FAA47` y contadores formateados en pastillas (`.filter-badge`).
+- [x] **3.3. Toolbar de Catálogo & Asistencia Técnica B2B**:
+  - `snipplets/grid/products-list.tpl`:
+    - Toolbar superior (`.catalog-toolbar`) con contador dinámico de productos, botón de ordenamiento y alternador de vista Grilla / Lista.
+    - Banner inferior de asistencia técnica B2B al pie de la grilla ("¿Necesitás asesoramiento sobre qué equipo elegir?...") con botón directo a WhatsApp oficial.
+- [x] **3.4. Tarjetas de Producto Optimizadas (`item.tpl`)**:
+  - Visualización destacada de marca oficial (`.product-brand`) en mayúsculas sobre el título.
+  - Título con contraste completo y límite de 2 líneas fijas.
+  - Resalte de 6 cuotas fijas sin interés y botón de compra directa con tap target $\ge 44$px.
+- [x] **3.5. Reactividad JavaScript & Motor SCSS**:
+  - `web_ftp/static/js/store.js.tpl`: Alternador de vista Grilla/Lista con persistencia en `localStorage['hmc_catalog_view']`, y detección automática de ofertas por URL.
+  - `web_ftp/static/css/style-async.scss`: Estilos modulares completos para `.catalog-offers-banner`, `.catalog-sidebar`, `.active-filter-chips`, `.catalog-toolbar`, `.list-view`, `.technical-assistance-banner` y controles móviles.
+
+

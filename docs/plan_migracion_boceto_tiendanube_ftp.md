@@ -93,30 +93,21 @@ flowchart TD
 
 ---
 
-### Fase 3: Catálogo, Búsqueda y Filtros Técnicos
+### Fase 3: Catálogo, Búsqueda y Filtros Técnicos — ✅ COMPLETADO
 > **Objetivo**: Llevar a Tiendanube el layout de catálogo industrial (`catalog.html`) con filtros reactivos, chips activos y tarjetas de producto optimizadas.
 
-#### 3.1. Barra Lateral de Filtros y Drawer Táctil en Móviles
-- **Archivos a modificar**: `web_ftp/templates/category.tpl`, `templates/search.tpl`, `web_ftp/snipplets/grid/filters-sidebar.tpl`, `filters-modals.tpl`.
-- **Detalle**:
-  - Filtros por categoría y marcas oficiales con contadores reales.
-  - Filtros rápidos tipo interruptor: Envío Gratis, En Stock, Solo Ofertas.
-  - En móviles: Modal/drawer deslizable inferior para filtrar y ordenar sin recargar.
-
-#### 3.2. Chips Activos de Filtros
-- **Archivos a modificar**: `web_ftp/snipplets/grid/filters.tpl`, `web_ftp/static/js/store.js.tpl`.
-- **Detalle**: Píldoras interactivas de filtros activos con botón de borrado individual y botón *"Limpiar todo"*.
-
-#### 3.3. Banner Dinámico de Ofertas en Catálogo
-- **Archivos a modificar**: `web_ftp/templates/category.tpl`.
-- **Detalle**: Despliegue automático del banner premium de liquidación (`#catalogOffersPromoBanner`) al filtrar por ofertas especiales.
-
-#### 3.4. Tarjetas de Producto (`item.tpl`)
-- **Archivos a modificar**: `web_ftp/snipplets/grid/item.tpl`.
-- **Detalle**:
-  - Badge de oferta porcentual y badge de cuotas destacadas (6 cuotas fijas sin interés).
-  - Botón directo de compra / consulta rápida a WhatsApp.
-  - Indicador visual de stock disponible.
+- [x] **3.1. Barra Lateral de Filtros y Drawer Táctil en Móviles**:
+  - Cabecera industrial de filtros con icono de ajustes (`.catalog-sidebar-title`).
+  - Checkboxes de filtros por marca y categorías con contadores reales (`.filter-badge`).
+  - Drawer táctil modal en móviles (`.category-controls`) con tap targets $\ge 44$px.
+- [x] **3.2. Chips Activos de Filtros y Limpieza Rápida**:
+  - Chips de filtros activos con diseño píldora redondeada (`.filter-chip`), icono de eliminación táctil y botón de borrado total (`.clear-filters-btn`).
+- [x] **3.3. Toolbar de Catálogo, Banner Dinámico de Ofertas y Asistencia Técnica**:
+  - Banner dinámico de ofertas (`#catalogOffersPromoBanner`) condicionado por query string o categorías de liquidación.
+  - Toolbar de catálogo (`.catalog-toolbar`) con contador dinámico de productos, disparador de ordenamiento y alternador de vista Grilla / Lista con persistencia en `localStorage`.
+  - Banner de asistencia técnica B2B con enlace directo a WhatsApp oficial al pie de la grilla de productos.
+- [x] **3.4. Tarjetas de Producto (`item.tpl`)**:
+  - Visualización destacada de marca oficial (`.product-brand`), título con contraste 100%, 6 cuotas fijas y botón de compra directa con área táctil $\ge 44$px.
 
 ---
 

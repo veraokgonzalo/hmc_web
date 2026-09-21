@@ -58,11 +58,30 @@
 
 <section class="category-body overflow-none">
 	<div class="container {% if has_applied_filters %}mt-md-0{% endif %}mb-5 {% if products %}mt-3{% endif %}">
+		{# Dynamic Promotional Offers Banner #}
+		{% set is_offers_query = params.offers == 'true' or (query | lower in ['oferta', 'ofertas', 'liquidacion', 'liquidación', 'promocion', 'promoción', 'descuento']) %}
+		<div id="catalogOffersPromoBanner" class="catalog-offers-banner mb-4" {% if not is_offers_query %}style="display: none;"{% endif %}>
+			<div class="catalog-offers-banner-inner">
+				<div class="catalog-offers-text">
+					<div class="section-tag section-tag-danger mb-2">
+						<i class="fa-solid fa-bolt mr-1"></i> {{ 'Oportunidades por Tiempo Limitado' | translate }}
+					</div>
+					<h2 class="catalog-offers-title mb-1">{{ 'Liquidación y Ofertas Especiales' | translate }}</h2>
+					<p class="catalog-offers-desc mb-0">
+						{{ 'Equipos de primeras marcas con hasta' | translate }} <strong>16% OFF</strong>, <strong>6 cuotas fijas</strong> {{ 'sin interés y garantía oficial de fábrica.' | translate }}
+					</p>
+				</div>
+				<div class="catalog-offers-pill">
+					<i class="fa-solid fa-tags mr-2"></i> {{ 'Precios Promocionales' | translate }}
+				</div>
+			</div>
+		</div>
+
 		{% if products %}
 			<div class="row"> 
 		{% endif %}
 			{% if has_applied_filters %}
-				<div class="col-12 mb-3 mb-md-4 d-flex justify-content-md-end align-items-center visible-when-content-ready">
+				<div class="col-12 mb-3 mb-md-4 d-flex justify-content-md-start align-items-center visible-when-content-ready">
 					{% include "snipplets/grid/filters.tpl" with {applied_filters: true} %}
 				</div>
 			{% endif %}
