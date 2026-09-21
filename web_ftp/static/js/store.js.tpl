@@ -3607,4 +3607,154 @@ stream_videos.forEach(function(player){
 
     {% endif %}
 
+    /* ==========================================================================
+       HMC HUB Phase 2: Unified Navigation & Mobile Experience
+       ========================================================================== */
+
+    // 1. Mobile Slide-Down Search Toggle
+    var $mobileSearchToggle = jQueryNuvem("#btnMobileSearchToggle");
+    var $mobileSearchBar = jQueryNuvem("#mobileSearchBar");
+    var $mobileSearchInput = jQueryNuvem("#mobileHeaderSearchInput");
+    var $mobileSearchCloseBtn = jQueryNuvem("#mobileSearchCloseBtn");
+    var $mobileSearchClearBtn = jQueryNuvem("#mobileSearchClearBtn");
+
+    function toggleMobileSearch(forceState) {
+        var willOpen = typeof forceState === "boolean" ? forceState : !$mobileSearchBar.hasClass("active");
+        if (willOpen) {
+            $mobileSearchBar.addClass("active");
+            $mobileSearchToggle.addClass("active").html('<i class="fa-solid fa-xmark"></i>');
+            setTimeout(function() {
+                $mobileSearchInput.focus();
+            }, 120);
+        } else {
+            $mobileSearchBar.removeClass("active");
+            $mobileSearchToggle.removeClass("active").html('<i class="fa-solid fa-magnifying-glass"></i>');
+            jQueryNuvem("#mobileSearchDropdown").removeClass("active");
+        }
+    }
+
+    $mobileSearchToggle.on("click", function(e) {
+        e.preventDefault();
+        toggleMobileSearch();
+    });
+
+    $mobileSearchCloseBtn.on("click", function(e) {
+        e.preventDefault();
+        toggleMobileSearch(false);
+    });
+
+    $mobileSearchInput.on("input", function() {
+        if (jQueryNuvem(this).val().length > 0) {
+            $mobileSearchClearBtn.show();
+        } else {
+            $mobileSearchClearBtn.hide();
+        }
+    });
+
+    $mobileSearchClearBtn.on("click", function(e) {
+        e.preventDefault();
+        $mobileSearchInput.val("").focus();
+        $mobileSearchClearBtn.hide();
+    });
+
+    jQueryNuvem(document).on("keydown", function(e) {
+        if (e.key === "Escape" && $mobileSearchBar.hasClass("active")) {
+            toggleMobileSearch(false);
+        }
+    });
+
+    // 2. Mobile Off-Canvas Drawer Menu & Accordions
+    var $mobileDrawer = jQueryNuvem("#mobileDrawerMenu");
+    var $mobileDrawerOverlay = jQueryNuvem("#mobileDrawerOverlay");
+
+    function openMobileDrawer() {
+        $mobileDrawer.addClass("active");
+        $mobileDrawerOverlay.addClass("active");
+        document.body.style.overflow = "hidden";
+    }
+
+    function closeMobileDrawer() {
+        $mobileDrawer.removeClass("active");
+        $mobileDrawerOverlay.removeClass("active");
+        document.body.style.overflow = "";
+    }
+
+    jQueryNuvem(document).on("click", ".js-open-mobile-menu, #mobileMenuToggle", function(e) {
+        e.preventDefault();
+        openMobileDrawer();
+    });
+
+    jQueryNuvem(document).on("click", ".js-close-mobile-menu, #mobileDrawerClose, #mobileDrawerOverlay", function(e) {
+        e.preventDefault();
+        closeMobileDrawer();
+    });
+
+    // Drawer Accordions (Categorías y Marcas)
+    jQueryNuvem(document).on("click", ".js-drawer-accordion", function(e) {
+        e.preventDefault();
+        var $header = jQueryNuvem(this);
+        var $content = $header.next(".mobile-drawer-accordion-content");
+        var $icon = $header.find("i.fa-chevron-down");
+        
+        $content.toggleClass("active");
+        if ($content.hasClass("active")) {
+            $icon.css("transform", "rotate(180deg)");
+        } else {
+            $icon.css("transform", "rotate(0deg)");
+        }
+    });
+
+    // 3. Sync Active Navigation State (Desktop, Drawer & Bottom Bar)
+    function syncNavigationActiveState() {
+        var currentPath = window.location.pathname.toLowerCase();
+        var searchParams = new URLSearchParams(window.location.search);
+        var isOffers = searchParams.get("offers") === "true";
+        var hasCategory = searchParams.has("category") || searchParams.has("cat");
+        var hasBrand = searchParams.has("brand") || searchParams.get("brand_filter") === "true";
+
+        // Desktop nav links
+        jQueryNuvem(".nav-link").each(function() {
+            var $link = jQueryNuvem(this);
+            var href = ($link.attr("href") || "").toLowerCase();
+            var isActive = false;
+
+            if (isOffers && href.indexOf("offers=true") !== -1) {
+                isActive = true;
+            } else if (!isOffers && hasCategory && (href.indexOf("categoria") !== -1 || href.indexOf("category") !== -1)) {
+                isActive = true;
+            } else if (!isOffers && hasBrand && (href.indexOf("marca") !== -1 || href.indexOf("brand") !== -1)) {
+                isActive = true;
+            } else if (!isOffers && !hasCategory && !hasBrand) {
+                if ((currentPath === "/" || currentPath.endsWith("home")) && (href === "/" || href.endsWith("home"))) {
+                    isActive = true;
+                } else if (currentPath.indexOf("nosotros") !== -1 && href.indexOf("nosotros") !== -1) {
+                    isActive = true;
+                } else if (currentPath.indexOf("contacto") !== -1 && href.indexOf("contacto") !== -1) {
+                    isActive = true;
+                }
+            }
+
+            if (isActive) {
+                $link.addClass("active").closest(".nav-item").addClass("active");
+            }
+        });
+
+        // Bottom nav buttons
+        jQueryNuvem(".mobile-nav-btn").each(function() {
+            var $btn = jQueryNuvem(this);
+            var page = $btn.data("page");
+            if (page === "index" && (currentPath === "/" || currentPath.endsWith("home"))) {
+                $btn.addClass("active");
+            } else if (page === "categories" && (hasCategory || currentPath.indexOf("categoria") !== -1)) {
+                $btn.addClass("active");
+            } else if (page === "brands" && (hasBrand || currentPath.indexOf("marca") !== -1)) {
+                $btn.addClass("active");
+            } else if (page === "cart" && currentPath.indexOf("cart") !== -1) {
+                $btn.addClass("active");
+            }
+        });
+    }
+
+    syncNavigationActiveState();
+
 });

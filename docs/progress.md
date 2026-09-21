@@ -525,3 +525,28 @@ Auditoría exhaustiva y resolución de discrepancias visuales reportadas frente 
   - Video nativo HD (`hmc_mantenimientos_v2.mp4` / `.webm`) y poster 4K (`poster_v2.jpg`) con decodificación acelerada por hardware.
   - Botón de Play/Pausa reactivo: se oculta automáticamente al reproducir (`visibility: hidden; opacity: 0;`), reaparece suavemente al pausar o pasar el cursor, y responde a clics en toda la zona del video.
 
+---
+
+## 🚀 Migración de Boceto a Tiendanube FTP — Fase 2 Completa: Header Global, Mega-Menús & Mobile Nav (2026-09-21)
+
+Objetivo: Trasladar al 100% la arquitectura de navegación unificada, mega-menús alfabéticos y experiencia móvil app-like desde `boceto_web/` a la tienda productiva Tiendanube Legacy (`web_ftp/`).
+
+- [x] **2.1. Barra Superior, Buscador y Utilidades**:
+  - `web_ftp/snipplets/header/header-advertising.tpl`: Top announcement bar con marquesina continua infinita (`hmc-top-bar-marquee`), tres mensajes de valor comercial ("Envíos a todo el país", "6 cuotas fijas sin interés", "Puesta en marcha oficial") y links a Sucursal Santa Rosa y WhatsApp Facturación A.
+  - `web_ftp/snipplets/header/header.tpl`:
+    - Buscador predictivo en escritorio con autocompletado y diseño industrial con botón verde institucional (`.search-btn`).
+    - Botón de búsqueda rápida en móvil (`#btnMobileSearchToggle`) que abre la barra deslizable (`#mobileSearchBar`) con input redondeado, botón de borrado rápido (`#mobileSearchClearBtn`) y botón Cancelar.
+    - Utilidades: Acceso a Mi Cuenta (adaptativo según login de cliente), Carrito con badge reactivo de unidades (`js-cart-count`), y gatillo táctil de Menú.
+    - Integración de los 10 logotipos oficiales de HMC HUB en `web_ftp/static/images/logos/`.
+- [x] **2.2. Mega-Menús Desktop de Categorías y Marcas**:
+  - **Categorías (`navigation-categories-dropdown.tpl`)**: Mega dropdown con las 12 categorías principales por volumen en orden alfabético estricto (4 columnas x 3 filas), conectado en vivo con la base de datos de Tiendanube (`categories`), resolviendo URL canónica y contador real de productos, con pie hacia "Todas las categorías →".
+  - **Marcas**: Dropdown enfocado con las 8 marcas líderes del catálogo (*OREGON, NIWA, BOSCH, EINHELL, HUSQVARNA, GARDENA, SENSEI, HONDA*) + botón directo a "Todas las marcas →".
+  - **Secuencia comercial estricta**: `Inicio` $\rightarrow$ `Categorías` $\rightarrow$ `Marcas` $\rightarrow$ `Ofertas` (badge `OFF`) $\rightarrow$ `Nosotros` $\rightarrow$ `Contacto` $\rightarrow$ `Asesoría Técnica` (botón WhatsApp en navbar).
+- [x] **2.3. Menú Lateral Móvil (Drawer) & Barra Inferior Fija (Bottom App Bar)**:
+  - **Drawer Off-Canvas (`navigation-drawer.tpl`)**: Menú lateral táctil (`#mobileDrawerMenu`) con overlay difuminado, buscador integrado, acordeones interactivos para Categorías (12 rubros) y Marcas (8 fabricantes líderes) con tap targets $\ge 44$px, links directos y tarjeta de Asesoría Técnica ("Respuesta en menos de 15 min").
+  - **Bottom App Bar (`navigation-bottom-nav.tpl`)**: Barra fija inferior estilo App (`.mobile-bottom-nav`) con 5 accesos directos (*Inicio, Categorías, Marcas, Carrito con contador reactivo, Menú*) incluida en `layouts/layout.tpl`.
+  - **WhatsApp Flotante Coordinado (`whatsapp-chat.tpl`)**: Elevación dinámica a `bottom: 74px` en móviles sobre la barra inferior y a `bottom: 136px` cuando la barra de compra rápida esté activa.
+- [x] **2.4. Motor de Estilos & Comportamiento JS**:
+  - `web_ftp/static/css/style-async.scss`: Más de 1.200 líneas de estilos modulares portados desde `boceto_web/css/styles.css` con soporte completo para desktop, tablet ($\le 992$px), móviles ($\le 768$px) y pantallas compactas ($\le 480$px).
+  - `web_ftp/static/js/store.js.tpl`: Controladores de apertura/cierre de drawer, slide-down search móvil, acordeones táctiles y despachador de navegación activa (`syncNavigationActiveState()`).
+

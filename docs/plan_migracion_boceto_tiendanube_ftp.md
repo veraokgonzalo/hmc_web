@@ -75,30 +75,21 @@ flowchart TD
 
 ---
 
-### Fase 2: Header Global, Mega-Menús y Experiencia Móvil de Navegación
+### Fase 2: Header Global, Mega-Menús y Experiencia Móvil de Navegación — ✅ COMPLETADO
 > **Objetivo**: Reemplazar la barra estándar de Tiendanube por la arquitectura de navegación unificada del boceto, con mega-menús alfabéticos y barra inferior estilo App para teléfonos.
 
-#### 2.1. Barra Superior, Buscador y Utilidades
-- **Archivos a modificar**: `web_ftp/snipplets/header/header.tpl`, `header-utilities.tpl`, `header-search.tpl`.
-- **Detalle**:
-  - Top announcement bar con mensaje comercial ("Envíos a todo el país / Asesoría directa").
-  - Buscador predictivo en vivo con motor de búsqueda y botón de lupa desplegable en móvil (`#btnMobileSearchToggle` + `#mobileSearchBar`).
-  - Botón directo de WhatsApp de mostrador en la barra principal.
-  - Carrito con badge reactivo de unidades.
-
-#### 2.2. Mega-Menús Desktop de Categorías y Marcas
-- **Archivos a modificar**: `web_ftp/snipplets/navigation/navigation-nav-list.tpl`.
-- **Detalle**:
-  - **Categorías**: Mega dropdown con las 12 categorías principales en orden alfabético estricto (4 columnas x 3 filas), sin emojis, con enlace al pie *"Todas las categorías →"*.
-  - **Marcas**: Dropdown enfocado con las 8 marcas oficiales líderes (OREGON, NIWA, BOSCH, EINHELL, HUSQVARNA, GARDENA, SENSEI, HONDA) + CTA directo *"Explorar todas nuestras marcas →"*.
-  - **Secuencia comercial**: `Inicio` $\rightarrow$ `Categorías` $\rightarrow$ `Marcas` $\rightarrow$ `Ofertas` (badge `OFF`) $\rightarrow$ `Nosotros` $\rightarrow$ `Contacto` $\rightarrow$ `Asesoría Técnica` (botón verde WhatsApp).
-
-#### 2.3. Menú Móvil Lateral (Drawer) & Barra Inferior Fija
-- **Archivos a modificar**: `web_ftp/snipplets/navigation/navigation-panel.tpl`, `web_ftp/layouts/layout.tpl`.
-- **Detalle**:
-  - Drawer táctil con acordeón limpio de categorías y marcas (touch targets $\ge 44$px).
-  - Barra inferior fija estilo app (`.mobile-bottom-nav`) con 5 botones: *Inicio*, *Categorías*, *Marcas*, *Carrito*, *Menú*.
-  - Botón flotante de WhatsApp con auto-elevación ante barras inferiores o sticky buy bar.
+- [x] **2.1. Barra Superior, Buscador y Utilidades**:
+  - Top announcement bar con marquesina animada ("Envíos a todo el país / 6 cuotas fijas / Puesta en marcha") + accesos a Sucursal Santa Rosa y WhatsApp Factura A.
+  - Buscador predictivo en escritorio + botón desplegable táctil en mobile (`#btnMobileSearchToggle` + `#mobileSearchBar`).
+  - Utilidades: Mi Cuenta, Carrito con badge reactivo de unidades, y menú hamburguesa.
+- [x] **2.2. Mega-Menús Desktop de Categorías y Marcas**:
+  - **Categorías**: Mega dropdown con las 12 categorías principales en orden alfabético estricto (4 columnas x 3 filas), conectado a base de datos de Tiendanube + CTA a *"Todas las categorías →"*.
+  - **Marcas**: Dropdown con las 8 marcas oficiales líderes (OREGON, NIWA, BOSCH, EINHELL, HUSQVARNA, GARDENA, SENSEI, HONDA) + CTA directo *"Todas las marcas →"*.
+  - **Secuencia comercial unificada**: `Inicio` $\rightarrow$ `Categorías` $\rightarrow$ `Marcas` $\rightarrow$ `Ofertas` (badge `OFF`) $\rightarrow$ `Nosotros` $\rightarrow$ `Contacto` $\rightarrow$ `Asesoría Técnica` (botón WhatsApp destacado).
+- [x] **2.3. Menú Móvil Lateral (Drawer) & Barra Inferior Fija (Bottom App Bar)**:
+  - Drawer táctil off-canvas con buscador, acordeones de Categorías y Marcas (tap targets $\ge 44$px) y card directa de WhatsApp.
+  - Barra inferior fija estilo app (`.mobile-bottom-nav`) con 5 accesos directos (*Inicio, Categorías, Marcas, Carrito, Menú*).
+  - WhatsApp flotante sincronizado con auto-elevación para no solapar la barra inferior ni el sticky buy bar.
 
 ---
 

@@ -1,211 +1,200 @@
 {# Site Overlay #}
 <div class="js-overlay site-overlay" style="display: none;"></div>
 
-{# Header #}
+{# 1. Top Announcement Bar (HMC HUB Marquee) #}
+{% snipplet "header/header-advertising.tpl" %}
 
-{# Header logo dynamic classes #}
-
-{% set header_logo_mobile_classes = settings.logo_position_mobile == 'center' ? 'head-logo-center' : 'head-logo-left' %}
-{% set header_logo_desktop_classes = settings.logo_position_desktop == 'center' ? 'head-logo-md-center' : 'head-logo-md-left' %}
-{% set header_colors_classes = settings.header_colors ? 'head-colors' : '' %}
-{% set header_search_full_mobile_classes = settings.search_big_mobile and settings.search_full ? 'head-search-full' : '' %}
-{% set header_desktop_and_nav_colors_classes = settings.desktop_nav_colors and settings.header_colors ? 'head-desktop-and-nav-colors' : '' %}
-{% set header_desktop_nav_colors_classes = settings.desktop_nav_colors ? 'head-desktop-nav-colors' : '' %}
-{% set header_desktop_nav_categories_link_classes = settings.category_item ? 'head-desktop-categories-link' : '' %}
-
-{# Logo mobile dynamic classes #}
-
-{% set logo_mobile_classes = settings.logo_position_mobile == 'center' ? 'text-center' : 'ml-2 ml-md-0 text-left' %}
-
-{# Logo desktop dynamic classes + utilities desktop order #}
-
-{% set logo_desktop_classes = settings.logo_position_desktop == 'center' ? 'col-md-6 order-md-1 text-md-center' : 'col-md-3 order-md-first text-md-left' %}
-
-{# Header position type #}
-
-{% set head_position_mobile = 'position-sticky' %}
-{% set head_position_desktop = settings.head_fix_desktop ? 'position-sticky-md' : 'position-relative-md' %}
-
-{# Header visibility classes #}
-
-{% set show_inline_desktop_hide_mobile_class = 'd-none d-md-inline-block' %}
-{% set show_inline_mobile_hide_desktop_class = 'd-inline-block d-md-none' %}
-{% set show_block_desktop_hide_mobile_class = 'd-none d-md-block' %}
-{% set show_block_mobile_hide_desktop_class = 'd-block d-md-none' %}
-
-{# Utilities conditions #}
-
-{% set show_whatsapp_button = store.whatsapp and settings.whatsapp_header_link %}
-{% set hamburger_icon_alone = settings.logo_position_mobile == 'left' or (settings.logo_position_mobile == 'center' and not show_whatsapp_button and settings.search_big_mobile) %}
-
-{# Header banners #}
-
-{% set has_head_banner_1 = settings.head_informative_banner_01_show and (settings.head_informative_banner_01_title or (settings.head_informative_banner_01_link_text and settings.head_informative_banner_01_url)) %}
-{% set has_head_banner_2 = settings.head_informative_banner_02_show and (settings.head_informative_banner_02_title or (settings.head_informative_banner_02_link_text and settings.head_informative_banner_02_url)) %}
-{% set has_header_banners = has_head_banner_1 or has_head_banner_2 %}
-
-<header class="js-head-main head-main {{ header_colors_classes }} {{ head_position_mobile }} {{ head_position_desktop }} {{ header_logo_mobile_classes }} {{ header_logo_desktop_classes }} {{ header_search_full_mobile_classes }} {{ header_desktop_and_nav_colors_classes }} {{ header_desktop_nav_colors_classes }} {{ header_desktop_nav_categories_link_classes }} transition-soft" data-store="head">
-    {# Adversiting bar #}
-    {% if settings.ad_bar %}
-        {% snipplet "header/header-advertising.tpl" %}
-    {% endif %}
-    <div class="head-logo-row position-relative container-fluid">
-        <div class="{% if not settings.head_fix_desktop %}js-nav-logo-bar{% endif %} row no-gutters align-items-center">
-
-            {# Menu icon #}
-
-            <div class="{% if settings.search_big_mobile and settings.logo_position_mobile == 'center' and not show_whatsapp_button %}col-2{% else %}col-auto{% endif %} col-utility d-md-none">
-                {% include "snipplets/header/header-utilities.tpl" with {use_menu: true} %}
-            </div>
-
-            {# Account icon #}
-
-            {% if settings.search_big_mobile or (not settings.search_big_mobile and not show_whatsapp_button) %}
-                <div class="col-auto {{ show_inline_mobile_hide_desktop_class }} {% if hamburger_icon_alone or (settings.logo_position_mobile == 'center' and settings.search_big_mobile) %}order-1{% endif %}">
-                    {% include "snipplets/header/header-utilities.tpl" with {use_account: true, icon_only: true} %}
-                </div>
-            {% endif %}
-
-            {# Languages #}
-
-            {% if languages | length > 1 and settings.languages_header %}
-                <div class="col-auto col-utility order-1 order-md-2">
-                    {% include "snipplets/header/header-utilities.tpl" with {use_languages: true} %}
-                </div>
-            {% endif %}
-
-            {# WhatsApp icon #}
-
-            {% if show_whatsapp_button %}
-                <div class="col-auto col-utility {% if settings.logo_position_mobile == 'left' %}order-1{% endif %} order-md-2">
-                    {% include "snipplets/header/header-utilities.tpl" with {use_whatsapp: true} %}
-                </div>
-            {% endif %}
-
-            {# Logo #}
-
-            <div class="col {{ logo_mobile_classes }} {{ logo_desktop_classes }} {% if hamburger_icon_alone and settings.logo_position_mobile != 'left' %}ml-1 ml-md-0{% endif %}">
-                {% set logo_size_class = settings.logo_size == 'small' ? 'logo-img-small' : settings.logo_size == 'big' ? 'logo-img-big' %}
-                {{ component('logos/logo', {
-                        logo_img_classes: 'transition-soft ' ~ logo_size_class,
-                        logo_text_classes: 'h3 m-0',
-                        logo_size: 'large'
-                    })
-                }}
-            </div>
-
-            {# Search: Icon or box #}
-
-            <div class="col-auto {% if settings.logo_position_desktop == 'center' %}col-md-3{% else %}col-md-6{% endif %} col-utility {% if settings.search_big_mobile %}{{ show_inline_desktop_hide_mobile_class }}{% elseif settings.logo_position_mobile == 'left' %}order-1{% endif %} order-md-0">
-                <span class="{{ show_block_desktop_hide_mobile_class }}">
-                    {% include "snipplets/header/header-search.tpl" %}
-                </span>
-                <span class="{{ show_inline_mobile_hide_desktop_class }}">
-                    {% include "snipplets/header/header-utilities.tpl" with {use_search: true} %}
-                </span>
-            </div>
-
-            <div class="col-md col-utility text-right {{ show_inline_desktop_hide_mobile_class }} {% if settings.logo_position_desktop == 'center' %}order-md-1{% endif %}">
-                {% include "snipplets/header/header-utilities.tpl" with {use_account: true, header_desktop: true} %}
-            </div>
-
-            {# Cart icon #}
-
-            <div class="col-auto col-utility order-2">
-                {% include "snipplets/header/header-utilities.tpl" %}
-            </div>
-
-            {# Add to cart notification #}
-
-            {% if settings.ajax_cart %}
-                {% if not settings.head_fix_desktop %}
-                    <div class="{{ show_block_mobile_hide_desktop_class }}">
-                {% endif %}
-                        {% include "snipplets/notification.tpl" with {add_to_cart: true} %}
-                {% if not settings.head_fix_desktop %}
-                    </div>
-                {% endif %}
-            {% endif %}
-
-        </div>
-    </div>   
-
-    {% if settings.head_secondary_menu_show %}
-        <div class="head-secondary-nav container-fluid {{ show_block_desktop_hide_mobile_class }}">
-            {% include "snipplets/navigation/navigation-secondary.tpl" %}
-        </div>
-    {% endif %}
-
-    {# Mobile search big #}
-
-    {% if settings.search_big_mobile %}
-        <div class="js-big-search-mobile {% if settings.search_full %}p-0{% else %}pb-3{% endif %} container-fluid {{ show_block_mobile_hide_desktop_class }}">
-            {% include "snipplets/header/header-search.tpl" %}
-        </div>
-    {% endif %}
-
-    {# Desktop navigation below logo #}
-
-    <div class="js-menu-and-banners-row container-fluid menu-and-banners-row d-none d-md-block">
-        <div class="row">
-            {% if settings.category_item %}
-                {% include 'snipplets/navigation/navigation-categories.tpl' %}
-            {% endif %}
-            <div class="js-desktop-nav-col col">
-                {% snipplet "navigation/navigation.tpl" %}
-            </div>
-            {% if has_header_banners %}
-                <div class="js-head-banners-col col-md-auto">
-                    {% include "snipplets/header/header-banners.tpl" %}
-                </div>
-            {% endif %}
-        </div>
+{# 2. Main Sticky Header & Navigation #}
+<header class="header-main" data-store="head">
+  <div class="container header-inner">
+    
+    <!-- Brand Logo -->
+    <div class="logo-container">
+      <a href="{{ store.home_url }}" class="logo-link">
+        <img src="{{ 'images/logos/logo-horizontal-color.png' | static_url }}" alt="{{ store.name | default('HMC HUB') }}" class="logo-img">
+      </a>
     </div>
- 
-    {% include "snipplets/notification.tpl" with {order_notification: true} %}
+
+    <!-- Live Search Form (Desktop) -->
+    <div class="header-search d-none d-lg-block">
+      <form class="search-form js-search-form" action="{{ store.search_url | default('/search/') }}" method="get">
+        <input type="search" name="q" id="mainSearchInput" class="search-input js-search-input" placeholder="{{ 'Buscar demoledores, taladros, motoguadañas, bombas, sierras...' | translate }}" autocomplete="off">
+        <button type="submit" class="search-btn js-search-input-submit" title="{{ 'Buscar' | translate }}" aria-label="{{ 'Buscar' | translate }}">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </form>
+      <div id="searchDropdown" class="search-dropdown js-search-form-suggestions">
+        <div class="search-dropdown-header">{{ 'Sugerencias destacadas' | translate }}</div>
+        <div id="searchResultsList" class="js-search-results"></div>
+      </div>
+    </div>
+
+    <!-- Header Utility Actions -->
+    <div class="header-utilities">
+      <!-- Mobile Search Toggle Button -->
+      <button type="button" class="utility-btn btn-mobile-search-toggle js-toggle-mobile-search d-lg-none" id="btnMobileSearchToggle" title="{{ 'Buscar productos' | translate }}" aria-label="{{ 'Abrir buscador' | translate }}">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+
+      <!-- Account Link -->
+      <a href="{% if not customer %}{{ store.customer_login_url }}{% else %}{{ store.customer_home_url }}{% endif %}" class="utility-btn" title="{% if not customer %}{{ 'Mi Cuenta' | translate }}{% else %}{{ customer.name | split(' ') | first }}{% endif %}">
+        <i class="fa-regular fa-user"></i>
+        <span class="d-none-mobile">{% if not customer %}{{ 'Mi Cuenta' | translate }}{% else %}{{ customer.name | split(' ') | first }}{% endif %}</span>
+      </a>
+
+      <!-- Shopping Cart Button -->
+      <a {% if settings.ajax_cart and template != 'cart' %}href="#" data-toggle="#modal-cart" data-modal-url="modal-fullscreen-cart"{% else %}href="{{ store.cart_url }}"{% endif %} class="utility-btn js-open-cart {% if settings.ajax_cart and template != 'cart' %}js-modal-open js-fullscreen-modal-open{% endif %}" title="{{ 'Carrito de Compras' | translate }}" data-component="cart-button">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span class="d-none-mobile">{{ 'Carrito' | translate }}</span>
+        <span class="cart-count-badge js-cart-widget-amount js-cart-count">{{ cart.items_count }}</span>
+      </a>
+
+      <!-- Mobile Hamburger Toggle -->
+      <button type="button" class="mobile-menu-toggle js-open-mobile-menu d-lg-none" id="mobileMenuToggle" title="{{ 'Abrir Menú' | translate }}" aria-label="{{ 'Abrir Menú' | translate }}">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Mobile Slide-Down Search Bar -->
+  <div class="mobile-search-bar" id="mobileSearchBar">
+    <div class="container mobile-search-container">
+      <form class="mobile-search-form js-search-form" id="mobileHeaderSearchForm" action="{{ store.search_url | default('/search/') }}" method="get">
+        <div class="mobile-search-input-box">
+          <i class="fa-solid fa-magnifying-glass mobile-search-icon"></i>
+          <input type="search" name="q" id="mobileHeaderSearchInput" class="mobile-search-input js-search-input" placeholder="{{ 'Buscar herramientas, bombas, repuestos...' | translate }}" autocomplete="off">
+          <button type="button" class="mobile-search-clear js-empty-search" id="mobileSearchClearBtn" title="{{ 'Limpiar texto' | translate }}" style="display: none;">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <button type="button" class="mobile-search-close-btn js-close-mobile-search" id="mobileSearchCloseBtn" title="{{ 'Cerrar buscador' | translate }}">
+          {{ 'Cancelar' | translate }}
+        </button>
+      </form>
+      <div id="mobileSearchDropdown" class="search-dropdown mobile-search-dropdown js-search-form-suggestions">
+        <div class="search-dropdown-header">{{ 'Sugerencias destacadas' | translate }}</div>
+        <div id="mobileSearchResultsList" class="js-search-results"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Desktop Main Navigation Bar with Mega-Dropdowns -->
+  <nav class="nav-bar d-none d-lg-block">
+    <div class="container nav-inner">
+      <ul class="nav-list">
+        <!-- 1. Inicio -->
+        <li class="nav-item">
+          <a href="{{ store.home_url }}" class="nav-link {% if template == 'home' %}active{% endif %}">
+            <i class="fa-solid fa-house"></i> {{ 'Inicio' | translate }}
+          </a>
+        </li>
+
+        <!-- 2. Categorías Mega Dropdown -->
+        <li class="nav-item has-mega-dropdown">
+          <a href="{% if store.categories_url %}{{ store.categories_url }}{% else %}{{ store.products_url }}{% endif %}" class="nav-link {% if template == 'category' %}active{% endif %}">
+            {{ 'Categorías' | translate }} <i class="fa-solid fa-chevron-down" style="font-size: 0.75em; margin-left: 2px;"></i>
+          </a>
+          <div class="mega-dropdown mega-dropdown-categories-featured">
+            <div class="dropdown-categories-wrapper">
+              <div class="dropdown-categories-header">
+                <div class="dropdown-categories-title">
+                  <h4>{{ 'Categorías Principales' | translate }}</h4>
+                </div>
+                <span class="badge-official-pill"><i class="fa-solid fa-boxes-stacked"></i> Catálogo HMC</span>
+              </div>
+
+              <!-- 12 Top Categories Grid (4 cols x 3 rows, Dynamic & Alphabetical) -->
+              <div class="dropdown-categories-grid">
+                {% include "snipplets/navigation/navigation-categories-dropdown.tpl" %}
+              </div>
+
+              <!-- Footer CTA Button -->
+              <div class="dropdown-categories-footer">
+                <div class="dropdown-categories-footer-text">
+                  <i class="fa-solid fa-layer-group text-primary"></i>
+                  <span>Más de <strong>13 rubros industriales</strong> y 460 subrubros con stock y repuestos.</span>
+                </div>
+                <a href="{% if store.categories_url %}{{ store.categories_url }}{% else %}{{ store.products_url }}{% endif %}" class="btn btn-primary btn-sm btn-explore-categories">
+                  {{ 'Todas las categorías →' | translate }}
+                </a>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <!-- 3. Marcas Dropdown -->
+        <li class="nav-item has-mega-dropdown">
+          <a href="{{ store.products_url }}?brand_filter=true" class="nav-link">
+            {{ 'Marcas' | translate }} <i class="fa-solid fa-chevron-down" style="font-size: 0.75em; margin-left: 2px;"></i>
+          </a>
+          
+          <div class="mega-dropdown mega-dropdown-brands-featured">
+            <div class="dropdown-brands-wrapper">
+              <div class="dropdown-brands-header">
+                <div class="dropdown-brands-title">
+                  <h4>{{ 'Marcas Destacadas' | translate }}</h4>
+                </div>
+                <span class="badge-official-pill"><i class="fa-solid fa-shield-halved"></i> Garantía Oficial</span>
+              </div>
+
+              <!-- 8 Featured Brands Grid -->
+              <div class="dropdown-brands-grid">
+                {% set official_brands = ["OREGON", "NIWA", "BOSCH", "EINHELL", "HUSQVARNA", "GARDENA", "SENSEI", "HONDA"] %}
+                {% for brand in official_brands %}
+                  <a href="{{ store.products_url }}?brand={{ brand | url_encode }}" class="dropdown-brand-card" title="Ver catálogo oficial {{ brand }}">
+                    <div class="dropdown-brand-name">
+                      <span>{{ brand }}</span>
+                    </div>
+                  </a>
+                {% endfor %}
+              </div>
+
+              <!-- Footer CTA Button -->
+              <div class="dropdown-brands-footer">
+                <div class="dropdown-brands-footer-text">
+                  <i class="fa-solid fa-layer-group text-primary"></i>
+                  <span>Representamos a más de <strong>100 fabricantes líderes</strong> con stock y repuestos.</span>
+                </div>
+                <a href="{{ store.products_url }}?brand_filter=true" class="btn btn-primary btn-sm btn-explore-brands">
+                  {{ 'Todas las marcas →' | translate }}
+                </a>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <!-- 4. Ofertas -->
+        <li class="nav-item">
+          <a href="{{ store.products_url }}?offers=true" class="nav-link has-badge">{{ 'Ofertas' | translate }}</a>
+        </li>
+
+        <!-- 5. Nosotros -->
+        <li class="nav-item">
+          <a href="{{ store.about_url | default('/nosotros') }}" class="nav-link">{{ 'Nosotros' | translate }}</a>
+        </li>
+
+        <!-- 6. Contacto -->
+        <li class="nav-item">
+          <a href="{{ store.contact_url }}" class="nav-link">{{ 'Contacto' | translate }}</a>
+        </li>
+      </ul>
+
+      <!-- Direct Technical Advice Link in Navbar -->
+      <a href="https://wa.me/5492954696231?text=Hola%20HMC%20Hub,%20necesito%20asesoramiento%20t%C3%A9cnico" target="_blank" class="nav-support-link">
+        <i class="fa-brands fa-whatsapp"></i> {{ 'Asesoría Técnica' | translate }}
+      </a>
+    </div>
+  </nav>
 </header>
 
 {{ component('nubesdk-slot', { type: "after_header" }) }}
 
-{% if has_header_banners %}
-    <div class="container-fluid {{ show_block_mobile_hide_desktop_class }}">
-        {% include "snipplets/header/header-banners.tpl" %}
-    </div>
-{% endif %}
+{# 4. Mobile Off-Canvas Drawer Menu #}
+{% include "snipplets/navigation/navigation-drawer.tpl" %}
 
 {# Show cookie validation message #}
-
 {% include "snipplets/notification.tpl" with {show_cookie_banner: true} %}
 
-{# Add to cart notification for non fixed header #}
-
-{% if settings.ajax_cart and not settings.head_fix_desktop %}
-    <div class="{{ show_block_desktop_hide_mobile_class }}">
-        {% include "snipplets/notification.tpl" with {add_to_cart: true, add_to_cart_fixed: true} %}
-    </div>
-{% endif %}
-
-{# Cross selling promotion notification on add to cart #}
-
-{% embed "snipplets/modal.tpl" with {
-    modal_id: 'js-cross-selling-modal',
-    modal_class: 'bottom modal-bottom-sheet h-auto overflow-none modal-body-scrollable-auto',
-    modal_header_title: true,
-    modal_header_class: 'p-2 w-100',
-    modal_position: 'bottom',
-    modal_transition: 'slide',
-    modal_footer: true,
-    modal_width: 'centered-md m-0 p-0 modal-full-width modal-md-width-400px'
-} %}
-    {% block modal_head %}
-        {{ '¡Descuento exclusivo!' | translate }}
-    {% endblock %}
-
-    {% block modal_body %}
-        {# Promotion info and actions #}
-
-        <div class="js-cross-selling-modal-body" style="display: none"></div>
-    {% endblock %}
-{% endembed %}
-
+{# Header modals (Cart Modal, etc.) #}
 {% include "snipplets/header/header-modals.tpl" %}
