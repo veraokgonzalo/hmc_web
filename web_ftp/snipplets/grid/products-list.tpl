@@ -12,17 +12,23 @@
             </div>
             
             <div class="catalog-toolbar-actions">
-                <a href="#" class="catalog-sort-btn js-modal-open d-inline-flex align-items-center" data-toggle="#sort-by">
+                <a href="#" class="catalog-sort-btn js-modal-open d-none d-md-inline-flex align-items-center" data-toggle="#sort-by">
                     {% include "snipplets/svg/sort.tpl" with { svg_custom_class: "icon-inline mr-2"} %}
                     <span>{{ 'Ordenar por' | translate }}</span>
                 </a>
 
                 <div class="catalog-view-modes d-none d-sm-flex">
-                    <button type="button" class="view-mode-btn js-view-mode active" data-view="grid" title="{{ 'Vista en Grilla' | translate }}"><i class="fa-solid fa-table-cells-large"></i></button>
+                    <button type="button" class="view-mode-btn js-view-mode active" data-view="grid" title="{{ 'Vista en Grilla' | translate }}"><i class="fa-solid fa-border-all"></i></button>
                     <button type="button" class="view-mode-btn js-view-mode" data-view="list" title="{{ 'Vista en Lista' | translate }}"><i class="fa-solid fa-list"></i></button>
                 </div>
             </div>
         </div>
+
+        {% if has_applied_filters %}
+            <div class="mb-3 d-flex justify-content-start align-items-center visible-when-content-ready">
+                {% include "snipplets/grid/filters.tpl" with {applied_filters: true} %}
+            </div>
+        {% endif %}
 
         <div class="js-product-table row row-grid">
             {% include 'snipplets/product_grid.tpl' %}

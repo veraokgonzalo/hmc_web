@@ -55,22 +55,22 @@
                                         {% endif %}
                                     </div>
                                     <div class="col-auto my-1">
-                                        <span class="js-accordion-toggle-inactive">
+                                        <span class="js-accordion-toggle-inactive" style="display: none;">
                                           {% include "snipplets/svg/chevron-right.tpl" with {svg_custom_class: "icon-inline svg-icon-text icon-lg font-big font-md-body mr-1"} %}
                                         </span>
-                                        <span class="js-accordion-toggle-active" style="display: none;">
+                                        <span class="js-accordion-toggle-active">
                                           {% include "snipplets/svg/chevron-down.tpl" with {svg_custom_class: "icon-inline svg-icon-text icon-lg font-big font-md-body"} %}
                                         </span>
                                     </div>
                                 </a>
                             </div>
-                            <div class="js-accordion-content mt-md-1 my-3" style="display: none;"> 
+                            <div class="js-accordion-content mt-md-1 my-3"> 
                                 {% set index = 0 %}
                                 {% for value in product_filter.values %}
                                     {% if value.product_count > 0 %}
                                         {% set index = index + 1 %}
 
-                                        <label class="js-filter-checkbox {% if not value.selected %}js-apply-filter{% else %}js-remove-filter{% endif %} checkbox-container" data-filter-name="{{ product_filter.key }}" data-filter-value="{{ value.name }}" data-component="filter.option" data-component-value="{{ value.name }}">
+                                        <label class="js-filter-checkbox {% if not value.selected %}js-apply-filter{% else %}js-remove-filter active font-weight-bold{% endif %} checkbox-container" data-filter-name="{{ product_filter.key }}" data-filter-value="{{ value.name }}" data-component="filter.option" data-component-value="{{ value.name }}">
                                             <input type="checkbox" autocomplete='off' {% if value.selected %}checked{% endif %}/>
                                             <span class="checkbox {% if loop.last and product_filter.values_with_products < 8 %}mb-0{% endif %}">
                                                 <span class="checkbox-icon"></span>

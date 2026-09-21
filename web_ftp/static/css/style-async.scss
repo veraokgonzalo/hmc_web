@@ -5104,7 +5104,8 @@ footer {
     background: #ffffff;
     border: 1px solid #e4e4e7;
     border-radius: 12px;
-    padding: 14px;
+    padding: 0 !important;
+    overflow: hidden;
     transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     height: 100%;
     display: flex;
@@ -5118,8 +5119,48 @@ footer {
   }
 
   .item-image {
-    border-radius: 8px;
+    border-radius: 0;
+    width: 100%;
+    aspect-ratio: 1 / 1;
     overflow: hidden;
+    margin: 0;
+    position: relative;
+    background: #f4f4f5;
+
+    img {
+      object-fit: contain;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.3s ease;
+    }
+  }
+
+  &:hover .item-image img {
+    transform: scale(1.05);
+  }
+
+  .item-description {
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .item-link {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .product-brand {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #71717a;
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
   }
 
   .item-name {
@@ -5133,6 +5174,12 @@ footer {
     overflow: hidden;
     min-height: 2.7em;
     opacity: 1 !important;
+    margin-bottom: 8px;
+  }
+
+  .item-price-container {
+    margin-top: auto;
+    margin-bottom: 6px;
   }
 
   .item-price {
@@ -5142,23 +5189,76 @@ footer {
     color: var(--color-black, #111111);
   }
 
+  .price-compare {
+    font-size: 0.85rem;
+    color: #a1a1aa;
+    text-decoration: line-through;
+  }
+
   .item-installments {
     font-size: 0.82rem;
     font-weight: 600;
     color: #27672d;
     display: inline-flex;
     align-items: center;
+    margin-bottom: 10px;
   }
 
-  .btn-primary.btn-small,
-  .btn-add-to-cart {
-    min-height: 44px;
-    border-radius: 8px;
-    font-weight: 700;
-    font-size: 0.88rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .item-actions {
+    width: 100%;
+    margin-top: 10px;
+
+    .item-submit-container {
+      width: 100%;
+      position: relative;
+    }
+
+    .btn-primary.btn-small,
+    input.btn-add-to-cart,
+    input.btn-small-quickshop,
+    input[type="submit"].btn-primary,
+    span.btn-primary.btn-small {
+      background-color: var(--color-primary, #3FAA47) !important;
+      border: none !important;
+      color: #ffffff !important;
+      font-weight: 700 !important;
+      font-size: 0.88rem !important;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      min-height: 44px;
+      height: 44px;
+      line-height: 44px;
+      border-radius: 8px !important;
+      padding: 0 16px;
+      width: 100%;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(63, 170, 71, 0.25);
+      transition: all 0.2s ease;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover {
+        background-color: var(--color-primary-dark, #2e8b35) !important;
+        box-shadow: 0 6px 16px rgba(63, 170, 71, 0.35);
+        transform: translateY(-1px);
+      }
+    }
+
+    .item-quickshop-icon {
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      fill: #ffffff !important;
+      color: #ffffff !important;
+      pointer-events: none;
+      font-size: 14px;
+      width: 16px;
+      height: 16px;
+      margin: 0 !important;
+    }
   }
 }
 
@@ -5189,5 +5289,105 @@ footer {
   }
 }
 
+/* 9. Sidebar Categories & Filters State */
+.filter-item {
+  transition: all 0.15s ease;
 
+  a {
+    color: #4b5563;
+    transition: color 0.15s ease;
+    padding: 4px 0;
 
+    &:hover {
+      color: var(--color-primary, #3FAA47) !important;
+    }
+  }
+
+  &.active {
+    a {
+      color: var(--color-primary, #3FAA47) !important;
+      font-weight: 700 !important;
+    }
+
+    .filter-badge {
+      background: rgba(63, 170, 71, 0.12);
+      color: var(--color-primary, #3FAA47);
+      font-weight: 700;
+    }
+  }
+}
+
+.filter-badge {
+  font-size: 0.75rem;
+  color: #71717a;
+  padding: 2px 6px;
+  border-radius: 9999px;
+  background: #f4f4f5;
+}
+
+.js-filter-checkbox.active {
+  color: var(--color-primary, #3FAA47) !important;
+  font-weight: 700;
+
+  .checkbox-icon {
+    background-color: var(--color-primary, #3FAA47) !important;
+    border-color: var(--color-primary, #3FAA47) !important;
+  }
+}
+
+/* 10. Modals (Filters Drawer & Sort Bottom Sheet) */
+#nav-filters.modal,
+#sort-by.modal {
+  background: #ffffff !important;
+  color: #111111 !important;
+  z-index: 20000 !important;
+
+  .modal-header {
+    background: #ffffff !important;
+    border-bottom: 1px solid #e4e4e7;
+    color: #111111 !important;
+    padding: 16px 20px;
+    font-size: 1.1rem;
+    font-weight: 700;
+  }
+
+  .modal-close {
+    color: #111111 !important;
+    font-size: 1.25rem;
+    padding: 8px;
+  }
+
+  .modal-body {
+    background: #ffffff !important;
+    padding: 16px 20px;
+    overflow-y: auto;
+  }
+}
+
+#sort-by.modal.modal-bottom-sheet {
+  background: #ffffff !important;
+  border-radius: 16px 16px 0 0 !important;
+  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.15);
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+@media (min-width: 768px) {
+  #sort-by.modal,
+  #nav-filters.modal {
+    width: 380px !important;
+    max-width: 90vw !important;
+    right: -420px;
+    left: auto !important;
+    top: 0 !important;
+    bottom: 0 !important;
+    height: 100vh !important;
+    border-radius: 0 !important;
+    box-shadow: -8px 0 24px rgba(0, 0, 0, 0.12);
+    transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+
+    &.modal-show {
+      right: 0 !important;
+    }
+  }
+}

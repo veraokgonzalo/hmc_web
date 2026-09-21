@@ -39,21 +39,6 @@
 					{% endif %}
 				{% endif %}
 			</div>
-			{% if products %}
-				<div class="col-auto py-3 py-md-4">
-					<a href="#" class="js-modal-open btn-link d-none d-md-block" data-toggle="#sort-by">
-						<div class="d-flex justify-content-center align-items-center">
-							{% include "snipplets/svg/sort.tpl" with { svg_custom_class: "icon-inline mr-2"} %}
-							{{ 'Ordenar' | t }}
-						</div>
-					</a>
-					{% if products | length > 1 %}
-						<div class="d-md-none text-right font-small mb-1">
-							{{ products_count }} {{ 'productos' | translate }}
-						</div>
-					{% endif %}
-				</div>
-			{% endif %}
 		</div>
 	</div>
 </div>
@@ -62,7 +47,7 @@
 <section class="js-category-controls-prev category-controls-sticky-detector"></section>
 
 <section class="category-body" data-store="category-grid-{{ category.id }}">
-	<div class="container {% if has_applied_filters %}mt-md-0{% endif %} mt-3 mb-5">
+	<div class="container mt-3 mb-5">
 		{# Dynamic Promotional Offers Banner #}
 		{% set is_offers_category = params.offers == 'true' or (category.name | lower in ['ofertas', 'liquidación', 'liquidacion', 'promociones']) %}
 		<div id="catalogOffersPromoBanner" class="catalog-offers-banner mb-4" {% if not is_offers_category %}style="display: none;"{% endif %}>
@@ -83,11 +68,6 @@
 		</div>
 
 		<div class="row">
-			{% if has_applied_filters %}
-				<div class="col-12 mb-3 mb-md-4 d-flex justify-content-md-start align-items-center visible-when-content-ready">
-					{% include "snipplets/grid/filters.tpl" with {applied_filters: true} %}
-				</div>
-			{% endif %}
 			{% if has_filters_available %} 
 				{% include 'snipplets/grid/filters-sidebar.tpl' %}
 			{% endif %}

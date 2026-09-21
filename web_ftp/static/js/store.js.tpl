@@ -388,7 +388,7 @@ DOMContentLoaded.addEventOrExecute(() => {
         
         {# Close full screen modal: Remove url hash #}
 
-        if ((window.innerWidth < 768) && (jQueryNuvem(this).hasClass(".js-fullscreen-modal-close"))) {
+        if ((window.innerWidth < 768) && (jQueryNuvem(this).hasClass("js-fullscreen-modal-close") || jQueryNuvem(this).closest(".js-fullscreen-modal").length)) {
             goBackBrowser();
         }
 
@@ -407,8 +407,8 @@ DOMContentLoaded.addEventOrExecute(() => {
 
         {# Remove body lock only if a single modal is visible on screen #}
 
-        if(jQueryNuvem(".js-modal.modal-show").length == 1){
-            jQueryNuvem("body").removeClass("overflow-none");
+        if(jQueryNuvem(".js-modal.modal-show").length <= 1){
+            jQueryNuvem("body").removeClass("overflow-none move-right");
         }
 
         var modal_id = jQueryNuvem(this).data('modalId');
@@ -424,6 +424,9 @@ DOMContentLoaded.addEventOrExecute(() => {
             restoreQuickshopForm();
         {% endif %}
 
+        if (window.location.hash && window.location.hash.indexOf("modal-fullscreen") > -1) {
+            cleanURLHash();
+        }
     });
 
     {% if template == 'home' and settings.home_promotional_popup %}

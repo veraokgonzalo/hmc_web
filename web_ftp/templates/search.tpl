@@ -31,27 +31,12 @@
 						{{ "Mostrando los resultados para" | translate }}<span class="ml-2 font-weight-bold">"{{ query }}"</span>
 					</h2>
 				</div>
-				{% if search_filter %}
-					<div class="col-auto py-3 py-md-4">
-						<a href="#" class="js-modal-open btn-link d-none d-md-block" data-toggle="#sort-by">
-							<div class="d-flex justify-content-center align-items-center">
-								{% include "snipplets/svg/sort.tpl" with { svg_custom_class: "icon-inline mr-2"} %}
-								{{ 'Ordenar' | t }}
-							</div>
-						</a>
-						{% if products | length > 1 %}
-							<div class="d-md-none text-right font-small mb-1">
-								{{ products_count }} {{ 'productos' | translate }}
-							</div>
-						{% endif %}
-					</div>
-				{% endif %}
 			</div>
 		{% endif %}
 	</div>
 </div>
 
-{% if products and search_filter %}
+{% if products and (search_filter or has_filters_available) %}
 	{% include 'snipplets/grid/filters-modals.tpl' %}
 	<section class="js-category-controls-prev category-controls-sticky-detector"></section>
 {% endif %}
@@ -80,12 +65,7 @@
 		{% if products %}
 			<div class="row"> 
 		{% endif %}
-			{% if has_applied_filters %}
-				<div class="col-12 mb-3 mb-md-4 d-flex justify-content-md-start align-items-center visible-when-content-ready">
-					{% include "snipplets/grid/filters.tpl" with {applied_filters: true} %}
-				</div>
-			{% endif %}
-			{% if has_filters_available and search_filter %} 
+			{% if has_filters_available %} 
 				{% include 'snipplets/grid/filters-sidebar.tpl' %}
 			{% endif %}
 			{% include 'snipplets/grid/products-list.tpl' %}

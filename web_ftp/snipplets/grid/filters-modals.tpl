@@ -9,39 +9,6 @@
 							{{ 'Ordenar' | t }}
 						</div>
 					</a>
-					{% embed "snipplets/modal.tpl" with{modal_id: 'sort-by', modal_class: 'bottom modal-centered modal-bottom-sheet modal-right-md', modal_position: 'bottom', modal_position_desktop: right, modal_width: 'docked-md', modal_transition: 'slide', modal_header_title: true} %}
-						{% block modal_head %}
-							{{'Ordenar' | translate }}
-						{% endblock %}
-						{% block modal_body %}
-							{{ component(
-								'sort-by',{
-									list: true,
-									list_title: false,
-									svg_sprites: false,
-									sort_by_classes: {
-										list: "list-unstyled",
-										radio_button: "radio-button radio-button-item",
-										radio_button_content: "radio-button-content",
-										radio_button_icons_container: "radio-button-icons-container",
-										radio_button_icons: "radio-button-icons",
-										radio_button_icon: "radio-button-icon",
-										radio_button_label: "radio-button-label pt-0",
-										applying_feedback_message: 'h5 mr-2',
-									},
-									applying_feedback_custom_icon: include("snipplets/svg/circle-notch.tpl",  {svg_custom_class: "icon-inline h5 icon-spin svg-icon-text"}),
-								})
-							}}
-							<div class="js-sorting-overlay filters-overlay" style="display: none;">
-								<div class="filters-updating-message">
-									<span class="h5 mr-2">{{ 'Ordenando productos' | translate }}</span>
-									<span>
-										{% include "snipplets/svg/circle-notch.tpl" with {svg_custom_class: "icon-inline h5 icon-spin svg-icon-text"} %}
-									</span>
-								</div>
-							</div>
-						{% endblock %}
-					{% endembed %}
 				</div>
 			{% endif %}
 			{% if has_filters_available %}
@@ -52,32 +19,72 @@
 							{{ 'Filtrar' | t }}
 						</div>
 					</a>
-					{% embed "snipplets/modal.tpl" with{modal_id: 'nav-filters', modal_class: 'filters', modal_body_class: 'h-100 p-0', modal_position: 'right', modal_position_desktop: right, modal_transition: 'slide', modal_header_title: true, modal_width: 'docked-md', modal_mobile_full_screen: 'true' } %}
-						{% block modal_head %}
-							{{'Filtros ' | translate }}
-						{% endblock %}
-						{% block modal_body %}
-							{% if has_filters_available %}
-								{% if filter_categories is not empty %}
-									{% include "snipplets/grid/categories.tpl" with {modal: true} %}
-								{% endif %}
-								{% if product_filters is not empty %}
-							   		{% include "snipplets/grid/filters.tpl" with {modal: true} %}
-							   	{% endif %}
-								<div class="js-filters-overlay filters-overlay" style="display: none;">
-									<div class="filters-updating-message">
-										<span class="js-applying-filter h5 mr-2" style="display: none;">{{ 'Aplicando filtro' | translate }}</span>
-										<span class="js-removing-filter h5 mr-2" style="display: none;">{{ 'Borrando filtro' | translate }}</span>
-										<span class="js-filtering-spinner" style="display: none;">
-											{% include "snipplets/svg/circle-notch.tpl" with {svg_custom_class: "icon-inline h5 icon-spin svg-icon-text"} %}
-										</span>
-									</div>
-								</div>
-							{% endif %}
-						{% endblock %}
-					{% endembed %}
 				</div>
 			{% endif %}
 		</div>
 	</div>
 </section>
+
+{# Global Modals (rendered outside d-md-none container so both desktop toolbar and mobile bar can trigger them) #}
+{% if products %}
+	{% embed "snipplets/modal.tpl" with {modal_id: 'sort-by', modal_class: 'bottom modal-centered modal-bottom-sheet modal-right-md', modal_position: 'bottom', modal_position_desktop: 'right', modal_width: 'docked-md', modal_transition: 'slide', modal_header_title: true} %}
+		{% block modal_head %}
+			{{'Ordenar' | translate }}
+		{% endblock %}
+		{% block modal_body %}
+			{{ component(
+				'sort-by',{
+					list: true,
+					list_title: false,
+					svg_sprites: false,
+					sort_by_classes: {
+						list: "list-unstyled",
+						radio_button: "radio-button radio-button-item",
+						radio_button_content: "radio-button-content",
+						radio_button_icons_container: "radio-button-icons-container",
+						radio_button_icons: "radio-button-icons",
+						radio_button_icon: "radio-button-icon",
+						radio_button_label: "radio-button-label pt-0",
+						applying_feedback_message: 'h5 mr-2',
+					},
+					applying_feedback_custom_icon: include("snipplets/svg/circle-notch.tpl",  {svg_custom_class: "icon-inline h5 icon-spin svg-icon-text"}),
+				})
+			}}
+			<div class="js-sorting-overlay filters-overlay" style="display: none;">
+				<div class="filters-updating-message">
+					<span class="h5 mr-2">{{ 'Ordenando productos' | translate }}</span>
+					<span>
+						{% include "snipplets/svg/circle-notch.tpl" with {svg_custom_class: "icon-inline h5 icon-spin svg-icon-text"} %}
+					</span>
+				</div>
+			</div>
+		{% endblock %}
+	{% endembed %}
+{% endif %}
+
+{% if has_filters_available %}
+	{% embed "snipplets/modal.tpl" with {modal_id: 'nav-filters', modal_class: 'filters', modal_body_class: 'h-100 p-0', modal_position: 'right', modal_position_desktop: 'right', modal_transition: 'slide', modal_header_title: true, modal_width: 'docked-md', modal_mobile_full_screen: true, modal_url: 'modal-fullscreen-filters'} %}
+		{% block modal_head %}
+			{{'Filtros ' | translate }}
+		{% endblock %}
+		{% block modal_body %}
+			{% if has_filters_available %}
+				{% if filter_categories is not empty %}
+					{% include "snipplets/grid/categories.tpl" with {modal: true} %}
+				{% endif %}
+				{% if product_filters is not empty %}
+					{% include "snipplets/grid/filters.tpl" with {modal: true} %}
+				{% endif %}
+				<div class="js-filters-overlay filters-overlay" style="display: none;">
+					<div class="filters-updating-message">
+						<span class="js-applying-filter h5 mr-2" style="display: none;">{{ 'Aplicando filtro' | translate }}</span>
+						<span class="js-removing-filter h5 mr-2" style="display: none;">{{ 'Borrando filtro' | translate }}</span>
+						<span class="js-filtering-spinner" style="display: none;">
+							{% include "snipplets/svg/circle-notch.tpl" with {svg_custom_class: "icon-inline h5 icon-spin svg-icon-text"} %}
+						</span>
+					</div>
+				</div>
+			{% endif %}
+		{% endblock %}
+	{% endembed %}
+{% endif %}

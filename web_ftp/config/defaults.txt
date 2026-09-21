@@ -128,6 +128,7 @@ home_order_position_21 = empty
 product_filters = 1
 price_filters = 1
 pagination = classic
+quick_shop = 1
 grid_columns_mobile = 2
 grid_columns_desktop = 5
 product_hover = 1

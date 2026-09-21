@@ -15,8 +15,13 @@
     {% set columns_mobile = section_columns_mobile %}
     {% set section_slider = section_slider %}
 {% else %}
-    {% set columns_desktop = settings.grid_columns_desktop %}
-    {% set columns_mobile = settings.grid_columns_mobile %}
+    {% if template == 'category' or template == 'search' %}
+        {% set columns_desktop = 3 %}
+        {% set columns_mobile = 2 %}
+    {% else %}
+        {% set columns_desktop = settings.grid_columns_desktop %}
+        {% set columns_mobile = settings.grid_columns_mobile %}
+    {% endif %}
     {% if template == 'product'%}
         {% set section_slider = true %}
     {% endif %}
@@ -54,7 +59,7 @@
 {% if slide_item %}
     <div class="swiper-slide">
 {% endif %}
-    <div class="js-item-product{% if slide_item %} js-item-slide item-slide p-0{% endif %}{% if not slide_item %} col-{% if columns_mobile == 1 or horizontal_item %}12{% else %}6{% endif %} col-md-{% if horizontal_item %}4{% elseif columns_desktop == 4 %}3{% elseif columns_desktop == 5 %}2-4{% elseif columns_desktop == 5 %}{% else %}2{% endif %}{% endif %} item-product {% if reduced_item %}item-product-reduced{% endif %} col-grid" data-product-type="list" data-product-id="{{ product.id }}" data-store="product-item-{{ product.id }}" data-component="product-list-item" data-component-value="{{ product.id }}" {% if appear_transition %}data-transition="fade-in-up"{% endif %}>
+    <div class="js-item-product{% if slide_item %} js-item-slide item-slide p-0{% endif %}{% if not slide_item %} col-{% if columns_mobile == 1 or horizontal_item %}12{% else %}6{% endif %} col-md-{% if horizontal_item %}4{% elseif columns_desktop == 3 %}4{% elseif columns_desktop == 4 %}3{% elseif columns_desktop == 5 %}2-4{% else %}4{% endif %}{% endif %} item-product {% if reduced_item %}item-product-reduced{% endif %} col-grid" data-product-type="list" data-product-id="{{ product.id }}" data-store="product-item-{{ product.id }}" data-component="product-list-item" data-component-value="{{ product.id }}" {% if appear_transition %}data-transition="fade-in-up"{% endif %}>
         <div class="js-item-container item{% if horizontal_item %} item-horizontal{% endif %}{% if slide_item %} mb-0{% endif %}">
 
             {% if horizontal_item and not (settings.quick_shop or settings.product_color_variants) %}
@@ -252,10 +257,9 @@
                             {% include 'snipplets/grid/item-colors.tpl' %}
                         </div>
                     {% endif %}
-                    {% if product.available and product.display_price and (settings.quick_shop or settings.product_item_stock) and not reduced_item %}
+                    {% if product.available and product.display_price and not reduced_item %}
                         <div class="js-quickshop-or-stock-container row row-grid {% if horizontal_item %}mt-2{% else %}mt-3{% endif %} align-items-center">
-                        {% if settings.quick_shop %}
-                            <div class="js-item-quickshop-container item-actions col-grid {% if settings.product_item_stock %}col{% if horizontal_item %}-auto pr-0{% endif %}{% else %}{% if horizontal_item %}col-8{% endif %} col-md-9{% endif %}">
+                            <div class="js-item-quickshop-container item-actions col-grid {% if settings.product_item_stock %}col{% if horizontal_item %}-auto pr-0{% endif %}{% else %}col-12{% endif %}">
                                 
                                 {% set quickshop_button_classes = 'btn btn-primary btn-small btn-block' %}
                                 
@@ -263,59 +267,66 @@
                                 {% set texts = {'cart': "Comprar", 'contact': "Consultar precio", 'nostock': "Sin stock", 'catalog': "Consultar"} %}
                                 {% set quickshop_btn_text = product.variations ? 'Comprar' : texts[state] %}
 
-                                {% if product.isSubscribable() %}
+                                {% if settings.quick_shop %}
+                                    {% if product.isSubscribable() %}
+                                        
+                                        {# Product with subscription will link to the product page #}
+                                        
+                                        {% if is_subscription_only %}
+                                            {# Subscription only: use span to avoid nested anchors (item-link is already an <a>) #}
+                                            {% set button_text = 'our_components.subscriptions.subscribe' | tt %}
+                                            {% set button_title = button_text ~ ' ' ~ product.name %}
+                                            <span class="{{ quickshop_button_classes }} d-flex justify-content-center align-items-center" title="{{ button_title }}" aria-label="{{ button_title }}">
+                                                {{ button_text }}
+                                                {% include "snipplets/svg/bag.tpl" with {svg_custom_class: 'icon-inline ml-1 ' ~ hide_bag_icon_on_mobile_class} %}
+                                            </span>
+                                        {% else %}
+                                            {# Subscribable (not subscription only): keep original span #}
+                                            <span class="{{ quickshop_button_classes }} d-flex justify-content-center align-items-center" title="{{ 'Compra rápida de' | translate }} {{ product.name }}" aria-label="{{ 'Compra rápida de' | translate }} {{ product.name }}">
+                                                {{ quickshop_btn_text | translate }}
+                                                {% include "snipplets/svg/bag.tpl" with {svg_custom_class: 'icon-inline ml-1 ' ~ hide_bag_icon_on_mobile_class} %}
+                                            </span>
+                                        {% endif %}
                                     
-                                    {# Product with subscription will link to the product page #}
-                                    
-                                    {% if is_subscription_only %}
-                                        {# Subscription only: use span to avoid nested anchors (item-link is already an <a>) #}
-                                        {% set button_text = 'our_components.subscriptions.subscribe' | tt %}
-                                        {% set button_title = button_text ~ ' ' ~ product.name %}
-                                        <span class="{{ quickshop_button_classes }} d-flex justify-content-center align-items-center" title="{{ button_title }}" aria-label="{{ button_title }}">
-                                            {{ button_text }}
-                                            {% include "snipplets/svg/bag.tpl" with {svg_custom_class: 'icon-inline ml-1 ' ~ hide_bag_icon_on_mobile_class} %}
-                                        </span>
                                     {% else %}
-                                        {# Subscribable (not subscription only): keep original span #}
-                                        <span class="{{ quickshop_button_classes }} d-flex justify-content-center align-items-center" title="{{ 'Compra rápida de' | translate }} {{ product.name }}" aria-label="{{ 'Compra rápida de' | translate }} {{ product.name }}">
-                                            {{ quickshop_btn_text | translate }}
-                                            {% include "snipplets/svg/bag.tpl" with {svg_custom_class: 'icon-inline ml-1 ' ~ hide_bag_icon_on_mobile_class} %}
-                                        </span>
+                                        {% if product.variations %}
+
+                                            {# Open quickshop popup if has variants #}
+
+                                            <span data-toggle="#quickshop-modal" data-modal-url="modal-fullscreen-quickshop" class="js-quickshop-modal-open js-fullscreen-modal-open {% if slide_item %}js-quickshop-slide{% endif %} js-modal-open {{ quickshop_button_classes }} d-flex justify-content-center align-items-center" title="{{ 'Compra rápida de' | translate }} {{ product.name }}" aria-label="{{ 'Compra rápida de' | translate }} {{ product.name }}" data-component="product-list-item.add-to-cart" data-component-value="{{product.id}}">
+                                                <span class="js-open-quickshop-wording">{{ 'Comprar' | translate }}</span>
+                                                {% include "snipplets/svg/bag.tpl" with {svg_custom_class: 'js-open-quickshop-icon icon-inline ml-1 ' ~ hide_bag_icon_on_mobile_class} %}
+                                            </span>
+                                        {% else %}
+                                            {# If not variants add directly to cart #}
+                                            <form class="js-product-form" method="post" action="{{ store.cart_url }}">
+                                                <input type="hidden" name="add_to_cart" value="{{product.id}}" />
+                                                
+
+                                                <div class="js-item-submit-container item-submit-container position-relative{% if not settings.product_item_stock %} float-left d-inline-block w-100{% endif %}">
+                                                    <input type="submit" class="js-addtocart js-prod-submit-form {{ quickshop_button_classes }} {% if hide_bag_icon_on_mobile_class %}btn-small-quickshop-md{% else %}btn-small-quickshop{% endif %} {{ state }}" value="{{ texts[state] | translate }}" alt="{{ texts[state] | translate }}" {% if state == 'nostock' %}disabled{% endif %} data-component="product-list-item.add-to-cart" data-component-value="{{ product.id }}"/>
+                                                    {% include "snipplets/svg/bag.tpl" with {svg_custom_class: 'js-quickshop-bag icon-inline item-quickshop-icon ' ~ hide_bag_icon_on_mobile_class} %}
+                                                </div>
+
+                                                {# Fake add to cart CTA visible during add to cart event #}
+
+                                                {% include 'snipplets/placeholders/button-placeholder.tpl' with {direct_add: true, buy_icon_classes: hide_bag_icon_on_mobile_class} %}
+                                            </form>
+                                        {% endif %}
                                     {% endif %}
-                                
                                 {% else %}
-                                    {% if product.variations %}
-
-                                        {# Open quickshop popup if has variants #}
-
-                                        <span data-toggle="#quickshop-modal" data-modal-url="modal-fullscreen-quickshop" class="js-quickshop-modal-open js-fullscreen-modal-open {% if slide_item %}js-quickshop-slide{% endif %} js-modal-open {{ quickshop_button_classes }} d-flex justify-content-center align-items-center" title="{{ 'Compra rápida de' | translate }} {{ product.name }}" aria-label="{{ 'Compra rápida de' | translate }} {{ product.name }}" data-component="product-list-item.add-to-cart" data-component-value="{{product.id}}">
-                                            <span class="js-open-quickshop-wording">{{ 'Comprar' | translate }}</span>
-                                            {% include "snipplets/svg/bag.tpl" with {svg_custom_class: 'js-open-quickshop-icon icon-inline ml-1 ' ~ hide_bag_icon_on_mobile_class} %}
-                                        </span>
-                                    {% else %}
-                                        {# If not variants add directly to cart #}
-                                        <form class="js-product-form" method="post" action="{{ store.cart_url }}">
-                                            <input type="hidden" name="add_to_cart" value="{{product.id}}" />
-                                            
-
-                                            <div class="js-item-submit-container item-submit-container position-relative{% if not settings.product_item_stock %} float-left d-inline-block w-100{% endif %}">
-                                                <input type="submit" class="js-addtocart js-prod-submit-form {{ quickshop_button_classes }} {% if hide_bag_icon_on_mobile_class %}btn-small-quickshop-md{% else %}btn-small-quickshop{% endif %} {{ state }}" value="{{ texts[state] | translate }}" alt="{{ texts[state] | translate }}" {% if state == 'nostock' %}disabled{% endif %} data-component="product-list-item.add-to-cart" data-component-value="{{ product.id }}"/>
-                                                {% include "snipplets/svg/bag.tpl" with {svg_custom_class: 'js-quickshop-bag icon-inline item-quickshop-icon ' ~ hide_bag_icon_on_mobile_class} %}
-                                            </div>
-
-                                            {# Fake add to cart CTA visible during add to cart event #}
-
-                                            {% include 'snipplets/placeholders/button-placeholder.tpl' with {direct_add: true, buy_icon_classes: hide_bag_icon_on_mobile_class} %}
-                                        </form>
-                                    {% endif %}
+                                    {# Fallback CTA linking to product details #}
+                                    <span class="{{ quickshop_button_classes }} d-flex justify-content-center align-items-center" title="{{ 'Comprar' | translate }} {{ product.name }}" aria-label="{{ 'Comprar' | translate }} {{ product.name }}">
+                                        <span>{{ 'Comprar' | translate }}</span>
+                                        {% include "snipplets/svg/bag.tpl" with {svg_custom_class: 'icon-inline ml-1 ' ~ hide_bag_icon_on_mobile_class} %}
+                                    </span>
                                 {% endif %}
                             </div>
-                        {% endif %}
-                        {% if settings.product_item_stock and not reduced_item %}
-                            <div class="js-item-stock-container item-stock {% if settings.quick_shop %}col-grid col-auto my-2 {% if columns_mobile == 2 and not horizontal_item %}pl-0 pl-md-1{% else %}pl-2{% endif %}{% if not horizontal_item %} pr-md-3{% endif %}{% else %}mt-3 mb-1{% endif %}">
-                                <span class="js-product-stock">{{ product.stock }}</span> {{ "en stock" | translate }}
-                            </div>
-                        {% endif %}
+                            {% if settings.product_item_stock and not reduced_item %}
+                                <div class="js-item-stock-container item-stock {% if settings.quick_shop %}col-grid col-auto my-2 {% if columns_mobile == 2 and not horizontal_item %}pl-0 pl-md-1{% else %}pl-2{% endif %}{% if not horizontal_item %} pr-md-3{% endif %}{% else %}mt-3 mb-1{% endif %}">
+                                    <span class="js-product-stock">{{ product.stock }}</span> {{ "en stock" | translate }}
+                                </div>
+                            {% endif %}
                         </div>
                     {% endif %}
                 </a>
