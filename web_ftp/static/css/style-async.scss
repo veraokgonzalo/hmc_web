@@ -2578,17 +2578,17 @@ footer {
 
   /* Value Props Strip - Mobile Compact 2x2 */
   .value-props-section {
-    padding: 10px 0;
+    padding: 18px 0;
   }
 
   .value-strip-item {
     width: 50%;
     justify-content: center;
     text-align: center;
-    padding: 10px 8px;
+    padding: 12px 8px;
     border-right: none;
     font-size: 0.75rem;
-    gap: 6px;
+    gap: 8px;
     white-space: normal;
     min-height: 44px;
   }
@@ -2939,29 +2939,29 @@ footer {
 @media (max-width: 768px) {
   .categories-section,
   .timer-offers-section {
-    padding: 36px 0;
+    padding: 54px 0;
   }
 
   .categories-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    gap: 14px;
   }
 
   .category-card {
-    padding: 12px 8px;
+    padding: 16px 10px;
     min-width: 0;
   }
 
   .category-name {
-    font-size: 0.85rem;
+    font-size: 0.88rem;
   }
 
   .timer-banner {
     flex-direction: column;
     text-align: center;
-    padding: 20px 16px;
-    gap: 18px;
-    margin-bottom: 24px;
+    padding: 24px 18px;
+    gap: 20px;
+    margin-bottom: 28px;
   }
 
   .timer-banner-info {
@@ -2989,7 +2989,7 @@ footer {
 
   .offers-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    gap: 14px;
   }
 
   .product-details {
@@ -3478,8 +3478,21 @@ footer {
     justify-content: center;
   }
 
+  .hmc-parallax-section {
+    padding: 54px 0;
+  }
+
+  .testimonials-section,
+  .section-testimonials-home {
+    padding: 54px 0;
+  }
+
+  .testimonials-grid {
+    gap: 20px;
+  }
+
   .testimonial-card {
-    padding: 20px;
+    padding: 24px 20px;
   }
 
   .testimonial-quote {
@@ -4615,6 +4628,16 @@ footer {
 @media (max-width: 768px) {
   body {
     padding-bottom: 60px; /* Clearance for fixed mobile bottom app bar */
+  }
+
+  /* Enhanced Mobile Breathing Room */
+  .section-padding {
+    padding-top: 54px;
+    padding-bottom: 54px;
+  }
+
+  .section-header {
+    margin-bottom: 32px;
   }
 
   .d-none-mobile {

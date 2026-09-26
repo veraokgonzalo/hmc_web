@@ -4813,6 +4813,16 @@ h6 { font-size: 0.95rem; }
     padding-bottom: 60px; /* Space for bottom nav */
   }
 
+  /* Mobile Spacing & Breathing Room Enhancement */
+  .section-padding {
+    padding-top: 54px;
+    padding-bottom: 54px;
+  }
+
+  .section-header {
+    margin-bottom: 32px;
+  }
+
   .container {
     width: 100%;
     max-width: 100%;
@@ -4954,76 +4964,78 @@ h6 { font-size: 0.95rem; }
 
   /* Value Props Strip - Mobile Compact 2x2 */
   .value-props-section {
-    padding: 10px 0;
+    padding: 18px 0;
   }
 
   .value-strip-item {
     width: 50%;
     justify-content: center;
     text-align: center;
-    padding: 8px 6px;
-    font-size: 0.72rem;
-    gap: 6px;
+    padding: 12px 8px;
+    font-size: 0.74rem;
+    gap: 8px;
     white-space: normal;
   }
 
   .value-strip-item i {
-    font-size: 0.95rem;
+    font-size: 1rem;
   }
 
   /* 4-Pillar Card Grid Mobile 2x2 (about.html) */
   .value-props-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    gap: 14px;
     width: 100%;
   }
 
   .value-prop-card {
-    padding: 14px 10px;
+    padding: 16px 12px;
     flex-direction: column;
     text-align: center;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     min-width: 0;
   }
 
   .value-prop-icon {
-    width: 42px;
-    height: 42px;
-    font-size: 1.15rem;
+    width: 44px;
+    height: 44px;
+    font-size: 1.2rem;
   }
 
   .value-prop-title {
-    font-size: 0.85rem;
-    margin-bottom: 2px;
+    font-size: 0.88rem;
+    margin-bottom: 4px;
   }
 
   .value-prop-desc {
-    font-size: 0.75rem;
-    line-height: 1.3;
+    font-size: 0.76rem;
+    line-height: 1.35;
   }
 
   /* Categories Mobile 2-Col */
   .categories-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    gap: 14px;
     width: 100%;
   }
 
   .category-card {
-    padding: 12px 8px;
+    padding: 16px 10px;
     min-width: 0;
   }
 
   .category-name {
-    font-size: 0.85rem;
+    font-size: 0.88rem;
   }
 
   /* Offers Countdown Display */
   .timer-banner {
-    padding: 18px 14px;
+    padding: 24px 18px;
     width: 100%;
     max-width: 100%;
+    gap: 20px;
+    margin-bottom: 28px;
   }
 
   .timer-banner-info h3 {
@@ -5031,31 +5043,31 @@ h6 { font-size: 0.95rem; }
   }
 
   .countdown-clock {
-    gap: 4px;
+    gap: 6px;
     flex-wrap: nowrap;
     justify-content: center;
   }
 
   .countdown-box {
-    width: 40px;
-    height: 40px;
-    font-size: 1.15rem;
+    width: 44px;
+    height: 44px;
+    font-size: 1.2rem;
     border-radius: var(--radius-sm);
   }
 
   .countdown-label {
-    font-size: 0.6rem;
+    font-size: 0.65rem;
   }
 
   .countdown-sep {
-    font-size: 1rem;
+    font-size: 1.1rem;
     margin-bottom: 12px;
   }
 
   /* Mobile 2-Column Product Cards (Zero Overflow) */
   .offers-grid, .products-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    gap: 14px;
     width: 100%;
   }
 
@@ -5067,7 +5079,7 @@ h6 { font-size: 0.95rem; }
   }
 
   .product-details {
-    padding: 10px 8px;
+    padding: 12px 10px;
     min-width: 0;
     width: 100%;
   }
@@ -5114,17 +5126,17 @@ h6 { font-size: 0.95rem; }
   /* Brands Grid Mobile */
   .brands-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    gap: 14px;
     width: 100%;
   }
 
   .brand-card {
-    padding: 12px 8px;
+    padding: 16px 12px;
     min-width: 0;
   }
 
   .brand-name {
-    font-size: 0.85rem;
+    font-size: 0.88rem;
   }
 
   /* Catalog Page Toolbar Fix */
@@ -5518,11 +5530,11 @@ h6 { font-size: 0.95rem; }
 
   .offers-grid, .products-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
+    gap: 10px;
   }
 
   .product-details {
-    padding: 8px 4px;
+    padding: 10px 6px;
   }
 
   .product-name {

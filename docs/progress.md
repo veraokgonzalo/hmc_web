@@ -583,12 +583,12 @@ Objetivo: Trasladar la experiencia del catálogo técnico de `boceto_web/catalog
 
 Fuente: `docs/feedback_cliente.md` §7 y `docs/specs.md` ("Ajustes de Feedback del Cliente"). Estado: **pendiente de ejecución**.
 
-### 1. Mobile — Espaciado ("falta aire")
-- [ ] Auditar visualmente el home y páginas principales en `≤768px` y `≤480px` para listar los puntos concretos con poco espacio (entre secciones, entre cards de grillas).
-- [ ] Aumentar `margin`/`padding` vertical entre `<section>` del home en `web_ftp/static/css/style-async.scss` (breakpoints mobile) — no tocar `--container-padding` (piso de 16px, ver `CLAUDE.md`).
-- [ ] Aumentar el `gap` de grillas de cards (categorías, productos, value props, testimonios) en mobile.
-- [ ] Replicar el mismo ajuste en `boceto_web/css/styles.css` para mantener paridad boceto ↔ tienda real.
-- [ ] Verificar visualmente en `≤768px` y `≤480px` que no se generó overflow horizontal ni se rompió ningún tap target (`≥44px`).
+### 1. Mobile — Espaciado ("falta aire") - IMPLEMENTADO
+- [x] Auditar visualmente el home y páginas principales en `≤768px` y `≤480px` para listar los puntos concretos con poco espacio (entre secciones, entre cards de grillas).
+- [x] Aumentar `margin`/`padding` vertical entre `<section>` del home en `web_ftp/static/css/style-async.scss` (breakpoints mobile) — no tocar `--container-padding` (piso de 16px, ver `CLAUDE.md`).
+- [x] Aumentar el `gap` de grillas de cards (categorías, productos, value props, testimonios) en mobile.
+- [x] Replicar el mismo ajuste en `boceto_web/css/styles.css` para mantener paridad boceto ↔ tienda real.
+- [x] Verificar visualmente en `≤768px` y `≤480px` que no se generó overflow horizontal ni se rompió ningún tap target (`≥44px`).
 
 ### 2. Carrusel Hero (Home) — imagen ↔ título
 - [ ] Revisar en el admin de Tiendanube si hay un slider custom cargado (`settings.slider`). Si existe, corregir las imágenes ahí directamente (tiene prioridad sobre el código).
