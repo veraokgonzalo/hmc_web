@@ -577,4 +577,46 @@ Objetivo: Trasladar la experiencia del catálogo técnico de `boceto_web/catalog
   - `web_ftp/static/js/store.js.tpl`: Alternador de vista Grilla/Lista con persistencia en `localStorage['hmc_catalog_view']`, y detección automática de ofertas por URL.
   - `web_ftp/static/css/style-async.scss`: Estilos modulares completos para `.catalog-offers-banner`, `.catalog-sidebar`, `.active-filter-chips`, `.catalog-toolbar`, `.list-view`, `.technical-assistance-banner` y controles móviles.
 
+---
+
+## 📋 Plan de Implementación — Feedback del Cliente 2026-09-26
+
+Fuente: `docs/feedback_cliente.md` §7 y `docs/specs.md` ("Ajustes de Feedback del Cliente"). Estado: **pendiente de ejecución**.
+
+### 1. Mobile — Espaciado ("falta aire")
+- [ ] Auditar visualmente el home y páginas principales en `≤768px` y `≤480px` para listar los puntos concretos con poco espacio (entre secciones, entre cards de grillas).
+- [ ] Aumentar `margin`/`padding` vertical entre `<section>` del home en `web_ftp/static/css/style-async.scss` (breakpoints mobile) — no tocar `--container-padding` (piso de 16px, ver `CLAUDE.md`).
+- [ ] Aumentar el `gap` de grillas de cards (categorías, productos, value props, testimonios) en mobile.
+- [ ] Replicar el mismo ajuste en `boceto_web/css/styles.css` para mantener paridad boceto ↔ tienda real.
+- [ ] Verificar visualmente en `≤768px` y `≤480px` que no se generó overflow horizontal ni se rompió ningún tap target (`≥44px`).
+
+### 2. Carrusel Hero (Home) — imagen ↔ título
+- [ ] Revisar en el admin de Tiendanube si hay un slider custom cargado (`settings.slider`). Si existe, corregir las imágenes ahí directamente (tiene prioridad sobre el código).
+- [ ] Si no hay slider custom, conseguir/seleccionar la foto de un **tractor** para el slide 1 ("Hacé tu compra online") y la foto de **insumos y repuestos** para el slide 2 ("Potencia y Rendimiento Para Tu Trabajo").
+- [ ] Actualizar `web_ftp/snipplets/home/home-slider.tpl` (array `default_slides`, campo `image` de los slides 1 y 2) y subir las nuevas imágenes a `web_ftp/static/images/hero/`.
+- [ ] Actualizar `boceto_web/index.html` (slides 1 y 2) y `boceto_web/assets/images/hero/` en paralelo.
+- [ ] El slide 3 ("Servicio técnico") ya usa la foto de llaves inglesas correcta — sin cambios.
+- [ ] Push por FTP (`tiendanube theme ftp push`) y verificar en vivo.
+
+### 3. Categorías Destacadas (Home) — fotos vs. categoría
+- [ ] Revisar en el admin si hay categorías custom cargadas (`settings.slider_categories`); si existen, corregir ahí.
+- [ ] Auditar las 6 imágenes de `web_ftp/snipplets/home/home-categories.tpl` (`default_categories`) contra la categoría real que representan (ver tabla en `docs/specs.md` §C) y anotar cuáles están mal.
+- [ ] Reemplazar las imágenes incorrectas en `web_ftp/static/images/categories/` y en `boceto_web/assets/images/categories/` (mismo nombre de archivo o actualizar la referencia en ambos `.tpl`/`.html`).
+- [ ] Push por FTP y verificar en vivo.
+
+### 4. Página "Nosotros" — Tarjetas de valor (`boceto_web/about.html`)
+- [ ] Cambiar `<h4 class="value-prop-title">Servicio Técnico y Taller</h4>` → `Servicio de Post Venta` (línea 119).
+- [ ] Redactar y reemplazar la descripción de esa tarjeta (línea 120) para que hable de post venta (pendiente confirmar texto exacto con el cliente).
+- [ ] Reemplazar la descripción de "Asesoría Especializada" (línea 110) por: *"Personal especializado a tu disposición para guiarte en la elección de la máquina exacta para vos."*
+- [ ] Nota: esta página todavía no está portada a `web_ftp/` — el cambio por ahora solo aplica al prototipo `boceto_web/`; si/cuando se porte "Nosotros" a Tiendanube, llevar el mismo copy corregido.
+
+### 5. Foto Casa Central — interior → exterior
+- [ ] Conseguir/seleccionar una foto **exterior** de la casa central de Santa Rosa (reemplazo de `sucursal-foto-vertical.webp`, que hoy es una foto interior de showroom/mostrador).
+- [ ] Reemplazar el archivo en `web_ftp/static/images/` (mismo nombre o actualizar referencia) y en `boceto_web/assets/images/`.
+- [ ] Actualizar `background-image` en `web_ftp/static/css/style-async.scss:3196` y `boceto_web/css/styles.css:7301` si cambia el nombre de archivo.
+- [ ] Actualizar `<img src>` en `boceto_web/about.html:203` si cambia el nombre de archivo.
+- [ ] Actualizar el `alt` text si la nueva foto ya no muestra "maquinaria Husqvarna/Niwa y mostrador" (contenido interior) — ajustar a lo que la foto exterior realmente muestra.
+- [ ] Actualizar la descripción del asset en `docs/assets-map.md`.
+- [ ] Push por FTP y verificar en vivo (home parallax + `about.html`).
+
 

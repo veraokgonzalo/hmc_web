@@ -60,3 +60,60 @@ Copy definitivo de cada ítem: pendiente del cliente, arranca con placeholder.
 
 - Crear una section nueva no fue necesario — las 6 secciones de contenido de arriba ya existen en el tema base. Si en algún punto se pide algo que ninguna section/block existente cubre, se evalúa puntualmente ahí.
 - El resto del checklist original (`docs/checklist_presupuesto.md`) que no es programación (plan/dominio, medios de pago, envíos, impuestos, páginas legales, redes sociales, carga de contenido) queda fuera del alcance de este repo.
+
+---
+
+## Ajustes de Feedback del Cliente (2026-09-26)
+
+> Escrito contra la estructura real vigente: `web_ftp/` (tema legacy productivo) para todo lo que ya está migrado, y `boceto_web/` (prototipo) para lo que todavía no se portó (la página "Nosotros" no tiene aún equivalente en `web_ftp/`). Fuente: `docs/feedback_cliente.md` §7.
+
+### A. Mobile — Más espaciado ("falta aire")
+
+El cliente percibe la vista mobile apretada. Archivos: `web_ftp/static/css/style-async.scss` (breakpoints `≤768px`/`≤480px`) y, en paralelo, `boceto_web/css/styles.css`.
+
+- No es el padding horizontal del contenedor (`--container-padding`, ya en 16px en mobile — es un piso definido en `CLAUDE.md`, no se debe bajar de ahí).
+- Es espaciado **vertical**: separación entre secciones del home (`section-padding` / márgenes entre `<section>`), y espaciado interno/entre cards en grillas (categorías, productos, value props, testimonios) en los breakpoints mobile.
+- Acción: aumentar los valores de `margin`/`padding` verticales entre bloques y el `gap` de las grillas de cards específicamente en `≤768px` y `≤480px`, sin tocar el layout desktop.
+
+### B. Carrusel Hero (Home) — imagen no se condice con el título
+
+Archivos: `web_ftp/snipplets/home/home-slider.tpl` (slides por defecto, líneas 6-34) y `boceto_web/index.html` (slides estáticos, líneas ~37-86). Mapeo correcto:
+
+| Slide | Título | Imagen debe ser |
+|---|---|---|
+| 1 | "Hacé tu compra online" | Foto de un **tractor** |
+| 2 | "Potencia y Rendimiento Para Tu Trabajo" | Foto de **insumos y repuestos** |
+| 3 | "Servicio Técnico Oficial y Repuestos Originales" | Foto de **llaves inglesas** (ya es la actual — sin cambios) |
+
+⚠️ Nota operativa: `home-slider.tpl` usa `settings.slider` del admin si está cargado (`has_custom_slider`), y en ese caso ignora por completo los slides por defecto del código. Antes de tocar el `.tpl`, verificar en el admin de Tiendanube si hay un slider custom cargado — si lo hay, el fix va ahí, no en el código.
+
+### C. Categorías Destacadas (Home) — fotos no coinciden con la categoría
+
+Archivo: `web_ftp/snipplets/home/home-categories.tpl` (array `default_categories`, líneas 7-50). Mismo mecanismo de override por admin que el hero: si `settings.slider_categories` está cargado, revisar ahí primero.
+
+Pendiente de auditoría visual (el cliente no especificó cuáles fotos están mal, solo que hay que revisarlas) contra las 6 categorías actuales:
+
+| Slug | Nombre | Imagen actual |
+|---|---|---|
+| `agua` | Agua | `categoria-3-agua-bombeo.webp` |
+| `construccion` | Construcción | `categoria-4-construccion.webp` |
+| `consumibles-e-insumos` | Consumibles e Insumos | `categoria-6-accesorios-insumos.webp` |
+| `ferreteria` | Ferretería | `categoria-1-ferreteria.webp` |
+| `maquina-a-bateria` | Herramientas a Batería | `categoria-5-herramientas-bateria.webp` |
+| `maquina-a-explosion` | Máquinas a Explosión | `categoria-2-maquinas-explosion.webp` |
+
+### D. Página "Nosotros" — Tarjetas de valor (`boceto_web/about.html`, líneas 103-127)
+
+Solo existe en `boceto_web/` por ahora (no portada a `web_ftp/`).
+
+- Tarjeta actual `<h4 class="value-prop-title">Servicio Técnico y Taller</h4>` (línea 119) + descripción "Taller propio homologado, puesta en marcha sin cargo y mantenimiento preventivo continuo." (línea 120) → **renombrar a "Servicio de Post Venta"** y ajustar la descripción a ese enfoque (texto definitivo pendiente del cliente).
+- Tarjeta `<h4 class="value-prop-title">Asesoría Especializada</h4>` (línea 109) → nueva descripción: *"Personal especializado a tu disposición para guiarte en la elección de la máquina exacta para vos."*
+
+### E. Foto de la Casa Central — interior → exterior
+
+Asset: `sucursal-foto-vertical.webp` (foto actual = interior del showroom/mostrador, según `docs/assets-map.md`). Usada en 4 lugares que hay que actualizar todos con la nueva foto exterior:
+
+1. `web_ftp/static/images/sucursal-foto-vertical.webp` (o nuevo nombre de archivo si se reemplaza el asset)
+2. `web_ftp/static/css/style-async.scss:3196` (`background-image`, sección parallax del home)
+3. `boceto_web/about.html:203` (`<img src="assets/images/sucursal-foto-vertical.webp">`, sección "Casa Central")
+4. `boceto_web/css/styles.css:7301` (`background-image`, parallax del home en el boceto)
