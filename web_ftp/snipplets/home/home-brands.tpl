@@ -31,13 +31,11 @@
 	{% set brands_items = settings.brands %}
 {% endif %}
 
-<section class="section-brands-home {% if settings.brands_colors %}section-brands-home-colors{% endif %} overflow-none" data-store="home-brands">
+<section class="section-brands-home brands-section {% if settings.brands_colors %}section-brands-home-colors{% endif %} overflow-none" id="marcas" data-store="home-brands">
 	<div class="container">
-		{% if settings.brands_title %}
-			<div class="text-center mb-3">
-				<h2 class="h5 m-0 font-weight-bold">{{ settings.brands_title }}</h2>
-			</div>
-		{% endif %}
+		<div class="section-header" style="margin-bottom: 32px;">
+			<h2 class="section-title">{{ settings.brands_title | default('Nuestras Marcas' | translate) }}</h2>
+		</div>
 		<div class="row align-items-center">
 			<div class="col-12">
 				{% if is_marquee %}
@@ -110,6 +108,12 @@
 					</div>
 				{% endif %}
 			</div>
+		</div>
+
+		<div style="text-align: center; margin-top: 32px;">
+			<a href="{{ '/marcas' | fqdn }}" class="btn btn-outline-primary btn-lg">
+				<i class="fa-solid fa-layer-group mr-2"></i> {{ 'Explorar el directorio de marcas' | translate }}
+			</a>
 		</div>
 	</div>
 </section>

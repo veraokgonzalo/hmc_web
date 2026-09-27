@@ -603,6 +603,41 @@ Objetivo: Trasladar la experiencia de la ficha de producto de `boceto_web/produc
   - `web_ftp/static/js/store.js.tpl`: Conmutador de pestañas técnicas (`.js-product-tab-btn`) y detector de scroll para la barra adhesiva con listener pasivo.
   - `web_ftp/static/css/style-async.scss`: Estilos modulares completos para `.product-sku-bar`, `.product-brand-tag`, `.btn-buy-now`, `.product-whatsapp-advice`, `.product-guarantee-bullets`, `.product-tabs-wrapper` y `.mobile-sticky-buy-bar`.
 
+
+---
+
+## ⚡ Migración de Boceto a Tiendanube FTP — Fase 5 Completa: Página de Inicio (Home Page) y Comunidad Instagram (2026-09-27)
+
+Objetivo: Asegurar la paridad 1-a-1 de la página de inicio (`templates/home.tpl` y componentes en `snipplets/home/*.tpl`) contra el prototipo modular `boceto_web/index.html`, garantizando la secuencia de secciones, títulos institucionales, marquee infinito de marcas con directorio, módulo cinemático de taller en video bleed, ofertas con countdown, y el módulo completo de Comunidad Instagram con fallback curado.
+
+- [x] **5.1. Secuencia de Secciones y Arquitectura de Carga (`templates/home.tpl`)**:
+  - Activación persistente de secciones sin dependencia de flags vacíos en DB (`has_brands`, `has_testimonials`, `has_instafeed = true`).
+  - Orden por defecto sincronizado 1-a-1 con `boceto_web`:
+    1. Hero Slider interactivo (`home-slider.tpl`).
+    2. Tira de propuestas de valor / 4 pilares (`banner-services.tpl`).
+    3. Video Showcase cinemático con WhatsApp al taller (`home-video.tpl`).
+    4. Ofertas especiales con reloj countdown activo (`home-sale-offers.tpl`).
+    5. Showroom & Casa Central Santa Rosa Parallax (`home-showroom-parallax.tpl`).
+    6. Categorías destacadas en grilla (`home-categories.tpl`).
+    7. Nuestras Marcas con marquee continuo y botón a directorio (`home-brands.tpl`).
+    8. Testimonios con reseñas Google 5.0 verificadas (`home-testimonials.tpl`).
+    9. Comunidad Instagram & Feed (`home-instafeed.tpl`).
+  - Fallback automático resiliente si las posiciones de la tienda aún no fueron guardadas en el panel administrador.
+- [x] **5.2. Marcas Oficiales y Marquee Continuo (`snipplets/home/home-brands.tpl`)**:
+  - Incorporación de clase `.brands-section` e id `#marcas`.
+  - Encabezado unificado `.section-header` con título *"Nuestras Marcas"*.
+  - Botón inferior destacado *"Explorar el directorio de marcas"* con enlace a `/marcas`.
+  - Padding y bordes institucionales alineados con el prototipo.
+- [x] **5.3. Comunidad Instagram & Redes Sociales (`snipplets/home/home-instafeed.tpl`)**:
+  - Encabezado con `.section-tag` conteniendo icono de Instagram y `@hmchub` dinámico según la tienda.
+  - Título *"Comunidad en Obra y Campo"* y bajada explicativa institucional.
+  - Grilla de 6 tarjetas (`.insta-grid`, `.insta-item`, `.insta-img`) con efecto hover y overlay oscuro con isotipo de Instagram.
+  - Doble motor: soporte de token oficial de Tiendanube con carga reactiva vía API y fallback curado con productos reales HMC en caso de no contar con token o error de conexión.
+- [x] **5.4. Estilos SCSS y Reglas Responsive (`web_ftp/static/css/style-async.scss`)**:
+  - Estilos de `.instafeed-section`, `.insta-grid` (6 columnas en desktop, 3 columnas en tablet/mobile).
+  - Gaps táctiles optimizados (14px en $\le 768$px, 10px en $\le 420$px) sin desbordamiento horizontal.
+  - Espaciado vertical de marcas adaptado a la regla mobile de 54px.
+
 ---
 
 Fuente: `docs/feedback_cliente.md` §7 y `docs/specs.md` ("Ajustes de Feedback del Cliente"). Estado: **pendiente de ejecución**.

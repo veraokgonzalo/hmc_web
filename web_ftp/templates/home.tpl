@@ -9,10 +9,10 @@
 {% set has_news_banners = settings.banner_news and settings.banner_news is not empty %}
 {% set has_featured_banners =  settings.banner_01_show or settings.banner_02_show or settings.banner_03_show or settings.banner_04_show %}
 {% set has_image_and_text_module = settings.module and settings.module is not empty %}
-{% set has_brands = (settings.brands and settings.brands is not empty) or settings.brands_format == 'marquee' %}
+{% set has_brands = true %}
 {% set has_new_block = settings.new_block and (settings.new_block_title or "new_block_image_01.jpg" | has_custom_image or "new_block_image_02.jpg" | has_custom_image) %}
 {% set has_informative_banners = true %}
-{% set has_instafeed = settings.show_instafeed and store.instagram and store.hasInstagramToken() %}
+{% set has_instafeed = true %}
 {% set has_institutional_message = true %}
 {% set has_welcome_message = settings.welcome_message or settings.welcome_text %}
 
@@ -27,16 +27,25 @@
 
 {% set newArray = [] %}
 <div class="js-home-sections-container home-sections-container">
-	{% for i in 1..21 %}
-        {% set section = 'home_order_position_' ~ i %}
-        {% set section_select = attribute(settings, section) %}
+	{% set has_custom_order = settings.home_order_position_1 is not empty %}
+	{% if has_custom_order %}
+		{% for i in 1..21 %}
+			{% set section = 'home_order_position_' ~ i %}
+			{% set section_select = attribute(settings, section) %}
 
-        {% if section_select not in newArray %}
-            {% include 'snipplets/home/home-section-switch.tpl' %}
-            {% set newArray = newArray|merge([section_select]) %}
-        {% endif %}
-
-    {% endfor %}
+			{% if section_select and section_select != 'empty' and section_select not in newArray %}
+				{% include 'snipplets/home/home-section-switch.tpl' %}
+				{% set newArray = newArray|merge([section_select]) %}
+			{% endif %}
+		{% endfor %}
+	{% else %}
+		{% for section_select in ['slider', 'informatives', 'video', 'sale', 'institutional', 'main_categories', 'brands', 'testimonials', 'instafeed'] %}
+			{% if section_select not in newArray %}
+				{% include 'snipplets/home/home-section-switch.tpl' %}
+				{% set newArray = newArray|merge([section_select]) %}
+			{% endif %}
+		{% endfor %}
+	{% endif %}
 
     {#  **** Hidden Sections ****  #}
     {% if show_component_help %}

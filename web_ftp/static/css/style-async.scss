@@ -1219,7 +1219,14 @@ footer {
 
 /* // Brands */
 
-.section-brands-home,
+.brands-section,
+.section-brands-home {
+  background-color: #FFFFFF;
+  border-top: 1px solid var(--color-gray-border, #E2E8F0);
+  border-bottom: 1px solid var(--color-gray-border, #E2E8F0);
+  padding: 60px 0;
+}
+
 .section-categories-home {
   padding: 20px 0;
 }
@@ -1312,6 +1319,10 @@ footer {
 }
 
 @media (max-width: 767.98px) {
+  .brands-section,
+  .section-brands-home {
+    padding: 54px 0;
+  }
   .brands-marquee-container {
     padding: 10px 0;
     -webkit-mask-image: linear-gradient(90deg, transparent, #000 24px, #000 calc(100% - 24px), transparent);
@@ -5634,4 +5645,74 @@ footer {
   flex-shrink: 0;
   padding: 8px 14px;
   font-size: 0.85rem;
+}
+
+/* --------------------------------------------------------------------------
+   Instagram & Comunidad (home-instafeed.tpl)
+   -------------------------------------------------------------------------- */
+.instafeed-section {
+  background-color: var(--color-gray-ultra-light, #F8F9FA);
+}
+
+.insta-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 14px;
+}
+
+.insta-item {
+  position: relative;
+  border-radius: var(--radius-md, 8px);
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  cursor: pointer;
+  display: block;
+  text-decoration: none;
+}
+
+.insta-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow, 0.4s ease);
+}
+
+.insta-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-white, #FFFFFF);
+  font-size: 1.8rem;
+  opacity: 0;
+  transition: opacity var(--transition-fast, 0.2s ease);
+}
+
+.insta-item:hover .insta-img {
+  transform: scale(1.08);
+}
+
+.insta-item:hover .insta-overlay {
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .instafeed-section {
+    padding: 54px 0;
+  }
+  .insta-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+}
+
+@media (max-width: 420px) {
+  .insta-grid {
+    gap: 10px;
+  }
 }
