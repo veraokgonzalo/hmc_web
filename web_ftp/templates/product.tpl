@@ -6,19 +6,18 @@
             </div>
             <div class="col" data-store="product-info-{{ product.id }}">
                 {% include 'snipplets/product/product-form.tpl' %}
-                {% if not settings.full_width_description %}
-                    {% include 'snipplets/product/product-description.tpl' %}
-                {% endif %}
             </div>
         </div>
     </div>
 
-    {# Product description full width #}
-
-    {% if settings.full_width_description %}
-        {% include 'snipplets/product/product-description.tpl' %}
-    {% endif %}
+    {# Product Tabs Section (Single Source of Truth matching boceto_web/product.html) #}
+    <div class="container mt-4 pt-2 mb-4">
+        {% include 'snipplets/product/product-tabs.tpl' %}
+    </div>
 </div>
 
 {# Related products #}
 {% include 'snipplets/product/product-related.tpl' %}
+
+{# Mobile Sticky Buy Bar #}
+{% include 'snipplets/product/product-sticky-buy-bar.tpl' %}

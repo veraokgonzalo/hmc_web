@@ -579,7 +579,31 @@ Objetivo: Trasladar la experiencia del catálogo técnico de `boceto_web/catalog
 
 ---
 
-## 📋 Plan de Implementación — Feedback del Cliente 2026-09-26
+## ⚡ Migración de Boceto a Tiendanube FTP — Fase 4 Completa: Ficha de Producto y Asesoramiento Técnico (2026-09-26)
+
+Objetivo: Trasladar la experiencia de la ficha de producto de `boceto_web/product.html` al tema Tiendanube `web_ftp/`, incorporando la barra técnica de SKU y marca, stock reactivo, botón de compra directa, CTA a WhatsApp con SKU precargado, trío de garantías y soporte oficial, pestañas técnicas estructuradas y barra adhesiva de compra mobile (*Sticky Buy Bar*).
+
+- [x] **4.1. Barra Técnica de Encabezado (`product-form.tpl`)**:
+  - Incorporación de tag destacado de marca oficial (`.product-brand-tag`) en mayúsculas.
+  - Indicador dinámico de stock con punto pulsante institucional verde (`.stock-pulse-dot` y "Stock Disponible").
+  - Mantenimiento íntegro de visualización de SKU nativo.
+- [x] **4.2. Acciones de Compra y Asesoría Técnica**:
+  - Botón secundario *"Comprar Ahora"* (`.btn-buy-now`) que envía de inmediato el formulario nativo al checkout.
+  - Botón destacado de WhatsApp oficial (`.product-whatsapp-advice`) con precarga dinámica de mensaje técnico conteniendo el nombre del producto y su SKU.
+  - Trío de garantías oficiales (`.product-guarantee-bullets`): *Garantía Oficial de Fábrica*, *Emitimos Factura A y B* y *Taller y Puesta en Marcha*.
+- [x] **4.3. Pestañas Técnicas de Producto (`snipplets/product/product-tabs.tpl`)**:
+  - Pestaña de *Descripción & Aplicaciones* (`tabDesc`): contenido enriquecido, llamado de mantenimiento preventivo HMC y ranura de extensiones.
+  - Pestaña de *Garantía & Respaldo Oficial* (`tabWarranty`): red de talleres homologados, repuestos 100% legítimos y atención B2B.
+  - Pestaña de *Opiniones de Clientes* (`tabReviews`): caja verificada de 5.0 ★ y opiniones de clientes en obra y campo.
+- [x] **4.4. Barra Adhesiva Inferior Mobile (`snipplets/product/product-sticky-buy-bar.tpl`)**:
+  - Activación automática al hacer scroll (`scrollY > 380`) en pantallas $\le 768$px.
+  - Muestra miniatura del producto, nombre, precio y botón de compra directa despejado.
+  - Elevación coordinada del botón flotante de WhatsApp a `bottom: 136px` para evitar solapamientos táctiles.
+- [x] **4.5. Reactividad JavaScript y Estilos SCSS**:
+  - `web_ftp/static/js/store.js.tpl`: Conmutador de pestañas técnicas (`.js-product-tab-btn`) y detector de scroll para la barra adhesiva con listener pasivo.
+  - `web_ftp/static/css/style-async.scss`: Estilos modulares completos para `.product-sku-bar`, `.product-brand-tag`, `.btn-buy-now`, `.product-whatsapp-advice`, `.product-guarantee-bullets`, `.product-tabs-wrapper` y `.mobile-sticky-buy-bar`.
+
+---
 
 Fuente: `docs/feedback_cliente.md` §7 y `docs/specs.md` ("Ajustes de Feedback del Cliente"). Estado: **pendiente de ejecución**.
 

@@ -3799,4 +3799,39 @@ stream_videos.forEach(function(player){
         }
     } catch(e) {}
 
+    /* ==========================================================================
+       HMC HUB Phase 4: Product Detail Tabs & Mobile Sticky Buy Bar
+       ========================================================================== */
+
+    // 1. Technical Product Tabs Switcher
+    jQueryNuvem(document).on("click", ".js-product-tab-btn", function(e) {
+        e.preventDefault();
+        var  = jQueryNuvem(this);
+        var targetId = .data("tab");
+        
+        jQueryNuvem(".js-product-tab-btn").removeClass("active");
+        jQueryNuvem(".js-product-tab-panel").removeClass("active");
+        
+        .addClass("active");
+        jQueryNuvem("#" + targetId).addClass("active");
+    });
+
+    // 2. Mobile Sticky Bottom Buy Bar
+    var  = jQueryNuvem("#mobileStickyBuyBar");
+    if (.length) {
+        var checkStickyBuyBar = function() {
+            if (window.scrollY > 380 && window.innerWidth <= 768) {
+                .addClass("active");
+                jQueryNuvem("body").addClass("sticky-buy-active");
+            } else {
+                .removeClass("active");
+                jQueryNuvem("body").removeClass("sticky-buy-active");
+            }
+        };
+
+        window.addEventListener("scroll", checkStickyBuyBar, { passive: true });
+        window.addEventListener("resize", checkStickyBuyBar, { passive: true });
+        checkStickyBuyBar();
+    }
+
 });

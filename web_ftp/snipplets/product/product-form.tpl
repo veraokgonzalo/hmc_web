@@ -11,13 +11,25 @@
         {% endembed %}
     {% endif %}
 
-    {# Product SKU #}
-
-    {% if settings.product_sku and product.sku %}
-        <div class="font-smallest opacity-60 mb-3">
-            {{ "SKU" | translate }}: <span class="js-product-sku">{{ product.sku }}</span>
+    {# Product SKU, Brand & Stock Status Header #}
+    <div class="product-sku-bar mb-3 d-flex align-items-center justify-content-between">
+        <div>
+            {% if product.brand %}
+                <span class="product-brand-tag text-uppercase font-weight-bold mr-2">{{ product.brand }}</span>
+            {% endif %}
+            {% if settings.product_sku and product.sku %}
+                <span class="font-smallest opacity-60">
+                    {{ "SKU" | translate }}: <span class="js-product-sku">{{ product.sku }}</span>
+                </span>
+            {% endif %}
         </div>
-    {% endif %}
+        {% if product.has_stock %}
+            <div class="product-stock-status">
+                <span class="stock-pulse-dot"></span>
+                <span>{{ "Stock Disponible" | translate }}</span>
+            </div>
+        {% endif %}
+    </div>
 
     {# Subscription only detection #}
     {% set is_subscription_only_product = product.isSubscribable() and product.isSubscriptionOnly() %}
@@ -266,6 +278,41 @@
                 {% include 'snipplets/placeholders/button-placeholder.tpl' with {custom_class: "btn-big"} %}
 
             </div>
+
+            {% if template == 'product' and product.available and product.display_price %}
+                <div class="col-12 mt-2">
+                    <button type="button" class="btn btn-buy-now btn-big btn-block js-hmc-buy-now" onclick="document.getElementById('product_form').submit();">
+                        {{ 'Comprar Ahora' | translate }}
+                    </button>
+                </div>
+            {% endif %}
+
+            {% if template == 'product' %}
+                {% set wa_num = '5492954696231' %}
+                {% set wa_msg = ('Hola HMC Hub, quiero consultar por asesoramiento técnico sobre: ' ~ product.name ~ (product.sku ? (' (SKU: ' ~ product.sku ~ ')') : '')) | url_encode %}
+                <div class="col-12 mt-3">
+                    <a href="https://wa.me/{{ wa_num }}?text={{ wa_msg }}" target="_blank" class="product-whatsapp-advice btn-block" rel="noopener noreferrer">
+                        <i class="fa-brands fa-whatsapp font-big"></i>
+                        <span>{{ 'Consultar con un Técnico Especialista' | translate }}</span>
+                    </a>
+                </div>
+                <div class="col-12 mt-3">
+                    <div class="product-guarantee-bullets">
+                        <div class="guarantee-bullet">
+                            <i class="fa-solid fa-shield-halved"></i>
+                            <span>Garantía Oficial de Fábrica</span>
+                        </div>
+                        <div class="guarantee-bullet">
+                            <i class="fa-solid fa-file-invoice"></i>
+                            <span>Emitimos Factura A y B</span>
+                        </div>
+                        <div class="guarantee-bullet">
+                            <i class="fa-solid fa-screwdriver-wrench"></i>
+                            <span>Taller y Puesta en Marcha</span>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
 
             {% if settings.ajax_cart %}
                 <div class="col-12">
