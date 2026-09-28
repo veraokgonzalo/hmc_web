@@ -5813,7 +5813,8 @@ footer {
   gap: 14px;
 }
 
-.insta-item {
+.insta-item,
+.instafeed-link {
   position: relative;
   border-radius: var(--radius-md, 8px);
   overflow: hidden;
@@ -5823,10 +5824,14 @@ footer {
   text-decoration: none;
 }
 
-.insta-img {
+.insta-img,
+.instafeed-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
   transition: transform var(--transition-slow, 0.4s ease);
 }
 
@@ -5846,11 +5851,15 @@ footer {
   transition: opacity var(--transition-fast, 0.2s ease);
 }
 
-.insta-item:hover .insta-img {
+.insta-item:hover .insta-img,
+.insta-item:hover .instafeed-img,
+.instafeed-link:hover .insta-img,
+.instafeed-link:hover .instafeed-img {
   transform: scale(1.08);
 }
 
-.insta-item:hover .insta-overlay {
+.insta-item:hover .insta-overlay,
+.instafeed-link:hover .insta-overlay {
   opacity: 1;
 }
 

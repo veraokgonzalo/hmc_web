@@ -23,50 +23,30 @@
 		</div>
 
 		{% if store.hasInstagramToken() %}
-			<div class="js-ig-success insta-grid"
+			<div id="instagram-feed" class="js-ig-success insta-grid"
 				data-ig-feed
 				data-ig-items-count="6"
 				data-ig-item-class="insta-item"
-				data-ig-link-class="insta-item-link"
+				data-ig-link-class="insta-item"
 				data-ig-image-class="insta-img fade-in"
 				data-ig-aria-label="{{ 'Publicación de Instagram de' | translate }} {{ store.name }}"
 				style="display: none;">
 			</div>
 			<div class="js-ig-fallback insta-grid">
-				{% for i in 1..6 %}
-					{% set custom_img = "insta_custom_0" ~ i ~ ".jpg" %}
-					{% set custom_link = attribute(settings, "insta_custom_0" ~ i ~ "_url") %}
-					{% set target_url = custom_link ? custom_link : instagram_url %}
-					{% if custom_img | has_custom_image %}
-						<a href="{{ target_url }}" target="_blank" rel="noopener noreferrer" class="insta-item" aria-label="Instagram @{{ instagram_handle }}">
-							<img src="{{ custom_img | static_url | settings_image_url('large') }}" alt="Instagram HMC Hub {{ i }}" class="insta-img" loading="lazy">
-							<div class="insta-overlay"><i class="fa-brands fa-instagram"></i></div>
-						</a>
-					{% else %}
-						<a href="{{ target_url }}" target="_blank" rel="noopener noreferrer" class="insta-item" aria-label="Instagram @{{ instagram_handle }}">
-							<img src="{{ default_ig_images[i - 1] | static_url }}" alt="Instagram HMC Hub {{ i }}" class="insta-img" loading="lazy">
-							<div class="insta-overlay"><i class="fa-brands fa-instagram"></i></div>
-						</a>
-					{% endif %}
+				{% for img_path in default_ig_images %}
+					<a href="{{ instagram_url }}" target="_blank" rel="noopener noreferrer" class="insta-item" aria-label="Instagram @{{ instagram_handle }}">
+						<img src="{{ img_path | static_url }}" alt="Instagram HMC Hub {{ loop.index }}" class="insta-img" loading="lazy">
+						<div class="insta-overlay"><i class="fa-brands fa-instagram"></i></div>
+					</a>
 				{% endfor %}
 			</div>
 		{% else %}
 			<div class="insta-grid">
-				{% for i in 1..6 %}
-					{% set custom_img = "insta_custom_0" ~ i ~ ".jpg" %}
-					{% set custom_link = attribute(settings, "insta_custom_0" ~ i ~ "_url") %}
-					{% set target_url = custom_link ? custom_link : instagram_url %}
-					{% if custom_img | has_custom_image %}
-						<a href="{{ target_url }}" target="_blank" rel="noopener noreferrer" class="insta-item" aria-label="Instagram @{{ instagram_handle }}">
-							<img src="{{ custom_img | static_url | settings_image_url('large') }}" alt="Instagram HMC Hub {{ i }}" class="insta-img" loading="lazy">
-							<div class="insta-overlay"><i class="fa-brands fa-instagram"></i></div>
-						</a>
-					{% else %}
-						<a href="{{ target_url }}" target="_blank" rel="noopener noreferrer" class="insta-item" aria-label="Instagram @{{ instagram_handle }}">
-							<img src="{{ default_ig_images[i - 1] | static_url }}" alt="Instagram HMC Hub {{ i }}" class="insta-img" loading="lazy">
-							<div class="insta-overlay"><i class="fa-brands fa-instagram"></i></div>
-						</a>
-					{% endif %}
+				{% for img_path in default_ig_images %}
+					<a href="{{ instagram_url }}" target="_blank" rel="noopener noreferrer" class="insta-item" aria-label="Instagram @{{ instagram_handle }}">
+						<img src="{{ img_path | static_url }}" alt="Instagram HMC Hub {{ loop.index }}" class="insta-img" loading="lazy">
+						<div class="insta-overlay"><i class="fa-brands fa-instagram"></i></div>
+					</a>
 				{% endfor %}
 			</div>
 		{% endif %}
