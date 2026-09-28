@@ -111,7 +111,7 @@
 		</div>
 
 		<div style="text-align: center; margin-top: 32px;">
-			<a href="{{ '/marcas' | fqdn }}" class="btn btn-outline-primary btn-lg">
+			<a href="{{ store.url }}/marcas" class="btn btn-outline-primary btn-lg">
 				<i class="fa-solid fa-layer-group mr-2"></i> {{ 'Explorar el directorio de marcas' | translate }}
 			</a>
 		</div>

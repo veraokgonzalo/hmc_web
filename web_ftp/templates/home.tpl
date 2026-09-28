@@ -27,25 +27,15 @@
 
 {% set newArray = [] %}
 <div class="js-home-sections-container home-sections-container">
-	{% set has_custom_order = settings.home_order_position_1 is not empty %}
-	{% if has_custom_order %}
-		{% for i in 1..21 %}
-			{% set section = 'home_order_position_' ~ i %}
-			{% set section_select = attribute(settings, section) %}
+	{% for i in 1..21 %}
+		{% set section = 'home_order_position_' ~ i %}
+		{% set section_select = attribute(settings, section) %}
 
-			{% if section_select and section_select != 'empty' and section_select not in newArray %}
-				{% include 'snipplets/home/home-section-switch.tpl' %}
-				{% set newArray = newArray|merge([section_select]) %}
-			{% endif %}
-		{% endfor %}
-	{% else %}
-		{% for section_select in ['slider', 'informatives', 'video', 'sale', 'institutional', 'main_categories', 'brands', 'testimonials', 'instafeed'] %}
-			{% if section_select not in newArray %}
-				{% include 'snipplets/home/home-section-switch.tpl' %}
-				{% set newArray = newArray|merge([section_select]) %}
-			{% endif %}
-		{% endfor %}
-	{% endif %}
+		{% if section_select and section_select != 'empty' and section_select not in newArray %}
+			{% include 'snipplets/home/home-section-switch.tpl' %}
+			{% set newArray = newArray|merge([section_select]) %}
+		{% endif %}
+	{% endfor %}
 
     {#  **** Hidden Sections ****  #}
     {% if show_component_help %}
