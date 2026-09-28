@@ -25,7 +25,7 @@
       </div>
     </div>
     <div class="top-bar-links">
-      <a href="{{ store.contact_url }}" class="top-bar-link">
+      <a href="{{ store.contact_url | default(store.url ~ '/contacto') }}" class="top-bar-link">
         <i class="fa-solid fa-location-dot"></i> {{ 'Sucursal: Santa Rosa, La Pampa' | translate }}
       </a>
       <a href="https://wa.me/5492954696231?text=Hola%20HMC%20Hub,%20necesito%20asesoramiento%20t%C3%A9cnico" target="_blank" class="top-bar-link">

@@ -3,12 +3,12 @@
 ==============================================================================*/ #}
 
 <nav class="mobile-bottom-nav d-md-none" aria-label="{{ 'Navegación rápida inferior' | translate }}">
-  <a href="{{ store.home_url }}" class="mobile-nav-btn {% if template == 'home' %}active{% endif %}" data-page="index">
+  <a href="{{ store.url }}" class="mobile-nav-btn {% if template == 'home' %}active{% endif %}" data-page="index">
     <i class="fa-solid fa-house"></i>
     <span>{{ 'Inicio' | translate }}</span>
   </a>
 
-  <a href="{% if store.categories_url %}{{ store.categories_url }}{% else %}{{ store.products_url }}{% endif %}" class="mobile-nav-btn {% if template == 'category' %}active{% endif %}" data-page="categories">
+  <a href="{{ store.products_url }}" class="mobile-nav-btn {% if template == 'category' %}active{% endif %}" data-page="categories">
     <i class="fa-solid fa-layer-group"></i>
     <span>{{ 'Categorías' | translate }}</span>
   </a>

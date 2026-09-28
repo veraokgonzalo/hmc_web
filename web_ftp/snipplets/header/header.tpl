@@ -10,7 +10,7 @@
     
     <!-- Brand Logo -->
     <div class="logo-container">
-      <a href="{{ store.home_url }}" class="logo-link">
+      <a href="{{ store.url }}" class="logo-link">
         <img src="{{ 'images/logos/logo-horizontal-color.png' | static_url }}" alt="{{ store.name | default('HMC HUB') }}" class="logo-img">
       </a>
     </div>
@@ -85,14 +85,14 @@
       <ul class="nav-list">
         <!-- 1. Inicio -->
         <li class="nav-item">
-          <a href="{{ store.home_url }}" class="nav-link {% if template == 'home' %}active{% endif %}">
+          <a href="{{ store.url }}" class="nav-link {% if template == 'home' %}active{% endif %}">
             <i class="fa-solid fa-house"></i> {{ 'Inicio' | translate }}
           </a>
         </li>
 
         <!-- 2. Categorías Mega Dropdown -->
         <li class="nav-item has-mega-dropdown">
-          <a href="{% if store.categories_url %}{{ store.categories_url }}{% else %}{{ store.products_url }}{% endif %}" class="nav-link {% if template == 'category' %}active{% endif %}">
+          <a href="{{ store.products_url }}" class="nav-link {% if template == 'category' %}active{% endif %}">
             {{ 'Categorías' | translate }} <i class="fa-solid fa-chevron-down" style="font-size: 0.75em; margin-left: 2px;"></i>
           </a>
           <div class="mega-dropdown mega-dropdown-categories-featured">
@@ -115,7 +115,7 @@
                   <i class="fa-solid fa-layer-group text-primary"></i>
                   <span>Más de <strong>13 rubros industriales</strong> y 460 subrubros con stock y repuestos.</span>
                 </div>
-                <a href="{% if store.categories_url %}{{ store.categories_url }}{% else %}{{ store.products_url }}{% endif %}" class="btn btn-primary btn-sm btn-explore-categories">
+                <a href="{{ store.products_url }}" class="btn btn-primary btn-sm btn-explore-categories">
                   {{ 'Todas las categorías →' | translate }}
                 </a>
               </div>
@@ -171,12 +171,12 @@
 
         <!-- 5. Nosotros -->
         <li class="nav-item">
-          <a href="{{ store.about_url | default('/nosotros') }}" class="nav-link">{{ 'Nosotros' | translate }}</a>
+          <a href="{{ store.url }}/nosotros" class="nav-link">{{ 'Nosotros' | translate }}</a>
         </li>
 
         <!-- 6. Contacto -->
         <li class="nav-item">
-          <a href="{{ store.contact_url }}" class="nav-link">{{ 'Contacto' | translate }}</a>
+          <a href="{{ store.contact_url | default(store.url ~ '/contacto') }}" class="nav-link">{{ 'Contacto' | translate }}</a>
         </li>
       </ul>
 

@@ -3734,8 +3734,10 @@ stream_videos.forEach(function(player){
         // Desktop nav links
         jQueryNuvem(".nav-link").each(function() {
             var $link = jQueryNuvem(this);
-            var href = ($link.attr("href") || "").toLowerCase();
+            var href = ($link.attr("href") || "").toLowerCase().trim();
             var isActive = false;
+            var isHomePath = currentPath === "/" || currentPath.endsWith("/home") || currentPath === "";
+            var isHomeHref = href === "/" || href === window.location.origin.toLowerCase() || href === (window.location.origin.toLowerCase() + "/") || href.endsWith("/home");
 
             if (isOffers && href.indexOf("offers=true") !== -1) {
                 isActive = true;
@@ -3744,7 +3746,7 @@ stream_videos.forEach(function(player){
             } else if (!isOffers && hasBrand && (href.indexOf("marca") !== -1 || href.indexOf("brand") !== -1)) {
                 isActive = true;
             } else if (!isOffers && !hasCategory && !hasBrand) {
-                if ((currentPath === "/" || currentPath.endsWith("home")) && (href === "/" || href.endsWith("home"))) {
+                if (isHomePath && isHomeHref) {
                     isActive = true;
                 } else if (currentPath.indexOf("nosotros") !== -1 && href.indexOf("nosotros") !== -1) {
                     isActive = true;
@@ -3755,6 +3757,8 @@ stream_videos.forEach(function(player){
 
             if (isActive) {
                 $link.addClass("active").closest(".nav-item").addClass("active");
+            } else if (!isHomePath && isHomeHref) {
+                $link.removeClass("active").closest(".nav-item").removeClass("active");
             }
         });
 

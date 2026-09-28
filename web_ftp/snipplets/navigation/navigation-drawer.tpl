@@ -23,7 +23,9 @@
 
 <aside class="mobile-drawer-menu" id="mobileDrawerMenu" aria-label="{{ 'Menú lateral de navegación' | translate }}">
   <div class="mobile-drawer-header">
-    <img src="{{ 'images/logos/logo-horizontal-white.png' | static_url }}" alt="{{ store.name | default('HMC HUB') }}" class="mobile-drawer-logo">
+    <a href="{{ store.url }}" title="{{ store.name | default('HMC HUB') }}">
+      <img src="{{ 'images/logos/logo-horizontal-white.png' | static_url }}" alt="{{ store.name | default('HMC HUB') }}" class="mobile-drawer-logo">
+    </a>
     <button type="button" class="mobile-drawer-close js-close-mobile-menu" id="mobileDrawerClose" title="{{ 'Cerrar' | translate }}" aria-label="{{ 'Cerrar' | translate }}">
       <i class="fa-solid fa-xmark"></i>
     </button>
@@ -40,7 +42,7 @@
 
   <div class="mobile-drawer-nav">
     <!-- 1. Inicio -->
-    <a href="{{ store.home_url }}" class="mobile-nav-link-item {% if template == 'home' %}active{% endif %}">
+    <a href="{{ store.url }}" class="mobile-nav-link-item {% if template == 'home' %}active{% endif %}">
       <span><i class="fa-solid fa-house mr-2"></i> {{ 'Inicio' | translate }}</span>
     </a>
     
@@ -61,7 +63,7 @@
         {% endfor %}
         <a href="{{ cat_url }}" class="mobile-subnav-link">{{ cat_name }}</a>
       {% endfor %}
-      <a href="{% if store.categories_url %}{{ store.categories_url }}{% else %}{{ store.products_url }}{% endif %}" class="mobile-subnav-link mobile-subnav-link-cta">
+      <a href="{{ store.products_url }}" class="mobile-subnav-link mobile-subnav-link-cta">
         <span>{{ 'Todas las categorías →' | translate }}</span>
       </a>
     </div>
@@ -87,12 +89,12 @@
     </a>
 
     <!-- 5. Nosotros -->
-    <a href="{{ store.about_url | default('/nosotros') }}" class="mobile-nav-link-item">
+    <a href="{{ store.url }}/nosotros" class="mobile-nav-link-item">
       <span>{{ 'Nosotros' | translate }}</span>
     </a>
 
     <!-- 6. Contacto -->
-    <a href="{{ store.contact_url }}" class="mobile-nav-link-item">
+    <a href="{{ store.contact_url | default(store.url ~ '/contacto') }}" class="mobile-nav-link-item">
       <span>{{ 'Contacto' | translate }}</span>
     </a>
 
