@@ -10,7 +10,7 @@
     
     <!-- Brand Logo -->
     <div class="logo-container">
-      <a href="{{ store.url }}" class="logo-link">
+      <a href="{{ store.url | default('/') }}" class="logo-link">
         <img src="{{ 'images/logos/logo-horizontal-color.png' | static_url }}" alt="{{ store.name | default('HMC HUB') }}" class="logo-img">
       </a>
     </div>
@@ -85,14 +85,14 @@
       <ul class="nav-list">
         <!-- 1. Inicio -->
         <li class="nav-item">
-          <a href="{{ store.url }}" class="nav-link {% if template == 'home' %}active{% endif %}">
+          <a href="{{ store.url | default('/') }}" class="nav-link {% if template == 'home' %}active{% endif %}">
             <i class="fa-solid fa-house"></i> {{ 'Inicio' | translate }}
           </a>
         </li>
 
         <!-- 2. Categorías Mega Dropdown -->
         <li class="nav-item has-mega-dropdown">
-          <a href="{{ store.products_url }}" class="nav-link {% if template == 'category' %}active{% endif %}">
+          <a href="{{ store.products_url | default('/productos') }}" class="nav-link {% if template == 'category' %}active{% endif %}">
             {{ 'Categorías' | translate }} <i class="fa-solid fa-chevron-down" style="font-size: 0.75em; margin-left: 2px;"></i>
           </a>
           <div class="mega-dropdown mega-dropdown-categories-featured">
@@ -115,7 +115,7 @@
                   <i class="fa-solid fa-layer-group text-primary"></i>
                   <span>Más de <strong>13 rubros industriales</strong> y 460 subrubros con stock y repuestos.</span>
                 </div>
-                <a href="{{ store.products_url }}" class="btn btn-primary btn-sm btn-explore-categories">
+                <a href="{{ store.products_url | default('/productos') }}" class="btn btn-primary btn-sm btn-explore-categories">
                   {{ 'Todas las categorías →' | translate }}
                 </a>
               </div>
@@ -125,7 +125,7 @@
 
         <!-- 3. Marcas Dropdown -->
         <li class="nav-item has-mega-dropdown">
-          <a href="{{ store.products_url }}?brand_filter=true" class="nav-link">
+          <a href="{{ store.products_url | default('/productos') }}?brand_filter=true" class="nav-link">
             {{ 'Marcas' | translate }} <i class="fa-solid fa-chevron-down" style="font-size: 0.75em; margin-left: 2px;"></i>
           </a>
           
@@ -142,7 +142,7 @@
               <div class="dropdown-brands-grid">
                 {% set official_brands = ["OREGON", "NIWA", "BOSCH", "EINHELL", "HUSQVARNA", "GARDENA", "SENSEI", "HONDA"] %}
                 {% for brand in official_brands %}
-                  <a href="{{ store.products_url }}?brand={{ brand | url_encode }}" class="dropdown-brand-card" title="Ver catálogo oficial {{ brand }}">
+                  <a href="{{ store.products_url | default('/productos') }}?brand={{ brand | url_encode }}" class="dropdown-brand-card" title="Ver catálogo oficial {{ brand }}">
                     <div class="dropdown-brand-name">
                       <span>{{ brand }}</span>
                     </div>
@@ -156,7 +156,7 @@
                   <i class="fa-solid fa-layer-group text-primary"></i>
                   <span>Representamos a más de <strong>100 fabricantes líderes</strong> con stock y repuestos.</span>
                 </div>
-                <a href="{{ store.products_url }}?brand_filter=true" class="btn btn-primary btn-sm btn-explore-brands">
+                <a href="{{ store.products_url | default('/productos') }}?brand_filter=true" class="btn btn-primary btn-sm btn-explore-brands">
                   {{ 'Todas las marcas →' | translate }}
                 </a>
               </div>
@@ -166,17 +166,17 @@
 
         <!-- 4. Ofertas -->
         <li class="nav-item">
-          <a href="{{ store.products_url }}?offers=true" class="nav-link has-badge">{{ 'Ofertas' | translate }}</a>
+          <a href="{{ store.products_url | default('/productos') }}?offers=true" class="nav-link has-badge">{{ 'Ofertas' | translate }}</a>
         </li>
 
         <!-- 5. Nosotros -->
         <li class="nav-item">
-          <a href="{{ store.url }}/nosotros" class="nav-link">{{ 'Nosotros' | translate }}</a>
+          <a href="{{ store.url ? store.url ~ '/nosotros' : '/nosotros' }}" class="nav-link">{{ 'Nosotros' | translate }}</a>
         </li>
 
         <!-- 6. Contacto -->
         <li class="nav-item">
-          <a href="{{ store.contact_url | default(store.url ~ '/contacto') }}" class="nav-link">{{ 'Contacto' | translate }}</a>
+          <a href="{{ store.contact_url | default(store.url ? store.url ~ '/contacto' : '/contacto') }}" class="nav-link">{{ 'Contacto' | translate }}</a>
         </li>
       </ul>
 

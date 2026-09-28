@@ -3776,7 +3776,24 @@ stream_videos.forEach(function(player){
                 $btn.addClass("active");
             }
         });
+
+        // Fail-safe: ensure home links (logo, Inicio, mobile bottom bar) are never empty
+        jQueryNuvem(".logo-link, .nav-item:first-child .nav-link, .mobile-nav-btn[data-page='index'], a:has(.mobile-drawer-logo)").each(function() {
+            var $el = jQueryNuvem(this);
+            var h = $el.attr("href");
+            if (!h || h === "" || h === "#") {
+                $el.attr("href", "/");
+            }
+        });
     }
+
+    jQueryNuvem(document).on("click", ".logo-link, .nav-item:first-child .nav-link, .mobile-nav-btn[data-page='index'], a:has(.mobile-drawer-logo)", function(e) {
+        var h = jQueryNuvem(this).attr("href");
+        if (!h || h === "" || h === "#") {
+            e.preventDefault();
+            window.location.href = "/";
+        }
+    });
 
     syncNavigationActiveState();
 
