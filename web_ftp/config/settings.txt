@@ -1539,12 +1539,74 @@ Página de inicio
 		title = Publicaciones de Instagram
 		backto = home_order_position
 	description
-		description = El Feed de Instagram muestra automáticamente tus últimas publicaciones en la página de inicio de tu tienda. Tu perfil debe ser público.
+		description = El Feed de Instagram muestra automáticamente tus últimas publicaciones en la página de inicio de tu tienda si tenés conectado el Token oficial. También podés cargar tus propias fotos reales a continuación.
 	checkbox
 		name = show_instafeed
 		description = Mostrar tus publicaciones de Instagram en la página de inicio de tu tienda
 	subtitle
-		subtitle = Para mostrar tus publicaciones necesitás generar un token, <a target='_blank' href='https://ayuda.tiendanube.com/es_ES/123224-redes-sociales/como-mostrar-mis-publicaciones-de-instagram-en-mi-tiendanube'>¿cómo configurarlo?</a>
+		subtitle = Para conectar automáticamente necesitás generar un token en Redes Sociales, <a target='_blank' href='https://ayuda.tiendanube.com/es_ES/123224-redes-sociales/como-mostrar-mis-publicaciones-de-instagram-en-mi-tiendanube'>¿cómo configurarlo?</a>
+	subtitle
+		subtitle = Fotos personalizadas de Instagram (opcional):
+	subtitle
+		subtitle = Publicación 1
+	image
+		original = insta_custom_01.jpg
+		title = Foto 1 (JPG, PNG, WEBP)
+		width = 400
+		height = 400
+	i18n_input
+		name = insta_custom_01_url
+		description = Link a la publicación 1
+	subtitle
+		subtitle = Publicación 2
+	image
+		original = insta_custom_02.jpg
+		title = Foto 2 (JPG, PNG, WEBP)
+		width = 400
+		height = 400
+	i18n_input
+		name = insta_custom_02_url
+		description = Link a la publicación 2
+	subtitle
+		subtitle = Publicación 3
+	image
+		original = insta_custom_03.jpg
+		title = Foto 3 (JPG, PNG, WEBP)
+		width = 400
+		height = 400
+	i18n_input
+		name = insta_custom_03_url
+		description = Link a la publicación 3
+	subtitle
+		subtitle = Publicación 4
+	image
+		original = insta_custom_04.jpg
+		title = Foto 4 (JPG, PNG, WEBP)
+		width = 400
+		height = 400
+	i18n_input
+		name = insta_custom_04_url
+		description = Link a la publicación 4
+	subtitle
+		subtitle = Publicación 5
+	image
+		original = insta_custom_05.jpg
+		title = Foto 5 (JPG, PNG, WEBP)
+		width = 400
+		height = 400
+	i18n_input
+		name = insta_custom_05_url
+		description = Link a la publicación 5
+	subtitle
+		subtitle = Publicación 6
+	image
+		original = insta_custom_06.jpg
+		title = Foto 6 (JPG, PNG, WEBP)
+		width = 400
+		height = 400
+	i18n_input
+		name = insta_custom_06_url
+		description = Link a la publicación 6
 	collapse
 		title = Pop-up promocional
 		backto = home_order_position
