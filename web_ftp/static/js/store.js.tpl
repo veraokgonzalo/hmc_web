@@ -501,7 +501,11 @@ DOMContentLoaded.addEventOrExecute(() => {
             jQueryNuvem(selector).find(".js-accordion-toggle-inactive").toggle();
             jQueryNuvem(selector).find(".js-accordion-toggle-active").toggle();
         }
-        jQueryNuvem(selector).closest(".js-accordion-container").find(".js-accordion-content").first().slideToggle("fast");
+        var container = jQueryNuvem(selector).closest(".js-accordion-container");
+        container.toggleClass("active");
+        var expanded = jQueryNuvem(selector).attr("aria-expanded") === "true";
+        jQueryNuvem(selector).attr("aria-expanded", !expanded);
+        container.find(".js-accordion-content").first().slideToggle("fast");
     }
 
     jQueryNuvem(document).on("click", ".js-accordion-toggle", function(e) {
@@ -518,6 +522,18 @@ DOMContentLoaded.addEventOrExecute(() => {
     }else{
         jQueryNuvem(".js-accordion-toggle-mobile").css("cursor" , "default").removeAttr('href');
     }
+
+    jQueryNuvem(document).on("submit", "#contact-form", function() {
+        var inquirySelect = jQueryNuvem(this).find("#inquiry_type");
+        var messageArea = jQueryNuvem(this).find("textarea[name='message']");
+        if (inquirySelect.length && inquirySelect.val() && messageArea.length) {
+            var selectedText = inquirySelect.find("option:selected").text();
+            var currentVal = messageArea.val();
+            if (currentVal.indexOf("[Motivo:") === -1) {
+                messageArea.val("[Motivo: " + selectedText + "]\n\n" + currentVal);
+            }
+        }
+    });
 
     {#/*============================================================================
       #Transitions

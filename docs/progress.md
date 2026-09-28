@@ -640,6 +640,34 @@ Objetivo: Asegurar la paridad 1-a-1 de la página de inicio (`templates/home.tpl
 
 ---
 
+## ⚡ Migración de Boceto a Tiendanube FTP — Fase 7 Completa: Contacto, Soporte Técnico y Sucursales (2026-09-28)
+
+Objetivo: Trasladar la experiencia integral de contacto y postventa desde `boceto_web/contact.html` a la plantilla de producción `web_ftp/templates/contact.tpl`, incorporando el formulario técnico con selector de motivo de consulta, la tarjeta de sucursal física central con mapa y horarios pampeanos, el callout de respaldo oficial de fábrica y el acordeón interactivo de Preguntas Frecuentes (FAQ).
+
+- [x] **7.1. Estructura y Encabezado de Página (`templates/contact.tpl`)**:
+  - Incorporación de clases `.contact-page` y `.contact-page-section` con `#contactPageLayout`.
+  - Encabezado con `.section-tag` conteniendo icono de canales de atención, título *"Contacto y Sucursales"* y bajada institucional.
+  - Soporte preservado para el flujo legal de cancelación de compras (`is_order_cancellation`).
+- [x] **7.2. Formulario de Contacto & Asesoría Técnica**:
+  - Título *"Envianos tu consulta o visitanos en nuestra sucursal de Santa Rosa"* con descripción orientadora.
+  - Campos semánticos: Razón Social / Nombre, Email, Teléfono/Celular, Selector de Tipo de Consulta (Asesoramiento, Presupuesto / Factura A, Repuestos / Puesta en marcha, Envíos, Otro) y Área de Mensaje.
+  - Botón de envío prioritario *"Enviar Mensaje a HMC"* (`.btn-primary.btn-lg.btn-block`).
+  - Concatenación automática de motivo (`[Motivo: ...]`) en `store.js.tpl` al enviar el formulario para que el comerciante reciba el requerimiento detallado en su email.
+- [x] **7.3. Ficha de Sucursal Santa Rosa y Respaldo Oficial**:
+  - Tarjeta de sucursal con dirección física en Av. Santiago Marzo (Norte) 171, Santa Rosa, La Pampa.
+  - Horarios comerciales reales de La Pampa (*Lunes a Viernes de 8:30 a 12:30 hs. y de 15:30 a 19:30 hs. | Sábados de 8:30 a 13:00 hs.*).
+  - Destacado de showroom y prueba de marcha sin cargo.
+  - Iframe interactivo de Google Maps con botón directo a *"Cómo llegar"*.
+  - Callout de confianza *"Respaldo de fábrica garantizado"* con factura oficial y número de serie homologado.
+- [x] **7.4. Acordeón Interactivo de Preguntas Frecuentes (FAQ)**:
+  - 4 dudas frecuentes clave sobre maquinaria: entrega lista para usar vs. armada, envíos pesados a todo el país, solicitud de Factura A y disponibilidad de repuestos originales.
+  - Acordeón interactivo compatible con Tiendanube (`.js-accordion-container`, `.js-accordion-toggle`, `.js-accordion-content`) con animación fluida y rotación suave de chevron (`.faq-chevron`).
+- [x] **7.5. Estilos SCSS & Optimización Mobile (`web_ftp/static/css/style-async.scss`)**:
+  - Diseño desktop en 2 columnas (1.2fr / 1fr equivalente a `col-md-7` y `col-md-5`).
+  - Mobile: espaciado vertical de 54px, gap de 28px entre formulario y sucursal, tarjetas acolchadas y tap targets $\ge 44$px.
+
+---
+
 Fuente: `docs/feedback_cliente.md` §7 y `docs/specs.md` ("Ajustes de Feedback del Cliente"). Estado: **pendiente de ejecución**.
 
 ### 1. Mobile — Espaciado ("falta aire") - IMPLEMENTADO

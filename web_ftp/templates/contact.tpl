@@ -3,17 +3,17 @@
 
 {% include "snipplets/breadcrumbs.tpl" with {breadcrumbs_custom_class: 'mb-3'} %}
 
-<section class="contact-page visible-when-content-ready mb-4">
+<main class="contact-page contact-page-section visible-when-content-ready mb-4" id="contactPageLayout">
 	<div class="container">
 
-		<div class="section-header contact-section-header">
+		<div class="section-header contact-section-header" style="margin-bottom: 36px;">
 			{% if not is_order_cancellation %}
 				<div class="section-tag">
-					{% include "snipplets/svg/chat.tpl" with {svg_custom_class: "icon-inline"} %}
+					<i class="fa-solid fa-comments mr-1"></i>
 					{{ "Canales de Atención" | translate }}
 				</div>
-				<h1 class="section-title" data-store="page-title">{{ "Contacto & Sucursales" | translate }}</h1>
-				<p class="section-subtitle">{{ "Envianos tu consulta técnica, cotización corporativa o visitanos en nuestra sucursal de Santa Rosa." | translate }}</p>
+				<h1 class="section-title" data-store="page-title">{{ "Contacto y Sucursales" | translate }}</h1>
+				<p class="section-subtitle">{{ "Envianos tu consulta o visitanos en nuestra sucursal de Santa Rosa." | translate }}</p>
 			{% else %}
 				<h1 class="section-title" data-store="page-title">{{ "Pedí la cancelación de tu última compra" | translate }}</h1>
 			{% endif %}
@@ -66,7 +66,7 @@
 							{% include "snipplets/contact-links.tpl" with {btn_link: true} %}
 						{% endif %}
 					{% else %}
-						<h3 class="contact-form-card-title">{{ "Envianos tu Consulta o Solicitud de Cotización" | translate }}</h3>
+						<h3 class="contact-form-card-title">{{ "Envianos tu consulta o visitanos en nuestra sucursal de Santa Rosa" | translate }}</h3>
 						<p class="contact-form-card-copy">{{ "Completá el siguiente formulario y un técnico especialista responderá lo antes posible. Para respuestas más rápidas, no dudes en escribirnos por WhatsApp." | translate }}</p>
 					{% endif %}
 
@@ -74,7 +74,7 @@
 						<p class="mb-3" data-component="order-cancellation-disclaimer">{{ "Si te arrepentiste de una compra, podés pedir la cancelación enviando este formulario <strong>con tu número de orden.</strong> Tenés como máximo hasta 10 días corridos desde que recibiste el producto." | translate }}</p>
 					{% endif %}
 
-					{% embed "snipplets/forms/form.tpl" with{form_id: 'contact-form', form_custom_class: 'js-winnie-pooh-form', form_action: '/winnie-pooh', submit_custom_class: 'btn-block', submit_name: 'contact', submit_text: 'Enviar Mensaje a HMC' | translate, data_store: 'contact-form' }  %}
+					{% embed "snipplets/forms/form.tpl" with{form_id: 'contact-form', form_custom_class: 'js-winnie-pooh-form', form_action: '/winnie-pooh', submit_custom_class: 'btn-block btn-lg', submit_name: 'contact', submit_text: 'Enviar Mensaje a HMC' | translate, data_store: 'contact-form' }  %}
 						{% block form_body %}
 
 							{# Hidden inputs used to send attributes #}
@@ -93,19 +93,19 @@
 
 							{# Name input #}
 
-							{% embed "snipplets/forms/form-input.tpl" with{input_for: 'name', type_text: true, input_name: 'name', input_id: 'name', input_required: true, input_label_text: 'Nombre y Apellido / Razón Social' | translate, input_placeholder: 'Ej: Ing. Juan Pérez o Constructora del Plata' | translate } %}
+							{% embed "snipplets/forms/form-input.tpl" with{input_for: 'name', type_text: true, input_name: 'name', input_id: 'name', input_required: true, input_label_text: 'Nombre y Apellido / Razón Social *' | translate, input_placeholder: 'Ej: Ing. Juan Pérez o Constructora del Plata' | translate } %}
 							{% endembed %}
 
 							<div class="row">
 								{# Email input #}
 
-								{% embed "snipplets/forms/form-input.tpl" with{input_for: 'email', type_email: true, input_name: 'email', input_id: 'email', input_required: true, input_group_custom_class: 'col-md-6', input_label_text: 'Correo Electrónico' | translate, input_placeholder: 'tuemail@dominio.com' | translate } %}
+								{% embed "snipplets/forms/form-input.tpl" with{input_for: 'email', type_email: true, input_name: 'email', input_id: 'email', input_required: true, input_group_custom_class: 'col-md-6', input_label_text: 'Correo Electrónico *' | translate, input_placeholder: 'tuemail@dominio.com' | translate } %}
 								{% endembed %}
 
 								{% if not is_order_cancellation %}
 									{# Phone input #}
 
-									{% embed "snipplets/forms/form-input.tpl" with{input_for: 'phone', type_tel: true, input_name: 'phone', input_id: 'phone', input_required: true, input_group_custom_class: 'col-md-6', input_label_text: 'Teléfono / Celular' | translate, input_placeholder: 'Ej: 11 4455-6677' | translate } %}
+									{% embed "snipplets/forms/form-input.tpl" with{input_for: 'phone', type_tel: true, input_name: 'phone', input_id: 'phone', input_required: true, input_group_custom_class: 'col-md-6', input_label_text: 'Teléfono / Celular *' | translate, input_placeholder: 'Ej: 11 4455-6677' | translate } %}
 									{% endembed %}
 								{% endif %}
 							</div>
@@ -114,7 +114,7 @@
 
 								{# Inquiry type select #}
 
-								{% embed "snipplets/forms/form-select.tpl" with{select_label: true, select_for: 'inquiry_type', select_name: 'inquiry_type', select_id: 'inquiry_type', select_required: true, select_label_name: 'Tipo de Consulta' | translate, select_aria_label: 'Tipo de Consulta' | translate } %}
+								{% embed "snipplets/forms/form-select.tpl" with{select_label: true, select_for: 'inquiry_type', select_name: 'inquiry_type', select_id: 'inquiry_type', select_required: true, select_label_name: 'Tipo de Consulta *' | translate, select_aria_label: 'Tipo de Consulta' | translate } %}
 									{% block select_options %}
 										<option value="">{{ 'Seleccioná un motivo...' | translate }}</option>
 										<option value="asesoria">{{ 'Asesoramiento técnico para elegir una máquina' | translate }}</option>
@@ -127,7 +127,7 @@
 
 								{# Message textarea #}
 
-								{% embed "snipplets/forms/form-input.tpl" with{text_area: true, input_for: 'message', input_name: 'message', input_id: 'message', input_required: true, input_rows: '4', input_label_text: 'Mensaje o Detalle del Requerimiento' | translate, input_placeholder: 'Detallanos el trabajo a realizar, potencia requerida o equipo de interés...' | translate } %}
+								{% embed "snipplets/forms/form-input.tpl" with{text_area: true, input_for: 'message', input_name: 'message', input_id: 'message', input_required: true, input_rows: '4', input_label_text: 'Mensaje o Detalle del Requerimiento *' | translate, input_placeholder: 'Detallanos el trabajo a realizar, potencia requerida o equipo de interés...' | translate } %}
 								{% endembed %}
 
 							{% endif %}
@@ -140,19 +140,17 @@
 			<div class="col-md-5">
 				<div class="contact-branches-col">
 					<h3 class="contact-branches-title">
-						{% include "snipplets/svg/map-marker-alt.tpl" with {svg_custom_class: "icon-inline mr-2"} %}
+						<i class="fa-solid fa-location-dot text-primary mr-2"></i>
 						{{ "Sucursal y Punto de Retiro" | translate }}
 					</h3>
 
 					<div class="branch-card">
 						<h4>
-							{% include "snipplets/svg/store.tpl" with {svg_custom_class: "icon-inline mr-2"} %}
+							<i class="fa-solid fa-store text-primary mr-2"></i>
 							{{ "Sucursal HMC HUB — Santa Rosa" | translate }}
 						</h4>
-						{% if store.address %}
-							<p class="branch-card-line"><strong>{{ 'Dirección:' | translate }}</strong> {{ store.address }}</p>
-						{% endif %}
-						<p class="branch-card-line"><strong>{{ 'Horarios:' | translate }}</strong> {{ 'Lunes a Viernes de 8:00 a 18:00 hs | Sábados de 8:30 a 13:00 hs.' | translate }}</p>
+						<p class="branch-card-line"><strong>{{ 'Dirección:' | translate }}</strong> {{ store.address ? store.address : 'Av. Santiago Marzo (Norte) 171, Santa Rosa, La Pampa, Argentina.' }}</p>
+						<p class="branch-card-line"><strong>{{ 'Horarios:' | translate }}</strong> {{ 'Lunes a Viernes de 8:30 a 12:30 hs. y de 15:30 a 19:30 hs. | Sábados de 8:30 a 13:00 hs.' | translate }}</p>
 						<p class="branch-card-highlight">{{ '✓ Showroom de maquinaria, taller oficial y retiro con prueba de arranque sin cargo.' | translate }}</p>
 						<div class="branch-map">
 							<iframe
@@ -163,15 +161,15 @@
 								aria-label="{{ 'Mapa con la ubicación de la sucursal HMC HUB en Santa Rosa, La Pampa' | translate }}">
 							</iframe>
 						</div>
-						<a href="https://www.google.com/maps/dir/?api=1&destination=Av.+Santiago+Marzo+(Norte)+171,+Santa+Rosa,+La+Pampa,+Argentina" target="_blank" class="branch-map-directions">
-							{% include "snipplets/svg/arrow-right.tpl" with {svg_custom_class: "icon-inline"} %}
+						<a href="https://www.google.com/maps/dir/?api=1&destination=Av.+Santiago+Marzo+(Norte)+171,+Santa+Rosa,+La+Pampa,+Argentina" target="_blank" rel="noopener noreferrer" class="branch-map-directions">
+							<i class="fa-solid fa-diamond-turn-right mr-1"></i>
 							{{ "Cómo llegar" | translate }}
 						</a>
 					</div>
 
 					<div class="contact-trust-callout">
 						<h5>
-							{% include "snipplets/svg/security.tpl" with {svg_custom_class: "icon-inline mr-2"} %}
+							<i class="fa-solid fa-shield-halved text-primary mr-2"></i>
 							{{ "Respaldo de fábrica garantizado" | translate }}
 						</h5>
 						<p>{{ "Todos los equipos se entregan con factura oficial, garantía registrada y número de serie homologado por el fabricante." | translate }}</p>
@@ -194,21 +192,16 @@
 		<section class="faq-accordion">
 			<div class="section-header" style="margin-bottom: 24px;">
 				<div class="section-tag">
-					{% include "snipplets/svg/info-circle.tpl" with {svg_custom_class: "icon-inline"} %}
+					<i class="fa-solid fa-circle-question mr-1"></i>
 					{{ "Dudas Frecuentes" | translate }}
 				</div>
 				<h2 class="section-title faq-title">{{ "Preguntas Frecuentes" | translate }}</h2>
 			</div>
 
 			<div class="faq-item js-accordion-container">
-				<a href="#" class="faq-question js-accordion-toggle">
+				<a href="#" class="faq-question js-accordion-toggle" role="button" aria-expanded="false">
 					<span>{{ "¿Los equipos se entregan listos para usar o hay que armarlos?" | translate }}</span>
-					<span class="js-accordion-toggle-inactive">
-						{% include "snipplets/svg/chevron-down.tpl" with {svg_custom_class: "icon-inline"} %}
-					</span>
-					<span class="js-accordion-toggle-active" style="display: none;">
-						{% include "snipplets/svg/chevron-up.tpl" with {svg_custom_class: "icon-inline"} %}
-					</span>
+					<i class="fa-solid fa-chevron-down faq-chevron"></i>
 				</a>
 				<div class="faq-answer js-accordion-content" style="display: none;">
 					{{ "En los retiros por sucursal entregamos las máquinas armadas, con fluidos revisados y prueba de marcha sin costo. Para envíos al interior, viajan en su caja original de fábrica con manuales en español y ofrecemos asistencia remota guiada por videollamada para el primer encendido." | translate }}
@@ -216,14 +209,9 @@
 			</div>
 
 			<div class="faq-item js-accordion-container">
-				<a href="#" class="faq-question js-accordion-toggle">
+				<a href="#" class="faq-question js-accordion-toggle" role="button" aria-expanded="false">
 					<span>{{ "¿Hacen envíos de generadores y maquinaria pesada a todo el país?" | translate }}</span>
-					<span class="js-accordion-toggle-inactive">
-						{% include "snipplets/svg/chevron-down.tpl" with {svg_custom_class: "icon-inline"} %}
-					</span>
-					<span class="js-accordion-toggle-active" style="display: none;">
-						{% include "snipplets/svg/chevron-up.tpl" with {svg_custom_class: "icon-inline"} %}
-					</span>
+					<i class="fa-solid fa-chevron-down faq-chevron"></i>
 				</a>
 				<div class="faq-answer js-accordion-content" style="display: none;">
 					{{ "Sí. Coordinamos envíos paletizados y asegurados a través de expresos y transportes de carga con seguimiento en tiempo real hasta tu obra o depósito. Superando los $300.000 el envío es gratis en productos seleccionados." | translate }}
@@ -231,14 +219,9 @@
 			</div>
 
 			<div class="faq-item js-accordion-container">
-				<a href="#" class="faq-question js-accordion-toggle">
+				<a href="#" class="faq-question js-accordion-toggle" role="button" aria-expanded="false">
 					<span>{{ "¿Cómo solicito Factura A para mi empresa o CUIT?" | translate }}</span>
-					<span class="js-accordion-toggle-inactive">
-						{% include "snipplets/svg/chevron-down.tpl" with {svg_custom_class: "icon-inline"} %}
-					</span>
-					<span class="js-accordion-toggle-active" style="display: none;">
-						{% include "snipplets/svg/chevron-up.tpl" with {svg_custom_class: "icon-inline"} %}
-					</span>
+					<i class="fa-solid fa-chevron-down faq-chevron"></i>
 				</a>
 				<div class="faq-answer js-accordion-content" style="display: none;">
 					{{ "Al momento de realizar la compra, simplemente ingresá tu CUIT y Razón Social en el campo de facturación. La factura electrónica A se genera automáticamente y se envía a tu correo en formato PDF." | translate }}
@@ -246,14 +229,9 @@
 			</div>
 
 			<div class="faq-item js-accordion-container">
-				<a href="#" class="faq-question js-accordion-toggle">
+				<a href="#" class="faq-question js-accordion-toggle" role="button" aria-expanded="false">
 					<span>{{ "¿Cuentan con repuestos originales de las marcas que comercializan?" | translate }}</span>
-					<span class="js-accordion-toggle-inactive">
-						{% include "snipplets/svg/chevron-down.tpl" with {svg_custom_class: "icon-inline"} %}
-					</span>
-					<span class="js-accordion-toggle-active" style="display: none;">
-						{% include "snipplets/svg/chevron-up.tpl" with {svg_custom_class: "icon-inline"} %}
-					</span>
+					<i class="fa-solid fa-chevron-down faq-chevron"></i>
 				</a>
 				<div class="faq-answer js-accordion-content" style="display: none;">
 					{{ "Sí, somos distribuidores y centro de servicio oficial de STIHL, HONDA, HUSQVARNA, BOSCH, DEWALT y marcas asociadas. Disponemos de stock permanente de espadas, cadenas, bujías, filtros, cuchillas y lubricantes originales." | translate }}
@@ -262,4 +240,4 @@
 		</section>
 
 	</div>
-</section>
+</main>
