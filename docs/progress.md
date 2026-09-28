@@ -665,6 +665,9 @@ Objetivo: Trasladar la experiencia integral de contacto y postventa desde `bocet
 - [x] **7.5. Estilos SCSS & Optimización Mobile (`web_ftp/static/css/style-async.scss`)**:
   - Diseño desktop en 2 columnas (1.2fr / 1fr equivalente a `col-md-7` y `col-md-5`).
   - Mobile: espaciado vertical de 54px, gap de 28px entre formulario y sucursal, tarjetas acolchadas y tap targets $\ge 44$px.
+- [x] **7.6. Ajuste de Paridad 1-a-1 & Soporte de Fotos Reales en Instagram**:
+  - Contacto: Sincronización exacta de markup con `boceto_web/contact.html`, miga de pan (`.breadcrumbs-section`), clases ergonómicas de formulario (`.form-group-hmc`, `.form-input-hmc`, `.form-select-hmc`) con fondo blanco `#FFF`, borde `#E2E8F0` y foco institucional verde.
+  - Instagram Feed: Se agregaron 6 slots de imágenes configurables (`insta_custom_01.jpg` a `06.jpg`) y enlaces en `config/settings.txt` y `snipplets/home/home-instafeed.tpl`. Permite cargar fotos reales directamente desde el personalizador de Tiendanube sin depender exclusivamente de la vigencia del token de la API de Meta.
 
 ---
 
