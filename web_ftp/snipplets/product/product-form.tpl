@@ -293,7 +293,7 @@
                 <div class="col-12 mt-3">
                     <a href="https://wa.me/{{ wa_num }}?text={{ wa_msg }}" target="_blank" class="product-whatsapp-advice btn-block" rel="noopener noreferrer">
                         <i class="fa-brands fa-whatsapp font-big"></i>
-                        <span>{{ 'Consultar con un Técnico Especialista' | translate }}</span>
+                        <span>{{ 'Escribinos al WhatsApp por cualquier duda' | translate }}</span>
                     </a>
                 </div>
                 <div class="col-12 mt-3">

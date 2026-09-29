@@ -1,13 +1,13 @@
 <div class="product-tabs-wrapper">
     <div class="product-tabs-header">
         <button type="button" class="product-tab-btn active js-product-tab-btn" data-tab="tabDesc">
-            <i class="fa-solid fa-circle-info"></i> {{ "Descripción & Aplicaciones" | translate }}
+            {{ "Descripción y Aplicaciones" | translate }}
         </button>
         <button type="button" class="product-tab-btn js-product-tab-btn" data-tab="tabWarranty">
-            <i class="fa-solid fa-award"></i> {{ "Garantía & Respaldo Oficial" | translate }}
+            {{ "Garantía y Respaldo Oficial" | translate }}
         </button>
-        <button type="button" class="product-tab-btn js-product-tab-btn" data-tab="tabReviews">
-            <i class="fa-solid fa-star"></i> {{ "Opiniones de Clientes" | translate }}
+        <button type="button" class="product-tab-btn js-product-tab-btn d-none" data-tab="tabReviews" id="tabReviewsBtn">
+            {{ "Opiniones de Clientes" | translate }}
         </button>
     </div>
 
@@ -55,45 +55,40 @@
             </ul>
         </div>
 
-        <!-- Tab 3: Reviews & Trust -->
-        <div class="product-tab-panel js-product-tab-panel" id="tabReviews">
+        <!-- Tab 3: Reviews & Trust (Only shown if reviews app is active) -->
+        <div class="product-tab-panel js-product-tab-panel d-none" id="tabReviews">
             <div id="reviewsapp"></div>
-            <div class="product-verified-reviews-box p-3 rounded bg-light mb-3">
-                <div class="d-flex align-items-center gap-3 mb-3 pb-3 border-bottom">
-                    <div class="text-center pr-3 border-right">
-                        <div class="h1 font-weight-bold mb-0 text-dark">5.0</div>
-                        <div class="text-warning font-small">
-                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                        </div>
-                        <span class="font-smallest opacity-60">{{ "Opiniones verificadas" | translate }}</span>
-                    </div>
-                    <div class="pl-2">
-                        <p class="font-small text-muted mb-0">
-                            {{ "Respaldado por la satisfacción de nuestros clientes en obra, campo y talleres de todo el país." | translate }}
-                        </p>
-                    </div>
-                </div>
-                <div class="d-flex flex-column gap-2">
-                    <div class="p-3 bg-white rounded border mb-2">
-                        <div class="d-flex justify-content-between align-items-center mb-1">
-                            <strong class="font-small">Ing. Marcelo R. (Contratista)</strong>
-                            <div class="text-warning font-smallest">
-                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                            </div>
-                        </div>
-                        <p class="font-smallest text-muted mb-0">"Excelente equipo y atención. La puesta en marcha y la orientación técnica nos ahorraron mucho tiempo."</p>
-                    </div>
-                    <div class="p-3 bg-white rounded border">
-                        <div class="d-flex justify-content-between align-items-center mb-1">
-                            <strong class="font-small">Daniel G. (Mantenimiento Agropecuario)</strong>
-                            <div class="text-warning font-smallest">
-                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-                            </div>
-                        </div>
-                        <p class="font-smallest text-muted mb-0">"Muy buen asesoramiento previo a la compra. El equipo respondió con potencia continua."</p>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>
+
+<script>
+(function() {
+    function initProductTabsReviewsCheck() {
+        var reviewsApp = document.getElementById('reviewsapp');
+        var reviewsBtn = document.getElementById('tabReviewsBtn');
+        var reviewsPanel = document.getElementById('tabReviews');
+
+        if (reviewsApp && reviewsBtn && reviewsPanel) {
+            function checkReviewsApp() {
+                var hasContent = reviewsApp.children.length > 0 || (reviewsApp.textContent && reviewsApp.textContent.trim().length > 0);
+                if (hasContent) {
+                    reviewsBtn.classList.remove('d-none');
+                    reviewsPanel.classList.remove('d-none');
+                }
+            }
+            checkReviewsApp();
+            try {
+                var observer = new MutationObserver(checkReviewsApp);
+                observer.observe(reviewsApp, { childList: true, subtree: true });
+            } catch(e) {}
+        }
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initProductTabsReviewsCheck);
+    } else {
+        initProductTabsReviewsCheck();
+    }
+})();
+</script>
