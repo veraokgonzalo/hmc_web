@@ -766,6 +766,11 @@ Fuente: `docs/feedback_cliente.md` §7 y `docs/specs.md` ("Ajustes de Feedback d
   - Sincronización de estado activo de navegación en `store.js.tpl` para resaltar el botón de Marcas en la navbar al visitar `/marcas`.
 - [x] **Despliegue FTP Exitoso**:
   - Desplegado a la tienda en vivo con `tiendanube theme ftp push --yes` (1 archivo creado, 7 actualizados, 309 sin cambios).
+- [x] **Intercepción de Categoría Raíz `/marcas` (`templates/category.tpl` & `templates/page.tpl`)**:
+  - En la base de datos de Tiendanube existe una categoría padre de nivel superior llamada `MARCAS` (a la que pertenecen más de 3.390 productos bajo `MARCAS > [Marca]`), por lo que el despachador de URLs de Tiendanube enrutaba `/marcas` hacia `category.tpl`.
+  - Se configuró la intercepción en `templates/category.tpl`: al detectar la categoría raíz `MARCAS` (`category.handle in ['marcas', 'brands']` y `not parent_category`), se delega e incluye de inmediato `templates/page.brands.tpl` en lugar de listar los 3.397 productos sueltos.
+  - Las subcategorías individuales (por ej. `/marcas/bosch` o `/marcas/niwa`) conservan intacto su listado de productos y filtros correspondientes.
+  - Se expandió la condición en `templates/page.tpl` para contemplar variantes de handle y títulos generados en el CMS (`marcas`, `marcas-1`, `directorio-marcas`, etc.).
 
 
 
