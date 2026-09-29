@@ -22,9 +22,8 @@
   {% set cat_name = cat.name %}
   {% set cat_count = cat.count %}
   {% for db_cat in categories %}
-    {% if db_cat.handle == cat.slug or (db_cat.url and db_cat.url | trim('/') | split('/') | last == cat.slug) %}
-      {% set cat_url = db_cat.url %}
-      {% set cat_name = db_cat.name %}
+    {% set is_root = not db_cat.parent or db_cat.parent == 0 or not db_cat.parent_id or db_cat.parent_id == 0 %}
+    {% if is_root and db_cat.handle == cat.slug %}
       {% if db_cat.products_count and db_cat.products_count > 0 %}
         {% set cat_count = db_cat.products_count ~ ' ' ~ ('productos' | translate) %}
       {% endif %}

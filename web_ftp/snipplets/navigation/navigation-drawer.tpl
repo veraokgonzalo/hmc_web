@@ -56,8 +56,8 @@
         {% set cat_url = cat.link %}
         {% set cat_name = cat.name %}
         {% for db_cat in categories %}
-          {% if db_cat.handle == cat.slug or (db_cat.url and db_cat.url | trim('/') | split('/') | last == cat.slug) %}
-            {% set cat_url = db_cat.url %}
+          {% set is_root = not db_cat.parent or db_cat.parent == 0 or not db_cat.parent_id or db_cat.parent_id == 0 %}
+          {% if is_root and db_cat.handle == cat.slug %}
             {% set cat_name = db_cat.name %}
           {% endif %}
         {% endfor %}
