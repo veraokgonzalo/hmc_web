@@ -2539,6 +2539,11 @@ footer {
   }
 }
 
+.section-padding {
+  padding-top: 80px;
+  padding-bottom: 80px;
+}
+
 .section-header {
   text-align: center;
   max-width: 760px;
@@ -6026,6 +6031,7 @@ footer {
    -------------------------------------------------------------------------- */
 .instafeed-section {
   background-color: var(--color-gray-ultra-light, #F8F9FA);
+  padding: 92px 0;
 }
 
 .insta-grid {
@@ -6086,7 +6092,7 @@ footer {
 
 @media (max-width: 768px) {
   .instafeed-section {
-    padding: 54px 0;
+    padding: 68px 0;
   }
   .insta-grid {
     grid-template-columns: repeat(3, 1fr);
