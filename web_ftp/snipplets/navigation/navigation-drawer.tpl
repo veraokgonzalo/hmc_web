@@ -77,7 +77,7 @@
       {% for brand in official_brands %}
         <a href="{{ store.products_url | default('/productos') }}?brand={{ brand | url_encode }}" class="mobile-subnav-link">{{ brand }}</a>
       {% endfor %}
-      <a href="{{ store.products_url | default('/productos') }}?brand_filter=true" class="mobile-subnav-link mobile-subnav-link-cta">
+      <a href="/marcas" class="mobile-subnav-link mobile-subnav-link-cta">
         <span>{{ 'Todas las marcas →' | translate }}</span>
       </a>
     </div>

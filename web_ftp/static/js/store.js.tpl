@@ -3746,7 +3746,7 @@ stream_videos.forEach(function(player){
                 isActive = true;
             } else if (!isOffers && hasCategory && (href.indexOf("categoria") !== -1 || href.indexOf("category") !== -1)) {
                 isActive = true;
-            } else if (!isOffers && hasBrand && (href.indexOf("marca") !== -1 || href.indexOf("brand") !== -1)) {
+            } else if (!isOffers && (hasBrand || currentPath.indexOf("marcas") !== -1 || currentPath.indexOf("brands") !== -1) && (href.indexOf("marca") !== -1 || href.indexOf("brand") !== -1)) {
                 isActive = true;
             } else if (!isOffers && !hasCategory && !hasBrand) {
                 if (isHomePath && isHomeHref) {
@@ -3873,6 +3873,171 @@ stream_videos.forEach(function(player){
         window.addEventListener("scroll", checkStickyBuyBar, { passive: true });
         window.addEventListener("resize", checkStickyBuyBar, { passive: true });
         checkStickyBuyBar();
+    }
+
+    /* ==========================================================================
+       HMC HUB Phase 5.2: Brands Directory Page (/marcas) Interactive Filtering
+       ========================================================================== */
+    var brandsGrid = document.getElementById("brandsAlphabetGrid");
+    if (brandsGrid) {
+        var searchInput = document.getElementById("brandsPageSearchInput");
+        var clearBtn = document.getElementById("brandsPageClearSearch");
+        var alphaBtns = document.querySelectorAll(".js-brands-page-alpha-bar .alpha-btn");
+        var countPills = document.querySelectorAll(".js-brands-page-count");
+        var emptyState = document.getElementById("brandsEmptyState");
+        var emptyQuerySpan = emptyState ? emptyState.querySelector(".js-empty-query") : null;
+        var resetBtn = document.getElementById("btnResetBrandsFilter");
+        var groupCards = Array.prototype.slice.call(document.querySelectorAll(".js-brand-group-card"));
+
+        var currentLetter = "ALL";
+        var currentSearch = "";
+
+        function filterBrands(searchText, letter) {
+            var query = (searchText || "").trim().toLowerCase();
+            var targetLetter = letter || "ALL";
+            var totalVisible = 0;
+
+            groupCards.forEach(function(card) {
+                var cardLetter = card.getAttribute("data-letter");
+                var matchesLetter = false;
+
+                if (targetLetter === "ALL") {
+                    matchesLetter = true;
+                } else if (targetLetter === "#" || targetLetter === "0-9") {
+                    matchesLetter = (cardLetter === "#" || /^\d/.test(cardLetter));
+                } else {
+                    matchesLetter = (cardLetter === targetLetter);
+                }
+
+                if (!matchesLetter) {
+                    card.style.display = "none";
+                    return;
+                }
+
+                var items = card.querySelectorAll(".js-brand-item");
+                var visibleInGroup = 0;
+
+                for (var i = 0; i < items.length; i++) {
+                    var item = items[i];
+                    var brandName = item.getAttribute("data-brand") || item.textContent.trim().toLowerCase();
+                    if (!query || brandName.indexOf(query) !== -1) {
+                        item.style.display = "";
+                        visibleInGroup++;
+                    } else {
+                        item.style.display = "none";
+                    }
+                }
+
+                if (visibleInGroup > 0) {
+                    card.style.display = "";
+                    var countBadge = card.querySelector(".js-brand-group-count");
+                    if (countBadge) {
+                        countBadge.textContent = visibleInGroup;
+                    }
+                    totalVisible += visibleInGroup;
+                } else {
+                    card.style.display = "none";
+                }
+            });
+
+            // Update Counter
+            countPills.forEach(function(pill) {
+                pill.innerHTML = "<strong>" + totalVisible + "</strong> " + (totalVisible === 1 ? "marca disponible" : "marcas disponibles");
+            });
+
+            // Empty State
+            if (emptyState) {
+                if (totalVisible === 0) {
+                    emptyState.style.display = "block";
+                    if (emptyQuerySpan) {
+                        emptyQuerySpan.textContent = query || targetLetter;
+                    }
+                } else {
+                    emptyState.style.display = "none";
+                }
+            }
+        }
+
+        if (searchInput) {
+            searchInput.addEventListener("input", function(e) {
+                currentSearch = e.target.value;
+                if (clearBtn) {
+                    clearBtn.style.display = currentSearch.length > 0 ? "flex" : "none";
+                }
+                // Reset active letter to ALL when typing
+                for (var i = 0; i < alphaBtns.length; i++) {
+                    alphaBtns[i].classList.remove("active");
+                }
+                var allBtn = document.querySelector(".js-brands-page-alpha-bar .alpha-btn[data-letter='ALL']");
+                if (allBtn) allBtn.classList.add("active");
+                currentLetter = "ALL";
+
+                filterBrands(currentSearch, "ALL");
+            });
+        }
+
+        if (clearBtn) {
+            clearBtn.addEventListener("click", function() {
+                if (searchInput) {
+                    searchInput.value = "";
+                    searchInput.focus();
+                }
+                clearBtn.style.display = "none";
+                currentSearch = "";
+                filterBrands("", currentLetter);
+            });
+        }
+
+        for (var i = 0; i < alphaBtns.length; i++) {
+            (function(btn) {
+                btn.addEventListener("click", function() {
+                    for (var j = 0; j < alphaBtns.length; j++) {
+                        alphaBtns[j].classList.remove("active");
+                    }
+                    btn.classList.add("active");
+                    currentLetter = btn.getAttribute("data-letter");
+                    filterBrands(currentSearch, currentLetter);
+                });
+            })(alphaBtns[i]);
+        }
+
+        if (resetBtn) {
+            resetBtn.addEventListener("click", function() {
+                if (searchInput) searchInput.value = "";
+                if (clearBtn) clearBtn.style.display = "none";
+                currentSearch = "";
+                currentLetter = "ALL";
+                for (var j = 0; j < alphaBtns.length; j++) {
+                    alphaBtns[j].classList.remove("active");
+                }
+                var allBtn = document.querySelector(".js-brands-page-alpha-bar .alpha-btn[data-letter='ALL']");
+                if (allBtn) allBtn.classList.add("active");
+                filterBrands("", "ALL");
+            });
+        }
+
+        // Deep linking support (/marcas?q=bosch or /marcas?letter=B)
+        try {
+            var brandsUrlParams = new URLSearchParams(window.location.search);
+            var initialSearch = brandsUrlParams.get("q") || brandsUrlParams.get("search");
+            var initialLetter = brandsUrlParams.get("letter");
+            if (initialSearch) {
+                if (searchInput) searchInput.value = initialSearch;
+                if (clearBtn) clearBtn.style.display = "flex";
+                currentSearch = initialSearch;
+                filterBrands(currentSearch, "ALL");
+            } else if (initialLetter) {
+                currentLetter = initialLetter.toUpperCase();
+                for (var k = 0; k < alphaBtns.length; k++) {
+                    if (alphaBtns[k].getAttribute("data-letter") === currentLetter) {
+                        alphaBtns[k].classList.add("active");
+                    } else {
+                        alphaBtns[k].classList.remove("active");
+                    }
+                }
+                filterBrands("", currentLetter);
+            }
+        } catch(e) {}
     }
 
 });

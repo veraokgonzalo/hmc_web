@@ -1,5 +1,7 @@
 {% if page.handle in ['nosotros', 'quienes-somos', 'sobre-nosotros', 'about', 'empresa'] or template == 'page.about' %}
 	{% include 'templates/page.about.tpl' %}
+{% elseif page.handle in ['marcas', 'brands', 'fabricantes', 'directorio-marcas'] or template == 'page.brands' %}
+	{% include 'templates/page.brands.tpl' %}
 {% else %}
 	{% embed "snipplets/page-header.tpl" %}
 		{% block page_header_text %}{{ page.name }}{% endblock page_header_text %}

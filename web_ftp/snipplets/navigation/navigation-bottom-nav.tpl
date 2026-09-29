@@ -13,7 +13,7 @@
     <span>{{ 'Categorías' | translate }}</span>
   </a>
 
-  <a href="{{ store.products_url | default('/productos') }}?brand_filter=true" class="mobile-nav-btn" data-page="brands">
+  <a href="/marcas" class="mobile-nav-btn" data-page="brands">
     <i class="fa-solid fa-certificate"></i>
     <span>{{ 'Marcas' | translate }}</span>
   </a>

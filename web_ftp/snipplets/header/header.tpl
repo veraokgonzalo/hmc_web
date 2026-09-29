@@ -125,7 +125,7 @@
 
         <!-- 3. Marcas Dropdown -->
         <li class="nav-item has-mega-dropdown">
-          <a href="{{ store.products_url | default('/productos') }}?brand_filter=true" class="nav-link">
+          <a href="/marcas" class="nav-link">
             {{ 'Marcas' | translate }} <i class="fa-solid fa-chevron-down" style="font-size: 0.75em; margin-left: 2px;"></i>
           </a>
           
@@ -156,7 +156,7 @@
                   <i class="fa-solid fa-layer-group text-primary"></i>
                   <span>Representamos a más de <strong>100 fabricantes líderes</strong> con stock y repuestos.</span>
                 </div>
-                <a href="{{ store.products_url | default('/productos') }}?brand_filter=true" class="btn btn-primary btn-sm btn-explore-brands">
+                <a href="/marcas" class="btn btn-primary btn-sm btn-explore-brands">
                   {{ 'Todas las marcas →' | translate }}
                 </a>
               </div>
