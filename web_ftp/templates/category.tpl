@@ -1,4 +1,5 @@
-{% set has_filters_available = products and has_filters_enabled and (filter_categories is not empty or product_filters is not empty or category) %}
+{% set is_real_category = category and category.id and category.handle not in ['productos', 'todos-los-productos'] and category.name | lower not in ['productos', 'todos los productos', 'todo el catalogo', 'catalogo'] %}
+{% set has_filters_available = products and has_filters_enabled and (filter_categories is not empty or product_filters is not empty or is_real_category) %}
 
 {# Only remove this if you want to take away the theme onboarding advices #}
 {% set show_help = not has_products %}
@@ -21,28 +22,17 @@
 {% elseif not show_help %}
 
 {% set category_banner = (category.images is not empty) or ("banner-products.jpg" | has_custom_image) %}
-{% set has_category_description_without_banner = not category_banner and category.description %}
-{% set page_header_classes = has_category_description_without_banner ? 'pt-3 pt-md-4' : '' %}
-{% set page_header_padding = has_category_description_without_banner ? false : true %}
 
 {% if category_banner %}
     {% include 'snipplets/category-banner.tpl' %}
 {% endif %}
 
-<div class="background-secondary mb-md-3">
+<div class="catalog-breadcrumbs-bar background-secondary py-2 mb-md-3">
 	<div class="container">
-		<div class="row align-items{% if category_banner %}-center{% else %}-end{% endif %}">
+		<div class="row align-items-center">
 			<div class="col">
-				{% if category_banner %}
-					{% include 'snipplets/breadcrumbs.tpl' with {breadcrumbs_custom_class: 'mb-0' } %}
-				{% else %}
-					{% embed "snipplets/page-header.tpl" with {container: false, padding: page_header_padding, page_header_class: page_header_classes} %}
-					    {% block page_header_text %}{{ category ? category.name : ('Productos' | translate) }}{% endblock page_header_text %}
-					{% endembed %}
-					{% if category.description %}
-						<p class="mt-2 mb-md-4 mb-3">{{ category.description }}</p>
-					{% endif %}
-				{% endif %}
+				{% include 'snipplets/breadcrumbs.tpl' with {breadcrumbs_custom_class: 'mb-0' } %}
+				<h1 class="sr-only">{{ is_real_category ? category.name : ('Productos' | translate) }}</h1>
 			</div>
 		</div>
 	</div>

@@ -2,35 +2,51 @@
 
     {# Applied filters chips #}
 
-    {% if has_applied_filters or category %}
+    {% set is_real_cat = category and category.id and category.handle not in ['productos', 'todos-los-productos'] and category.name | lower not in ['productos', 'todos los productos', 'todo el catalogo', 'catalogo'] %}
+
+    {% if has_applied_filters or is_real_cat %}
         <div class="active-filter-chips d-flex flex-wrap align-items-center">
             <span class="font-weight-bold font-small d-none d-md-inline mr-2 text-muted">{{ 'Filtros activos:' | translate }}</span>
 
-            {# Active Category Chip #}
-            {% if category %}
-                <a href="/productos" class="chip filter-chip category-active-chip" title="{{ 'Quitar categoría y ver todo el catálogo' | translate }}">
-                    <span>{{ 'Categoría:' | translate }} <strong>{{ category.name }}</strong></span>
-                    <i class="fa-solid fa-xmark ml-2 chip-remove-icon"></i>
-                </a>
+            {# 1. Active Category Chips (Hierarchical: Parent + Subcategory) #}
+            {% if is_real_cat %}
+                {% if parent_category and parent_category.id != 0 %}
+                    {# Parent Category Chip (removes both, goes to /productos) #}
+                    <a href="/productos" class="chip filter-chip category-active-chip" title="{{ 'Quitar categoría superior' | translate }}">
+                        <span>{{ 'Categoría:' | translate }} <strong>{{ parent_category.name }}</strong></span>
+                        <i class="fa-solid fa-xmark ml-2 chip-remove-icon"></i>
+                    </a>
+                    {# Subcategory Chip (removes subcategory, returns to parent) #}
+                    <a href="{{ parent_category.url }}" class="chip filter-chip category-active-chip" title="{{ 'Quitar subcategoría y volver a' | translate }} {{ parent_category.name }}">
+                        <span>{{ 'Subcategoría:' | translate }} <strong>{{ category.name }}</strong></span>
+                        <i class="fa-solid fa-xmark ml-2 chip-remove-icon"></i>
+                    </a>
+                {% else %}
+                    {# Single Root Category Chip #}
+                    <a href="/productos" class="chip filter-chip category-active-chip" title="{{ 'Quitar categoría y ver todo el catálogo' | translate }}">
+                        <span>{{ 'Categoría:' | translate }} <strong>{{ category.name }}</strong></span>
+                        <i class="fa-solid fa-xmark ml-2 chip-remove-icon"></i>
+                    </a>
+                {% endif %}
             {% endif %}
 
-            {# Active Attribute Filters (Brand, Price, etc.) #}
+            {# 2. Active Attribute Filters (Brand, Price, etc.) #}
             {% if has_applied_filters %}
                 {% for product_filter in product_filters %}
                     {% for value in product_filter.values %}
                         {% if value.selected %}
                             <button class="js-remove-filter chip filter-chip" data-filter-name="{{ product_filter.key }}" data-filter-value="{{ value.name }}" data-component="filter.pill-{{ product_filter.type }}" data-component-value="{{ product_filter.key }}" title="{{ 'Eliminar filtro' | translate }}">
                                 <span>{{ value.pill_label }}</span>
-                                {% include "snipplets/svg/times.tpl" with {svg_custom_class: "icon-inline chip-remove-icon ml-1"} %}
+                                <i class="fa-solid fa-xmark ml-2 chip-remove-icon"></i>
                             </button>
                         {% endif %}
                     {% endfor %}
                 {% endfor %}
             {% endif %}
 
-            {# Clear All / Reset Button #}
-            {% if category %}
-                <a href="/productos" class="clear-filters-btn btn-link d-inline-block ml-md-2 mt-1 mt-md-0 font-small" title="{{ 'Limpiar categoría y filtros' | translate }}">
+            {# 3. Clear All / Reset Button #}
+            {% if is_real_cat %}
+                <a href="/productos" class="clear-filters-btn btn-link d-inline-block ml-md-2 mt-1 mt-md-0 font-small" title="{{ 'Limpiar todo y ver el catálogo completo' | translate }}">
                     <i class="fa-solid fa-rotate-left mr-1"></i> {{ 'Limpiar todo' | translate }}
                 </a>
             {% else %}

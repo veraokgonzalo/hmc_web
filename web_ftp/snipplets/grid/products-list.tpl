@@ -24,7 +24,8 @@
             </div>
         </div>
 
-        {% if has_applied_filters or category %}
+        {% set is_real_cat = category and category.id and category.handle not in ['productos', 'todos-los-productos'] and category.name | lower not in ['productos', 'todos los productos', 'todo el catalogo', 'catalogo'] %}
+        {% if has_applied_filters or is_real_cat %}
             <div class="mb-3 d-flex justify-content-start align-items-center visible-when-content-ready">
                 {% include "snipplets/grid/filters.tpl" with {applied_filters: true} %}
             </div>

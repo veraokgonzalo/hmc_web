@@ -5060,34 +5060,65 @@ footer {
 
 /* 3. Active Filter Chips */
 .active-filter-chips {
-  gap: 8px;
-  margin-bottom: 16px;
-}
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 8px !important;
+  margin-bottom: 16px !important;
 
-.filter-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: rgba(63, 170, 71, 0.1) !important;
-  color: #27672d !important;
-  border: 1px solid rgba(63, 170, 71, 0.3) !important;
-  padding: 6px 14px !important;
-  border-radius: 9999px !important;
-  font-size: 0.82rem !important;
-  font-weight: 600 !important;
-  transition: all 0.2s ease;
-  cursor: pointer;
+  .chip, .filter-chip {
+    position: relative !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    padding: 6px 14px !important;
+    border-radius: 9999px !important;
+    font-size: 0.82rem !important;
+    font-weight: 600 !important;
+    line-height: 1.2 !important;
+    white-space: nowrap !important;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin: 3px 0 !important;
 
-  &:hover {
-    background: rgba(63, 170, 71, 0.2) !important;
-    border-color: rgba(63, 170, 71, 0.5) !important;
-    color: #1a491f !important;
+    span {
+      display: inline-flex !important;
+      align-items: center !important;
+    }
+
+    .chip-remove-icon {
+      position: static !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      margin-left: 6px !important;
+      font-size: 12px !important;
+      line-height: 1 !important;
+      width: auto !important;
+      height: auto !important;
+      padding: 0 !important;
+      flex-shrink: 0 !important;
+      opacity: 0.75;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+    }
+
+    &:hover .chip-remove-icon {
+      opacity: 1 !important;
+      transform: scale(1.15);
+    }
   }
 
-  .chip-remove-icon {
-    width: 12px;
-    height: 12px;
-    opacity: 0.75;
+  /* Attribute filter chips (e.g. Brands) */
+  .js-remove-filter {
+    background: rgba(63, 170, 71, 0.1) !important;
+    color: #27672d !important;
+    border: 1px solid rgba(63, 170, 71, 0.3) !important;
+
+    &:hover {
+      background: rgba(63, 170, 71, 0.2) !important;
+      border-color: rgba(63, 170, 71, 0.5) !important;
+      color: #1a491f !important;
+    }
   }
 }
 
@@ -5113,7 +5144,7 @@ footer {
 
     .chip-remove-icon {
       color: #dc2626 !important;
-      opacity: 1;
+      opacity: 1 !important;
     }
   }
 }
@@ -5179,6 +5210,93 @@ footer {
     background: rgba(220, 38, 38, 0.08);
     color: #b91c1c !important;
     text-decoration: none;
+  }
+}
+
+/* ==========================================================================
+   Modern Green Checkbox for Brand & Attribute Filters (Replacing Black Square)
+   ========================================================================== */
+.checkbox-container.js-filter-checkbox,
+.checkbox-container {
+  display: flex !important;
+  align-items: center !important;
+  cursor: pointer !important;
+  margin-bottom: 8px !important;
+  user-select: none !important;
+
+  .checkbox {
+    position: relative !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    padding-left: 28px !important;
+    min-height: 22px !important;
+    font-size: 0.88rem !important;
+    color: #475569 !important;
+    transition: color 0.15s ease !important;
+    opacity: 1 !important;
+  }
+
+  .checkbox-icon {
+    position: absolute !important;
+    top: 50% !important;
+    left: 0 !important;
+    transform: translateY(-50%) !important;
+    width: 18px !important;
+    height: 18px !important;
+    border: 1.5px solid #cbd5e1 !important;
+    border-radius: 4px !important;
+    background-color: #ffffff !important;
+    background-image: none !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04) !important;
+
+    &:after {
+      content: '' !important;
+      position: absolute !important;
+      display: none !important;
+      left: 5px !important;
+      top: 1px !important;
+      width: 5px !important;
+      height: 10px !important;
+      border: solid #ffffff !important;
+      border-width: 0 2.2px 2.2px 0 !important;
+      transform: rotate(45deg) !important;
+      background-color: transparent !important;
+      background: transparent !important;
+    }
+  }
+
+  &:hover {
+    .checkbox {
+      color: #0f172a !important;
+    }
+    .checkbox-icon {
+      border-color: #3faa47 !important;
+    }
+  }
+
+  /* Checked / Active State: Brand Green (#3FAA47) + Crisp White Checkmark */
+  &.active,
+  input:checked ~ .checkbox {
+    color: #0f172a !important;
+    font-weight: 700 !important;
+
+    .checkbox-icon {
+      background: #3faa47 !important;
+      background-color: #3faa47 !important;
+      border-color: #3faa47 !important;
+      box-shadow: 0 2px 6px rgba(63, 170, 71, 0.35) !important;
+
+      &:after {
+        display: block !important;
+        background-color: transparent !important;
+        background: transparent !important;
+      }
+    }
+
+    .checkbox-text {
+      color: #0f172a !important;
+    }
   }
 }
 

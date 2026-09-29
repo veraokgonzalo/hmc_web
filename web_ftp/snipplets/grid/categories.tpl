@@ -1,5 +1,6 @@
-{% set list_categories = filter_categories is not empty ? filter_categories : (category ? categories : null) %}
-{% set current_page_category_id = category ? category.id : null %}
+{% set is_real_cat = category and category.id and category.handle not in ['productos', 'todos-los-productos'] and category.name | lower not in ['productos', 'todos los productos', 'todo el catalogo', 'catalogo'] %}
+{% set list_categories = filter_categories is not empty ? filter_categories : (is_real_cat ? categories : null) %}
+{% set current_page_category_id = is_real_cat ? category.id : null %}
 
 {% if not modal %}
 <div class="visible-when-content-ready card px-3 py-3 mb-3 d-none d-md-block">
@@ -7,8 +8,8 @@
 <div class="filter-modal-categories px-3 pt-3 pb-2">
 {% endif %}
 
-    {# 1. Navigation Back Button #}
-    {% if category %}
+    {# 1. Navigation Back Button (Shown ONLY when in a specific category, NEVER in general /productos) #}
+    {% if is_real_cat %}
         <div class="category-nav-back mb-3">
             {% if parent_category and parent_category.id != 0 %}
                 <a href="{{ parent_category.url }}" title="{{ parent_category.name }}" class="category-back-btn d-flex align-items-center">
@@ -24,9 +25,19 @@
         </div>
     {% endif %}
 
-    {# 2. Categories Accordion List #}
+    {# 2. Categories Accordion List with Dynamic Superior Category Title #}
     {% if list_categories %}
-        {% set accordion_title = (filter_categories is empty and category) ? ('Todas las Categorías' | translate) : (parent_category and parent_category.id != 0 ? ('Subcategorías' | translate) : ('Categorías' | translate)) %}
+        {% if is_real_cat %}
+            {% if filter_categories is not empty %}
+                {% set superior_name = (parent_category and parent_category.id != 0) ? parent_category.name : category.name %}
+                {% set accordion_title = ('Subcategorías de' | translate) ~ ' ' ~ superior_name %}
+            {% else %}
+                {% set accordion_title = 'Todas las Categorías' | translate %}
+            {% endif %}
+        {% else %}
+            {% set accordion_title = 'Categorías' | translate %}
+        {% endif %}
+
         <div class="js-accordion-container {% if modal %}filter-accordion{% endif %}">
             <div class="h6 font-big mb-0">
                 <a href="#" class="js-accordion-toggle font-md-small text-uppercase row no-gutters align-items-center py-md-2">

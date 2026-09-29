@@ -32,7 +32,8 @@
                     {% set has_products_crumb = true %}
                 {% endif %}
             {% endfor %}
-            {% if (template == 'category' and category and not has_products_crumb) or (template == 'product' and not has_products_crumb) %}
+            {% set is_real_cat = category and category.id and category.handle not in ['productos', 'todos-los-productos'] and category.name | lower not in ['productos', 'todos los productos', 'todo el catalogo', 'catalogo'] %}
+            {% if (template == 'category' and is_real_cat and not has_products_crumb) or (template == 'product' and not has_products_crumb) %}
                 <a class="crumb" href="/productos" title="{{ 'Productos' | translate }}">{{ 'Productos' | translate }}</a>
                 <span class="separator">></span>
             {% endif %}

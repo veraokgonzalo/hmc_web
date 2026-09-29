@@ -69,12 +69,13 @@
 		{% endblock %}
 		{% block modal_body %}
 			{% if has_filters_available %}
-				{% if has_applied_filters or category %}
+				{% set is_real_cat = category and category.id and category.handle not in ['productos', 'todos-los-productos'] and category.name | lower not in ['productos', 'todos los productos', 'todo el catalogo', 'catalogo'] %}
+				{% if has_applied_filters or is_real_cat %}
 					<div class="px-3 pt-3 pb-2 border-bottom bg-light">
 						{% include "snipplets/grid/filters.tpl" with {applied_filters: true} %}
 					</div>
 				{% endif %}
-				{% if filter_categories is not empty or category %}
+				{% if filter_categories is not empty or is_real_cat %}
 					{% include "snipplets/grid/categories.tpl" with {modal: true} %}
 				{% endif %}
 				{% if product_filters is not empty %}
