@@ -3,7 +3,7 @@
         <span><i class="fa-solid fa-sliders text-primary mr-2"></i> {{ 'Filtros de Búsqueda' | translate }}</span>
     </div>
     {% if products %}
-        {% if filter_categories is not empty %}
+        {% if filter_categories is not empty or category %}
             {% include "snipplets/grid/categories.tpl" %}
         {% endif %}
         {% if product_filters is not empty %}	   

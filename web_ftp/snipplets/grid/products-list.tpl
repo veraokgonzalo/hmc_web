@@ -24,7 +24,7 @@
             </div>
         </div>
 
-        {% if has_applied_filters %}
+        {% if has_applied_filters or category %}
             <div class="mb-3 d-flex justify-content-start align-items-center visible-when-content-ready">
                 {% include "snipplets/grid/filters.tpl" with {applied_filters: true} %}
             </div>

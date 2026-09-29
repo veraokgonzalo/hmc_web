@@ -69,7 +69,12 @@
 		{% endblock %}
 		{% block modal_body %}
 			{% if has_filters_available %}
-				{% if filter_categories is not empty %}
+				{% if has_applied_filters or category %}
+					<div class="px-3 pt-3 pb-2 border-bottom bg-light">
+						{% include "snipplets/grid/filters.tpl" with {applied_filters: true} %}
+					</div>
+				{% endif %}
+				{% if filter_categories is not empty or category %}
 					{% include "snipplets/grid/categories.tpl" with {modal: true} %}
 				{% endif %}
 				{% if product_filters is not empty %}

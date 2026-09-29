@@ -1,16 +1,37 @@
+{% set list_categories = filter_categories is not empty ? filter_categories : (category ? categories : null) %}
+{% set current_page_category_id = category ? category.id : null %}
+
 {% if not modal %}
-    <div class="visible-when-content-ready card px-3 mb-3 d-none d-md-block">
-        {% if parent_category and parent_category.id!=0 %}
-            <a href="{{ parent_category.url }}" title="{{ parent_category.name }}" class="category-back d-block{% if filter_categories %} mb-4{% endif %}">{% include "snipplets/svg/chevron-left.tpl" with {svg_custom_class: "icon-inline mr-2 svg-icon-text"} %}{{ parent_category.name }}</a>
-        {% endif %}
+<div class="visible-when-content-ready card px-3 py-3 mb-3 d-none d-md-block">
+{% else %}
+<div class="filter-modal-categories px-3 pt-3 pb-2">
 {% endif %}
-        {% if filter_categories %}
-        {% set current_page_category_id = category ? category.id : null %}
+
+    {# 1. Navigation Back Button #}
+    {% if category %}
+        <div class="category-nav-back mb-3">
+            {% if parent_category and parent_category.id != 0 %}
+                <a href="{{ parent_category.url }}" title="{{ parent_category.name }}" class="category-back-btn d-flex align-items-center">
+                    <i class="fa-solid fa-arrow-left mr-2"></i>
+                    <span class="text-truncate">{{ 'Volver a' | translate }} <strong>{{ parent_category.name }}</strong></span>
+                </a>
+            {% else %}
+                <a href="/productos" title="{{ 'Ver todos los productos' | translate }}" class="category-back-btn d-flex align-items-center">
+                    <i class="fa-solid fa-arrow-left mr-2"></i>
+                    <span>{{ 'Ver todo el catálogo' | translate }}</span>
+                </a>
+            {% endif %}
+        </div>
+    {% endif %}
+
+    {# 2. Categories Accordion List #}
+    {% if list_categories %}
+        {% set accordion_title = (filter_categories is empty and category) ? ('Todas las Categorías' | translate) : (parent_category and parent_category.id != 0 ? ('Subcategorías' | translate) : ('Categorías' | translate)) %}
         <div class="js-accordion-container {% if modal %}filter-accordion{% endif %}">
             <div class="h6 font-big mb-0">
                 <a href="#" class="js-accordion-toggle font-md-small text-uppercase row no-gutters align-items-center py-md-2">
                     <div class="col pr-3 my-1 font-weight-bold">
-                        {{ "Categorías" | translate }}
+                        {{ accordion_title }}
                     </div>
                     <div class="col-auto my-1">
                         <span class="js-accordion-toggle-inactive" style="display: none;">
@@ -23,7 +44,7 @@
                 </a>
             </div>
             <ul class="js-accordion-content list-unstyled mt-md-1 my-3"> 
-                {% for cat in filter_categories %}
+                {% for cat in list_categories %}
                     {% set is_selected = (current_page_category_id and cat.id == current_page_category_id) or cat.active or (selected_category and cat.id == selected_category.id) %}
                     <li data-item="{{ loop.index }}" class="filter-item mb-2 pb-md-1 {% if is_selected %}active font-weight-bold{% endif %}">
                         <a href="{{ cat.url }}" title="{{ cat.name }}" class="{% if is_selected %}text-primary font-weight-bold{% else %}btn-link{% endif %} font-small no-underline d-flex align-items-center justify-content-between">
@@ -41,11 +62,11 @@
                         </a>
                     </li>
 
-                    {% if loop.index == 8 and filter_categories | length > 8 %}
+                    {% if loop.index == 8 and list_categories | length > 8 %}
                         <div class="js-accordion-container">
                             <div class="js-accordion-content" style="display: none;">
                     {% endif %}
-                    {% if loop.last and filter_categories | length > 8 %}
+                    {% if loop.last and list_categories | length > 8 %}
                             </div>
                             <a href="#" class="js-accordion-toggle d-inline-block btn-link font-small mt-1">
                                 <span class="js-accordion-toggle-inactive">{{ 'Ver más' | translate }}</span>
@@ -56,7 +77,6 @@
                 {% endfor %}
             </ul>
         </div>
-        {% endif %}
-{% if not modal %}
-    </div>
-{% endif %}
+    {% endif %}
+
+</div>

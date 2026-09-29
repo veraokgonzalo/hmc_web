@@ -26,6 +26,16 @@
             <span class="separator">></span>
             <span class="crumb active">{{ post.title }}</span>
         {% else %}
+            {% set has_products_crumb = false %}
+            {% for c in breadcrumbs %}
+                {% if c.url == '/productos' or c.url == store.products_url %}
+                    {% set has_products_crumb = true %}
+                {% endif %}
+            {% endfor %}
+            {% if (template == 'category' and category and not has_products_crumb) or (template == 'product' and not has_products_crumb) %}
+                <a class="crumb" href="/productos" title="{{ 'Productos' | translate }}">{{ 'Productos' | translate }}</a>
+                <span class="separator">></span>
+            {% endif %}
             {% for crumb in breadcrumbs %}
                 {% if crumb.last %}
                     <span class="crumb active">{{ crumb.name }}</span>

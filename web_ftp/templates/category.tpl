@@ -1,4 +1,4 @@
-{% set has_filters_available = products and has_filters_enabled and (filter_categories is not empty or product_filters is not empty) %}
+{% set has_filters_available = products and has_filters_enabled and (filter_categories is not empty or product_filters is not empty or category) %}
 
 {# Only remove this if you want to take away the theme onboarding advices #}
 {% set show_help = not has_products %}
