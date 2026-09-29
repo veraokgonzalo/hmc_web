@@ -772,6 +772,34 @@ Fuente: `docs/feedback_cliente.md` §7 y `docs/specs.md` ("Ajustes de Feedback d
   - Las subcategorías individuales (por ej. `/marcas/bosch` o `/marcas/niwa`) conservan intacto su listado de productos y filtros correspondientes.
   - Se expandió la condición en `templates/page.tpl` para contemplar variantes de handle y títulos generados en el CMS (`marcas`, `marcas-1`, `directorio-marcas`, etc.).
 
+---
+
+## 🗂️ Migración de Directorio Jerárquico de Categorías a Tiendanube FTP (Fase 5.1 - 2026-09-28)
+
+- [x] **Plantilla Dedicada `templates/page.categories.tpl` & Delegación en `page.tpl`**:
+  - Implementada la arquitectura **Master-Detail B2B** (13 Rubros Industriales, 79 Subcategorías y 464 Familias de Repuestos).
+  - Pre-renderizado server-side en Twig de los 13 rubros (`master_rubros`) para First Contentful Paint instantáneo y SEO crawlability.
+  - Configurada auto-delegación en `templates/page.tpl` para handles `['categorias', 'categorias-1', 'categories', 'rubros', 'directorio-categorias']` y títulos correspondientes.
+- [x] **Dataset Completo de Categorías (`web_ftp/static/js/categories-data.js`)**:
+  - Sincronizado el árbol maestro `window.REAL_CATEGORIES_TREE` (74.5 KB) con los 13 rubros, subcategorías y familias con conteos reales extraídos del catálogo de Tiendanube.
+- [x] **Motor Interactivo Master-Detail (`web_ftp/static/js/store.js.tpl`)**:
+  - Selección dinámica de rubros con sincronización instantánea del panel de detalle y smooth scroll en mobile.
+  - Buscador predictivo en tiempo real con resaltado visual (`<mark class="search-highlight">`) que busca en rubros, subcategorías y familias simultáneamente.
+  - Progressive disclosure con botón `+ Ver X familias más` / `- Ver menos` por subcategoría.
+  - Navegación Drill-Down en 2 pasos para móviles:
+    - Paso 1 (`.mobile-step-categories`): Selector de rubros y buscador.
+    - Paso 2 (`.mobile-step-detail`): Detalle del rubro con barra superior *"Volver a todos los rubros"* (`#btnMobileBackToRubros`).
+  - Deep-linking por URL (`/categorias?cat=ferreteria` o `/categorias?q=bomba`).
+- [x] **Estilos SCSS & Responsividad Mobile-First (`web_ftp/static/css/style-async.scss`)**:
+  - Reglas completas para `.categories-master-detail-layout`, `.categories-master-sidebar`, `.category-detail-hero`, `.detail-sub-card`, `.detail-subsub-list` y media queries para switches de pantalla $\le 992$px y $\le 480$px con tap targets $\ge 44$px.
+- [x] **Actualización de Enlaces Globales a `/categorias`**:
+  - `snipplets/header/header.tpl`: CTA *"Todas las categorías →"* actualizado a `/categorias`.
+  - `snipplets/navigation/navigation-drawer.tpl`: CTA *"Todas las categorías →"* del menú móvil actualizado a `/categorias`.
+  - `snipplets/navigation/navigation-bottom-nav.tpl`: Botón "Categorías" de la barra móvil inferior actualizado a `/categorias`.
+- [x] **Despliegue FTP Exitoso**:
+  - Desplegado a la tienda en vivo con `tiendanube theme ftp push --yes` (2 archivos creados, 6 actualizados, 311 sin cambios).
+
+
 
 
 
