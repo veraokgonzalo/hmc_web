@@ -694,11 +694,11 @@ Fuente: `docs/feedback_cliente.md` §7 y `docs/specs.md` ("Ajustes de Feedback d
 - [ ] Reemplazar las imágenes incorrectas en `web_ftp/static/images/categories/` y en `boceto_web/assets/images/categories/` (mismo nombre de archivo o actualizar la referencia en ambos `.tpl`/`.html`).
 - [ ] Push por FTP y verificar en vivo.
 
-### 4. Página "Nosotros" — Tarjetas de valor (`boceto_web/about.html`)
-- [ ] Cambiar `<h4 class="value-prop-title">Servicio Técnico y Taller</h4>` → `Servicio de Post Venta` (línea 119).
-- [ ] Redactar y reemplazar la descripción de esa tarjeta (línea 120) para que hable de post venta (pendiente confirmar texto exacto con el cliente).
-- [ ] Reemplazar la descripción de "Asesoría Especializada" (línea 110) por: *"Personal especializado a tu disposición para guiarte en la elección de la máquina exacta para vos."*
-- [ ] Nota: esta página todavía no está portada a `web_ftp/` — el cambio por ahora solo aplica al prototipo `boceto_web/`; si/cuando se porte "Nosotros" a Tiendanube, llevar el mismo copy corregido.
+### 4. Página "Nosotros" — Tarjetas de valor (`boceto_web/about.html`) - IMPLEMENTADO
+- [x] Cambiar `<h4 class="value-prop-title">Servicio Técnico y Taller</h4>` → `Servicio de Post Venta` (línea 119).
+- [x] Redactar y reemplazar la descripción de esa tarjeta (línea 120) para que hable de post venta.
+- [x] Reemplazar la descripción de "Asesoría Especializada" (línea 110) por: *"Personal especializado a tu disposición para guiarte en la elección de la máquina exacta para vos."*
+- [x] Portada a `web_ftp/templates/page.about.tpl` y `templates/page.tpl` con el mismo copy corregido.
 
 ### 5. Foto Casa Central — interior → exterior
 - [ ] Conseguir/seleccionar una foto **exterior** de la casa central de Santa Rosa (reemplazo de `sucursal-foto-vertical.webp`, que hoy es una foto interior de showroom/mostrador).
@@ -724,6 +724,22 @@ Fuente: `docs/feedback_cliente.md` §7 y `docs/specs.md` ("Ajustes de Feedback d
   - `snipplets/grid/categories.tpl`: `current_page_category_id = category ? category.id : null`.
 - [x] **Despliegue FTP Exitoso**:
   - Sincronización de 5 archivos actualizados mediante `tiendanube theme ftp push --yes`.
+
+---
+
+## 🏛️ Migración de Página Institucional "Nosotros" a Tiendanube FTP (Fase 5.3 - 2026-09-28)
+
+- [x] **Plantilla Dedicada `templates/page.about.tpl` & Auto-Delegación en `page.tpl`**:
+  - Creada plantilla completa `templates/page.about.tpl` con miga de pan, identidad de marca desde 1996, 4 pilares de valor, métricas de trayectoria, sucursal Santa Rosa con Google Maps y WhatsApp, y el feed de Instagram reutilizando `snipplets/home/home-instafeed.tpl`.
+  - Actualizado `templates/page.tpl` para auto-delegar a `page.about.tpl` si `page.handle in ['nosotros', 'quienes-somos', 'sobre-nosotros', 'about', 'empresa']` o `template == 'page.about'`.
+- [x] **Feedback de Cliente Incorporado**:
+  - Pilar 1: *"Personal especializado a tu disposición para guiarte en la elección de la máquina exacta para vos."*
+  - Pilar 2: Título actualizado a *"Servicio de Post Venta"* con descripción orientada a taller, puesta en marcha y post venta.
+- [x] **Assets e Imágenes**:
+  - Transferida imagen `about-us-we.webp` a `web_ftp/static/images/about-us-we.webp`.
+- [x] **Estilos SCSS & Responsividad Mobile-First (`web_ftp/static/css/style-async.scss`)**:
+  - Reglas completas para `.about-page-section`, `.about-identity-grid`, `.value-props-grid`, `.about-metrics-card`, `.about-branch-layout` y breakpoints móviles $\le 768$px y $\le 480$px con tap targets $\ge 44$px.
+
 
 
 

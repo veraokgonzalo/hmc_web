@@ -5887,3 +5887,315 @@ footer {
   transform: none !important;
 }
 
+/* ==========================================================================
+   About Page Layout (templates/page.about.tpl)
+   ========================================================================== */
+.about-page-section {
+  padding: 40px 0 70px;
+}
+
+/* Company Identity & Philosophy */
+.about-identity-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 48px;
+  align-items: center;
+  margin-bottom: 64px;
+}
+
+.about-identity-title {
+  font-family: var(--font-headings, 'Quedora', sans-serif);
+  font-size: 2.1rem;
+  line-height: 1.25;
+  margin-bottom: 20px;
+  color: var(--color-black, #000000);
+}
+
+.about-identity-desc {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--color-gray-dark, #494848);
+  margin-bottom: 16px;
+}
+
+.about-identity-desc:last-child {
+  margin-bottom: 0;
+}
+
+.about-identity-media {
+  position: relative;
+}
+
+.about-identity-img-wrapper {
+  border-radius: var(--radius-lg, 12px);
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  border: 1px solid var(--color-gray-border, #E2E8F0);
+}
+
+.about-identity-img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* Common Section Spacer */
+.about-section-spacer {
+  margin-bottom: 64px;
+}
+
+/* 4 Pillars Value Props Grid */
+.about-page .value-props-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.about-page .value-prop-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 24px 20px;
+  border-radius: var(--radius-lg, 12px);
+  background: var(--color-white, #FFFFFF);
+  border: 1px solid var(--color-gray-border, #E2E8F0);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.about-page .value-prop-card:hover {
+  background: #FAFAFA;
+  border-color: var(--color-primary, #3FAA47);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.about-page .value-prop-icon {
+  width: 54px;
+  height: 54px;
+  flex-shrink: 0;
+  border-radius: var(--radius-md, 8px);
+  background: rgba(63, 170, 71, 0.12);
+  color: var(--color-primary, #3FAA47);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.45rem;
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.about-page .value-prop-card:hover .value-prop-icon {
+  background: var(--color-primary, #3FAA47);
+  color: #FFFFFF;
+  transform: scale(1.08) rotate(3deg);
+}
+
+.about-page .value-prop-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: var(--color-black, #000000);
+}
+
+.about-page .value-prop-desc {
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--color-gray-dark, #494848);
+  margin-bottom: 0;
+}
+
+/* Metrics and Achievements */
+.about-metrics-card {
+  background: #F8F9FA;
+  border-radius: var(--radius-lg, 12px);
+  padding: 46px 30px;
+  margin-bottom: 64px;
+  border: 1px solid var(--color-gray-border, #E2E8F0);
+}
+
+.about-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  text-align: center;
+}
+
+.about-metric-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.about-metric-number {
+  font-family: var(--font-headings, 'Quedora', sans-serif);
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--color-primary, #3FAA47);
+  line-height: 1;
+}
+
+.about-metric-label {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-black, #000000);
+  margin-top: 10px;
+}
+
+.about-metric-sub {
+  font-size: 0.82rem;
+  color: #777777;
+  margin-top: 2px;
+}
+
+/* Branch / Location Section */
+.about-branch-layout {
+  display: grid;
+  grid-template-columns: minmax(320px, 420px) 1fr;
+  gap: 32px;
+  align-items: stretch;
+}
+
+.about-branch-media {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.about-branch-img-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-lg, 12px);
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--color-gray-border, #E2E8F0);
+  display: flex;
+}
+
+.about-branch-img {
+  width: 100%;
+  height: 100%;
+  min-height: 440px;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.about-branch-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #F8F9FA;
+  border: 1px solid var(--color-gray-border, #E2E8F0);
+  border-radius: var(--radius-lg, 12px);
+  padding: 28px;
+  height: 100%;
+}
+
+.about-branch-card h4 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-black, #000000);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.about-branch-info,
+.about-branch-schedule {
+  font-size: 0.92rem;
+  color: #444444;
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+
+.about-branch-map {
+  border-radius: var(--radius-md, 8px);
+  overflow: hidden;
+  border: 1px solid var(--color-gray-border, #E2E8F0);
+  margin-bottom: 20px;
+  background: #EAEAEA;
+}
+
+.about-branch-map iframe {
+  display: block;
+  width: 100%;
+  height: 230px;
+  border: 0;
+}
+
+.about-branch-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+@media (max-width: 992px) {
+  .about-page .value-props-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .about-page-section {
+    padding: 30px 0 54px;
+  }
+  .about-identity-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    margin-bottom: 40px;
+  }
+  .about-identity-title {
+    font-size: 1.6rem;
+    line-height: 1.3;
+  }
+  .about-identity-img {
+    height: 280px;
+  }
+  .about-section-spacer {
+    margin-bottom: 40px;
+  }
+  .about-metrics-card {
+    padding: 28px 18px;
+    margin-bottom: 40px;
+  }
+  .about-metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 14px;
+  }
+  .about-metric-number {
+    font-size: 2.2rem;
+  }
+  .about-branch-layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .about-branch-img {
+    min-height: 260px;
+    height: 260px;
+  }
+  .about-branch-actions .btn {
+    width: 100%;
+    justify-content: center;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-page .value-props-grid {
+    grid-template-columns: 1fr;
+  }
+  .about-identity-title {
+    font-size: 1.35rem;
+  }
+  .about-metric-number {
+    font-size: 1.85rem;
+  }
+}
+
+
