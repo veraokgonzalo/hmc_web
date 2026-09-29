@@ -134,6 +134,71 @@
             {# General CSS Tokens #}
 
             {% include "static/css/style-tokens.tpl" %}
+
+            {# Critical Anti-FOUC Defenses (Zero Flash on Page Transitions) #}
+            .mega-dropdown,
+            .mega-dropdown-categories-featured,
+            .mega-dropdown-brands-featured {
+                display: none !important;
+                position: absolute !important;
+                opacity: 0 !important;
+                visibility: hidden !important;
+                pointer-events: none !important;
+            }
+
+            @media (min-width: 992px) {
+                .nav-item.has-mega-dropdown {
+                    position: relative;
+                }
+                .nav-item.has-mega-dropdown:hover > .mega-dropdown {
+                    display: block !important;
+                    opacity: 1 !important;
+                    visibility: visible !important;
+                    pointer-events: auto !important;
+                }
+            }
+
+            .mobile-drawer-overlay {
+                display: none !important;
+                position: fixed !important;
+                inset: 0 !important;
+                opacity: 0 !important;
+                visibility: hidden !important;
+            }
+            .mobile-drawer-overlay.active {
+                display: block !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+            }
+
+            .mobile-drawer-menu {
+                position: fixed !important;
+                top: 0 !important;
+                left: -100% !important;
+                visibility: hidden !important;
+                z-index: 9999 !important;
+            }
+            .mobile-drawer-menu.active {
+                left: 0 !important;
+                visibility: visible !important;
+            }
+
+            .mobile-drawer-accordion-content {
+                display: none !important;
+            }
+            .mobile-drawer-accordion-content.active {
+                display: block !important;
+            }
+
+            #quickViewModal,
+            .modal-overlay,
+            .cart-drawer-overlay,
+            .cart-drawer {
+                display: none !important;
+            }
+            .cart-drawer.active {
+                display: block !important;
+            }
         </style>
 
         {# Critical CSS #}
