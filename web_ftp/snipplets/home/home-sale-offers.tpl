@@ -2,9 +2,54 @@
   #Home Sale Offers with Countdown Timer (HMC HUB)
 ==============================================================================*/ #}
 
-{% set has_db_sale = sections.sale.products and sections.sale.products is not empty %}
-{% set has_db_primary = sections.primary.products and sections.primary.products is not empty %}
+{# Aggregate all genuine offers from available store sections on the home page #}
+{% set real_offers = [] %}
+{% set offer_product_ids = [] %}
 
+{# 1. Products explicitly assigned to sections.sale (Configured under Productos en Oferta) #}
+{% if sections.sale.products and sections.sale.products is not empty %}
+	{% for product in sections.sale.products %}
+		{% if product.id not in offer_product_ids %}
+			{% set real_offers = real_offers | merge([product]) %}
+			{% set offer_product_ids = offer_product_ids | merge([product.id]) %}
+		{% endif %}
+	{% endfor %}
+{% endif %}
+
+{# 2. Products explicitly assigned to sections.promotion (Configured under Promociones) #}
+{% if sections.promotion.products and sections.promotion.products is not empty %}
+	{% for product in sections.promotion.products %}
+		{% if product.id not in offer_product_ids %}
+			{% set real_offers = real_offers | merge([product]) %}
+			{% set offer_product_ids = offer_product_ids | merge([product.id]) %}
+		{% endif %}
+	{% endfor %}
+{% endif %}
+
+{# 3. Dynamic Scan: Check all products in primary (destacados), new (novedades), and best_seller for active promotional prices or discounts #}
+{% set candidate_products = [] %}
+{% if sections.primary.products %}
+	{% set candidate_products = candidate_products | merge(sections.primary.products) %}
+{% endif %}
+{% if sections.new.products %}
+	{% set candidate_products = candidate_products | merge(sections.new.products) %}
+{% endif %}
+{% if sections.best_seller.products %}
+	{% set candidate_products = candidate_products | merge(sections.best_seller.products) %}
+{% endif %}
+
+{% for product in candidate_products %}
+	{% if product.id not in offer_product_ids %}
+		{% set is_discounted = (product.compare_at_price and (product.compare_at_price > product.price)) or product.promotional_offer or product.has_discount or product.hasVisiblePromotionLabel %}
+		{% if is_discounted %}
+			{% set real_offers = real_offers | merge([product]) %}
+			{% set offer_product_ids = offer_product_ids | merge([product.id]) %}
+		{% endif %}
+	{% endif %}
+{% endfor %}
+
+{# The offers section ONLY renders if real, verified offers exist in the store #}
+{% if real_offers and real_offers is not empty %}
 <section class="section-padding timer-offers-section" id="ofertas" data-store="home-offers-timer">
 	<div class="container">
 		
@@ -38,97 +83,18 @@
 			</div>
 		</div>
 
-		{# Offers Products Grid #}
-		{% if has_db_sale %}
-			<div class="row row-grid offers-grid-row">
-				{% for product in sections.sale.products | slice(0, 4) %}
-					{% include 'snipplets/grid/item.tpl' with {'horizontal_item': false, 'columns_desktop': 4, 'columns_mobile': 2} %}
-				{% endfor %}
-			</div>
-		{% elseif has_db_primary %}
-			<div class="row row-grid offers-grid-row">
-				{% for product in sections.primary.products | slice(0, 4) %}
-					{% include 'snipplets/grid/item.tpl' with {'horizontal_item': false, 'columns_desktop': 4, 'columns_mobile': 2} %}
-				{% endfor %}
-			</div>
-		{% else %}
-			{# Curated Fallback with Real HMC Catalog Products #}
-			{% set curated_offers = [
-				{
-					'id': 1,
-					'brand': 'NIWA',
-					'name': 'Bomba Centrífuga Niwa WENW-50C 0.5 HP 16m - 4.2 m³/h 1"',
-					'image': 'images/products/prod-01-bomba-centrifuga-niwa-wenw50c-principal.webp',
-					'discount': '-14% OFF',
-					'price_old': '$169.000',
-					'price_current': '$145.000',
-					'link': (store.products_url ? store.products_url ~ '?q=NIWA' : '/search/?q=NIWA')
-				},
-				{
-					'id': 7,
-					'brand': 'EINHELL',
-					'name': 'Taladro Percutor Inalámbrico Einhell TE-CD 18/44 Li-i 18V',
-					'image': 'images/products/prod-07-taladro-impacto-einhell-te-cd18-principal.webp',
-					'discount': '-15% OFF',
-					'price_old': '$198.000',
-					'price_current': '$168.000',
-					'link': (store.products_url ? store.products_url ~ '?q=EINHELL' : '/search/?q=EINHELL')
-				},
-				{
-					'id': 3,
-					'brand': 'BOSCH',
-					'name': 'Martillo Demoledor Bosch GSH 11 E Professional 1500W SDS Max',
-					'image': 'images/products/prod-03-martillo-demoledor-bosch-gsh11e-principal.webp',
-					'discount': '-15% OFF',
-					'price_old': '$1.150.000',
-					'price_current': '$980.000',
-					'link': (store.products_url ? store.products_url ~ '?q=BOSCH' : '/search/?q=BOSCH')
-				},
-				{
-					'id': 11,
-					'brand': 'SHINDAIWA',
-					'name': 'Motoguadaña Profesional Shindaiwa B530 INTL 53.2cc 2T',
-					'image': 'images/products/prod-11-motoguadana-shindaiwa-b530-principal.webp',
-					'discount': '-12% OFF',
-					'price_old': '$960.000',
-					'price_current': '$840.000',
-					'link': (store.products_url ? store.products_url ~ '?q=SHINDAIWA' : '/search/?q=SHINDAIWA')
-				}
-			] %}
-			<div class="offers-grid">
-				{% for item in curated_offers %}
-					<div class="product-card">
-						<div class="product-badge-group">
-							<span class="badge badge-discount">{{ item.discount }}</span>
-							<span class="badge badge-shipping"><i class="fa-solid fa-truck-fast"></i> {{ 'Envío Gratis' | translate }}</span>
-						</div>
-						<div class="product-image-box">
-							<a href="{{ item.link }}">
-								<img src="{{ item.image | static_url }}" alt="{{ item.name }}" class="product-img" loading="lazy">
-							</a>
-						</div>
-						<div class="product-details">
-							<div class="product-brand">{{ item.brand }}</div>
-							<h4 class="product-name">
-								<a href="{{ item.link }}">{{ item.name }}</a>
-							</h4>
-							<div class="product-price-box">
-								<div>
-									<span class="price-old">{{ item.price_old }}</span>
-									<span class="price-current">{{ item.price_current }}</span>
-								</div>
-								<div class="installments-info">
-									<i class="fa-solid fa-credit-card mr-1"></i> <strong>6 cuotas</strong> sin interés
-								</div>
-							</div>
-							<a href="{{ item.link }}" class="btn btn-primary btn-add-to-cart text-center">
-								<i class="fa-solid fa-cart-plus mr-1"></i> {{ 'Comprar Ahora' | translate }}
-							</a>
-						</div>
-					</div>
-				{% endfor %}
-			</div>
-		{% endif %}
+		{# Offers Products Grid (Real offers only, aligned to the left) #}
+		<div class="row row-grid offers-grid-row">
+			{% for product in real_offers | slice(0, 4) %}
+				{% include 'snipplets/grid/item.tpl' with {
+					'horizontal_item': false,
+					'section_columns_desktop': 4,
+					'columns_desktop': 4,
+					'section_columns_mobile': 2,
+					'columns_mobile': 2
+				} %}
+			{% endfor %}
+		</div>
 
 		{# CTA to all offers #}
 		<div class="text-center mt-4 pt-2">
@@ -194,3 +160,4 @@
 	}
 })();
 </script>
+{% endif %}
