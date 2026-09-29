@@ -13,7 +13,12 @@
 	{% endif %}
 {% endif %}
 
-{% if not show_help %}
+{# Root Marcas Category Interceptor -> Official Brands Directory #}
+{% set is_marcas_root = category and (category.handle in ['marcas', 'brands', 'fabricantes'] or category.name | lower in ['marcas', 'marcas oficiales', 'marcas destacadas']) and (not parent_category or parent_category.id == 0) %}
+
+{% if is_marcas_root %}
+	{% include 'templates/page.brands.tpl' %}
+{% elseif not show_help %}
 
 {% set category_banner = (category.images is not empty) or ("banner-products.jpg" | has_custom_image) %}
 {% set has_category_description_without_banner = not category_banner and category.description %}

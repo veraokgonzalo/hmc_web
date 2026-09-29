@@ -1,6 +1,6 @@
 {% if page.handle in ['nosotros', 'quienes-somos', 'sobre-nosotros', 'about', 'empresa'] or template == 'page.about' %}
 	{% include 'templates/page.about.tpl' %}
-{% elseif page.handle in ['marcas', 'brands', 'fabricantes', 'directorio-marcas'] or template == 'page.brands' %}
+{% elseif page.handle in ['marcas', 'marcas-1', 'marcas-2', 'brands', 'fabricantes', 'directorio-marcas', 'directorio-de-marcas'] or page.name | lower in ['marcas', 'brands', 'fabricantes', 'directorio de marcas', 'marcas oficiales'] or template == 'page.brands' %}
 	{% include 'templates/page.brands.tpl' %}
 {% else %}
 	{% embed "snipplets/page-header.tpl" %}
