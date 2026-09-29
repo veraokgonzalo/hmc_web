@@ -709,4 +709,21 @@ Fuente: `docs/feedback_cliente.md` §7 y `docs/specs.md` ("Ajustes de Feedback d
 - [ ] Actualizar la descripción del asset en `docs/assets-map.md`.
 - [ ] Push por FTP y verificar en vivo (home parallax + `about.html`).
 
+---
+
+## 🛠️ Corrección Crítica de Catálogo: Error de Sintaxis JS y Visibilidad de Productos (2026-09-28)
+
+- [x] **Reparación de SyntaxError Fatal en JavaScript (`web_ftp/static/js/store.js.tpl`)**:
+  - Se corrigió la falta de nombres de variables en las líneas 3847-3865 (`var $btn = jQueryNuvem(this);` y `var $stickyBar = jQueryNuvem("#mobileStickyBuyBar");`), restaurando la ejecución íntegra del archivo JS en el navegador.
+  - Se agregó salvaguarda `if (stickyPrevTarget)` en la línea 1879 para evitar excepciones de `IntersectionObserver.observe(null)`.
+- [x] **Visibilidad de Productos y CSS Anti-Fallos (`web_ftp/static/css/style-async.scss`)**:
+  - Se agregó la regla `.js-item-product { opacity: 1 !important; transform: none !important; }` asegurando que las tarjetas de producto no queden atrapadas en `opacity: 0` ante demoras de carga o errores de animación.
+- [x] **Robustez en Plantillas Twig de Catálogo (`category.tpl`, `products-list.tpl`, `categories.tpl`)**:
+  - `templates/category.tpl`: Título con fallback `category ? category.name : ('Productos' | translate)` y validación segura `category and category.name` en el banner promocional de ofertas para evitar excepciones en la raíz `/productos`.
+  - `snipplets/grid/products-list.tpl`: Manejo seguro de `category.id` evitando el sufijo vacío `category-grid-`.
+  - `snipplets/grid/categories.tpl`: `current_page_category_id = category ? category.id : null`.
+- [x] **Despliegue FTP Exitoso**:
+  - Sincronización de 5 archivos actualizados mediante `tiendanube theme ftp push --yes`.
+
+
 
