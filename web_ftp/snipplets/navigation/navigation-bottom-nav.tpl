@@ -3,7 +3,7 @@
 ==============================================================================*/ #}
 
 <nav class="mobile-bottom-nav d-md-none" aria-label="{{ 'Navegación rápida inferior' | translate }}">
-  <a href="{{ store.url | default('/') }}" class="mobile-nav-btn {% if template == 'home' %}active{% endif %}" data-page="index">
+  <a href="/" class="mobile-nav-btn nav-link-home {% if template == 'home' %}active{% endif %}" data-page="index" data-link-home="true">
     <i class="fa-solid fa-house"></i>
     <span>{{ 'Inicio' | translate }}</span>
   </a>

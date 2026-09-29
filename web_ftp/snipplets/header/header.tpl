@@ -10,7 +10,7 @@
     
     <!-- Brand Logo -->
     <div class="logo-container">
-      <a href="{{ store.url | default('/') }}" class="logo-link">
+      <a href="/" class="logo-link" data-link-home="true">
         <img src="{{ 'images/logos/logo-horizontal-color.png' | static_url }}" alt="{{ store.name | default('HMC HUB') }}" class="logo-img">
       </a>
     </div>
@@ -85,7 +85,7 @@
       <ul class="nav-list">
         <!-- 1. Inicio -->
         <li class="nav-item">
-          <a href="{{ store.url | default('/') }}" class="nav-link {% if template == 'home' %}active{% endif %}">
+          <a href="/" class="nav-link nav-link-home {% if template == 'home' %}active{% endif %}" data-link-home="true">
             <i class="fa-solid fa-house"></i> {{ 'Inicio' | translate }}
           </a>
         </li>

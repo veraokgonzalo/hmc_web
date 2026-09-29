@@ -23,7 +23,7 @@
 
 <aside class="mobile-drawer-menu" id="mobileDrawerMenu" aria-label="{{ 'Menú lateral de navegación' | translate }}">
   <div class="mobile-drawer-header">
-    <a href="{{ store.url | default('/') }}" title="{{ store.name | default('HMC HUB') }}">
+    <a href="/" class="nav-link-home" data-link-home="true" title="{{ store.name | default('HMC HUB') }}">
       <img src="{{ 'images/logos/logo-horizontal-white.png' | static_url }}" alt="{{ store.name | default('HMC HUB') }}" class="mobile-drawer-logo">
     </a>
     <button type="button" class="mobile-drawer-close js-close-mobile-menu" id="mobileDrawerClose" title="{{ 'Cerrar' | translate }}" aria-label="{{ 'Cerrar' | translate }}">
@@ -42,7 +42,7 @@
 
   <div class="mobile-drawer-nav">
     <!-- 1. Inicio -->
-    <a href="{{ store.url | default('/') }}" class="mobile-nav-link-item {% if template == 'home' %}active{% endif %}">
+    <a href="/" class="mobile-nav-link-item nav-link-home {% if template == 'home' %}active{% endif %}" data-link-home="true">
       <span><i class="fa-solid fa-house mr-2"></i> {{ 'Inicio' | translate }}</span>
     </a>
     

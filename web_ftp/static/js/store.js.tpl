@@ -3777,8 +3777,8 @@ stream_videos.forEach(function(player){
             }
         });
 
-        // Fail-safe: ensure home links (logo, Inicio, mobile bottom bar) are never empty
-        jQueryNuvem(".logo-link, .nav-item:first-child .nav-link, .mobile-nav-btn[data-page='index'], a:has(.mobile-drawer-logo)").each(function() {
+        // Fail-safe: ensure all home links always point to "/"
+        jQueryNuvem("a[data-link-home='true'], .nav-link-home, .logo-link, .mobile-nav-btn[data-page='index'], a:has(.mobile-drawer-logo)").each(function() {
             var $el = jQueryNuvem(this);
             var h = $el.attr("href");
             if (!h || h === "" || h === "#") {
@@ -3787,9 +3787,10 @@ stream_videos.forEach(function(player){
         });
     }
 
-    jQueryNuvem(document).on("click", ".logo-link, .nav-item:first-child .nav-link, .mobile-nav-btn[data-page='index'], a:has(.mobile-drawer-logo)", function(e) {
-        var h = jQueryNuvem(this).attr("href");
-        if (!h || h === "" || h === "#") {
+    // Direct navigation handler: clicking any home link when not on home navigates directly to "/"
+    jQueryNuvem(document).on("click", "a[data-link-home='true'], .nav-link-home, .logo-link, .mobile-nav-btn[data-page='index'], a:has(.mobile-drawer-logo)", function(e) {
+        var currentPath = window.location.pathname.toLowerCase();
+        if (currentPath !== "/" && !currentPath.endsWith("/home") && currentPath !== "") {
             e.preventDefault();
             window.location.href = "/";
         }
