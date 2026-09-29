@@ -5878,3 +5878,12 @@ footer {
     gap: 10px;
   }
 }
+
+/* ==========================================================================
+   Catalog Product Visibility Safety Fail-safe
+   ========================================================================== */
+.js-item-product {
+  opacity: 1 !important;
+  transform: none !important;
+}
+

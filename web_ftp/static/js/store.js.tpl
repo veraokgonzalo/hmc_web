@@ -1876,7 +1876,10 @@ DOMContentLoaded.addEventOrExecute(() => {
                         $category_controls.removeClass("is-sticky");
                     }, { threshold: [0,1]
                 });
-                observer.observe(document.querySelector(".js-category-controls-prev"));
+                var stickyPrevTarget = document.querySelector(".js-category-controls-prev");
+                if (stickyPrevTarget) {
+                    observer.observe(stickyPrevTarget);
+                }
 
                 offsetCategories = function() {
                     var $sticky_category_controls = jQueryNuvem(".js-category-controls");
@@ -3844,25 +3847,25 @@ stream_videos.forEach(function(player){
     // 1. Technical Product Tabs Switcher
     jQueryNuvem(document).on("click", ".js-product-tab-btn", function(e) {
         e.preventDefault();
-        var  = jQueryNuvem(this);
-        var targetId = .data("tab");
+        var $btn = jQueryNuvem(this);
+        var targetId = $btn.data("tab");
         
         jQueryNuvem(".js-product-tab-btn").removeClass("active");
         jQueryNuvem(".js-product-tab-panel").removeClass("active");
         
-        .addClass("active");
+        $btn.addClass("active");
         jQueryNuvem("#" + targetId).addClass("active");
     });
 
     // 2. Mobile Sticky Bottom Buy Bar
-    var  = jQueryNuvem("#mobileStickyBuyBar");
-    if (.length) {
+    var $stickyBar = jQueryNuvem("#mobileStickyBuyBar");
+    if ($stickyBar.length) {
         var checkStickyBuyBar = function() {
             if (window.scrollY > 380 && window.innerWidth <= 768) {
-                .addClass("active");
+                $stickyBar.addClass("active");
                 jQueryNuvem("body").addClass("sticky-buy-active");
             } else {
-                .removeClass("active");
+                $stickyBar.removeClass("active");
                 jQueryNuvem("body").removeClass("sticky-buy-active");
             }
         };

@@ -5,7 +5,7 @@
         {% endif %}
 {% endif %}
         {% if filter_categories %}
-        {% set current_page_category_id = category.id %}
+        {% set current_page_category_id = category ? category.id : null %}
         <div class="js-accordion-container {% if modal %}filter-accordion{% endif %}">
             <div class="h6 font-big mb-0">
                 <a href="#" class="js-accordion-toggle font-md-small text-uppercase row no-gutters align-items-center py-md-2">

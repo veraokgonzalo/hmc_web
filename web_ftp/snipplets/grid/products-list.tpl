@@ -1,5 +1,5 @@
 {% set noFilterResult = "No tenemos resultados para tu búsqueda. Por favor, intentá con otros filtros." %}
-{% set list_data_store = template == 'category' ? 'category-grid-' ~ category.id : 'search-grid' %}
+{% set list_data_store = template == 'category' ? (category ? 'category-grid-' ~ category.id : 'category-grid') : 'search-grid' %}
 
 {% if products or template == 'category' %}
     <div class="col" data-store="{{ list_data_store}}">

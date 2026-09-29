@@ -32,7 +32,7 @@
 					{% include 'snipplets/breadcrumbs.tpl' with {breadcrumbs_custom_class: 'mb-0' } %}
 				{% else %}
 					{% embed "snipplets/page-header.tpl" with {container: false, padding: page_header_padding, page_header_class: page_header_classes} %}
-					    {% block page_header_text %}{{ category.name }}{% endblock page_header_text %}
+					    {% block page_header_text %}{{ category ? category.name : ('Productos' | translate) }}{% endblock page_header_text %}
 					{% endembed %}
 					{% if category.description %}
 						<p class="mt-2 mb-md-4 mb-3">{{ category.description }}</p>
@@ -46,10 +46,10 @@
 {% include 'snipplets/grid/filters-modals.tpl' %}
 <section class="js-category-controls-prev category-controls-sticky-detector"></section>
 
-<section class="category-body" data-store="category-grid-{{ category.id }}">
+<section class="category-body" data-store="category-grid{% if category.id %}-{{ category.id }}{% endif %}">
 	<div class="container mt-3 mb-5">
 		{# Dynamic Promotional Offers Banner #}
-		{% set is_offers_category = params.offers == 'true' or (category.name | lower in ['ofertas', 'liquidación', 'liquidacion', 'promociones']) %}
+		{% set is_offers_category = params.offers == 'true' or (category and category.name | lower in ['ofertas', 'liquidación', 'liquidacion', 'promociones']) %}
 		<div id="catalogOffersPromoBanner" class="catalog-offers-banner mb-4" {% if not is_offers_category %}style="display: none;"{% endif %}>
 			<div class="catalog-offers-banner-inner">
 				<div class="catalog-offers-text">
