@@ -739,6 +739,10 @@ Fuente: `docs/feedback_cliente.md` §7 y `docs/specs.md` ("Ajustes de Feedback d
   - Transferida imagen `about-us-we.webp` a `web_ftp/static/images/about-us-we.webp`.
 - [x] **Estilos SCSS & Responsividad Mobile-First (`web_ftp/static/css/style-async.scss`)**:
   - Reglas completas para `.about-page-section`, `.about-identity-grid`, `.value-props-grid`, `.about-metrics-card`, `.about-branch-layout` y breakpoints móviles $\le 768$px y $\le 480$px con tap targets $\ge 44$px.
+- [x] **Ajuste de Paridad 1-a-1 de Encabezados y Tags**:
+  - Se incorporó la regla global `.section-tag` con color institucional verde (`--color-primary-dark`, `#2E8B35`), tipografía `Quedora`, mayúsculas, espaciado entre icono y texto, y compatibilidad con `.dark` y `.section-tag-danger`.
+  - Se removieron los estilos forzados de alineación izquierda en los encabezados de sección de `page.about.tpl`, recuperando el centrado del título *"Por Qué Elegir HMC HUB"* y *"Nuestra Casa Central en Santa Rosa"*, idénticos al prototipo interactivo.
+
 
 
 
