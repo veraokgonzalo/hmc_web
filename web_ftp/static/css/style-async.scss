@@ -2511,12 +2511,42 @@ footer {
 }
 
 /* --------------------------------------------------------------------------
-   HMC HUB - Global Headings Scale (Global - Idéntico a boceto)
+   HMC HUB - Global Headings Scale & Section Tags (Global - Idéntico a boceto)
    -------------------------------------------------------------------------- */
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-primary-dark, #2E8B35) !important;
+  font-family: var(--font-headings, 'Quedora', sans-serif);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+
+  i {
+    font-size: 0.95em;
+    color: inherit;
+  }
+
+  &.dark {
+    color: var(--color-primary, #3FAA47) !important;
+  }
+
+  &.section-tag-danger {
+    color: #DC2626 !important;
+  }
+}
+
 .section-header {
   text-align: center;
   max-width: 760px;
   margin: 0 auto 48px;
+
+  .section-tag {
+    justify-content: center;
+  }
 }
 
 .section-title {

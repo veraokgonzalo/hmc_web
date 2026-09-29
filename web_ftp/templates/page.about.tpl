@@ -20,7 +20,7 @@
 		<!-- Company Identity & Philosophy -->
 		<div class="about-identity-grid">
 			<div class="about-identity-text">
-				<div class="section-tag mb-2">
+				<div class="section-tag">
 					<i class="fa-solid fa-building"></i> {{ "Nuestra Identidad" | translate }}
 				</div>
 				<h1 class="about-identity-title">
@@ -45,8 +45,8 @@
 
 		<!-- 4 Pillars Grid (Valores y Diferenciales) -->
 		<div class="about-section-spacer">
-			<div class="section-header" style="text-align: left; margin-bottom: 32px;">
-				<div class="section-tag mb-2">
+			<div class="section-header">
+				<div class="section-tag">
 					<i class="fa-solid fa-award"></i> {{ "Valores y Diferenciales" | translate }}
 				</div>
 				<h2 class="section-title">{{ "Por Qué Elegir HMC HUB" | translate }}</h2>
@@ -128,10 +128,7 @@
 
 		<!-- Physical Presence & Branch Santa Rosa -->
 		<div class="about-section-spacer">
-			<div class="section-header" style="text-align: left; margin-bottom: 32px;">
-				<div class="section-tag mb-2">
-					<i class="fa-solid fa-location-dot"></i> {{ "Casa Central & Showroom" | translate }}
-				</div>
+			<div class="section-header">
 				<h2 class="section-title">{{ "Nuestra Casa Central en Santa Rosa" | translate }}</h2>
 				<p class="section-subtitle">{{ "Vení a conocer nuestro showroom, asesorarte cara a cara con especialistas y retirar tus compras con puesta en marcha oficial." | translate }}</p>
 			</div>
