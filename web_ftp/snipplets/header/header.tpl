@@ -115,7 +115,7 @@
                   <i class="fa-solid fa-layer-group text-primary"></i>
                   <span>Más de <strong>13 rubros industriales</strong> y 460 subrubros con stock y repuestos.</span>
                 </div>
-                <a href="{{ store.products_url | default('/productos') }}" class="btn btn-primary btn-sm btn-explore-categories">
+                <a href="/categorias" class="btn btn-primary btn-sm btn-explore-categories">
                   {{ 'Todas las categorías →' | translate }}
                 </a>
               </div>

@@ -4040,4 +4040,429 @@ stream_videos.forEach(function(player){
         } catch(e) {}
     }
 
+    /* ==========================================================================
+       HMC HUB Phase 5.1: Categories Directory Page (/categorias)
+       Master-Detail Architecture (13 Rubros, 79 Subcategorías, 464 Familias)
+       ========================================================================== */
+    var categoriesSection = document.getElementById("directorioCategorias");
+    var categoriesSidebarNav = document.getElementById("categoriesMasterNavList");
+    var categoryDetailHero = document.getElementById("categoryDetailHero");
+
+    if (categoriesSection && categoriesSidebarNav && categoryDetailHero) {
+        var categoriesSearchInput = document.getElementById("categoriesPageSearchInput");
+        var categoriesClearBtn = document.getElementById("categoriesPageClearSearch");
+        var categoriesSidebarCountBadge = document.getElementById("categoriesSidebarCount");
+        var categoriesCountPills = document.querySelectorAll(".js-categories-page-count");
+        var categoriesMobileBackBtn = document.getElementById("btnMobileBackToRubros");
+
+        var expandedSubcategories = new Set();
+        var activeCatId = "agua";
+        var catSearchQuery = "";
+
+        function highlightMatches(text, query) {
+            if (!query || !text) return text || "";
+            var escaped = query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+            var regex = new RegExp("(" + escaped + ")", "gi");
+            return text.replace(regex, '<mark class="search-highlight">$1</mark>');
+        }
+
+        function renderMasterSidebar(sortedCats) {
+            var query = catSearchQuery.toLowerCase();
+            var matchingCategories = sortedCats;
+
+            if (query) {
+                matchingCategories = sortedCats.filter(function(cat) {
+                    var catNameMatches = cat.name.toLowerCase().indexOf(query) !== -1 ||
+                        (cat.displayName && cat.displayName.toLowerCase().indexOf(query) !== -1) ||
+                        (cat.description && cat.description.toLowerCase().indexOf(query) !== -1);
+                    if (catNameMatches) return true;
+
+                    return (cat.subcategories || []).some(function(sub) {
+                        if (sub.name.toLowerCase().indexOf(query) !== -1 || (sub.displayName && sub.displayName.toLowerCase().indexOf(query) !== -1)) return true;
+                        return (sub.subsubcategories || []).some(function(sss) {
+                            return sss.name.toLowerCase().indexOf(query) !== -1;
+                        });
+                    });
+                });
+            }
+
+            if (categoriesSidebarCountBadge) {
+                categoriesSidebarCountBadge.textContent = matchingCategories.length;
+            }
+
+            var navHtml = "";
+            if (matchingCategories.length === 0) {
+                navHtml = '<div style="padding: 16px 12px; font-size: 0.82rem; color: #888; text-align: center;">Sin coincidencias en rubros</div>';
+            } else {
+                matchingCategories.forEach(function(cat) {
+                    var isActive = (!query && cat.id === activeCatId) ? " active" : "";
+                    navHtml += '<button type="button" class="master-nav-item' + isActive + '" data-cat-id="' + cat.id + '">' +
+                        '<span class="master-nav-name">' + highlightMatches(cat.displayName || cat.name, catSearchQuery) + '</span>' +
+                        '<i class="fa-solid fa-chevron-right master-nav-arrow"></i>' +
+                    '</button>';
+                });
+            }
+
+            categoriesSidebarNav.innerHTML = navHtml;
+
+            var navItems = categoriesSidebarNav.querySelectorAll(".master-nav-item");
+            for (var i = 0; i < navItems.length; i++) {
+                (function(item) {
+                    item.addEventListener("click", function() {
+                        var catId = item.getAttribute("data-cat-id");
+                        if (!catId) return;
+
+                        activeCatId = catId;
+                        if (catSearchQuery) {
+                            catSearchQuery = "";
+                            if (categoriesSearchInput) categoriesSearchInput.value = "";
+                            if (categoriesClearBtn) categoriesClearBtn.style.display = "none";
+                        }
+
+                        renderMasterSidebar(sortedCats);
+                        renderDetailPanel(sortedCats);
+
+                        if (categoriesSection) {
+                            categoriesSection.classList.remove("mobile-step-categories");
+                            categoriesSection.classList.add("mobile-step-detail");
+                        }
+
+                        if (window.innerWidth <= 992 && categoryDetailHero) {
+                            categoryDetailHero.scrollIntoView({ behavior: "smooth", block: "start" });
+                        }
+                    });
+                })(navItems[i]);
+            }
+        }
+
+        function renderDetailPanel(sortedCats) {
+            var query = catSearchQuery.toLowerCase();
+
+            if (query) {
+                renderSearchResults(query, sortedCats);
+                return;
+            }
+
+            var currentCat = null;
+            for (var i = 0; i < sortedCats.length; i++) {
+                if (sortedCats[i].id === activeCatId) {
+                    currentCat = sortedCats[i];
+                    break;
+                }
+            }
+            if (!currentCat) currentCat = sortedCats[0];
+            if (!currentCat) return;
+
+            var subcats = (currentCat.subcategories || []).slice().sort(function(a, b) {
+                return (a.displayName || a.name).localeCompare(b.displayName || b.name, "es");
+            });
+
+            var subgridHtml = "";
+            subcats.forEach(function(sub) {
+                var subKey = currentCat.id + "__" + (sub.slug || sub.name);
+                var isExpanded = expandedSubcategories.has(subKey);
+
+                var subsubsList = (sub.subsubcategories || []).slice().sort(function(a, b) {
+                    return a.name.localeCompare(b.name, "es");
+                });
+
+                var totalItems = subsubsList.length;
+                var visibleItems = (totalItems <= 5 || isExpanded) ? subsubsList : subsubsList.slice(0, 5);
+
+                var itemsHtml = "";
+                if (visibleItems.length > 0) {
+                    itemsHtml = '<div class="detail-subsub-list">' +
+                        visibleItems.map(function(item) {
+                            return '<a href="/search/?q=' + encodeURIComponent(item.name) + '" class="detail-subsub-item" title="Ver ' + item.count + ' productos de ' + item.name + '">' +
+                                '<span class="detail-subsub-name">' + item.name + '</span>' +
+                                '<span class="detail-subsub-count">' + item.count + '</span>' +
+                            '</a>';
+                        }).join("") +
+                    '</div>';
+                } else {
+                    itemsHtml = '<div style="padding: 10px 8px; font-size: 0.80rem; color: #888;">Productos de catálogo general</div>';
+                }
+
+                var expandBtnHtml = "";
+                if (totalItems > 5) {
+                    if (!isExpanded) {
+                        var remaining = totalItems - 5;
+                        expandBtnHtml = '<button type="button" class="btn-expand-subsubs js-expand-subsubs" data-sub-key="' + subKey + '">' +
+                            '<span>+ Ver ' + remaining + ' familias más</span>' +
+                            '<i class="fa-solid fa-chevron-down"></i>' +
+                        '</button>';
+                    } else {
+                        expandBtnHtml = '<button type="button" class="btn-expand-subsubs js-expand-subsubs" data-sub-key="' + subKey + '">' +
+                            '<span>- Ver menos</span>' +
+                            '<i class="fa-solid fa-chevron-up"></i>' +
+                        '</button>';
+                    }
+                }
+
+                subgridHtml += '<div class="detail-sub-card">' +
+                    '<div class="detail-sub-card-header">' +
+                        '<div class="detail-sub-card-title-group">' +
+                            '<a href="/search/?q=' + encodeURIComponent(sub.name) + '" class="detail-sub-card-title" title="Ver productos de ' + (sub.displayName || sub.name) + '">' +
+                                (sub.displayName || sub.name) +
+                            '</a>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="detail-sub-card-body">' +
+                        itemsHtml +
+                        expandBtnHtml +
+                    '</div>' +
+                '</div>';
+            });
+
+            var catLink = "/" + currentCat.id;
+
+            categoryDetailHero.innerHTML = '<div class="category-detail-hero-header">' +
+                '<div style="flex-grow: 1;">' +
+                    '<h2 class="category-detail-hero-title">' + (currentCat.displayName || currentCat.name) + '</h2>' +
+                    '<p class="category-detail-hero-desc">' + (currentCat.description || 'Catálogo industrial de repuestos y equipos especializados.') + '</p>' +
+                '</div>' +
+                '<div class="category-detail-hero-pills">' +
+                    '<span class="hero-pill">' + subcats.length + ' subcategorías</span>' +
+                '</div>' +
+            '</div>' +
+            '<div class="category-subcategories-grid" id="categoryDetailSubgrid">' +
+                subgridHtml +
+            '</div>' +
+            '<div class="category-detail-hero-meta">' +
+                '<a href="' + catLink + '" class="btn btn-primary btn-sm btn-detail-full-catalog" title="Explorar todos los productos de ' + (currentCat.displayName || currentCat.name) + '">' +
+                    'Ver catálogo de ' + (currentCat.displayName || currentCat.name) + ' <i class="fa-solid fa-arrow-right ml-1"></i>' +
+                '</a>' +
+            '</div>';
+
+            var totalInitialProducts = sortedCats.reduce(function(sum, c) { return sum + (c.count || 0); }, 0);
+            categoriesCountPills.forEach(function(pill) {
+                pill.innerHTML = '<strong>' + sortedCats.length + '</strong> rubros • <strong>' + totalInitialProducts.toLocaleString('es-AR') + '</strong> productos';
+            });
+        }
+
+        function renderSearchResults(query, sortedCats) {
+            var matchedCards = [];
+            var totalMatches = 0;
+
+            sortedCats.forEach(function(cat) {
+                var catMatches = cat.name.toLowerCase().indexOf(query) !== -1 ||
+                    (cat.displayName && cat.displayName.toLowerCase().indexOf(query) !== -1) ||
+                    (cat.description && cat.description.toLowerCase().indexOf(query) !== -1);
+
+                var subcats = cat.subcategories || [];
+                subcats.forEach(function(sub) {
+                    var subMatches = sub.name.toLowerCase().indexOf(query) !== -1 ||
+                        (sub.displayName && sub.displayName.toLowerCase().indexOf(query) !== -1);
+
+                    var matchedSubsubs = [];
+                    var allSubsubs = sub.subsubcategories || [];
+                    allSubsubs.forEach(function(sss) {
+                        if (sss.name.toLowerCase().indexOf(query) !== -1 || catMatches || subMatches) {
+                            matchedSubsubs.push(sss);
+                        }
+                    });
+
+                    if (catMatches || subMatches || matchedSubsubs.length > 0) {
+                        matchedCards.push({
+                            catId: cat.id,
+                            catName: cat.displayName || cat.name,
+                            subName: sub.displayName || sub.name,
+                            subCount: sub.count,
+                            items: matchedSubsubs.length > 0 ? matchedSubsubs : allSubsubs
+                        });
+                        totalMatches += sub.count;
+                    }
+                });
+            });
+
+            if (matchedCards.length === 0) {
+                categoryDetailHero.innerHTML = '<div class="search-results-hero">' +
+                    '<div>' +
+                        '<h3 class="search-results-hero-title">Búsqueda: "' + catSearchQuery + '"</h3>' +
+                        '<p style="margin: 4px 0 0 0; font-size: 0.85rem; color: #666;">Sin coincidencias en categorías ni familias de repuestos.</p>' +
+                    '</div>' +
+                    '<button type="button" class="btn btn-outline-primary btn-sm" id="btnResetSearchHero">' +
+                        '<i class="fa-solid fa-rotate-left mr-1"></i> Restablecer Búsqueda' +
+                    '</button>' +
+                '</div>' +
+                '<div class="brands-empty-state" style="margin-top: 20px; background: #fff; border: 1px solid var(--color-gray-border, #E2E8F0); border-radius: var(--radius-md, 8px); padding: 40px 20px; text-align: center;">' +
+                    '<i class="fa-solid fa-circle-exclamation" style="font-size: 2.2rem; color: #aaa; margin-bottom: 12px;"></i>' +
+                    '<h4 style="margin-bottom: 8px;">No encontramos coincidencias para "' + catSearchQuery + '"</h4>' +
+                    '<p style="font-size: 0.88rem; color: #666; max-width: 480px; margin: 0 auto 20px auto;">' +
+                        'Revisá la ortografía o consultá directamente con nuestros asesores comerciales para cotizar repuestos o equipos a pedido.' +
+                    '</p>' +
+                    '<button type="button" class="btn btn-primary btn-sm" id="btnResetSearchAction">' +
+                        '<i class="fa-solid fa-layer-group mr-1"></i> Ver todos los rubros' +
+                    '</button>' +
+                '</div>';
+                return;
+            }
+
+            var subgridHtml = "";
+            matchedCards.forEach(function(card) {
+                var items = card.items.slice(0, 8);
+                subgridHtml += '<div class="detail-sub-card">' +
+                    '<div class="detail-sub-card-header">' +
+                        '<div class="detail-sub-card-title-group">' +
+                            '<span class="detail-sub-card-category-tag">' + card.catName + '</span>' +
+                            '<a href="/search/?q=' + encodeURIComponent(card.subName) + '" class="detail-sub-card-title" title="Ver ' + card.subName + '">' +
+                                highlightMatches(card.subName, catSearchQuery) +
+                            '</a>' +
+                        '</div>' +
+                    '</div>' +
+                    '<div class="detail-sub-card-body">' +
+                        '<div class="detail-subsub-list">' +
+                            items.map(function(item) {
+                                return '<a href="/search/?q=' + encodeURIComponent(item.name) + '" class="detail-subsub-item" title="Ver ' + item.name + '">' +
+                                    '<span class="detail-subsub-name">' + highlightMatches(item.name, catSearchQuery) + '</span>' +
+                                    '<span class="detail-subsub-count">' + item.count + '</span>' +
+                                '</a>';
+                            }).join("") +
+                        '</div>' +
+                        (card.items.length > 8 ? '<a href="/search/?q=' + encodeURIComponent(card.subName) + '" class="btn-expand-subsubs" style="text-decoration: none;"><span>Ver ' + (card.items.length - 8) + ' repuestos más en catálogo →</span></a>' : "") +
+                    '</div>' +
+                '</div>';
+            });
+
+            categoryDetailHero.innerHTML = '<div class="search-results-hero">' +
+                '<div>' +
+                    '<h3 class="search-results-hero-title">Resultados para "' + highlightMatches(catSearchQuery, catSearchQuery) + '"</h3>' +
+                    '<p style="margin: 4px 0 0 0; font-size: 0.88rem; color: #666;">Mostrando ' + matchedCards.length + ' subcategorías que coinciden con tu búsqueda técnica.</p>' +
+                '</div>' +
+                '<div style="display: flex; align-items: center; gap: 10px;">' +
+                    '<span class="search-results-badge">' + matchedCards.length + ' grupos</span>' +
+                    '<button type="button" class="btn btn-outline-primary btn-sm" id="btnResetSearchHero">' +
+                        '<i class="fa-solid fa-xmark mr-1"></i> Limpiar' +
+                    '</button>' +
+                '</div>' +
+            '</div>' +
+            '<div class="category-subcategories-grid" id="categoryDetailSubgrid" style="margin-top: 20px;">' +
+                subgridHtml +
+            '</div>';
+
+            categoriesCountPills.forEach(function(pill) {
+                pill.innerHTML = '<strong>' + matchedCards.length + '</strong> subcategorías • <strong>' + totalMatches.toLocaleString('es-AR') + '</strong> productos';
+            });
+        }
+
+        // Initialize with available categories data
+        function runCategoriesInit() {
+            var tree = window.REAL_CATEGORIES_TREE;
+            if (!tree || tree.length === 0) return;
+
+            var sortedCats = tree.slice().sort(function(a, b) {
+                return (a.displayName || a.name).localeCompare(b.displayName || b.name, "es");
+            });
+
+            activeCatId = sortedCats[0] ? sortedCats[0].id : "agua";
+
+            try {
+                var urlParams = new URLSearchParams(window.location.search);
+                var initialCat = urlParams.get("cat") || urlParams.get("category");
+                var initialQuery = urlParams.get("search") || urlParams.get("q");
+
+                if (initialCat) {
+                    for (var i = 0; i < sortedCats.length; i++) {
+                        if (sortedCats[i].id.toLowerCase() === initialCat.toLowerCase()) {
+                            activeCatId = sortedCats[i].id;
+                            if (categoriesSection) {
+                                categoriesSection.classList.remove("mobile-step-categories");
+                                categoriesSection.classList.add("mobile-step-detail");
+                            }
+                            break;
+                        }
+                    }
+                }
+
+                if (initialQuery && categoriesSearchInput) {
+                    categoriesSearchInput.value = initialQuery;
+                    catSearchQuery = initialQuery.trim();
+                    if (categoriesClearBtn) categoriesClearBtn.style.display = "flex";
+                }
+            } catch(e) {}
+
+            renderMasterSidebar(sortedCats);
+            renderDetailPanel(sortedCats);
+
+            // Progressive disclosure delegation on detailHero
+            categoryDetailHero.addEventListener("click", function(e) {
+                var btn = e.target.closest(".js-expand-subsubs");
+                if (btn) {
+                    var subKey = btn.getAttribute("data-sub-key");
+                    if (subKey) {
+                        if (expandedSubcategories.has(subKey)) {
+                            expandedSubcategories.delete(subKey);
+                        } else {
+                            expandedSubcategories.add(subKey);
+                        }
+                        renderDetailPanel(sortedCats);
+                    }
+                    return;
+                }
+
+                var resetBtn = e.target.closest("#btnResetSearchHero, #btnResetSearchAction");
+                if (resetBtn) {
+                    catSearchQuery = "";
+                    if (categoriesSearchInput) categoriesSearchInput.value = "";
+                    if (categoriesClearBtn) categoriesClearBtn.style.display = "none";
+                    renderMasterSidebar(sortedCats);
+                    renderDetailPanel(sortedCats);
+                }
+            });
+
+            if (categoriesMobileBackBtn) {
+                categoriesMobileBackBtn.addEventListener("click", function() {
+                    if (categoriesSection) {
+                        categoriesSection.classList.remove("mobile-step-detail");
+                        categoriesSection.classList.add("mobile-step-categories");
+                        categoriesSection.scrollIntoView({ behavior: "smooth", block: "start" });
+                    }
+                });
+            }
+
+            if (categoriesSearchInput) {
+                categoriesSearchInput.addEventListener("input", function(e) {
+                    catSearchQuery = e.target.value.trim();
+                    if (categoriesClearBtn) {
+                        categoriesClearBtn.style.display = catSearchQuery.length > 0 ? "flex" : "none";
+                    }
+                    renderMasterSidebar(sortedCats);
+                    renderDetailPanel(sortedCats);
+
+                    if (catSearchQuery.length >= 2 && window.innerWidth <= 992 && categoriesSection) {
+                        categoriesSection.classList.remove("mobile-step-categories");
+                        categoriesSection.classList.add("mobile-step-detail");
+                    }
+                });
+            }
+
+            if (categoriesClearBtn) {
+                categoriesClearBtn.addEventListener("click", function() {
+                    if (categoriesSearchInput) {
+                        categoriesSearchInput.value = "";
+                        categoriesSearchInput.focus();
+                    }
+                    categoriesClearBtn.style.display = "none";
+                    catSearchQuery = "";
+                    renderMasterSidebar(sortedCats);
+                    renderDetailPanel(sortedCats);
+                });
+            }
+        }
+
+        if (window.REAL_CATEGORIES_TREE && window.REAL_CATEGORIES_TREE.length > 0) {
+            runCategoriesInit();
+        } else {
+            window.addEventListener("load", runCategoriesInit);
+            // Polling fallback
+            var checkCatTree = setInterval(function() {
+                if (window.REAL_CATEGORIES_TREE && window.REAL_CATEGORIES_TREE.length > 0) {
+                    clearInterval(checkCatTree);
+                    runCategoriesInit();
+                }
+            }, 100);
+            setTimeout(function() { clearInterval(checkCatTree); }, 4000);
+        }
+    }
+
 });

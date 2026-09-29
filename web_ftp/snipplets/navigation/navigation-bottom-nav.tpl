@@ -8,7 +8,7 @@
     <span>{{ 'Inicio' | translate }}</span>
   </a>
 
-  <a href="{{ store.products_url | default('/productos') }}" class="mobile-nav-btn {% if template == 'category' %}active{% endif %}" data-page="categories">
+  <a href="/categorias" class="mobile-nav-btn" data-page="categories">
     <i class="fa-solid fa-layer-group"></i>
     <span>{{ 'Categorías' | translate }}</span>
   </a>

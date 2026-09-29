@@ -63,7 +63,7 @@
         {% endfor %}
         <a href="{{ cat_url }}" class="mobile-subnav-link">{{ cat_name }}</a>
       {% endfor %}
-      <a href="{{ store.products_url | default('/productos') }}" class="mobile-subnav-link mobile-subnav-link-cta">
+      <a href="/categorias" class="mobile-subnav-link mobile-subnav-link-cta">
         <span>{{ 'Todas las categorías →' | translate }}</span>
       </a>
     </div>

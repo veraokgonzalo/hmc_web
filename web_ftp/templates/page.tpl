@@ -2,6 +2,8 @@
 	{% include 'templates/page.about.tpl' %}
 {% elseif page.handle in ['marcas', 'marcas-1', 'marcas-2', 'brands', 'fabricantes', 'directorio-marcas', 'directorio-de-marcas'] or page.name | lower in ['marcas', 'brands', 'fabricantes', 'directorio de marcas', 'marcas oficiales'] or template == 'page.brands' %}
 	{% include 'templates/page.brands.tpl' %}
+{% elseif page.handle in ['categorias', 'categorias-1', 'categories', 'rubros', 'directorio-categorias', 'directorio-de-categorias'] or page.name | lower in ['categorias', 'categorías', 'directorio de categorias', 'directorio de categorías', 'rubros'] or template == 'page.categories' %}
+	{% include 'templates/page.categories.tpl' %}
 {% else %}
 	{% embed "snipplets/page-header.tpl" %}
 		{% block page_header_text %}{{ page.name }}{% endblock page_header_text %}
