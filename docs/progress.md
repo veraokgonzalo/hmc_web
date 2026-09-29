@@ -743,6 +743,31 @@ Fuente: `docs/feedback_cliente.md` §7 y `docs/specs.md` ("Ajustes de Feedback d
   - Se incorporó la regla global `.section-tag` con color institucional verde (`--color-primary-dark`, `#2E8B35`), tipografía `Quedora`, mayúsculas, espaciado entre icono y texto, y compatibilidad con `.dark` y `.section-tag-danger`.
   - Se removieron los estilos forzados de alineación izquierda en los encabezados de sección de `page.about.tpl`, recuperando el centrado del título *"Por Qué Elegir HMC HUB"* y *"Nuestra Casa Central en Santa Rosa"*, idénticos al prototipo interactivo.
 
+---
+
+## 🏷️ Migración de Directorio Oficial de Marcas a Tiendanube FTP (Fase 5.2 - 2026-09-28)
+
+- [x] **Plantilla Dedicada `templates/page.brands.tpl` & Auto-Delegación en `page.tpl`**:
+  - Implementada la plantilla completa con el dataset server-side en Twig de los 113 fabricantes reales clasificados de la `#` a la `V` con enlaces canónicos de búsqueda `{{ store.search_url | default('/search/') }}?q={{ item.name | url_encode }}` y badges de cantidad de productos en catálogo.
+  - Delegación inteligente configurada en `templates/page.tpl` para los identificadores de página `['marcas', 'brands', 'fabricantes', 'directorio-marcas']` o `template == 'page.brands'`.
+- [x] **Filtros Interactivos y Motor en Tiempo Real (`web_ftp/static/js/store.js.tpl`)**:
+  - Búsqueda instantánea por nombre de fabricante con contador dinámico y botón de limpieza rápida (`#brandsPageClearSearch`).
+  - Barra de salto rápido por alfabeto (`TODAS`, `# / 0-9`, `A` a `V`) con clases activas y filtro sincronizado.
+  - Estado vacío interactivo (`#brandsEmptyState`) con botón de reseteo (`#btnResetBrandsFilter`).
+  - Soporte de deep-linking mediante parámetros de URL (`?q=...` o `?letter=...`).
+- [x] **Estilos SCSS & Responsividad Mobile-First (`web_ftp/static/css/style-async.scss`)**:
+  - Layout responsive en grilla de 6 columnas en desktop, 4 en tablet, 2 en mobile y 1 en pantallas pequeñas.
+  - Barra de navegación alfabética táctil con scroll horizontal suave (`-webkit-overflow-scrolling: touch`) y tap targets mínimos $\ge 44$px.
+- [x] **Actualización de Enlaces Globales de Navegación a `/marcas`**:
+  - `snipplets/header/header.tpl`: Enlace en navbar principal y botón CTA del mega dropdown actualizados a `/marcas`.
+  - `snipplets/navigation/navigation-drawer.tpl`: CTA del acordeón de marcas en menú off-canvas actualizado a `/marcas`.
+  - `snipplets/navigation/navigation-bottom-nav.tpl`: Botón "Marcas" de la barra móvil inferior actualizado a `/marcas`.
+  - `snipplets/home/home-brands.tpl`: Botón "Explorar el directorio de marcas" actualizado a enlace relativo `/marcas`.
+  - Sincronización de estado activo de navegación en `store.js.tpl` para resaltar el botón de Marcas en la navbar al visitar `/marcas`.
+- [x] **Despliegue FTP Exitoso**:
+  - Desplegado a la tienda en vivo con `tiendanube theme ftp push --yes` (1 archivo creado, 7 actualizados, 309 sin cambios).
+
+
 
 
 
