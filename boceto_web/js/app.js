@@ -71,6 +71,25 @@ const REAL_STORE_CATEGORIES = [
   { id: "riego", name: "RIEGO", displayName: "Riego", count: 200 }
 ];
 
+// Category names are shown in sentence case ("Máquinas a batería"), never Title Case or ALL CAPS
+function toSentenceCase(str) {
+  if (!str) return str;
+  const lower = str.toLocaleLowerCase('es');
+  return lower.charAt(0).toLocaleUpperCase('es') + lower.slice(1);
+}
+
+(function normalizeCategoryNames() {
+  const trees = [REAL_STORE_CATEGORIES];
+  if (typeof REAL_CATEGORIES_TREE !== 'undefined') trees.push(REAL_CATEGORIES_TREE);
+  trees.forEach(tree => tree.forEach(cat => {
+    cat.displayName = toSentenceCase(cat.displayName || cat.name);
+    (cat.subcategories || []).forEach(sub => {
+      sub.displayName = toSentenceCase(sub.displayName || sub.name);
+      (sub.subsubcategories || []).forEach(sss => { sss.name = toSentenceCase(sss.name); });
+    });
+  }));
+})();
+
 /* --------------------------------------------------------------------------
    -1.4. Category Taxonomy Mapping & Resolver (Task 2.2)
    -------------------------------------------------------------------------- */
@@ -168,10 +187,9 @@ function getCategoriesDropdownHtml() {
     .sort((a, b) => a.displayName.localeCompare(b.displayName, 'es'));
 
   return top12.map(cat => `
-    <a href="catalog.html?category=${cat.id}" class="dropdown-category-card" title="Ver ${cat.count.toLocaleString('es-AR')} productos en ${cat.displayName}">
+    <a href="catalog.html?category=${cat.id}" class="dropdown-category-card" title="Ver ${cat.displayName}">
       <div class="dropdown-category-info">
         <span class="dropdown-category-name">${cat.displayName}</span>
-        <span class="dropdown-category-count">${cat.count.toLocaleString('es-AR')} productos</span>
       </div>
     </a>
   `).join('');
@@ -248,26 +266,30 @@ function renderGlobalNavigation() {
       <div class="top-bar-slider">
         <div class="top-bar-marquee-track">
           <div class="top-bar-marquee-content">
-            <span><i class="fa-solid fa-truck-fast"></i> Envíos a todo el país</span>
+            <span><i class="fa-solid fa-shield-halved"></i> Garantía y Service Oficial</span>
             <span class="top-bar-marquee-sep">•</span>
-            <span><i class="fa-solid fa-credit-card"></i> <strong>6 cuotas fijas</strong> sin interés</span>
+            <span><i class="fa-solid fa-truck-ramp-box"></i> Envíos a Todo el País</span>
             <span class="top-bar-marquee-sep">•</span>
-            <span><i class="fa-solid fa-screwdriver-wrench"></i> Puesta en marcha oficial</span>
+            <span><i class="fa-solid fa-credit-card"></i> Todos los Medios de Pago</span>
+            <span class="top-bar-marquee-sep">•</span>
+            <span><i class="fa-solid fa-headset"></i> Asesoramiento Técnico</span>
             <span class="top-bar-marquee-sep">•</span>
           </div>
           <div class="top-bar-marquee-content" aria-hidden="true">
-            <span><i class="fa-solid fa-truck-fast"></i> Envíos a todo el país</span>
+            <span><i class="fa-solid fa-shield-halved"></i> Garantía y Service Oficial</span>
             <span class="top-bar-marquee-sep">•</span>
-            <span><i class="fa-solid fa-credit-card"></i> <strong>6 cuotas fijas</strong> sin interés</span>
+            <span><i class="fa-solid fa-truck-ramp-box"></i> Envíos a Todo el País</span>
             <span class="top-bar-marquee-sep">•</span>
-            <span><i class="fa-solid fa-screwdriver-wrench"></i> Puesta en marcha oficial</span>
+            <span><i class="fa-solid fa-credit-card"></i> Todos los Medios de Pago</span>
+            <span class="top-bar-marquee-sep">•</span>
+            <span><i class="fa-solid fa-headset"></i> Asesoramiento Técnico</span>
             <span class="top-bar-marquee-sep">•</span>
           </div>
         </div>
       </div>
       <div class="top-bar-links">
         <a href="contact.html"><i class="fa-solid fa-location-dot"></i> Sucursal: Santa Rosa, La Pampa</a>
-        <a href="https://wa.me/5492954696231" target="_blank"><i class="fa-brands fa-whatsapp"></i> Ventas y Factura A</a>
+        <a href="https://wa.me/5492954696231" target="_blank"><i class="fa-brands fa-whatsapp"></i> Canal de Ventas</a>
       </div>
     </div>
   </div>
@@ -486,7 +508,6 @@ function renderGlobalNavigation() {
       <!-- 4. Ofertas -->
       <a href="catalog.html?offers=true" class="mobile-nav-link-item">
         <span>Ofertas</span>
-        <span class="badge badge-discount">OFF</span>
       </a>
 
       <!-- 5. Nosotros -->
@@ -574,12 +595,12 @@ function renderGlobalFooter() {
           <h4>Navegación</h4>
           <ul class="footer-links">
             <li><a href="index.html"><i class="fa-solid fa-chevron-right"></i> Inicio</a></li>
-            <li><a href="catalog.html"><i class="fa-solid fa-chevron-right"></i> Catálogo Completo</a></li>
-            <li><a href="categories.html"><i class="fa-solid fa-chevron-right"></i> Directorio de Categorías</a></li>
-            <li><a href="catalog.html?offers=true"><i class="fa-solid fa-chevron-right"></i> Ofertas Especiales</a></li>
-            <li><a href="brands.html"><i class="fa-solid fa-chevron-right"></i> Marcas Oficiales</a></li>
-            <li><a href="about.html"><i class="fa-solid fa-chevron-right"></i> Nosotros y Respaldo</a></li>
-            <li><a href="contact.html"><i class="fa-solid fa-chevron-right"></i> Contacto y Sucursales</a></li>
+            <li><a href="categories.html"><i class="fa-solid fa-chevron-right"></i> Categorías</a></li>
+            <li><a href="brands.html"><i class="fa-solid fa-chevron-right"></i> Marcas</a></li>
+            <li><a href="catalog.html?offers=true"><i class="fa-solid fa-chevron-right"></i> Ofertas</a></li>
+            <li><a href="about.html"><i class="fa-solid fa-chevron-right"></i> Nosotros</a></li>
+            <li><a href="contact.html"><i class="fa-solid fa-chevron-right"></i> Contacto</a></li>
+            <li><a href="https://wa.me/5492954696231?text=Hola%20HMC%20Hub,%20necesito%20asesoramiento%20t%C3%A9cnico" target="_blank"><i class="fa-solid fa-chevron-right"></i> Asesoría Técnica</a></li>
           </ul>
         </div>
 
@@ -588,7 +609,6 @@ function renderGlobalFooter() {
           <h4>Atención al Cliente</h4>
           <ul class="footer-links">
             <li><a href="contact.html"><i class="fa-solid fa-chevron-right"></i> Formas de Envío</a></li>
-            <li><a href="contact.html"><i class="fa-solid fa-chevron-right"></i> Medios de Pago</a></li>
             <li><a href="contact.html"><i class="fa-solid fa-chevron-right"></i> Garantía y Devoluciones</a></li>
             <li><a href="contact.html"><i class="fa-solid fa-chevron-right"></i> Servicio Técnico Oficial</a></li>
           </ul>
@@ -624,13 +644,6 @@ function renderGlobalFooter() {
         <div class="footer-bottom-inner">
           <div>
             © 2026 <strong>HMC HUB</strong> — Todos los derechos reservados.
-          </div>
-          <div class="payment-methods-icons">
-            <i class="fa-brands fa-cc-visa" title="Visa"></i>
-            <i class="fa-brands fa-cc-mastercard" title="Mastercard"></i>
-            <i class="fa-brands fa-cc-amex" title="American Express"></i>
-            <i class="fa-solid fa-money-bill-transfer" title="Transferencia Bancaria"></i>
-            <i class="fa-solid fa-shield-check text-primary" title="Compra 100% Protegida"></i>
           </div>
         </div>
       </div>
@@ -1010,20 +1023,42 @@ function initBrandsPage() {
   // Initial Render
   renderBrandsDirectory("", "ALL");
 
-  // Search Input Handler
+  // Search: live filtering on desktop; on mobile it runs on submit ("Buscar" button or keyboard search key)
+  const searchForm = document.getElementById("brandsPageSearchForm");
+  const isMobileDirectory = () => window.matchMedia("(max-width: 768px)").matches; // matches the .btn-directory-search breakpoint in styles.css
+
+  function runBrandsSearch(value) {
+    currentSearch = value;
+    // Reset active letter to ALL when searching
+    alphaBtns.forEach(b => b.classList.remove("active"));
+    const allBtn = document.querySelector(".js-brands-page-alpha-bar .alpha-btn[data-letter='ALL']");
+    if (allBtn) allBtn.classList.add("active");
+    currentLetter = "ALL";
+
+    renderBrandsDirectory(currentSearch, "ALL");
+  }
+
   if (searchInput) {
     searchInput.addEventListener("input", (e) => {
-      currentSearch = e.target.value;
+      const value = e.target.value;
       if (clearBtn) {
-        clearBtn.style.display = currentSearch.length > 0 ? "flex" : "none";
+        clearBtn.style.display = value.length > 0 ? "flex" : "none";
       }
-      // Reset active letter to ALL when typing
-      alphaBtns.forEach(b => b.classList.remove("active"));
-      const allBtn = document.querySelector(".js-brands-page-alpha-bar .alpha-btn[data-letter='ALL']");
-      if (allBtn) allBtn.classList.add("active");
-      currentLetter = "ALL";
+      // Mobile: wait for submit, except when the field is emptied (restore the full directory)
+      if (isMobileDirectory() && value.trim().length > 0) return;
+      runBrandsSearch(value);
+    });
+  }
 
-      renderBrandsDirectory(currentSearch, "ALL");
+  if (searchForm) {
+    searchForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      runBrandsSearch(searchInput ? searchInput.value : "");
+      if (searchInput) searchInput.blur(); // closes the mobile keyboard so results are visible
+
+      if (isMobileDirectory()) {
+        container.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
     });
   }
 
@@ -1485,21 +1520,40 @@ function initCategoriesPage() {
     });
   }
 
-  // Search Input Handler
+  // Search: live filtering on desktop; on mobile the query only runs when the user taps "Buscar"
+  const searchForm = document.getElementById("categoriesPageSearchForm");
+  const isMobileDirectory = () => window.matchMedia("(max-width: 992px)").matches;
+
+  function runCategoriesSearch(value) {
+    searchQuery = value.trim();
+    renderMasterSidebar();
+    renderDetailPanel();
+    return searchQuery;
+  }
+
   if (searchInput) {
     searchInput.addEventListener("input", (e) => {
-      searchQuery = e.target.value.trim();
+      const value = e.target.value;
       if (clearBtn) {
-        clearBtn.style.display = searchQuery.length > 0 ? "flex" : "none";
+        clearBtn.style.display = value.trim().length > 0 ? "flex" : "none";
       }
 
-      renderMasterSidebar();
-      renderDetailPanel();
+      // Mobile: wait for submit, except when the field is emptied (restore the full list)
+      if (isMobileDirectory() && value.trim().length > 0) return;
+      runCategoriesSearch(value);
+    });
+  }
 
-      // On mobile: if searching and user enters text, show the detail panel with results
-      if (searchQuery.length >= 2 && window.innerWidth <= 992 && sectionContainer) {
+  if (searchForm) {
+    searchForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const query = runCategoriesSearch(searchInput ? searchInput.value : "");
+      if (searchInput) searchInput.blur(); // closes the mobile keyboard
+
+      if (query.length > 0 && isMobileDirectory() && sectionContainer) {
         sectionContainer.classList.remove("mobile-step-categories");
         sectionContainer.classList.add("mobile-step-detail");
+        sectionContainer.scrollIntoView({ behavior: "smooth", block: "start" });
       }
     });
   }

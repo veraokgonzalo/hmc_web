@@ -53,7 +53,7 @@
 					</div>
 					<h2 class="catalog-offers-title mb-1">{{ 'Liquidación y Ofertas Especiales' | translate }}</h2>
 					<p class="catalog-offers-desc mb-0">
-						{{ 'Equipos de primeras marcas con hasta' | translate }} <strong>16% OFF</strong>, <strong>6 cuotas fijas</strong> {{ 'sin interés y garantía oficial de fábrica.' | translate }}
+						{{ 'Equipos de primeras marcas con importantes descuentos, financiación y garantía oficial de fábrica.' | translate }}
 					</p>
 				</div>
 				<div class="catalog-offers-pill">

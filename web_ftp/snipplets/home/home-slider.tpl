@@ -6,8 +6,8 @@
     {% set default_slides = [
         {
             'title': 'Hacé tu compra <span>online</span>',
-            'image': 'images/hero/hero-slide-2-respaldo-generadores.jpg',
-            'alt': 'Respaldo técnico HMC Hub',
+            'image': 'images/hero/hero-slide-1-ofertas-motosierras.jpg',
+            'alt': 'Tractores cortacésped Troy-Bilt en HMC Hub',
             'button': 'Accedé a la tienda',
             'link': (store.products_url ? store.products_url : '/productos'),
             'icon': 'fa-solid fa-cart-shopping',
@@ -15,8 +15,8 @@
         },
         {
             'title': 'Potencia y Rendimiento Para <span>Tu Trabajo</span>',
-            'image': 'images/hero/hero-slide-1-ofertas-motosierras.jpg',
-            'alt': 'Ofertas de temporada HMC Hub',
+            'image': 'images/hero/banner-showcase-1-linea-pesada.jpg',
+            'alt': 'Motosierra Husqvarna para trabajo profesional',
             'button': 'Ofertas',
             'link': (store.products_url ? (store.products_url ~ '?offers=true') : '/productos?offers=true'),
             'icon': 'fa-solid fa-tag',
@@ -24,8 +24,8 @@
         },
         {
             'title': 'Servicio Técnico Oficial <span>y Repuestos Originales</span>',
-            'image': 'images/hero/hero-slide-3-servicio-tecnico-taller.jpg',
-            'alt': 'Servicio Técnico Oficial HMC Hub',
+            'image': 'images/hero/hero-slide-2-respaldo-generadores.jpg',
+            'alt': 'Taller de servicio técnico oficial HMC Hub',
             'button': 'Solicitar Asistencia',
             'link': (store.whatsapp ? ('https://wa.me/' ~ store.whatsapp) : 'https://wa.me/5492954696231'),
             'icon': 'fa-solid fa-phone',

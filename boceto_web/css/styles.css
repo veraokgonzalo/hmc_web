@@ -539,7 +539,9 @@ h6 { font-size: 0.95rem; }
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  padding: 16px 0;
+  /* Vertical only: this element is also .container, a shorthand would wipe its side gutter */
+  padding-top: 16px;
+  padding-bottom: 16px;
 }
 
 /* Logo */
@@ -1387,10 +1389,6 @@ h6 { font-size: 0.95rem; }
   height: 100%;
   object-fit: cover;
   transition: transform var(--transition-slow);
-}
-
-.product-card:hover .product-img {
-  transform: scale(1.06);
 }
 
 /* Quick Action Overlay */
@@ -3645,6 +3643,10 @@ h6 { font-size: 0.95rem; }
   box-shadow: var(--shadow-sm);
 }
 
+.contact-submit-btn {
+  width: 100%;
+}
+
 .contact-branches-col {
   display: flex;
   flex-direction: column;
@@ -3652,7 +3654,7 @@ h6 { font-size: 0.95rem; }
 }
 
 .contact-trust-callout {
-  margin-top: auto;
+  flex-shrink: 0;
 }
 
 .form-group-hmc {
@@ -3687,6 +3689,10 @@ h6 { font-size: 0.95rem; }
   border-radius: var(--radius-md);
   padding: 20px;
   margin-bottom: 16px;
+  /* Grows to fill the column so it meets the trust callout with no empty gap */
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .branch-card h4 {
@@ -3703,12 +3709,15 @@ h6 { font-size: 0.95rem; }
   overflow: hidden;
   border: 1px solid var(--color-gray-border);
   margin-bottom: 12px;
+  flex: 1 1 auto;
+  display: flex;
 }
 
 .branch-map iframe {
   display: block;
   width: 100%;
-  height: 220px;
+  min-height: 220px;
+  flex: 1 1 auto; /* stretches with the card so the map fills the extra height */
   border: 0;
 }
 
@@ -3727,7 +3736,7 @@ h6 { font-size: 0.95rem; }
 
 @media (max-width: 480px) {
   .branch-map iframe {
-    height: 180px;
+    min-height: 180px;
   }
 }
 
@@ -4253,7 +4262,7 @@ h6 { font-size: 0.95rem; }
 
 .mobile-drawer-search {
   padding: 14px 18px;
-  background: var(--color-gray-ultra-light);
+  background: var(--color-white);
   border-bottom: 1px solid var(--color-gray-border);
 }
 
@@ -4266,6 +4275,7 @@ h6 { font-size: 0.95rem; }
 }
 
 .mobile-drawer-search input {
+  background: transparent;
   flex: 1;
   border: none;
   padding: 8px 4px;
@@ -4880,7 +4890,8 @@ h6 { font-size: 0.95rem; }
   }
 
   .header-inner {
-    padding: 10px 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
     gap: 8px;
     width: 100%;
     justify-content: space-between;
@@ -4927,7 +4938,7 @@ h6 { font-size: 0.95rem; }
   }
 
   .hero-content {
-    padding: 24px 0;
+    padding: 24px 8px; /* + container gutter: title and button keep air from the left edge */
     width: 100%;
     max-width: 100%;
   }
@@ -4946,15 +4957,12 @@ h6 { font-size: 0.95rem; }
 
   .hero-buttons {
     flex-direction: column;
+    align-items: flex-start;
     gap: 8px;
     width: 100%;
   }
 
-  .hero-buttons .btn {
-    width: 100%;
-    padding: 12px 18px;
-    font-size: 0.88rem;
-  }
+  /* Hero button width: see "Mobile CTA width" at the end of this file */
 
   .hero-badge {
     font-size: 0.7rem;
@@ -6119,10 +6127,13 @@ h6 { font-size: 0.95rem; }
   color: var(--color-black);
 }
 
-.master-search-hint {
-  font-size: 0.72rem;
-  color: #888;
-  padding-left: 4px;
+.master-search-card {
+  margin: 0;
+}
+
+/* "Buscar" button: mobile only (desktop filters live while typing) */
+.btn-master-search {
+  display: none;
 }
 
 /* Master Nav Heading */
@@ -6770,6 +6781,18 @@ mark.search-highlight {
   margin: 0;
 }
 
+.directory-search-form {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+  margin: 0;
+}
+
+/* "Buscar" button: mobile only (desktop filters live while typing) */
+.btn-directory-search {
+  display: none;
+}
+
 .directory-search-wrapper {
   position: relative;
   width: 360px;
@@ -7123,8 +7146,34 @@ mark.search-highlight {
     gap: 16px;
   }
 
-  .directory-search-wrapper {
+  .directory-search-form {
     width: 100%;
+  }
+
+  .directory-search-wrapper {
+    flex: 1 1 auto;
+    width: auto;
+    min-width: 0;
+  }
+
+  .directory-search-wrapper input {
+    min-height: 48px;
+    font-size: 1rem; /* >=16px avoids iOS zoom on focus */
+  }
+
+  .btn-directory-search {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    flex: 0 0 auto;
+    min-height: 48px;
+    padding: 0 16px;
+  }
+
+  .brands-alphabet-grid,
+  .categories-directory-section {
+    scroll-margin-top: 90px;
   }
 
   .brands-alphabet-bar {
@@ -7232,6 +7281,62 @@ mark.search-highlight {
     position: static;
     max-height: none;
     top: auto;
+    /* Mobile: the search spans the full section width; only the rubros list keeps the card frame */
+    padding: 0;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    overflow: visible;
+  }
+
+  .master-search-card {
+    flex-direction: row;
+    align-items: stretch;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .master-search-box {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .master-search-box input {
+    min-height: 48px;
+    font-size: 1rem; /* >=16px avoids iOS zoom on focus */
+    background: var(--color-white);
+  }
+
+  .master-search-box .btn-clear-search {
+    width: 36px;
+    height: 36px;
+  }
+
+  .btn-master-search {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    flex: 0 0 auto;
+    min-height: 48px;
+    padding: 0 16px;
+  }
+
+  .master-nav-heading {
+    background: var(--color-white);
+    border: 1px solid var(--color-gray-border);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    padding: 14px 16px 10px;
+    margin-bottom: -14px; /* cancels the sidebar flex gap so heading and list read as one card */
+  }
+
+  .master-categories-nav {
+    background: var(--color-white);
+    border: 1px solid var(--color-gray-border);
+    border-top: none;
+    border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+    padding: 6px 12px 12px;
+    box-shadow: var(--shadow-xs);
   }
 
   /* Step 1: Selector de Rubros */
@@ -7674,3 +7779,54 @@ mark.search-highlight {
 }
 
 
+
+/* ==========================================================================
+   Mobile CTA width (feedback interno 2026-10-04)
+   Every standalone button on mobile shares the width of the home
+   "Consultar al Taller" CTA instead of stretching edge to edge.
+   ========================================================================== */
+:root {
+  --mobile-cta-width: 280px;
+}
+
+@media (max-width: 768px) {
+  .header-inner {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .btn-lg,
+  .hero-buttons .btn,
+  .video-actions .btn,
+  .hmc-parallax-actions .btn,
+  .about-hero-actions .btn,
+  .about-branch-actions .btn,
+  .about-parallax-card-actions .btn,
+  .b2b-support-actions .btn,
+  .btn-detail-full-catalog,
+  .btn-add-cart-lg,
+  .btn-buy-now,
+  .qty-input-box {
+    width: var(--mobile-cta-width); /* fixed width so every CTA (incl. "Consultar al Taller") is identical */
+    max-width: 100%;
+    justify-content: center;
+  }
+
+  .btn-lg,
+  .hero-buttons .btn,
+  .video-actions .btn {
+    padding: 14px 20px;
+    font-size: 0.95rem;
+  }
+
+  /* Centered sections center their CTA; the hero keeps it aligned with the title (left) */
+  .hmc-parallax-actions,
+  .about-hero-actions,
+  .about-branch-actions,
+  .about-parallax-card-actions,
+  .b2b-support-actions,
+  .product-actions-group,
+  .category-detail-hero-meta {
+    align-items: center;
+  }
+}

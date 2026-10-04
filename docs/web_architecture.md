@@ -140,6 +140,7 @@ web_ftp/
 │   │   └── help/
 │   │       └── help-*.tpl           — 15 ilustraciones mockup de "onboarding"
 │   ├── breadcrumbs.tpl
+│   ├── breadcrumbs-bar.tpl
 │   ├── card.tpl
 │   ├── cart-item-ajax.tpl
 │   ├── cart-panel.tpl
@@ -224,6 +225,7 @@ web_ftp/
 | Archivo | Descripción |
 |---|---|
 | `breadcrumbs.tpl` | Migas de pan; arma el trail según `template` (page, cart, search, blog, orden, categoría, etc.). |
+| `breadcrumbs-bar.tpl` | Barra de migas de ancho completo arriba de la página (mismo formato que el encabezado de páginas institucionales como "Nosotros"); la usan `product.tpl` y `contact.tpl`. Parámetro opcional `breadcrumbs_bar_class` (default `mb-4`). |
 | `card.tpl` | Wrapper visual genérico "card" con bloques `card_head`/`card_body`/`card_footer` y soporte de colapso. |
 | `cart-item-ajax.tpl` | Renderiza un ítem de línea dentro del panel de carrito ajax (imagen, nombre, variante, precio, cantidad). |
 | `cart-panel.tpl` | Contenido del modal de carrito ajax: lista de ítems (`cart-item-ajax.tpl`) + estado vacío. |

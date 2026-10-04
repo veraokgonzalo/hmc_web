@@ -18,7 +18,9 @@
 	<div class="container {{ page_header_container_class }}">
 {% endif %}
 		<section class="page-header {% if padding %}py-3 py-md-4{% endif %} {{ page_header_class }}" data-store="page-title">
-			{% include 'snipplets/breadcrumbs.tpl' %}
+			{% if template != 'product' %}{# product renders snipplets/breadcrumbs-bar.tpl at the top of the page #}
+				{% include 'snipplets/breadcrumbs.tpl' %}
+			{% endif %}
 			{% if template == 'product' %}
 
 				{{ component('nubesdk-slot', { type: "before_product_detail_name" }) }}

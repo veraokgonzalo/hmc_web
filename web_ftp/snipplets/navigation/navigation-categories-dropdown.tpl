@@ -20,19 +20,9 @@
 {% for cat in core_categories %}
   {% set cat_url = cat.link %}
   {% set cat_name = cat.name %}
-  {% set cat_count = cat.count %}
-  {% for db_cat in categories %}
-    {% set is_root = not db_cat.parent or db_cat.parent == 0 or not db_cat.parent_id or db_cat.parent_id == 0 %}
-    {% if is_root and db_cat.handle == cat.slug %}
-      {% if db_cat.products_count and db_cat.products_count > 0 %}
-        {% set cat_count = db_cat.products_count ~ ' ' ~ ('productos' | translate) %}
-      {% endif %}
-    {% endif %}
-  {% endfor %}
-  <a href="{{ cat_url }}" class="dropdown-category-card" title="Ver {{ cat_name }}">
+  <a href="{{ cat_url }}" class="dropdown-category-card" title="Ver {{ cat_name | capitalize }}">
     <div class="dropdown-category-info">
-      <span class="dropdown-category-name">{{ cat_name }}</span>
-      <span class="dropdown-category-count">{{ cat_count }}</span>
+      <span class="dropdown-category-name">{{ cat_name | capitalize }}</span>
     </div>
   </a>
 {% endfor %}

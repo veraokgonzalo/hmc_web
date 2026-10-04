@@ -1,12 +1,11 @@
 {% set has_social_network = store.facebook or store.twitter or store.pinterest or store.instagram or store.tiktok or store.youtube %}
 {% set has_footer_contact_info = (store.whatsapp or store.phone or store.email or store.address or store.blog) and settings.footer_contact_show %}          
 
-{% set has_footer_menu = settings.footer_menu and settings.footer_menu_show %}
+{% set has_footer_menu = true %}{# Always shown: navbar sections (snipplets/navigation/navigation-foot.tpl) #}
 {% set has_footer_menu_secondary = settings.footer_menu_secondary and settings.footer_menu_secondary_show %}
 {% set has_footer_about = settings.footer_about_show and (settings.footer_about_title or settings.footer_about_description) %}
-{% set has_payment_logos = settings.payments %}
 {% set has_shipping_logos = settings.shipping %}
-{% set has_shipping_payment_logos = has_payment_logos or has_shipping_logos %}
+{% set has_shipping_payment_logos = has_shipping_logos %}{# Payment methods are intentionally not shown in the footer #}
 {% set has_languages = languages | length > 1 and settings.languages_footer %}
 
 {% set has_seal_logos = store.afip or ebit or settings.custom_seal_code or ("seal_img.jpg" | has_custom_image) %}
@@ -48,9 +47,7 @@
 						{% if settings.footer_menus_toggle %}
 							<a href="#" class="js-accordion-toggle-mobile row">
 						{% endif %}
-							{% if settings.footer_menu_title %}
-								<div class="footer-col-title font-small text-uppercase font-weight-bold {% if settings.footer_menus_toggle %}col p-3{% else %}py-3{% endif %}">{{ settings.footer_menu_title }}</div>
-							{% endif %}
+								<div class="footer-col-title font-small text-uppercase font-weight-bold {% if settings.footer_menus_toggle %}col p-3{% else %}py-3{% endif %}">{{ "Navegación" | translate }}</div>
 						{% if settings.footer_menus_toggle %}
 								<div class="d-md-none col-auto icon-48px">
 									<span class="js-accordion-toggle-inactive">
@@ -146,15 +143,6 @@
 				{% if has_shipping_payment_logos or has_languages %}
 					<div class="row align-items-center py-4">
 						{# Logos Payments and Shipping #}
-
-						{% if has_payment_logos %}
-							<div class="col-md footer-payments-shipping-logos mb-3 mb-md-0{% if has_languages %} mt-md-1{% endif %}">
-								<span class="d-block d-md-inline-block align-middle mb-3 mb-md-1 mr-md-2">{{ "Medios de pago" | translate }}</span>
-								<span class="d-inline-block align-middle">
-									{{ component('payment-shipping-logos', {'type' : 'payments'}) }}
-								</span>
-							</div>
-						{% endif %}
 
 						{% if has_shipping_logos %}
 							<div class="col-md footer-payments-shipping-logos mb-3 mb-md-0{% if has_languages %} mt-md-1{% endif %}">

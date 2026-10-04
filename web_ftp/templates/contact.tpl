@@ -21,7 +21,7 @@
 	<div class="container">
 
 		<!-- Section Header -->
-		<div class="section-header" style="margin-bottom: 36px; text-align: left;">
+		<div class="section-header contact-section-header" style="margin-bottom: 36px;">
 			{% if is_order_cancellation %}
 				<h1 class="section-title" data-store="page-title" style="font-size: 2.4rem;">{{ "Pedí la cancelación de tu última compra" | translate }}</h1>
 			{% else %}
@@ -122,7 +122,7 @@
 						<textarea id="contactMessage" name="message" class="form-input-hmc" rows="4" placeholder="{{ 'Detallanos el trabajo a realizar, potencia requerida o equipo de interés...' | translate }}" required>{{ contact.message }}</textarea>
 					</div>
 
-					<button type="submit" name="contact" class="btn btn-primary btn-lg" style="width: 100%;">
+					<button type="submit" name="contact" class="btn btn-primary btn-lg contact-submit-btn">
 						<i class="fa-solid fa-paper-plane mr-2"></i> {{ "Enviar Mensaje a HMC" | translate }}
 					</button>
 				</form>

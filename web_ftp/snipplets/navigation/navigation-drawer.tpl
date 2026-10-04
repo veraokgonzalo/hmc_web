@@ -61,7 +61,7 @@
             {% set cat_name = db_cat.name %}
           {% endif %}
         {% endfor %}
-        <a href="{{ cat_url }}" class="mobile-subnav-link">{{ cat_name }}</a>
+        <a href="{{ cat_url }}" class="mobile-subnav-link">{{ cat_name | capitalize }}</a>
       {% endfor %}
       <a href="/categorias" class="mobile-subnav-link mobile-subnav-link-cta">
         <span>{{ 'Todas las categorías →' | translate }}</span>
@@ -85,7 +85,6 @@
     <!-- 4. Ofertas -->
     <a href="{{ store.products_url | default('/productos') }}?offers=true" class="mobile-nav-link-item">
       <span>{{ 'Ofertas' | translate }}</span>
-      <span class="badge badge-discount">OFF</span>
     </a>
 
     <!-- 5. Nosotros -->

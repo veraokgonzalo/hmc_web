@@ -65,7 +65,7 @@
                                 {% else %}
                                     <i class="fa-regular fa-circle text-muted mr-2" style="font-size: 0.65rem; opacity: 0.4;"></i>
                                 {% endif %}
-                                {{ cat.name }}
+                                {{ cat.name | capitalize }}
                             </span>
                             {% if cat.products_count %}
                                 <span class="filter-badge">({{ cat.products_count }})</span>

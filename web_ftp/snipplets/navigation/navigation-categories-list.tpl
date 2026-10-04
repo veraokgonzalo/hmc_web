@@ -2,7 +2,7 @@
     {# asking for subcategories without images #}
     <li class="js-desktop-nav-item js-item-subitems-desktop nav-item nav-item-desktop">
         <a class="nav-list-link" href="{{ category.url }}">
-            {{ category.name }}
+            {{ category.name | capitalize }}
         </a>
         {% if category.subcategories(false) %}
             <ul class="list-subitems">

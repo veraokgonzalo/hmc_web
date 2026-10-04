@@ -681,6 +681,8 @@ Fuente: `docs/feedback_cliente.md` §7 y `docs/specs.md` ("Ajustes de Feedback d
 - [x] Verificar visualmente en `≤768px` y `≤480px` que no se generó overflow horizontal ni se rompió ningún tap target (`≥44px`).
 
 ### 2. Carrusel Hero (Home) — imagen ↔ título
+> **Reemplazado** por el Feedback Interno 2026-10-04 (ver la sección "Implementación — Feedback Interno 2026-10-04" → Hero, al final de este archivo): se reasignaron fotos existentes en lugar de conseguir nuevas. Solo sigue vigente revisar el slider custom en el admin.
+
 - [ ] Revisar en el admin de Tiendanube si hay un slider custom cargado (`settings.slider`). Si existe, corregir las imágenes ahí directamente (tiene prioridad sobre el código).
 - [ ] Si no hay slider custom, conseguir/seleccionar la foto de un **tractor** para el slide 1 ("Hacé tu compra online") y la foto de **insumos y repuestos** para el slide 2 ("Potencia y Rendimiento Para Tu Trabajo").
 - [ ] Actualizar `web_ftp/snipplets/home/home-slider.tpl` (array `default_slides`, campo `image` de los slides 1 y 2) y subir las nuevas imágenes a `web_ftp/static/images/hero/`.
@@ -803,5 +805,69 @@ Fuente: `docs/feedback_cliente.md` §7 y `docs/specs.md` ("Ajustes de Feedback d
 
 
 
+
+---
+
+## ✅ Implementación — Feedback Interno 2026-10-04
+
+Fuente: `docs/feedback_interno_2026-10-04.md`. Estado: **implementado en código, pendiente de push FTP (`tiendanube theme ftp push`) y verificación en la tienda en vivo**.
+
+Alcance: los cambios se aplicaron en `web_ftp/` donde existe el componente. El directorio de categorías, el directorio alfabético de marcas y "Nosotros" todavía viven solo en `boceto_web/` (`categories.html`, `brands.html`, `about.html`), así que esos puntos se resolvieron en el boceto. Los cambios compartidos se replicaron en ambos para mantener la paridad. El boceto se verificó con capturas headless a 390px y 1366px; las plantillas `.tpl` no se pueden renderizar localmente.
+
+### Categorías
+- [x] **Nombres en minúscula (formato oración: "Máquinas a batería")**:
+  - `web_ftp`: filtro `| capitalize` sobre el nombre de categoría en el dropdown del header, el drawer, las categorías destacadas del home, la sidebar de filtros, el título de categoría, el banner de categoría y `navigation-categories-list.tpl`. Se quitó `text-uppercase` del título del banner.
+  - `boceto_web/js/app.js`: helper `toSentenceCase()` + normalización única de `REAL_STORE_CATEGORIES` / `REAL_CATEGORIES_TREE` (rubros, subcategorías y familias). Las tarjetas del home se corrigieron en `index.html`.
+- [x] **Sin cantidad de productos como subtítulo**: se eliminó `.dropdown-category-count` (mega-menú) y `.category-count` (categorías destacadas del home) en los dos lados, junto con la lógica `cat_count` que ya no se usaba.
+- [x] **Sin subtítulo "Buscá repuestos o filtrá rubros"**: se eliminó `.master-search-hint` (`categories.html` + CSS).
+- [x] **Mobile — buscar al tocar "Buscar"**: el buscador pasó a ser un `<form>` con botón "Buscar" (solo mobile) y `enterkeyhint="search"`. En `≤992px` el `input` ya no filtra mientras se escribe; la búsqueda corre al tocar el botón o la tecla de búsqueda del teclado, se cierra el teclado y se pasa al panel de resultados. Si se vacía el campo, vuelve el listado completo. En desktop sigue filtrando en vivo.
+- [x] **Mobile — campo a todo el ancho**: en `≤992px` la sidebar deja de ser una tarjeta con padding. El buscador ocupa todo el ancho de la sección y el listado de rubros conserva su marco de tarjeta.
+
+### Marcas
+- [x] **El buscador del directorio no funcionaba en mobile**: el input no estaba dentro de un `<form>`, así que la tecla "Buscar/Ir" del teclado no hacía nada, y los resultados quedaban tapados por el teclado. Se aplicó el mismo patrón que en categorías: form con botón "Buscar" en `≤768px` y `enterkeyhint="search"`. Al enviar se ejecuta la búsqueda, se cierra el teclado y se hace scroll a los resultados (`brands.html`, `app.js`, `styles.css`).
+
+### Listados de productos
+- [x] **La foto se corría a la derecha al pasar el mouse por el nombre**: `.item-product:hover .item-image img { transform: scale(1.05) }` pisaba el `translateX(-50%)` que centra la imagen (`.img-absolute-centered`). Se eliminaron todas las animaciones de zoom de la foto: esa regla, `.item-image:hover img` y `.product-card:hover .product-img`, también en el boceto.
+
+### Topbar
+- [x] El link de WhatsApp pasó de "Ventas y Factura A" a **"Canal de Ventas"** (`header-advertising.tpl`, `app.js`).
+- [x] El marquee ahora usa los ítems de la value prop strip (Garantía y Service Oficial / Envíos a Todo el País / Todos los Medios de Pago / Asesoramiento Técnico) con sus íconos, en las dos copias del track.
+
+### Hero
+- [x] Imágenes reasignadas en `home-slider.tpl` y `index.html`, con `alt` acorde a cada foto:
+  - Slide 1: `hero-slide-1-ofertas-motosierras.jpg` (tractores).
+  - Slide 2: `banner-showcase-1-linea-pesada.jpg` (motosierra).
+  - Slide 3: `hero-slide-2-respaldo-generadores.jpg` (tablero de herramientas del taller).
+- [x] **Mobile**: el título y el botón del hero tienen `8px` extra de aire sobre el gutter del contenedor, y el botón queda alineado a la izquierda con el ancho común de CTA.
+
+### Header mobile
+- [x] **El logo estaba pegado al borde**: `.header-inner { padding: 16px 0 }` está en el mismo elemento que `.container`, así que el shorthand anulaba el gutter lateral. Ahora usa solo `padding-top`/`padding-bottom`, con gutter de 16px en mobile.
+
+### Botones (mobile, global)
+- [x] **Ancho común de CTA** con el token `--mobile-cta-width: 280px` (bloque "Mobile CTA width" al final de `style-async.scss` y `styles.css`). Aplica a `.btn-lg`, `.btn-big`, `.btn-block`, los CTA del hero, del video ("Consultar al Taller"), del parallax y de asistencia técnica; en el boceto también a los CTA de Nosotros, producto, catálogo y contacto. Quedan excluidos los botones "Comprar ahora" de las grillas de 2 columnas y los botones pegados a un input. En el boceto se midieron todos los `.btn-lg` del home a 390px: 280px cada uno.
+
+### Menú lateral (drawer)
+- [x] Se eliminó el badge rojo "OFF" de "Ofertas".
+- [x] Se sacó el fondo gris de la zona del buscador: el contenedor queda blanco y el input transparente.
+
+### Banner de ofertas
+- [x] Nuevo texto: "Equipos de primeras marcas con importantes descuentos, financiación y garantía oficial de fábrica." (`category.tpl`, `search.tpl`, `catalog.html`).
+
+### Footer
+- [x] **Secciones del navbar en lugar del acordeón de categorías**: `navigation-foot.tpl` ahora lista Inicio, Categorías, Marcas, Ofertas, Nosotros, Contacto y Asesoría Técnica, en lugar del menú `settings.footer_menu` del admin. La columna se muestra siempre, con el título "Navegación" y el mismo comportamiento de acordeón mobile. En el boceto, la columna "Navegación" quedó alineada a esas mismas secciones.
+- [x] **Sin medios de pago**: se eliminó el bloque de logos de pago en `footer.tpl`. En el boceto se quitaron los íconos de pago y el link "Medios de Pago".
+
+### Contacto
+- [x] **Título "Contacto & Sucursales" y FAQ centrados**: `.contact-page .section-header` pasó a flex en columna con `align-items: center`, y título y subtítulo usan `text-align: center` explícito. Cubre el tag "Dudas Frecuentes" y el título "Preguntas Frecuentes".
+- [x] **Más aire entre el navbar y el título**: el breadcrumb pasa a una barra superior, más `padding-top: 32px` en `.contact-section-header`.
+- [x] **Sin hueco entre `.branch-card` y `.contact-trust-callout`**: se quitó el `margin-top: auto` del callout. La card crece (`flex: 1`) y el mapa se estira para llenar la altura sobrante, en los dos lados. Además, el botón de envío del boceto ya no lleva `width: 100%` inline (usa la clase `.contact-submit-btn`), para que respete el ancho de CTA en mobile.
+
+### Breadcrumbs
+- [x] **Formato unificado con "Nosotros"**: nuevo `snipplets/breadcrumbs-bar.tpl`, una barra de ancho completo arriba de la página con el mismo markup que el encabezado de `page.tpl`. La usan `product.tpl` (antes el breadcrumb quedaba dentro de la columna de info, al lado de la foto) y `contact.tpl`. `page-header.tpl` ya no repite el breadcrumb en `template == 'product'`. En el boceto el formato ya era consistente.
+
+### Pendiente
+- [ ] `tiendanube theme ftp push` desde `web_ftp/` y verificación en vivo en `≤480px`, `≤768px` y desktop: home, categoría, búsqueda, producto, contacto, drawer y footer.
+- [ ] Confirmar en el admin que no hay slider custom cargado (`settings.slider`): si lo hay, tiene prioridad sobre las imágenes por defecto del hero.
+- [ ] Confirmar en vivo que el filtro `capitalize` de Twig respeta los acentos de los nombres de categoría que vienen del admin (por ejemplo "MÁQUINAS" → "Máquinas").
 
 

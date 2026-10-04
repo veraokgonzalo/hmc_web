@@ -1,6 +1,6 @@
 <section class="background-secondary mb-md-3">
 	{% embed "snipplets/page-header.tpl" with {'breadcrumbs': false} %}
-		{% block page_header_text %}{{ category.name }}{% endblock page_header_text %}
+		{% block page_header_text %}{{ category.name | capitalize }}{% endblock page_header_text %}
 	{% endembed %}
 </section>
 <section class="category-body" data-store="category-grid">

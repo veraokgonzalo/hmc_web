@@ -1476,11 +1476,6 @@ footer {
   }
 }
 
-.item-image:not(.item-image-slider):hover img,
-.item-image-slider:hover .swiper-slide-active img {
-  @include prefix(transform, translateX(-50%) scale(1.04)!important, webkit ms moz o);
-}
-
 .item-actions .alert {
   position: absolute;
   bottom: 100%;
@@ -1757,8 +1752,26 @@ footer {
 .contact-page-section {
 
   .section-header {
-    text-align: left;
+    // Centered (title and FAQ). Flex column so tag, title and subtitle stay centered regardless of inherited heading alignment
+    text-align: center;
     margin-bottom: 36px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .section-title,
+    .section-subtitle {
+      width: 100%;
+      text-align: center;
+    }
+  }
+
+  .contact-section-header {
+    padding-top: 24px; // air between the navbar/breadcrumb and the page title
+  }
+
+  .contact-submit-btn {
+    width: 100%;
   }
 
   .section-title {
@@ -1868,6 +1881,10 @@ footer {
     border-radius: 8px;
     padding: 20px;
     margin-bottom: 16px;
+    // Grows to fill the column so it meets the trust callout with no empty gap
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
 
     h4 {
       font-size: 1.1rem;
@@ -1897,11 +1914,14 @@ footer {
     overflow: hidden;
     border: 1px solid var(--color-gray-border, #E2E8F0);
     margin-bottom: 12px;
+    flex: 1 1 auto;
+    display: flex;
 
     iframe {
       display: block;
       width: 100%;
-      height: 220px;
+      min-height: 220px;
+      flex: 1 1 auto; // stretches with the card so the map fills the extra height
       border: 0;
     }
   }
@@ -1920,7 +1940,6 @@ footer {
   }
 
   .contact-trust-callout {
-    margin-top: auto;
     background: var(--color-surface-dark, #1B1E22);
     color: #FFFFFF;
     border-radius: var(--radius-md, 8px);
@@ -2695,7 +2714,7 @@ footer {
   }
 
   .hero-content {
-    padding: 24px 0;
+    padding: 24px 8px; // + container gutter: title and button keep air from the left edge
     width: 100%;
     max-width: 100%;
   }
@@ -2714,16 +2733,12 @@ footer {
 
   .hero-buttons {
     flex-direction: column;
+    align-items: flex-start;
     gap: 8px;
     width: 100%;
   }
 
-  .hero-buttons .btn {
-    width: 100%;
-    padding: 12px 18px;
-    font-size: 0.88rem;
-    justify-content: center;
-  }
+  // Hero button width: see "Mobile CTA width" at the end of this file
 
   .hero-slider-nav {
     display: none;
@@ -3020,10 +3035,6 @@ footer {
   max-height: 100%;
   object-fit: contain;
   transition: transform 0.3s ease;
-}
-
-.product-card:hover .product-img {
-  transform: scale(1.06);
 }
 
 .product-details {
@@ -3787,7 +3798,9 @@ footer {
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  padding: 16px 0;
+  // Vertical only: this element is also .container, a shorthand would wipe its side gutter
+  padding-top: 16px;
+  padding-bottom: 16px;
 }
 
 /* Logo */
@@ -4437,7 +4450,7 @@ footer {
 
 .mobile-drawer-search {
   padding: 14px 18px;
-  background: #F8F9FA;
+  background: #ffffff;
   border-bottom: 1px solid #E0E0E0;
 }
 
@@ -4452,6 +4465,7 @@ footer {
 .mobile-drawer-search input {
   flex: 1;
   border: none;
+  background: transparent;
   padding: 8px 4px;
   font-size: 0.88rem;
   outline: none;
@@ -4889,7 +4903,8 @@ footer {
   }
 
   .header-inner {
-    padding: 10px 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
     gap: 8px;
     width: 100%;
     justify-content: space-between;
@@ -5544,13 +5559,10 @@ footer {
       object-fit: contain;
       width: 100%;
       height: 100%;
-      transition: transform 0.3s ease;
     }
   }
 
-  &:hover .item-image img {
-    transform: scale(1.05);
-  }
+  // No hover zoom on the photo: a transform here overrides the centering translateX(-50%) of .img-absolute-centered
 
   .item-description {
     padding: 14px 16px;
@@ -7406,6 +7418,42 @@ mark.search-highlight {
   }
 }
 
+/* ==========================================================================
+   Mobile CTA width (feedback interno 2026-10-04)
+   Every standalone button on mobile shares the width of the home
+   "Consultar al Taller" CTA instead of stretching edge to edge.
+   ========================================================================== */
+:root {
+  --mobile-cta-width: 280px;
+}
 
+@media (max-width: 767.98px) {
+  .header-inner {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
 
+  .btn-lg,
+  .btn-big,
+  .btn-block,
+  .hero-buttons .btn,
+  .video-actions .btn,
+  .hmc-parallax-actions .btn,
+  .technical-assistance-btn {
+    width: var(--mobile-cta-width); // fixed width so every CTA (incl. "Consultar al Taller") is identical
+    max-width: 100%;
+    padding: 14px 20px !important;
+    font-size: 0.95rem !important;
+    justify-content: center;
+  }
 
+  // Centered sections center their CTA; the hero keeps it aligned with the title (left)
+  .btn-block,
+  .btn-big,
+  .hmc-parallax-actions .btn,
+  .technical-assistance-btn {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
