@@ -112,7 +112,7 @@
 
 		<div style="text-align: center; margin-top: 32px;">
 			<a href="/marcas" class="btn btn-outline-primary btn-lg">
-				<i class="fa-solid fa-layer-group mr-2"></i> {{ 'Explorar el directorio de marcas' | translate }}
+				<i class="fa-solid fa-layer-group mr-2"></i> {{ 'Directorio de marcas' | translate }}
 			</a>
 		</div>
 	</div>

@@ -872,3 +872,8 @@ Alcance: se aplicó en `web_ftp/` y en `boceto_web/` para mantener la paridad. P
 - [ ] Confirmar en vivo que el filtro `capitalize` de Twig respeta los acentos de los nombres de categoría que vienen del admin (por ejemplo "MÁQUINAS" → "Máquinas").
 
 
+
+### Correcciones adicionales (2026-10-05)
+- [x] **Newsletter — botón más alto que el campo**: el padding global de `.btn` hacía el botón más alto que el input. La fila (`.newsletter-input-row`) estira ambas columnas y `.newsletter-submit-btn` ocupa el 100% de la altura sin padding vertical (`newsletter.tpl`, `home-newsletter.tpl`, `style-async.scss`).
+- [x] **Buscador del header sin fotos en las sugerencias**: la lista sigue cargando sola al escribir, pero se oculta `.search-suggestions-image-container` (componente nativo de Tiendanube que llena `.js-search-results`) en los desplegables de desktop y mobile. En el boceto se quitó el `<img>` de `.search-result-item`.
+- [x] **Botón de "Nuestras Marcas"**: "Explorar el directorio de marcas" → "Directorio de marcas" (`home-brands.tpl`, `index.html`).

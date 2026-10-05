@@ -2220,7 +2220,6 @@ function setupSearchEngine(searchInput, dropdown, resultsContainer, searchForm, 
     if (matches.length > 0) {
       resultsContainer.innerHTML = matches.map(p => `
         <div class="search-result-item" onclick="window.location.href='product.html?id=${p.id}'">
-          <img src="${p.image}" alt="${escapeHtml(p.name)}">
           <div class="search-result-info">
             <h5>${escapeHtml(p.name)}</h5>
             <span>${formatCurrency(p.price)} • <strong style="color: var(--color-primary);">${escapeHtml(p.brand)}</strong></span>

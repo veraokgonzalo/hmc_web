@@ -70,6 +70,12 @@ Las tres imágenes ya existen en `web_ftp/static/images/hero/` y en `boceto_web/
 - [x] En la columna `.contact-branches-col`, ajustar la distribución del contenido para que `.branch-card` y `.contact-trust-callout` ocupen todo el alto disponible. Hoy queda un espacio vacío entre ambas cards.
 - [x] La sección "Preguntas Frecuentes": tanto el tag/eyebrow "PREGUNTAS FRECUENTES" como su título de sección no están centrados; deben centrarse.
 
+## Correcciones adicionales (2026-10-05)
+
+- [x] **Newsletter:** el botón de enviar es más alto que el campo de texto a su izquierda; deben tener la misma altura (`snipplets/newsletter.tpl` / `snipplets/home/home-newsletter.tpl`).
+- [x] **Buscador del header:** al escribir, la búsqueda carga sugerencias automáticamente sin presionar Enter. La lista está bien, pero hay que quitar las imágenes de los productos (desplegables `#searchDropdown` y `#mobileSearchDropdown` en `snipplets/header/header.tpl`).
+- [x] **Home — sección "Nuestras Marcas":** el botón dice "Explorar el directorio de marcas"; quitar "Explorar el" y dejar solo **"Directorio de marcas"** (`snipplets/home/home-brands.tpl:115`).
+
 ## Breadcrumbs
 
 - [x] En la página de producto el breadcrumb no tiene el mismo formato que en el resto del sitio. El formato correcto es el de la página "Nosotros". Todas las páginas cuyo breadcrumb dice `Inicio > Producto` presentan el mismo problema y deben unificarse a ese formato.

@@ -24,7 +24,7 @@
 					{% endif %}
 
 					<form class="mt-4" method="post" action="/winnie-pooh" onsubmit="this.setAttribute('action', '');" data-store="home-newsletter-form">
-						<div class="input-append row no-gutters">
+						<div class="newsletter-input-row input-append row no-gutters">
 							<div class="col">
 								{% embed "snipplets/forms/form-input.tpl" with{input_for: 'email', type_email: true, input_name: 'email', input_id: 'email', input_placeholder: 'Email' | translate, input_group_custom_class: "mb-0",  input_aria_label: 'Email' | translate } %}
 								{% endembed %}
@@ -37,7 +37,7 @@
 								<input type="hidden" name="name" value="{{ 'Sin nombre' | translate }}" />
 								<input type="hidden" name="message" value="{{ 'Pedido de inscripción a newsletter' | translate }}" />
 								<input type="hidden" name="type" value="newsletter" />
-								<input type="submit" name="contact" class="btn btn-primary" value="{{ 'Enviar' | translate }}" />
+								<input type="submit" name="contact" class="btn btn-primary newsletter-submit-btn" value="{{ 'Enviar' | translate }}" />
 							</div>
 						</div>
 					</form>

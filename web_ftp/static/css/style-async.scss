@@ -915,6 +915,17 @@ button{
   -webkit-appearance:none
 }
 
+// Header search suggestions: text-only list (name + price), no product photos
+.search-suggestions .search-suggestions-image-container,
+.search-dropdown .search-suggestions-image-container,
+.search-dropdown .js-search-results img {
+  display: none !important;
+}
+
+.search-dropdown .search-suggestions-text {
+  padding-left: 12px;
+}
+
 .search-suggestions {
   position: absolute;
   z-index: 99999;
@@ -1378,6 +1389,19 @@ footer {
 }
 
 /* // Newsletter */
+
+// Submit button matches the email field height: the row stretches both columns and the button
+// drops its vertical padding (the global .btn padding made it taller than the input)
+.newsletter-input-row {
+  align-items: stretch;
+}
+
+.newsletter-submit-btn {
+  height: 100%;
+  min-height: 0;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
 
 .section-newsletter-home {
   padding: 100px 0;
