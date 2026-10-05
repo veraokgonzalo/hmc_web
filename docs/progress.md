@@ -810,7 +810,7 @@ Fuente: `docs/feedback_cliente.md` §7 y `docs/specs.md` ("Ajustes de Feedback d
 
 ## ✅ Implementación — Feedback Interno 2026-10-04
 
-Fuente: `docs/feedback_interno_2026-10-04.md`. Estado: **implementado en código, pendiente de push FTP (`tiendanube theme ftp push`) y verificación en la tienda en vivo**.
+Fuente: `docs/feedback_interno_2026-10-04.md`. Estado: **implementado y subido a la tienda (2026-10-05)**, pendiente de verificación visual en vivo.
 
 Alcance: se aplicó en `web_ftp/` y en `boceto_web/` para mantener la paridad. Primero se implementó sobre una copia desactualizada de `dev`; después de traer los 29 commits de `origin/dev` (que portan Nosotros `page.about.tpl`, Marcas `page.brands.tpl`, Categorías `page.categories.tpl`, ficha de producto y contacto a `web_ftp/`) se hizo rebase y se trasladaron los fixes a esas páginas reales. El boceto se verificó con capturas headless a 390px y 1366px; en `web_ftp` el SCSS se compiló con `sass` y el JS de los directorios se validó con `node --check`. Las plantillas `.tpl` no se pueden renderizar localmente.
 
@@ -866,7 +866,8 @@ Alcance: se aplicó en `web_ftp/` y en `boceto_web/` para mantener la paridad. P
 - [x] **Formato unificado con "Nosotros"**: el formato correcto es la barra `.breadcrumbs-section` con `.breadcrumb-list` y separadores chevron que usan `page.about.tpl`, `contact.tpl`, `page.brands.tpl` y `page.categories.tpl`. `snipplets/breadcrumbs.tpl` (el que generaba "Inicio > Producto" en texto plano) ahora emite ese mismo markup, y el nuevo `snipplets/breadcrumbs-bar.tpl` lo envuelve en la barra de ancho completo. La usan `product.tpl` (antes el breadcrumb quedaba dentro de la columna de info, al lado de la foto), `category.tpl` y todas las páginas con `page-header.tpl` a página completa (página genérica, carrito, blog). En el boceto el formato ya era consistente.
 
 ### Pendiente
-- [ ] `tiendanube theme ftp push` desde `web_ftp/` y verificación en vivo en `≤480px`, `≤768px` y desktop: home, categoría, búsqueda, producto, contacto, drawer y footer.
+- [x] `tiendanube theme ftp push` (2026-10-05): 1 creado, 319 actualizados, 0 borrados. Antes del push se comprobó que la tienda era idéntica a `origin/dev` (sin cambios hechos directo en la tienda) y después, que es idéntica al commit `d125dab`.
+- [ ] Verificación visual en vivo en `≤480px`, `≤768px` y desktop: home, categoría, búsqueda, producto, `/categorias`, `/marcas`, contacto, drawer y footer. La tienda está protegida con contraseña, así que hay que revisarla con sesión iniciada.
 - [ ] Confirmar en el admin que no hay slider custom cargado (`settings.slider`): si lo hay, tiene prioridad sobre las imágenes por defecto del hero.
 - [ ] Confirmar en vivo que el filtro `capitalize` de Twig respeta los acentos de los nombres de categoría que vienen del admin (por ejemplo "MÁQUINAS" → "Máquinas").
 
