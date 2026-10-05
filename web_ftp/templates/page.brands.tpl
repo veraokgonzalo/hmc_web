@@ -190,13 +190,19 @@
 						</div>
 					</div>
 					
-					<div class="directory-search-wrapper">
-						<i class="fa-solid fa-magnifying-glass search-icon"></i>
-						<input type="text" id="brandsPageSearchInput" class="js-brands-page-search" placeholder="{{ 'Bosch, DeWalt, Einhell...' | translate }}" autocomplete="off">
-						<button type="button" class="btn-clear-search" id="brandsPageClearSearch" title="{{ 'Limpiar búsqueda' | translate }}" style="display: none;">
-							<i class="fa-solid fa-xmark"></i>
+					<form class="directory-search-form" id="brandsPageSearchForm" role="search" action="" method="get">
+						<div class="directory-search-wrapper">
+							<i class="fa-solid fa-magnifying-glass search-icon"></i>
+							<input type="text" name="q" id="brandsPageSearchInput" class="js-brands-page-search" placeholder="{{ 'Bosch, DeWalt, Einhell...' | translate }}" autocomplete="off" enterkeyhint="search" aria-label="{{ 'Buscar marca' | translate }}">
+							<button type="button" class="btn-clear-search" id="brandsPageClearSearch" title="{{ 'Limpiar búsqueda' | translate }}" style="display: none;">
+								<i class="fa-solid fa-xmark"></i>
+							</button>
+						</div>
+						<!-- Mobile: la búsqueda se ejecuta al tocar "Buscar" (en desktop filtra en vivo) -->
+						<button type="submit" class="btn btn-primary btn-directory-search">
+							<i class="fa-solid fa-magnifying-glass"></i> {{ 'Buscar' | translate }}
 						</button>
-					</div>
+					</form>
 
 					<div class="directory-counter-box">
 						<span class="brands-counter-pill js-brands-page-count">

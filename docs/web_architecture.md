@@ -224,8 +224,8 @@ web_ftp/
 
 | Archivo | Descripción |
 |---|---|
-| `breadcrumbs.tpl` | Migas de pan; arma el trail según `template` (page, cart, search, blog, orden, categoría, etc.). |
-| `breadcrumbs-bar.tpl` | Barra de migas de ancho completo arriba de la página (mismo formato que el encabezado de páginas institucionales como "Nosotros"); la usan `product.tpl` y `contact.tpl`. Parámetro opcional `breadcrumbs_bar_class` (default `mb-4`). |
+| `breadcrumbs.tpl` | Migas de pan; arma el trail según `template` (page, cart, search, blog, orden, categoría, producto). Emite el mismo markup que las páginas custom (`.breadcrumb-list` con separadores chevron). |
+| `breadcrumbs-bar.tpl` | Barra gris de ancho completo (`.breadcrumbs-section`) que envuelve `breadcrumbs.tpl`, igual que en "Nosotros"; la usan `product.tpl`, `category.tpl` y `page-header.tpl` (cuando es encabezado de página completa). Parámetro opcional `breadcrumbs_bar_class`. |
 | `card.tpl` | Wrapper visual genérico "card" con bloques `card_head`/`card_body`/`card_footer` y soporte de colapso. |
 | `cart-item-ajax.tpl` | Renderiza un ítem de línea dentro del panel de carrito ajax (imagen, nombre, variante, precio, cantidad). |
 | `cart-panel.tpl` | Contenido del modal de carrito ajax: lista de ítems (`cart-item-ajax.tpl`) + estado vacío. |
@@ -239,7 +239,7 @@ web_ftp/
 | `newsletter.tpl` | Formulario de suscripción al newsletter, usado en el footer. |
 | `notification.tpl` | Contenedor de notificaciones globales: banner de cookies, notificación de estado de pedido, y switch a `notification-cart.tpl` al agregar al carrito. |
 | `notification-cart.tpl` | Notificación flotante "¡Agregado al carrito!" con datos del ítem y, opcionalmente, resumen de recomendados. |
-| `page-header.tpl` | Título de página + breadcrumbs, reusado como `{% embed %}` en casi todos los templates de `templates/`. |
+| `page-header.tpl` | Título de página, reusado como `{% embed %}` en casi todos los templates de `templates/`. A página completa (`container: true`) dibuja antes la barra `breadcrumbs-bar.tpl`. |
 | `preload-images.tpl` | `<link rel="preload">` de la imagen LCP según el template (primer slide del home, primera imagen de producto, banner de categoría) — optimización de performance. |
 | `product_grid.tpl` | Loop que imprime `grid/item.tpl` por cada producto de una lista, marcando prioridad de carga en las 2 primeras imágenes. |
 | `shipping_options.tpl` | Lista de opciones de envío a domicilio y retiro en sucursal dentro de la calculadora de envío, separando destacadas de "ver más". |

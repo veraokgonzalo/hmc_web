@@ -14,11 +14,13 @@
 {% set container = container ?? true %}
 
 {% if container %}
+{# Full-page header: breadcrumbs go in the full-width bar above it, same as the custom pages ("Nosotros") #}
+{% include "snipplets/breadcrumbs-bar.tpl" %}
 <div class="background-secondary mb-4">
 	<div class="container {{ page_header_container_class }}">
 {% endif %}
 		<section class="page-header {% if padding %}py-3 py-md-4{% endif %} {{ page_header_class }}" data-store="page-title">
-			{% if template != 'product' %}{# product renders snipplets/breadcrumbs-bar.tpl at the top of the page #}
+			{% if not container and template != 'product' %}{# product renders snipplets/breadcrumbs-bar.tpl at the top of the page #}
 				{% include 'snipplets/breadcrumbs.tpl' %}
 			{% endif %}
 			{% if template == 'product' %}

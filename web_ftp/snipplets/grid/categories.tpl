@@ -14,7 +14,7 @@
             {% if parent_category and parent_category.id != 0 %}
                 <a href="{{ parent_category.url }}" title="{{ parent_category.name }}" class="category-back-btn d-flex align-items-center">
                     <i class="fa-solid fa-arrow-left mr-2"></i>
-                    <span class="text-truncate">{{ 'Volver a' | translate }} <strong>{{ parent_category.name }}</strong></span>
+                    <span class="text-truncate">{{ 'Volver a' | translate }} <strong>{{ parent_category.name | capitalize }}</strong></span>
                 </a>
             {% else %}
                 <a href="/productos" title="{{ 'Ver todos los productos' | translate }}" class="category-back-btn d-flex align-items-center">

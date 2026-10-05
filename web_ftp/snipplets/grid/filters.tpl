@@ -13,18 +13,18 @@
                 {% if parent_category and parent_category.id != 0 %}
                     {# Parent Category Chip (removes both, goes to /productos) #}
                     <a href="/productos" class="chip filter-chip category-active-chip" title="{{ 'Quitar categoría superior' | translate }}">
-                        <span>{{ 'Categoría:' | translate }} <strong>{{ parent_category.name }}</strong></span>
+                        <span>{{ 'Categoría:' | translate }} <strong>{{ parent_category.name | capitalize }}</strong></span>
                         <i class="fa-solid fa-xmark ml-2 chip-remove-icon"></i>
                     </a>
                     {# Subcategory Chip (removes subcategory, returns to parent) #}
                     <a href="{{ parent_category.url }}" class="chip filter-chip category-active-chip" title="{{ 'Quitar subcategoría y volver a' | translate }} {{ parent_category.name }}">
-                        <span>{{ 'Subcategoría:' | translate }} <strong>{{ category.name }}</strong></span>
+                        <span>{{ 'Subcategoría:' | translate }} <strong>{{ category.name | capitalize }}</strong></span>
                         <i class="fa-solid fa-xmark ml-2 chip-remove-icon"></i>
                     </a>
                 {% else %}
                     {# Single Root Category Chip #}
                     <a href="/productos" class="chip filter-chip category-active-chip" title="{{ 'Quitar categoría y ver todo el catálogo' | translate }}">
-                        <span>{{ 'Categoría:' | translate }} <strong>{{ category.name }}</strong></span>
+                        <span>{{ 'Categoría:' | translate }} <strong>{{ category.name | capitalize }}</strong></span>
                         <i class="fa-solid fa-xmark ml-2 chip-remove-icon"></i>
                     </a>
                 {% endif %}

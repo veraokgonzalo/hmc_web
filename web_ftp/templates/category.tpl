@@ -27,16 +27,8 @@
     {% include 'snipplets/category-banner.tpl' %}
 {% endif %}
 
-<div class="catalog-breadcrumbs-bar background-secondary py-2 mb-md-3">
-	<div class="container">
-		<div class="row align-items-center">
-			<div class="col">
-				{% include 'snipplets/breadcrumbs.tpl' with {breadcrumbs_custom_class: 'mb-0' } %}
-				<h1 class="sr-only">{{ is_real_category ? category.name : ('Productos' | translate) }}</h1>
-			</div>
-		</div>
-	</div>
-</div>
+{% include 'snipplets/breadcrumbs-bar.tpl' with {breadcrumbs_bar_class: 'mb-md-3'} %}
+<h1 class="sr-only">{{ is_real_category ? category.name : ('Productos' | translate) }}</h1>
 
 {% include 'snipplets/grid/filters-modals.tpl' %}
 <section class="js-category-controls-prev category-controls-sticky-detector"></section>

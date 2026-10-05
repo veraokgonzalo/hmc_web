@@ -3958,21 +3958,44 @@ stream_videos.forEach(function(player){
             }
         }
 
+        // Search: live filtering on desktop; on mobile it runs on submit ("Buscar" button or keyboard search key)
+        var brandsSearchForm = document.getElementById("brandsPageSearchForm");
+        var isMobileBrandsDirectory = function() { return window.matchMedia("(max-width: 768px)").matches; }; // matches the .btn-directory-search breakpoint
+
+        function runBrandsSearch(value) {
+            currentSearch = value;
+            // Reset active letter to ALL when searching
+            for (var i = 0; i < alphaBtns.length; i++) {
+                alphaBtns[i].classList.remove("active");
+            }
+            var allBtn = document.querySelector(".js-brands-page-alpha-bar .alpha-btn[data-letter='ALL']");
+            if (allBtn) allBtn.classList.add("active");
+            currentLetter = "ALL";
+
+            filterBrands(currentSearch, "ALL");
+        }
+
         if (searchInput) {
             searchInput.addEventListener("input", function(e) {
-                currentSearch = e.target.value;
+                var value = e.target.value;
                 if (clearBtn) {
-                    clearBtn.style.display = currentSearch.length > 0 ? "flex" : "none";
+                    clearBtn.style.display = value.length > 0 ? "flex" : "none";
                 }
-                // Reset active letter to ALL when typing
-                for (var i = 0; i < alphaBtns.length; i++) {
-                    alphaBtns[i].classList.remove("active");
-                }
-                var allBtn = document.querySelector(".js-brands-page-alpha-bar .alpha-btn[data-letter='ALL']");
-                if (allBtn) allBtn.classList.add("active");
-                currentLetter = "ALL";
+                // Mobile: wait for submit, except when the field is emptied (restore the full directory)
+                if (isMobileBrandsDirectory() && value.trim().length > 0) return;
+                runBrandsSearch(value);
+            });
+        }
 
-                filterBrands(currentSearch, "ALL");
+        if (brandsSearchForm) {
+            brandsSearchForm.addEventListener("submit", function(e) {
+                e.preventDefault();
+                runBrandsSearch(searchInput ? searchInput.value : "");
+                if (searchInput) searchInput.blur(); // closes the mobile keyboard so results are visible
+
+                if (isMobileBrandsDirectory()) {
+                    brandsGrid.scrollIntoView({ behavior: "smooth", block: "start" });
+                }
             });
         }
 
@@ -4346,9 +4369,27 @@ stream_videos.forEach(function(player){
         }
 
         // Initialize with available categories data
+        var categoriesInitDone = false;
+
+        // Category names are shown in sentence case ("Máquinas a batería"), never Title Case or ALL CAPS
+        function toSentenceCase(str) {
+            if (!str) return str;
+            var lower = str.toLocaleLowerCase("es");
+            return lower.charAt(0).toLocaleUpperCase("es") + lower.slice(1);
+        }
+
         function runCategoriesInit() {
             var tree = window.REAL_CATEGORIES_TREE;
-            if (!tree || tree.length === 0) return;
+            if (!tree || tree.length === 0 || categoriesInitDone) return;
+            categoriesInitDone = true; // "load" and the polling fallback can both fire
+
+            tree.forEach(function(cat) {
+                cat.displayName = toSentenceCase(cat.displayName || cat.name);
+                (cat.subcategories || []).forEach(function(sub) {
+                    sub.displayName = toSentenceCase(sub.displayName || sub.name);
+                    (sub.subsubcategories || []).forEach(function(sss) { sss.name = toSentenceCase(sss.name); });
+                });
+            });
 
             var sortedCats = tree.slice().sort(function(a, b) {
                 return (a.displayName || a.name).localeCompare(b.displayName || b.name, "es");
@@ -4420,18 +4461,39 @@ stream_videos.forEach(function(player){
                 });
             }
 
+            // Search: live filtering on desktop; on mobile the query only runs when the user taps "Buscar"
+            var categoriesSearchForm = document.getElementById("categoriesPageSearchForm");
+            var isMobileDirectory = function() { return window.matchMedia("(max-width: 992px)").matches; };
+
+            function runCategoriesSearch(value) {
+                catSearchQuery = value.trim();
+                renderMasterSidebar(sortedCats);
+                renderDetailPanel(sortedCats);
+                return catSearchQuery;
+            }
+
             if (categoriesSearchInput) {
                 categoriesSearchInput.addEventListener("input", function(e) {
-                    catSearchQuery = e.target.value.trim();
+                    var value = e.target.value;
                     if (categoriesClearBtn) {
-                        categoriesClearBtn.style.display = catSearchQuery.length > 0 ? "flex" : "none";
+                        categoriesClearBtn.style.display = value.trim().length > 0 ? "flex" : "none";
                     }
-                    renderMasterSidebar(sortedCats);
-                    renderDetailPanel(sortedCats);
+                    // Mobile: wait for submit, except when the field is emptied (restore the full list)
+                    if (isMobileDirectory() && value.trim().length > 0) return;
+                    runCategoriesSearch(value);
+                });
+            }
 
-                    if (catSearchQuery.length >= 2 && window.innerWidth <= 992 && categoriesSection) {
+            if (categoriesSearchForm) {
+                categoriesSearchForm.addEventListener("submit", function(e) {
+                    e.preventDefault();
+                    var query = runCategoriesSearch(categoriesSearchInput ? categoriesSearchInput.value : "");
+                    if (categoriesSearchInput) categoriesSearchInput.blur(); // closes the mobile keyboard
+
+                    if (query.length > 0 && isMobileDirectory() && categoriesSection) {
                         categoriesSection.classList.remove("mobile-step-categories");
                         categoriesSection.classList.add("mobile-step-detail");
+                        categoriesSection.scrollIntoView({ behavior: "smooth", block: "start" });
                     }
                 });
             }

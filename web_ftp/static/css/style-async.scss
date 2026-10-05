@@ -6488,6 +6488,18 @@ footer {
   margin: 0;
 }
 
+.directory-search-form {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+  margin: 0;
+}
+
+// "Buscar" button: mobile only (desktop filters live while typing)
+.btn-directory-search {
+  display: none;
+}
+
 .directory-search-wrapper {
   position: relative;
   width: 360px;
@@ -6738,8 +6750,34 @@ footer {
     align-items: stretch;
     gap: 16px;
   }
-  .directory-search-wrapper {
+  .directory-search-form {
     width: 100%;
+  }
+
+  .directory-search-wrapper {
+    flex: 1 1 auto;
+    width: auto;
+    min-width: 0;
+  }
+
+  .directory-search-wrapper input {
+    min-height: 48px;
+    font-size: 1rem; // >=16px avoids iOS zoom on focus
+  }
+
+  .btn-directory-search {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    flex: 0 0 auto;
+    min-height: 48px;
+    padding: 0 16px;
+  }
+
+  .brands-alphabet-grid,
+  .categories-directory-section {
+    scroll-margin-top: 90px;
   }
   .brands-alphabet-bar {
     overflow-x: auto;
@@ -6945,10 +6983,13 @@ footer {
   color: var(--color-black, #111111);
 }
 
-.master-search-hint {
-  font-size: 0.72rem;
-  color: #888888;
-  padding-left: 4px;
+.master-search-card {
+  margin: 0;
+}
+
+// "Buscar" button: mobile only (desktop filters live while typing)
+.btn-master-search {
+  display: none;
 }
 
 /* Master Nav Heading */
@@ -7382,6 +7423,61 @@ mark.search-highlight {
     position: static;
     max-height: none;
     top: auto;
+    // Mobile: the search spans the full section width; only the rubros list keeps the card frame
+    padding: 0;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    overflow: visible;
+  }
+
+  .master-search-card {
+    flex-direction: row;
+    align-items: stretch;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .master-search-box {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .master-search-box input {
+    min-height: 48px;
+    font-size: 1rem; // >=16px avoids iOS zoom on focus
+    background: #ffffff;
+  }
+
+  .master-search-box .btn-clear-search {
+    width: 36px;
+    height: 36px;
+  }
+
+  .btn-master-search {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    flex: 0 0 auto;
+    min-height: 48px;
+    padding: 0 16px;
+  }
+
+  .master-nav-heading {
+    background: #ffffff;
+    border: 1px solid var(--color-gray-border, #E2E8F0);
+    border-radius: 14px 14px 0 0;
+    padding: 14px 16px 10px;
+    margin-bottom: -14px; // cancels the sidebar flex gap so heading and list read as one card
+  }
+
+  .master-categories-nav {
+    background: #ffffff;
+    border: 1px solid var(--color-gray-border, #E2E8F0);
+    border-top: none;
+    border-radius: 0 0 14px 14px;
+    padding: 6px 12px 12px;
   }
 
   /* Step 1: Selector de Rubros */
@@ -7433,13 +7529,17 @@ mark.search-highlight {
     padding-right: 16px;
   }
 
+  // .btn.btn-big.btn-block = product add-to-cart / buy-now, checkout and account forms.
+  // Grid "Comprar ahora" (.btn-big.w-100) and quickshop (.btn-small.btn-block) are intentionally excluded.
   .btn-lg,
-  .btn-big,
-  .btn-block,
+  .btn.btn-big.btn-block,
   .hero-buttons .btn,
   .video-actions .btn,
   .hmc-parallax-actions .btn,
-  .technical-assistance-btn {
+  .about-branch-actions .btn,
+  .technical-assistance-btn,
+  .contact-page-section .contact-submit-btn,
+  #single-product .product-whatsapp-advice {
     width: var(--mobile-cta-width); // fixed width so every CTA (incl. "Consultar al Taller") is identical
     max-width: 100%;
     padding: 14px 20px !important;
@@ -7448,10 +7548,12 @@ mark.search-highlight {
   }
 
   // Centered sections center their CTA; the hero keeps it aligned with the title (left)
-  .btn-block,
-  .btn-big,
+  .btn.btn-big.btn-block,
   .hmc-parallax-actions .btn,
-  .technical-assistance-btn {
+  .about-branch-actions .btn,
+  .technical-assistance-btn,
+  .contact-page-section .contact-submit-btn,
+  #single-product .product-whatsapp-advice {
     display: flex;
     margin-left: auto;
     margin-right: auto;

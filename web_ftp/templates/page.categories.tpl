@@ -60,16 +60,19 @@
 				<aside class="categories-master-sidebar" id="categoriesMasterSidebar" aria-label="{{ 'Navegación de Rubros' | translate }}">
 					
 					<!-- Buscador Integrado en Sidebar -->
-					<div class="master-search-card">
+					<form class="master-search-card" id="categoriesPageSearchForm" role="search" action="" method="get">
 						<div class="master-search-box">
 							<i class="fa-solid fa-magnifying-glass search-icon"></i>
-							<input type="text" id="categoriesPageSearchInput" class="js-categories-page-search" placeholder="{{ 'Buscar categoría o repuesto...' | translate }}" autocomplete="off">
+							<input type="text" name="q" id="categoriesPageSearchInput" class="js-categories-page-search" placeholder="{{ 'Buscar categoría o repuesto...' | translate }}" autocomplete="off" enterkeyhint="search" aria-label="{{ 'Buscar categoría o repuesto...' | translate }}">
 							<button type="button" class="btn-clear-search" id="categoriesPageClearSearch" title="{{ 'Limpiar búsqueda' | translate }}" style="display: none;">
 								<i class="fa-solid fa-xmark"></i>
 							</button>
 						</div>
-						<div class="master-search-hint">{{ "Buscá repuestos o filtrá rubros" | translate }}</div>
-					</div>
+						<!-- Mobile: la búsqueda se ejecuta al tocar "Buscar" (en desktop filtra en vivo) -->
+						<button type="submit" class="btn btn-primary btn-master-search">
+							<i class="fa-solid fa-magnifying-glass"></i> {{ 'Buscar' | translate }}
+						</button>
+					</form>
 
 					<div class="master-nav-heading">
 						<span>{{ "Rubros Principales" | translate }}</span>
@@ -80,7 +83,7 @@
 					<nav class="master-categories-nav" id="categoriesMasterNavList" aria-label="{{ 'Lista de rubros' | translate }}">
 						{% for rubro in master_rubros %}
 							<button type="button" class="master-nav-item {% if loop.first %}active{% endif %}" data-cat-id="{{ rubro.id }}">
-								<span class="master-nav-name">{{ rubro.name }}</span>
+								<span class="master-nav-name">{{ rubro.name | capitalize }}</span>
 								<i class="fa-solid fa-chevron-right master-nav-arrow"></i>
 							</button>
 						{% endfor %}

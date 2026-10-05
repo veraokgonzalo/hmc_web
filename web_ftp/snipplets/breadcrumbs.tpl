@@ -5,44 +5,39 @@
 
 #Breadcrumb
     //breadcrumbs_custom_class for custom CSS classes
+
+#Same markup as the custom pages (page.about.tpl, contact.tpl, page.brands.tpl):
+#.breadcrumb-list with .breadcrumb-item / chevron .breadcrumb-sep. For the full-width
+#gray bar use snipplets/breadcrumbs-bar.tpl.
 #}
 
+{% set breadcrumb_sep %}<div class="breadcrumb-sep"><i class="fa-solid fa-chevron-right"></i></div>{% endset %}
+
 {% if breadcrumbs %}
-    <div class="breadcrumbs {{ breadcrumbs_custom_class }}">
-        <a class="crumb nav-link-home" href="/" data-link-home="true" title="{{ store.name | default('HMC HUB') }}">{{ "Inicio" | translate }}</a>
-        <span class="separator">></span>
+    <div class="breadcrumb-list {{ breadcrumbs_custom_class }}">
+        <div class="breadcrumb-item"><a href="{{ store.url }}" title="{{ store.name }}">{{ "Inicio" | translate }}</a></div>
+        {{ breadcrumb_sep }}
         {% if template == 'page' %}
-            <span class="crumb active">{{ page.name }}</span>
+            <div class="breadcrumb-item active">{{ page.name }}</div>
         {% elseif template == 'cart' %}
-            <span class="crumb active">{{ "Carrito de compras" | translate }}</span>
+            <div class="breadcrumb-item active">{{ "Carrito de compras" | translate }}</div>
         {% elseif template == 'search' %}
-            <span class="crumb active">{{ "Resultados de búsqueda" | translate }}</span>
+            <div class="breadcrumb-item active">{{ "Resultados de búsqueda" | translate }}</div>
         {% elseif template == 'account.order' %}
-             <span class="crumb active">{{ 'Orden {1}' | translate(order.number) }}</span>
+            <div class="breadcrumb-item active">{{ 'Orden {1}' | translate(order.number) }}</div>
         {% elseif template == 'blog' %}
-            <span class="crumb active">{{ 'Blog' | translate }}</span>
+            <div class="breadcrumb-item active">{{ 'Blog' | translate }}</div>
         {% elseif template == 'blog-post' %}
-            <a class="crumb" href={{ store.blog_url }} title="{{ 'Blog' | translate }}">{{ 'Blog' | translate }}</a>
-            <span class="separator">></span>
-            <span class="crumb active">{{ post.title }}</span>
+            <div class="breadcrumb-item"><a href="{{ store.blog_url }}" title="{{ 'Blog' | translate }}">{{ 'Blog' | translate }}</a></div>
+            {{ breadcrumb_sep }}
+            <div class="breadcrumb-item active">{{ post.title }}</div>
         {% else %}
-            {% set has_products_crumb = false %}
-            {% for c in breadcrumbs %}
-                {% if c.url == '/productos' or c.url == store.products_url %}
-                    {% set has_products_crumb = true %}
-                {% endif %}
-            {% endfor %}
-            {% set is_real_cat = category and category.id and category.handle not in ['productos', 'todos-los-productos'] and category.name | lower not in ['productos', 'todos los productos', 'todo el catalogo', 'catalogo'] %}
-            {% if (template == 'category' and is_real_cat and not has_products_crumb) or (template == 'product' and not has_products_crumb) %}
-                <a class="crumb" href="/productos" title="{{ 'Productos' | translate }}">{{ 'Productos' | translate }}</a>
-                <span class="separator">></span>
-            {% endif %}
             {% for crumb in breadcrumbs %}
                 {% if crumb.last %}
-                    <span class="crumb active">{{ crumb.name }}</span>
+                    <div class="breadcrumb-item active">{{ template == 'category' ? crumb.name | capitalize : crumb.name }}</div>
                 {% else %}
-                    <a class="crumb" href="{{ crumb.url }}" title="{{ crumb.name }}">{{ crumb.name }}</a>
-    	            <span class="separator">></span>
+                    <div class="breadcrumb-item"><a href="{{ crumb.url }}" title="{{ crumb.name }}">{{ crumb.name | capitalize }}</a></div>{# intermediate crumbs are categories #}
+                    {{ breadcrumb_sep }}
                 {% endif %}
             {% endfor %}
         {% endif %}
