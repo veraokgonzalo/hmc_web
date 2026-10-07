@@ -2200,7 +2200,79 @@ function setupSearchEngine(searchInput, dropdown, resultsContainer, searchForm, 
 
   if (!dropdown || !resultsContainer) return;
 
+  let selectedIndex = -1;
+
+  function getItems() {
+    return Array.from(resultsContainer.querySelectorAll('.search-result-item'));
+  }
+
+  function updateSelection(items, newIndex) {
+    items.forEach((item, idx) => {
+      if (idx === newIndex) {
+        item.classList.add('is-selected');
+        if (typeof item.scrollIntoView === 'function') {
+          item.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        }
+      } else {
+        item.classList.remove('is-selected');
+      }
+    });
+    selectedIndex = newIndex;
+  }
+
+  function highlightQuery(text, q) {
+    if (!q || q.length < 2) return escapeHtml(text);
+    const safe = q.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const escaped = escapeHtml(text);
+    return escaped.replace(new RegExp(`(${safe})`, 'gi'), '<mark class="search-highlight">$1</mark>');
+  }
+
+  // Keyboard navigation (ArrowDown, ArrowUp, Enter, Escape)
+  searchInput.addEventListener('keydown', (e) => {
+    const items = getItems();
+    const isOpen = dropdown.classList.contains('active') || dropdown.style.display === 'block';
+    if (!items.length || !isOpen) return;
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      let nextIndex = selectedIndex + 1;
+      if (nextIndex >= items.length) nextIndex = 0;
+      updateSelection(items, nextIndex);
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      let prevIndex = selectedIndex - 1;
+      if (prevIndex < 0) {
+        items.forEach(el => el.classList.remove('is-selected'));
+        selectedIndex = -1;
+      } else {
+        updateSelection(items, prevIndex);
+      }
+    } else if (e.key === 'Enter') {
+      if (selectedIndex >= 0 && items[selectedIndex]) {
+        e.preventDefault();
+        items[selectedIndex].click();
+      }
+    } else if (e.key === 'Escape') {
+      dropdown.classList.remove('active');
+      selectedIndex = -1;
+      searchInput.blur();
+    }
+  });
+
+  // Sync mouse hover with selection
+  resultsContainer.addEventListener('mouseover', (e) => {
+    const item = e.target.closest('.search-result-item');
+    if (item) {
+      const items = getItems();
+      const idx = items.indexOf(item);
+      if (idx !== -1 && idx !== selectedIndex) {
+        updateSelection(items, idx);
+      }
+    }
+  });
+
   searchInput.addEventListener('input', (e) => {
+    selectedIndex = -1;
     const query = e.target.value.trim().toLowerCase();
     if (clearBtn) {
       clearBtn.style.display = query.length > 0 ? 'flex' : 'none';
@@ -2221,13 +2293,14 @@ function setupSearchEngine(searchInput, dropdown, resultsContainer, searchForm, 
       resultsContainer.innerHTML = matches.map(p => `
         <div class="search-result-item" onclick="window.location.href='product.html?id=${p.id}'">
           <div class="search-result-info">
-            <h5>${escapeHtml(p.name)}</h5>
+            <h5>${highlightQuery(p.name, query)}</h5>
             <span>${formatCurrency(p.price)} • <strong style="color: var(--color-primary);">${escapeHtml(p.brand)}</strong></span>
           </div>
+          <i class="fa-solid fa-chevron-right search-result-arrow" aria-hidden="true"></i>
         </div>
       `).join('') + `
         <div style="padding: 10px 16px; background: #fafafa; border-top: 1px solid #eee; text-align: center;">
-          <a href="catalog.html?q=${encodeURIComponent(query)}" style="font-size: 0.85rem; font-weight: 700; color: var(--color-primary-dark);">
+          <a href="catalog.html?q=${encodeURIComponent(query)}" style="font-size: 0.85rem; font-weight: 700; color: var(--color-primary-dark); text-decoration: none;">
             Ver todos los resultados para "${escapeHtml(query)}" →
           </a>
         </div>
@@ -2242,6 +2315,7 @@ function setupSearchEngine(searchInput, dropdown, resultsContainer, searchForm, 
   document.addEventListener('click', (e) => {
     if (!searchInput.contains(e.target) && !dropdown.contains(e.target)) {
       dropdown.classList.remove('active');
+      selectedIndex = -1;
     }
   });
 }

@@ -877,3 +877,21 @@ Alcance: se aplicó en `web_ftp/` y en `boceto_web/` para mantener la paridad. P
 - [x] **Newsletter — botón más alto que el campo**: el padding global de `.btn` hacía el botón más alto que el input. La fila (`.newsletter-input-row`) estira ambas columnas y `.newsletter-submit-btn` ocupa el 100% de la altura sin padding vertical (`newsletter.tpl`, `home-newsletter.tpl`, `style-async.scss`).
 - [x] **Buscador del header sin fotos en las sugerencias**: la lista sigue cargando sola al escribir, pero se oculta `.search-suggestions-image-container` (componente nativo de Tiendanube que llena `.js-search-results`) en los desplegables de desktop y mobile. En el boceto se quitó el `<img>` de `.search-result-item`.
 - [x] **Botón de "Nuestras Marcas"**: "Explorar el directorio de marcas" → "Directorio de marcas" (`home-brands.tpl`, `index.html`).
+
+### Rediseño y Mejoras de Search Suggestions (2026-10-07)
+- [x] **Rediseño visual (CSS)**:
+  - Tipografía `Plus Jakarta Sans`, 14px, semibold con `text-transform: none` (sin mayúsculas forzadas), line-clamp a 2 líneas.
+  - Precios con color de acento verde HMC Hub (`#3FAA47`, peso 700).
+  - Estados hover y active con fondo suave (`#F4F8F4`), borde lateral izquierdo (`#3FAA47`) y chevron desplazable `→`.
+  - Desplegable con bordes redondeados (`12px`), sombra suave moderna (`box-shadow: 0 16px 36px rgba(0,0,0,0.12)`) y animación de entrada.
+  - Mobile: altura máxima adaptativa `max-height: calc(100vh - 220px)` para evitar colisiones con el teclado virtual, y touch targets $\ge 48\text{px}$.
+  - Botón CTA inferior destacado: *"Ver todos los resultados para «...» →"*.
+- [x] **Mejoras de interacción (JS)**:
+  - Navegación completa por teclado con flechas `↑` y `↓`, selección visual activa (`.is-selected`), ejecución con `Enter` y escape con `Escape`.
+  - Resaltado dinámico del término de búsqueda en los títulos (`<mark class="search-highlight">`) mediante observador de mutaciones.
+  - Sincronización de hover del mouse con el índice del teclado y cierre al hacer clic fuera del buscador.
+  - Aplicado de forma idéntica en `web_ftp/` y `boceto_web/`.
+- [x] **Sincronización con Tiendanube (`tiendanube theme ftp push --yes`)**:
+  - Corrección de `Uncaught TypeError: $dropdown.is is not a function` migrando la lógica a JavaScript nativo (Vanilla JS) sin depender de métodos jQuery no soportados por Cash-dom en el runtime de Tiendanube.
+  - Subidos y compilados en producción: `web_ftp/snipplets/header/header.tpl`, `web_ftp/static/css/style-async.scss`, `web_ftp/static/js/store.js.tpl` y `web_ftp/layouts/layout.tpl`.
+  - Verificado en vivo en `https://www.hmchub.com.ar/` con cache-buster: cero errores de consola al tipear en el buscador, teclado operativo y estilos aplicados.

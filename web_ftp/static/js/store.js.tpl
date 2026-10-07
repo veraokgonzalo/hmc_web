@@ -3685,6 +3685,138 @@ stream_videos.forEach(function(player){
         }
     });
 
+    // 1.1 Enhanced Search Suggestions: Keyboard Navigation & Dropdown Polish
+    (function setupEnhancedSearchSuggestions() {
+        function setupEngine(inputSelector, dropdownSelector) {
+            var input = document.querySelector(inputSelector);
+            var dropdown = document.querySelector(dropdownSelector);
+            if (!input || !dropdown) return;
+
+            var selectedIndex = -1;
+
+            function getItems() {
+                return Array.from(dropdown.querySelectorAll(".search-suggestions-item, .search-result-item"));
+            }
+
+            function isDropdownVisible() {
+                return dropdown.classList.contains("active") ||
+                    (dropdown.style.display !== "none" && (dropdown.offsetWidth > 0 || dropdown.offsetHeight > 0));
+            }
+
+            function updateSelection(items, newIndex) {
+                items.forEach(function(el, idx) {
+                    if (idx === newIndex) {
+                        el.classList.add("is-selected");
+                        if (typeof el.scrollIntoView === "function") {
+                            el.scrollIntoView({ block: "nearest", behavior: "smooth" });
+                        }
+                    } else {
+                        el.classList.remove("is-selected");
+                    }
+                });
+                selectedIndex = newIndex;
+            }
+
+            input.addEventListener("keydown", function(e) {
+                var items = getItems();
+                if (!items.length || !isDropdownVisible()) return;
+
+                if (e.key === "ArrowDown") {
+                    e.preventDefault();
+                    var nextIndex = selectedIndex + 1;
+                    if (nextIndex >= items.length) nextIndex = 0;
+                    updateSelection(items, nextIndex);
+                } else if (e.key === "ArrowUp") {
+                    e.preventDefault();
+                    var prevIndex = selectedIndex - 1;
+                    if (prevIndex < 0) {
+                        items.forEach(function(el) { el.classList.remove("is-selected"); });
+                        selectedIndex = -1;
+                    } else {
+                        updateSelection(items, prevIndex);
+                    }
+                } else if (e.key === "Enter") {
+                    if (selectedIndex >= 0 && items[selectedIndex]) {
+                        e.preventDefault();
+                        var link = items[selectedIndex].querySelector("a.search-suggestions-link, a");
+                        if (link && link.href) {
+                            window.location.href = link.href;
+                        } else {
+                            items[selectedIndex].click();
+                        }
+                    }
+                } else if (e.key === "Escape") {
+                    dropdown.classList.remove("active");
+                    dropdown.style.display = "none";
+                    selectedIndex = -1;
+                    input.blur();
+                }
+            });
+
+            input.addEventListener("input", function() {
+                selectedIndex = -1;
+            });
+
+            dropdown.addEventListener("mouseover", function(e) {
+                var item = e.target.closest(".search-suggestions-item, .search-result-item");
+                if (item) {
+                    var items = getItems();
+                    var idx = items.indexOf(item);
+                    if (idx !== -1 && idx !== selectedIndex) {
+                        updateSelection(items, idx);
+                    }
+                }
+            });
+
+            function decorateSuggestions() {
+                var items = getItems();
+                if (!items.length) return;
+
+                // 1. Ensure header is present at the top
+                if (!dropdown.querySelector(".search-dropdown-header")) {
+                    var header = document.createElement("div");
+                    header.className = "search-dropdown-header";
+                    header.innerHTML = '<i class="fa-solid fa-magnifying-glass"></i> Sugerencias destacadas';
+                    dropdown.insertBefore(header, dropdown.firstChild);
+                }
+
+                // 2. Append arrow icon to each item if missing
+                var links = dropdown.querySelectorAll(".search-suggestions-link, .search-result-item");
+                links.forEach(function(link) {
+                    if (!link.querySelector(".search-suggestions-action-icon, .search-result-arrow")) {
+                        var arrow = document.createElement("i");
+                        arrow.className = "fa-solid fa-chevron-right search-suggestions-action-icon";
+                        arrow.setAttribute("aria-hidden", "true");
+                        link.appendChild(arrow);
+                    }
+                });
+            }
+
+            if (window.MutationObserver) {
+                var observer = new MutationObserver(function() {
+                    decorateSuggestions();
+                });
+                observer.observe(dropdown, { childList: true });
+            }
+        }
+
+        try {
+            setupEngine("#mainSearchInput", "#searchDropdown");
+            setupEngine("#mobileHeaderSearchInput", "#mobileSearchDropdown");
+
+            document.addEventListener("click", function(e) {
+                if (!e.target.closest(".header-search, .mobile-search-bar")) {
+                    var d1 = document.getElementById("searchDropdown");
+                    var d2 = document.getElementById("mobileSearchDropdown");
+                    if (d1) { d1.classList.remove("active"); d1.style.display = "none"; }
+                    if (d2) { d2.classList.remove("active"); d2.style.display = "none"; }
+                }
+            });
+        } catch(err) {
+            console.warn("Search suggestions init warning:", err);
+        }
+    })();
+
     // 2. Mobile Off-Canvas Drawer Menu & Accordions
     var $mobileDrawer = jQueryNuvem("#mobileDrawerMenu");
     var $mobileDrawerOverlay = jQueryNuvem("#mobileDrawerOverlay");

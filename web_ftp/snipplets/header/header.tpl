@@ -24,7 +24,7 @@
         </button>
       </form>
       <div id="searchDropdown" class="search-dropdown js-search-form-suggestions">
-        <div class="search-dropdown-header">{{ 'Sugerencias destacadas' | translate }}</div>
+        <div class="search-dropdown-header"><i class="fa-solid fa-magnifying-glass"></i> {{ 'Sugerencias destacadas' | translate }}</div>
         <div id="searchResultsList" class="js-search-results"></div>
       </div>
     </div>
@@ -73,7 +73,7 @@
         </button>
       </form>
       <div id="mobileSearchDropdown" class="search-dropdown mobile-search-dropdown js-search-form-suggestions">
-        <div class="search-dropdown-header">{{ 'Sugerencias destacadas' | translate }}</div>
+        <div class="search-dropdown-header"><i class="fa-solid fa-magnifying-glass"></i> {{ 'Sugerencias destacadas' | translate }}</div>
         <div id="mobileSearchResultsList" class="js-search-results"></div>
       </div>
     </div>

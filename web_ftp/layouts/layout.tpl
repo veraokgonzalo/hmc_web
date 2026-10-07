@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://www.facebook.com/2008/fbml" xmlns:og="http://opengraphprotocol.org/schema/" lang="{% for language in languages %}{% if language.active %}{{ language.lang }}{% endif %}{% endfor %}">
     <head>
+        <!-- build: search-suggestions-20261007-v4 -->
         <link rel="preconnect" href="{{ store_resource_hints }}" />
         <link rel="dns-prefetch" href="{{ store_resource_hints }}" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
