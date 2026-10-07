@@ -7428,6 +7428,7 @@ mark.search-highlight {
 @media (min-width: 992px) and (hover: hover) {
   .hmc-parallax-section {
     background-attachment: fixed;
+    background-position: center 30%;
   }
 }
 
@@ -7442,7 +7443,7 @@ mark.search-highlight {
 .hmc-parallax-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(14, 14, 14, 0.90) 0%, rgba(20, 20, 20, 0.74) 100%);
+  background: linear-gradient(135deg, rgba(14, 14, 14, 0.70) 0%, rgba(20, 20, 20, 0.52) 100%);
   z-index: 1;
   pointer-events: none;
 }

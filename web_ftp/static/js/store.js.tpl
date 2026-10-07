@@ -4237,7 +4237,7 @@ stream_videos.forEach(function(player){
                 '</div>';
             });
 
-            var catLink = "/" + currentCat.id;
+            var catLink = currentCat.url || (currentCat.id === "agua" ? "/agua1" : (currentCat.id === "riego" ? "/riego1" : "/" + currentCat.id));
 
             categoryDetailHero.innerHTML = '<div class="category-detail-hero-header">' +
                 '<div style="flex-grow: 1;">' +

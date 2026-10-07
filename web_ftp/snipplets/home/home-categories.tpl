@@ -10,7 +10,7 @@
 		'name': 'Agua',
 		'image': 'images/categories/categoria-3-agua-bombeo.webp',
 		'count': 'Equipos de Bombeo',
-		'link': '/agua'
+		'link': '/agua1'
 	},
 	{
 		'slug': 'construccion',
@@ -73,6 +73,12 @@
 				{% for cat in default_categories %}
 					{% set cat_url = cat.link %}
 					{% set cat_name = cat.name %}
+					{% for db_cat in categories %}
+						{% set is_root = not db_cat.parent or db_cat.parent == 0 or not db_cat.parent_id or db_cat.parent_id == 0 %}
+						{% if is_root and (db_cat.handle == cat.slug or db_cat.handle == cat.slug ~ '1') %}
+							{% set cat_url = db_cat.url %}
+						{% endif %}
+					{% endfor %}
 					<div class="category-card" onclick="location.href='{{ cat_url }}'">
 						<div class="category-img-wrapper">
 							<img src="{{ cat.image | static_url }}" alt="{{ cat_name }}" class="category-img" loading="lazy">

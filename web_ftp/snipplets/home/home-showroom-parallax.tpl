@@ -5,8 +5,9 @@
 {% set whatsapp_number = store.whatsapp_number ? store.whatsapp_number : '5492954696231' %}
 {% set whatsapp_text = 'Hola HMC Hub, quiero hacer una consulta para la sucursal Santa Rosa' | url_encode %}
 {% set whatsapp_url = 'https://wa.me/' ~ whatsapp_number ~ '?text=' ~ whatsapp_text %}
+{% set showroom_img_url = 'images/sucursal-foto-vertical.webp' | static_url %}
 
-<section class="hmc-parallax-section home-showroom-parallax" id="sucursal-central" data-store="home-showroom-parallax">
+<section class="hmc-parallax-section home-showroom-parallax" id="sucursal-central" data-store="home-showroom-parallax" style="background-image: url('{{ showroom_img_url }}');">
 	<div class="hmc-parallax-overlay"></div>
 	<div class="container hmc-parallax-container">
 		<div class="hmc-parallax-content">

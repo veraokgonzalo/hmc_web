@@ -6,6 +6,7 @@
 const REAL_CATEGORIES_TREE = [
   {
     "id": "agua",
+    "url": "/agua1",
     "name": "AGUA",
     "displayName": "Agua",
     "description": "Electrobombas centrífugas, presurizadoras, sumergibles y bombas solares.",
@@ -72,6 +73,7 @@ const REAL_CATEGORIES_TREE = [
   },
   {
     "id": "construccion",
+    "url": "/construccion",
     "name": "CONSTRUCCION",
     "displayName": "Construcción",
     "description": "Compactación, cortadoras de concreto, allanadoras, medición láser y demolición.",
@@ -330,6 +332,7 @@ const REAL_CATEGORIES_TREE = [
   },
   {
     "id": "consumibles-e-insumos",
+    "url": "/consumibles-e-insumos",
     "name": "CONSUMIBLES E INSUMOS",
     "displayName": "Consumibles e Insumos",
     "description": "Cadenas, espadas, tanzas, aceites 2T y 4T, grasas y lubricantes específicos.",
@@ -425,6 +428,7 @@ const REAL_CATEGORIES_TREE = [
   },
   {
     "id": "ferreteria",
+    "url": "/ferreteria",
     "name": "FERRETERIA",
     "displayName": "Ferretería",
     "description": "Herramientas manuales, eléctricas, a batería, neumáticas y equipamiento para taller.",
@@ -1379,6 +1383,7 @@ const REAL_CATEGORIES_TREE = [
   },
   {
     "id": "generacion-energia",
+    "url": "/generacion-energia",
     "name": "GENERACION ENERGIA",
     "displayName": "Generación Energía",
     "description": "Grupos electrógenos monofásicos y trifásicos, paneles solares e inversores.",
@@ -1465,6 +1470,7 @@ const REAL_CATEGORIES_TREE = [
   },
   {
     "id": "jardin",
+    "url": "/jardin",
     "name": "JARDIN",
     "displayName": "Jardín",
     "description": "Herramientas de corte, poda, sopladores, pulverizadores y mantenimiento de césped.",
@@ -1668,6 +1674,7 @@ const REAL_CATEGORIES_TREE = [
   },
   {
     "id": "maquina-a-bateria",
+    "url": "/maquina-a-bateria",
     "name": "MAQUINA A BATERIA",
     "displayName": "Máquinas a Batería",
     "description": "Línea inalámbrica profesional: motosierras, podadoras, sopladores y baterías.",
@@ -1808,6 +1815,7 @@ const REAL_CATEGORIES_TREE = [
   },
   {
     "id": "maquina-a-explosion",
+    "url": "/maquina-a-explosion",
     "name": "MAQUINA A EXPLOSION",
     "displayName": "Máquinas a Explosión",
     "description": "Motosierras, motoguadañas, cortacéspedes, riders y motores nafteros o diesel.",
@@ -2007,6 +2015,7 @@ const REAL_CATEGORIES_TREE = [
   },
   {
     "id": "maquina-electrica",
+    "url": "/maquina-electrica",
     "name": "MAQUINA ELECTRICA",
     "displayName": "Máquinas Eléctricas",
     "description": "Hidrolavadoras industriales, aspiradoras profesionales y lavadoras de piso.",
@@ -2135,6 +2144,7 @@ const REAL_CATEGORIES_TREE = [
   },
   {
     "id": "maquina-manual",
+    "url": "/maquina-manual",
     "name": "MAQUINA MANUAL",
     "displayName": "Máquinas Manuales",
     "description": "Barredoras mecánicas y equipos de limpieza manual para taller y depósito.",
@@ -2163,6 +2173,7 @@ const REAL_CATEGORIES_TREE = [
   },
   {
     "id": "producto-de-fuerza",
+    "url": "/producto-de-fuerza",
     "name": "PRODUCTO DE FUERZA",
     "displayName": "Productos de Fuerza",
     "description": "Motores estacionarios horizontales y verticales, diesel y motobombas pesadas.",
@@ -2209,6 +2220,7 @@ const REAL_CATEGORIES_TREE = [
   },
   {
     "id": "repuestos",
+    "url": "/repuestos",
     "name": "REPUESTOS",
     "displayName": "Repuestos",
     "description": "Componentes originales, carburadores, cilindros, cuchillas y kits de reparación.",
@@ -2914,6 +2926,7 @@ const REAL_CATEGORIES_TREE = [
   },
   {
     "id": "riego",
+    "url": "/riego1",
     "name": "RIEGO",
     "displayName": "Riego",
     "description": "Aspersores, toberas, electroválvulas, goteros, caños y accesorios de polietileno.",

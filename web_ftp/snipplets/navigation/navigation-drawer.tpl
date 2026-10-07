@@ -3,7 +3,7 @@
 ==============================================================================*/ #}
 
 {% set core_categories = [
-  {'slug': 'agua', 'name': 'Agua', 'link': '/agua'},
+  {'slug': 'agua', 'name': 'Agua', 'link': '/agua1'},
   {'slug': 'construccion', 'name': 'Construcción', 'link': '/construccion'},
   {'slug': 'consumibles-e-insumos', 'name': 'Consumibles e Insumos', 'link': '/consumibles-e-insumos'},
   {'slug': 'ferreteria', 'name': 'Ferretería', 'link': '/ferreteria'},
@@ -14,7 +14,7 @@
   {'slug': 'maquina-electrica', 'name': 'Máquinas Eléctricas', 'link': '/maquina-electrica'},
   {'slug': 'producto-de-fuerza', 'name': 'Productos de Fuerza', 'link': '/producto-de-fuerza'},
   {'slug': 'repuestos', 'name': 'Repuestos', 'link': '/repuestos'},
-  {'slug': 'riego', 'name': 'Riego', 'link': '/riego'}
+  {'slug': 'riego', 'name': 'Riego', 'link': '/riego1'}
 ] %}
 
 {% set official_brands = ["OREGON", "NIWA", "BOSCH", "EINHELL", "HUSQVARNA", "GARDENA", "SENSEI", "HONDA"] %}
@@ -57,7 +57,8 @@
         {% set cat_name = cat.name %}
         {% for db_cat in categories %}
           {% set is_root = not db_cat.parent or db_cat.parent == 0 or not db_cat.parent_id or db_cat.parent_id == 0 %}
-          {% if is_root and db_cat.handle == cat.slug %}
+          {% if is_root and (db_cat.handle == cat.slug or db_cat.handle == cat.slug ~ '1') %}
+            {% set cat_url = db_cat.url %}
             {% set cat_name = db_cat.name %}
           {% endif %}
         {% endfor %}

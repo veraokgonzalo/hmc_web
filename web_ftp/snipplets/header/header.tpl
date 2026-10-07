@@ -92,7 +92,7 @@
 
         <!-- 2. Categorías Mega Dropdown -->
         <li class="nav-item has-mega-dropdown">
-          <a href="{{ store.products_url | default('/productos') }}" class="nav-link {% if template == 'category' %}active{% endif %}">
+          <a href="/categorias" class="nav-link {% if template == 'page.categories' or (template == 'page' and page.handle in ['categorias', 'categorias-1', 'categories', 'rubros', 'directorio-categorias', 'directorio-de-categorias']) %}active{% endif %}">
             {{ 'Categorías' | translate }} <i class="fa-solid fa-chevron-down" style="font-size: 0.75em; margin-left: 2px;"></i>
           </a>
           <div class="mega-dropdown mega-dropdown-categories-featured">
