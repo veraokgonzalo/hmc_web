@@ -7,7 +7,7 @@
     <div class="top-bar-slider">
       <div class="top-bar-marquee-track">
         <div class="top-bar-marquee-content">
-          <span><i class="fa-solid fa-shield-halved"></i> {{ 'Garantía y Service Oficial' | translate }}</span>
+          <span><i class="fa-solid fa-shield-halved"></i> {{ 'Garantía y Servicio Oficial' | translate }}</span>
           <span class="top-bar-marquee-sep">•</span>
           <span><i class="fa-solid fa-truck-ramp-box"></i> {{ 'Envíos a Todo el País' | translate }}</span>
           <span class="top-bar-marquee-sep">•</span>
@@ -17,7 +17,7 @@
           <span class="top-bar-marquee-sep">•</span>
         </div>
         <div class="top-bar-marquee-content" aria-hidden="true">
-          <span><i class="fa-solid fa-shield-halved"></i> {{ 'Garantía y Service Oficial' | translate }}</span>
+          <span><i class="fa-solid fa-shield-halved"></i> {{ 'Garantía y Servicio Oficial' | translate }}</span>
           <span class="top-bar-marquee-sep">•</span>
           <span><i class="fa-solid fa-truck-ramp-box"></i> {{ 'Envíos a Todo el País' | translate }}</span>
           <span class="top-bar-marquee-sep">•</span>

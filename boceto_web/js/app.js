@@ -266,7 +266,7 @@ function renderGlobalNavigation() {
       <div class="top-bar-slider">
         <div class="top-bar-marquee-track">
           <div class="top-bar-marquee-content">
-            <span><i class="fa-solid fa-shield-halved"></i> Garantía y Service Oficial</span>
+            <span><i class="fa-solid fa-shield-halved"></i> Garantía y Servicio Oficial</span>
             <span class="top-bar-marquee-sep">•</span>
             <span><i class="fa-solid fa-truck-ramp-box"></i> Envíos a Todo el País</span>
             <span class="top-bar-marquee-sep">•</span>
@@ -276,7 +276,7 @@ function renderGlobalNavigation() {
             <span class="top-bar-marquee-sep">•</span>
           </div>
           <div class="top-bar-marquee-content" aria-hidden="true">
-            <span><i class="fa-solid fa-shield-halved"></i> Garantía y Service Oficial</span>
+            <span><i class="fa-solid fa-shield-halved"></i> Garantía y Servicio Oficial</span>
             <span class="top-bar-marquee-sep">•</span>
             <span><i class="fa-solid fa-truck-ramp-box"></i> Envíos a Todo el País</span>
             <span class="top-bar-marquee-sep">•</span>

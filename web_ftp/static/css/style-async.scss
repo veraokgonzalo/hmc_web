@@ -2547,7 +2547,7 @@ footer {
   align-items: center;
   justify-content: center;
   gap: 10px;
-  font-family: var(--font-headings, 'Quedora', 'Plus Jakarta Sans', sans-serif) !important;
+  font-family: var(--font-secondary, 'Plus Jakarta Sans', sans-serif) !important;
   font-weight: 700 !important;
   font-size: 0.95rem;
   letter-spacing: 0.04em;
@@ -2886,16 +2886,27 @@ footer {
     padding: 18px 0;
   }
 
+  .value-props-strip {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: stretch;
+  }
+
   .value-strip-item {
-    width: 50%;
+    width: 100%;
+    height: 100%;
     justify-content: center;
     text-align: center;
-    padding: 12px 8px;
+    padding: 12px 10px;
     border-right: none;
     font-size: 0.75rem;
     gap: 8px;
     white-space: normal;
-    min-height: 44px;
+    min-height: 48px;
+  }
+
+  .value-strip-item:nth-child(odd) {
+    border-right: 1px solid var(--color-gray-border, #E0E0E0);
   }
 
   .value-strip-item:nth-child(-n+2) {
@@ -3375,7 +3386,7 @@ footer {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center center;
+  object-position: center top;
   display: block;
 }
 
@@ -4157,7 +4168,7 @@ footer {
   gap: 6px;
   padding: 14px 18px;
   color: #ffffff;
-  font-family: var(--font-headings, 'Quedora', sans-serif);
+  font-family: var(--font-secondary, 'Plus Jakarta Sans', sans-serif);
   font-size: 0.9rem;
   font-weight: 600;
   letter-spacing: 0.03em;
@@ -4191,7 +4202,7 @@ footer {
   align-items: center;
   gap: 8px;
   color: var(--color-primary, #3FAA47);
-  font-family: var(--font-headings, 'Quedora', sans-serif);
+  font-family: var(--font-secondary, 'Plus Jakarta Sans', sans-serif);
   font-weight: 700;
   font-size: 0.9rem;
   letter-spacing: 0.04em;
@@ -4298,7 +4309,7 @@ footer {
 }
 
 .dropdown-category-name {
-  font-family: var(--font-headings, 'Quedora', sans-serif);
+  font-family: var(--font-secondary, 'Plus Jakarta Sans', sans-serif);
   font-weight: 700;
   font-size: 0.84rem;
   color: #000000;
@@ -4421,7 +4432,7 @@ footer {
 }
 
 .dropdown-brand-name {
-  font-family: var(--font-headings, 'Quedora', sans-serif);
+  font-family: var(--font-secondary, 'Plus Jakarta Sans', sans-serif);
   font-weight: 700;
   font-size: 0.95rem;
   color: #000000;
@@ -5170,7 +5181,7 @@ footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-family: var(--font-headings, 'Quedora', sans-serif);
+  font-family: var(--font-secondary, 'Plus Jakarta Sans', sans-serif);
   font-size: 1.15rem;
   font-weight: 800;
   color: var(--color-black, #111111);
@@ -5630,7 +5641,7 @@ footer {
 }
 
 .technical-assistance-title {
-  font-family: var(--font-headings, 'Quedora', sans-serif);
+  font-family: var(--font-secondary, 'Plus Jakarta Sans', sans-serif);
   color: #ffffff;
   font-size: 1.25rem;
   font-weight: 700;
@@ -6083,7 +6094,7 @@ footer {
 
 .product-tab-btn {
   padding: 16px 24px;
-  font-family: var(--font-headings, 'Quedora', sans-serif);
+  font-family: var(--font-secondary, 'Plus Jakarta Sans', sans-serif);
   font-size: 0.95rem;
   font-weight: 700;
   color: var(--color-gray-dark, #494848);
@@ -7400,7 +7411,7 @@ footer {
 }
 
 .detail-sub-card-title {
-  font-family: var(--font-headings, 'Quedora', sans-serif);
+  font-family: var(--font-secondary, 'Plus Jakarta Sans', sans-serif);
   font-size: 1rem;
   font-weight: 700;
   color: var(--color-black, #111111);

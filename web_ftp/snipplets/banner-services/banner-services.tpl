@@ -35,10 +35,10 @@
                     {% endif %}
                 {% endfor %}
             {% else %}
-                <!-- Pilar 1: Garantía y Service Oficial -->
+                <!-- Pilar 1: Garantía y Servicio Oficial -->
                 <div class="value-strip-item">
                     <i class="fa-solid fa-shield-halved"></i>
-                    <span>Garantía y Service Oficial</span>
+                    <span>Garantía y Servicio Oficial</span>
                 </div>
 
                 <!-- Pilar 2: Envíos a Todo el País -->
