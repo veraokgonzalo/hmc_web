@@ -33,9 +33,9 @@
 		{# Ambient Video Bleed (Right >50% of screen with leftward feather fade) #}
 		<div class="video-ambient-bleed" id="videoAmbientWrapper">
 			<div class="video-ambient-overlay"></div>
-			<video id="showcaseVideo" poster="{{ 'videos/poster_v2.jpg' | static_url }}" autoplay muted loop playsinline preload="auto">
-				<source src="{{ 'videos/hmc_mantenimientos_v2.mp4' | static_url }}" type="video/mp4">
-				<source src="{{ 'videos/hmc_mantenimientos_v2.webm' | static_url }}" type="video/webm">
+			<video id="showcaseVideo" poster="{{ 'videos/NuevoVideoHome-poster.jpg' | static_url }}" autoplay muted loop playsinline preload="auto">
+				<source src="{{ 'videos/NuevoVideoHome.mp4' | static_url }}" type="video/mp4">
+				<source src="{{ 'videos/NuevoVideoHome.webm' | static_url }}" type="video/webm">
 				{{ 'Tu navegador no soporta video HTML5.' | translate }}
 			</video>
 			<button class="video-play-btn" id="videoPlayBtn" title="{{ 'Reproducir / Pausar video' | translate }}" aria-label="{{ 'Reproducir o pausar video' | translate }}">

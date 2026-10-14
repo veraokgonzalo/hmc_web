@@ -2791,7 +2791,7 @@ footer {
   gap: 10px;
   padding: 8px 28px;
   border-right: 1px solid var(--color-gray-border, #E0E0E0);
-  font-family: var(--heading-font);
+  font-family: var(--font-secondary, 'Plus Jakarta Sans', sans-serif);
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--color-gray-dark, #494848);
@@ -2981,7 +2981,7 @@ footer {
 }
 
 .category-name {
-  font-family: var(--font-headings, 'Quedora', sans-serif);
+  font-family: var(--font-secondary, 'Plus Jakarta Sans', sans-serif);
   font-size: 1rem;
   font-weight: 700;
   margin-bottom: 4px;
@@ -3553,7 +3553,7 @@ footer {
 }
 
 .hmc-parallax-title {
-  font-family: var(--font-headings, 'Quedora', sans-serif);
+  font-family: var(--font-secondary, 'Plus Jakarta Sans', sans-serif);
   font-size: 2.4rem;
   font-weight: 700;
   color: #FFFFFF;

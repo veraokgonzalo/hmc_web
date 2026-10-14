@@ -2,5 +2,6 @@ web_fork/.nuvem
 web_ftp/.nuvem
 assets/FOTOS/
 assets/VIDEOS/
+/NuevoVideoHome.MP4
 __pycache__/
 *.pyc
