@@ -771,7 +771,7 @@ DOMContentLoaded.addEventOrExecute(() => {
 
             if (scrolledPosition > navbarHeight) {
                 header.addClass('compress').css('top', -topbarHeight + 'px' );
-                {% if template == 'category' or (template == 'search' and search_filter) %}
+                {% if template == 'category' or template == 'search' %}
                     if (window.innerWidth < 768) {
                         setTimeout(function(){
                             offsetCategories();
@@ -780,7 +780,7 @@ DOMContentLoaded.addEventOrExecute(() => {
                 {% endif %}
             } else {
                 header.removeClass('compress').css("top", "0px");
-                {% if template == 'category' or (template == 'search' and search_filter) %}
+                {% if template == 'category' or template == 'search' %}
                     if (window.innerWidth < 768) {
                         setTimeout(function(){
                             offsetCategories();
@@ -1857,15 +1857,15 @@ DOMContentLoaded.addEventOrExecute(() => {
 	  #Product grid
 	==============================================================================*/ #}
 
-    var nav_height = jQueryNuvem(".js-head-main").innerHeight();
+    var nav_height = (jQueryNuvem(".js-head-main").innerHeight() || 0);
 
-	{% if template == 'category' or (template == 'search' and search_filter) %}
+	{% if template == 'category' or template == 'search' %}
 
         {# /* // Fixed category controls */ #}
 
-            if (window.innerWidth < 768) {
+            if (window.innerWidth < 768 && $category_controls && $category_controls.length) {
 
-                $category_controls.css("top" , nav_height.toString() + 'px');
+                $category_controls.css("top" , (nav_height || 0).toString() + 'px');
 
                 {# Detect if category controls are sticky and add css #}
 
@@ -1884,13 +1884,14 @@ DOMContentLoaded.addEventOrExecute(() => {
                 offsetCategories = function() {
                     var $sticky_category_controls = jQueryNuvem(".js-category-controls");
 
-                    var categoriesOffset = jQueryNuvem(".js-head-main").outerHeight();
+                    var categoriesOffset = jQueryNuvem(".js-head-main").outerHeight() || 0;
+                    var topbarH = (typeof topbarHeight !== 'undefined') ? topbarHeight : (jQueryNuvem(".js-adbar").outerHeight() || 0);
 
                     if(jQueryNuvem(".js-head-main").hasClass("compress")){
-                        var categoriesOffset = categoriesOffset - topbarHeight;
+                        categoriesOffset = categoriesOffset - topbarH;
                     }
 
-                    $sticky_category_controls.css('top', (categoriesOffset).toString() + 'px' );
+                    $sticky_category_controls.css('top', (categoriesOffset || 0).toString() + 'px' );
                 };
 
                 offsetCategories();

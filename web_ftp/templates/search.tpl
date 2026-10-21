@@ -1,4 +1,4 @@
-{% set has_filters_available = products and has_filters_enabled and (filter_categories is not empty or product_filters is not empty) %}
+{% set has_filters_available = products and has_filters_enabled %}
 
 {% if settings.pagination == 'infinite' %}
 	{% paginate by 12 %}

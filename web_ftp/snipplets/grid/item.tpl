@@ -56,10 +56,26 @@
 
 {% set show_secondary_image = settings.product_hover %}
 
+{# Category data extraction for search filtering #}
+{% set item_cat_names = [] %}
+{% set item_cat_ids = [] %}
+{% if product.category %}
+    {% set item_cat_names = item_cat_names | merge([product.category.name | trim]) %}
+    {% set item_cat_ids = item_cat_ids | merge([product.category.id]) %}
+    {% if product.category.parent %}
+        {% set item_cat_names = item_cat_names | merge([product.category.parent.name | trim]) %}
+        {% set item_cat_ids = item_cat_ids | merge([product.category.parent.id]) %}
+        {% if product.category.parent.parent %}
+            {% set item_cat_names = item_cat_names | merge([product.category.parent.parent.name | trim]) %}
+            {% set item_cat_ids = item_cat_ids | merge([product.category.parent.parent.id]) %}
+        {% endif %}
+    {% endif %}
+{% endif %}
+
 {% if slide_item %}
     <div class="swiper-slide">
 {% endif %}
-    <div class="js-item-product{% if slide_item %} js-item-slide item-slide p-0{% endif %}{% if not slide_item %} col-{% if columns_mobile == 1 or horizontal_item %}12{% else %}6{% endif %} col-md-{% if horizontal_item %}4{% elseif columns_desktop == 3 %}4{% elseif columns_desktop == 4 %}3{% elseif columns_desktop == 5 %}2-4{% else %}4{% endif %}{% endif %} item-product {% if reduced_item %}item-product-reduced{% endif %} col-grid" data-product-type="list" data-product-id="{{ product.id }}" data-store="product-item-{{ product.id }}" data-component="product-list-item" data-component-value="{{ product.id }}" {% if appear_transition %}data-transition="fade-in-up"{% endif %}>
+    <div class="js-item-product{% if slide_item %} js-item-slide item-slide p-0{% endif %}{% if not slide_item %} col-{% if columns_mobile == 1 or horizontal_item %}12{% else %}6{% endif %} col-md-{% if horizontal_item %}4{% elseif columns_desktop == 3 %}4{% elseif columns_desktop == 4 %}3{% elseif columns_desktop == 5 %}2-4{% else %}4{% endif %}{% endif %} item-product {% if reduced_item %}item-product-reduced{% endif %} col-grid" data-product-type="list" data-product-id="{{ product.id }}" data-store="product-item-{{ product.id }}" data-component="product-list-item" data-component-value="{{ product.id }}" {% if appear_transition %}data-transition="fade-in-up"{% endif %}{% if item_cat_names is not empty %} data-category-names="{{ item_cat_names | join('|') | lower | escape }}" data-category-ids="{{ item_cat_ids | join(',') }}"{% endif %}>
         <div class="js-item-container item{% if horizontal_item %} item-horizontal{% endif %}{% if slide_item %} mb-0{% endif %}">
 
             {% if horizontal_item and not (settings.quick_shop or settings.product_color_variants) %}

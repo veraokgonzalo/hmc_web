@@ -4,8 +4,8 @@
 
     {% set is_real_cat = category and category.id and category.handle not in ['productos', 'todos-los-productos'] and category.name | lower not in ['productos', 'todos los productos', 'todo el catalogo', 'catalogo'] %}
 
-    {% if has_applied_filters or is_real_cat %}
-        <div class="active-filter-chips d-flex flex-wrap align-items-center">
+    {% if has_applied_filters or is_real_cat or template == 'search' %}
+        <div class="active-filter-chips d-flex flex-wrap align-items-center js-active-filter-chips">
             <span class="font-weight-bold font-small d-none d-md-inline mr-2 text-muted">{{ 'Filtros activos:' | translate }}</span>
 
             {# 1. Active Category Chips (Hierarchical: Parent + Subcategory) #}
@@ -30,6 +30,11 @@
                 {% endif %}
             {% endif %}
 
+            {# Dynamic Category Chips on Search Results #}
+            {% if template == 'search' %}
+                <span class="js-search-active-category-chips d-inline-flex flex-wrap align-items-center"></span>
+            {% endif %}
+
             {# 2. Active Attribute Filters (Brand, Price, etc.) #}
             {% if has_applied_filters %}
                 {% for product_filter in product_filters %}
@@ -50,7 +55,7 @@
                     <i class="fa-solid fa-rotate-left mr-1"></i> {{ 'Limpiar todo' | translate }}
                 </a>
             {% else %}
-                <a href="#" class="js-remove-all-filters clear-filters-btn btn-link d-inline-block ml-md-2 mt-1 mt-md-0 font-small" data-component="filter-delete">
+                <a href="#" class="js-remove-all-filters clear-filters-btn btn-link d-inline-block ml-md-2 mt-1 mt-md-0 font-small {% if template == 'search' and not has_applied_filters %}d-none{% endif %}" data-component="filter-delete">
                     <i class="fa-solid fa-rotate-left mr-1"></i> {{ 'Borrar filtros' | translate }}
                 </a>
             {% endif %}
