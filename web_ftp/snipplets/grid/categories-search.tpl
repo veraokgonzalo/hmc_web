@@ -2,9 +2,9 @@
   #Category Filters for Search Results (Desktop Sidebar & Mobile Modal)
 ==============================================================================*/ #}
 
-{# 1. Extract root categories and subcategories from search products #}
+{# 1. Extract root categories deduplicated by normalized name #}
 {% set search_roots = [] %}
-{% set search_root_ids = [] %}
+{% set search_root_names = [] %}
 
 {% if products %}
     {% for prod in products %}
@@ -17,10 +17,12 @@
                 {% endif %}
             {% endif %}
 
-            {% if r_cat.id not in search_root_ids %}
-                {% set search_root_ids = search_root_ids | merge([r_cat.id]) %}
+            {% set r_name = r_cat.name | lower | trim %}
+            {% if r_name not in search_root_names %}
+                {% set search_root_names = search_root_names | merge([r_name]) %}
 
                 {% set r_count = 0 %}
+                {% set r_ids = [] %}
                 {% for p2 in products %}
                     {% if p2.category %}
                         {% set p2_root = p2.category %}
@@ -30,14 +32,18 @@
                                 {% set p2_root = p2_root.parent %}
                             {% endif %}
                         {% endif %}
-                        {% if p2_root.id == r_cat.id %}
+                        {% if (p2_root.name | lower | trim) == r_name %}
                             {% set r_count = r_count + 1 %}
+                            {% if p2_root.id not in r_ids %}
+                                {% set r_ids = r_ids | merge([p2_root.id]) %}
+                            {% endif %}
                         {% endif %}
                     {% endif %}
                 {% endfor %}
 
                 {% set search_roots = search_roots | merge([{
                     'id': r_cat.id,
+                    'ids': r_ids | join(','),
                     'name': r_cat.name,
                     'count': r_count
                 }]) %}
@@ -46,8 +52,9 @@
     {% endfor %}
 {% endif %}
 
+{# 2. Extract subcategories deduplicated by normalized name #}
 {% set search_subs = [] %}
-{% set search_sub_ids = [] %}
+{% set search_sub_names = [] %}
 
 {% if products %}
     {% for prod in products %}
@@ -61,18 +68,40 @@
                 {% endif %}
             {% endif %}
 
-            {% if s_cat.id != s_root.id and s_cat.id not in search_sub_ids %}
-                {% set search_sub_ids = search_sub_ids | merge([s_cat.id]) %}
+            {% set s_name = s_cat.name | lower | trim %}
+            {% set r_name = s_root.name | lower | trim %}
+
+            {# Only add if name is not root and not already in search_sub_names #}
+            {% if s_name != r_name and s_name not in search_root_names and s_name not in search_sub_names %}
+                {% set search_sub_names = search_sub_names | merge([s_name]) %}
 
                 {% set s_count = 0 %}
+                {% set s_ids = [] %}
                 {% for p2 in products %}
-                    {% if p2.category and p2.category.id == s_cat.id %}
-                        {% set s_count = s_count + 1 %}
+                    {% if p2.category %}
+                        {% set p2_cat = p2.category %}
+                        {% set p2_match = false %}
+                        {% if (p2_cat.name | lower | trim) == s_name %}
+                            {% set p2_match = true %}
+                            {% if p2_cat.id not in s_ids %}
+                                {% set s_ids = s_ids | merge([p2_cat.id]) %}
+                            {% endif %}
+                        {% endif %}
+                        {% if p2_cat.parent and (p2_cat.parent.name | lower | trim) == s_name %}
+                            {% set p2_match = true %}
+                            {% if p2_cat.parent.id not in s_ids %}
+                                {% set s_ids = s_ids | merge([p2_cat.parent.id]) %}
+                            {% endif %}
+                        {% endif %}
+                        {% if p2_match %}
+                            {% set s_count = s_count + 1 %}
+                        {% endif %}
                     {% endif %}
                 {% endfor %}
 
                 {% set search_subs = search_subs | merge([{
                     'id': s_cat.id,
+                    'ids': s_ids | join(','),
                     'name': s_cat.name,
                     'root_id': s_root.id,
                     'count': s_count
@@ -82,11 +111,12 @@
     {% endfor %}
 {% endif %}
 
-{# Flatten into display list preserving hierarchical parent-child order #}
+{# Flatten into display list preserving hierarchical parent-child order without duplicates #}
 {% set display_items = [] %}
 {% for root in search_roots %}
     {% set display_items = display_items | merge([{
         'id': root.id,
+        'ids': root.ids,
         'name': root.name,
         'count': root.count,
         'is_sub': false,
@@ -96,6 +126,7 @@
         {% if sub.root_id == root.id %}
             {% set display_items = display_items | merge([{
                 'id': sub.id,
+                'ids': sub.ids,
                 'name': sub.name,
                 'count': sub.count,
                 'is_sub': true,
@@ -103,6 +134,25 @@
             }]) %}
         {% endif %}
     {% endfor %}
+{% endfor %}
+
+{% for sub in search_subs %}
+    {% set already_in = false %}
+    {% for di in display_items %}
+        {% if (di.name | lower | trim) == (sub.name | lower | trim) %}
+            {% set already_in = true %}
+        {% endif %}
+    {% endfor %}
+    {% if not already_in %}
+        {% set display_items = display_items | merge([{
+            'id': sub.id,
+            'ids': sub.ids,
+            'name': sub.name,
+            'count': sub.count,
+            'is_sub': true,
+            'parent_name': null
+        }]) %}
+    {% endif %}
 {% endfor %}
 
 <div class="js-accordion-container js-filter-container js-category-search-filter-container {% if not modal %}card px-3 mb-3{% else %}filter-accordion px-3 pt-3 pb-2{% endif %}" data-store="filters-group" data-filter-type="category" {% if display_items is empty %}style="display: none;"{% endif %}>
@@ -124,8 +174,8 @@
     </div>
     <div class="js-accordion-content js-category-search-list mt-md-1 my-3"> 
         {% for item in display_items %}
-            <label class="js-category-filter-checkbox js-filter-checkbox checkbox-container mb-2 {% if item.is_sub %}pl-3{% endif %}" data-category-name="{{ item.name | lower }}" data-category-id="{{ item.id }}" {% if item.parent_name %}data-parent-name="{{ item.parent_name | lower }}"{% endif %}>
-                <input type="checkbox" autocomplete="off" class="js-category-checkbox-input" value="{{ item.name | lower }}" data-category-id="{{ item.id }}" />
+            <label class="js-category-filter-checkbox js-filter-checkbox checkbox-container mb-2 {% if item.is_sub %}pl-3{% endif %}" data-category-name="{{ item.name | lower }}" data-category-id="{{ item.id }}" data-category-ids="{{ item.ids }}" {% if item.parent_name %}data-parent-name="{{ item.parent_name | lower }}"{% endif %}>
+                <input type="checkbox" autocomplete="off" class="js-category-checkbox-input" value="{{ item.name | lower }}" data-category-id="{{ item.id }}" data-category-ids="{{ item.ids }}" />
                 <span class="checkbox">
                     <span class="checkbox-icon"></span>
                     <span class="checkbox-text {% if not item.is_sub %}font-weight-bold{% else %}font-small text-muted{% endif %}">
