@@ -57,10 +57,27 @@ Todo cambio visual debe implementarse también en su versión mobile (ver regla 
 Pendientes que no dependen del código del tema:
 
 - [ ] Configurar las opciones de pago en Mercado Pago.
-- [ ] Configurar Andreani como método de envío.
-- [ ] Conectar Finnegans con Tiendanube.
-- [ ] Conectar Instagram.
-- [ ] Conectar Google Analytics 4 (GA4) y Meta Pixel.
-- [ ] Conectar Google Ads.
+- [ ] Configurar Andreani como método de envío. Es la app nueva de Andreani, en la categoría Logística. Requisitos:
+  - Datos de facturación de la tienda completos.
+  - Peso y medidas cargados en todos los productos; sin eso, Andreani no aparece en el checkout.
+  - Usuario y contraseña de Andreani de HMC.
+
+  Pedir también a HMC si tienen cuenta corriente con Andreani y qué modalidades quieren ofrecer: Estándar, Sucursal, Llega hoy o Bigger (para maquinaria pesada). Conviene hacerlo después de Finnegans, por si el ERP trae el peso y las medidas.
+- [ ] Conectar Finnegans con Tiendanube. **Bloqueado (2026-10-28), esperando al soporte de Finnegans:**
+  - Se instaló la app "Finnegans" desde la Tienda de Aplicaciones de Tiendanube. Al iniciar sesión en Finnegans GO, en el espacio de trabajo `HMCMAQUINAS`, apareció el mensaje "Debe seleccionar una opción de menú donde instalar la aplicación" y la instalación no se completó. La app no figura en Mis aplicaciones de Tiendanube.
+  - En Finnegans GO, en Administrar → Plug & Go, aparece "Tienda Nube", pero la pantalla de configuración queda vacía. La consola del navegador repite el error `TypeError: Cannot read properties of undefined (reading 'templateId')`: Finnegans no encuentra la configuración de la integración para la cuenta.
+  - Próximo paso: el soporte de Finnegans o el implementador de HMC tiene que revisar si la integración está habilitada para la cuenta y completar la instalación.
+  - Antes de activar la sincronización, definir con Finnegans qué sistema manda en cada dato (stock, precios, alta de productos), para no pisar lo cargado en la tienda. Confirmar también si el ERP tiene cargados el peso y las medidas de los productos, que necesita Andreani.
+- [x] Conectar Instagram (2026-10-28). Las publicaciones ya se ven en la sección "Comunidad" del home y en la página Nosotros.
+  - **Cómo se conectó:** con una app en Meta Developers, usando la API con inicio de sesión con Instagram y la cuenta de HMC como evaluadora. El token está cargado en Tiendanube, en Tienda online → Link de redes sociales → "Token de Instagram".
+  - **⚠️ El token vence a los 60 días, cerca del 2026-12-27.** Cuando vence, las publicaciones dejan de verse sin aviso. Para renovarlo, entrar en Meta Developers → la app → Casos de uso → Personalizar → "2. Genera identificadores de acceso" → **Generar identificador**, y pegar el token nuevo en Tiendanube.
+- [x] Conectar Google Analytics 4 (GA4) y Meta Pixel. GA4 está cargado por la integración nativa de Tiendanube (Configuración → Códigos externos, con ID de medición y secreto de Measurement Protocol). Meta está conectado por Canales de venta → Instagram y Facebook, que activa también la API de Conversiones. No se usa Google Tag Manager.
+- [ ] Conectar Google Ads. **En curso:** Google Shopping (Merchant Center) ya está conectado desde Más canales de venta → Google Shopping. La etiqueta de conversión de compra la crea esa integración; no se cargan códigos externos ni Tag Manager. El inicio de sesión de Google se destrabó desactivando por 10 minutos la verificación de acceso desde la consola de Workspace. Falta completar la facturación de la cuenta de Google Ads con estos datos, que tiene que pasar HMC:
+  - CUIT de la razón social que recibe las facturas.
+  - Condición frente al IVA.
+  - Campo "GRT": a confirmar qué dato pide.
+  - Medio de pago: tarjeta de la empresa, que conviene que cargue alguien de HMC.
+
+  El tipo de cuenta debe ser **Empresa**. Los datos fiscales no se pueden cambiar una vez guardados.
 - [ ] Activar protecciones contra el robo de datos (copia de contenido, scraping).
 - [ ] Actualizar el nombre "hmchub" en Google (perfil de empresa / resultados de búsqueda).
