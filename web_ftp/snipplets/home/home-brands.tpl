@@ -39,7 +39,11 @@
 		<div class="row align-items-center">
 			<div class="col-12">
 				{% if is_marquee %}
-					<div class="brands-marquee-container" data-speed="{{ settings.brands_marquee_speed | default(42) }}">
+					<div class="brands-marquee-wrapper">
+						<button type="button" class="brands-marquee-arrow brands-marquee-arrow-prev js-brands-marquee-prev" aria-label="{{ 'Anterior' | translate }}" title="{{ 'Anterior' | translate }}">
+							<i class="fa-solid fa-chevron-left" style="pointer-events: none;"></i>
+						</button>
+						<div class="brands-marquee-container" data-speed="{{ settings.brands_marquee_speed | default(42) }}">
 						<div class="brands-marquee-track" style="--marquee-speed: {{ settings.brands_marquee_speed | default(42) }}s;">
 							<div class="brands-marquee-group">
 								{% for slide in brands_items %}
@@ -82,6 +86,10 @@
 								{% endfor %}
 							</div>
 						</div>
+						</div>
+						<button type="button" class="brands-marquee-arrow brands-marquee-arrow-next js-brands-marquee-next" aria-label="{{ 'Siguiente' | translate }}" title="{{ 'Siguiente' | translate }}">
+							<i class="fa-solid fa-chevron-right" style="pointer-events: none;"></i>
+						</button>
 					</div>
 				{% else %}
 					<div class="row justify-content-center">

@@ -912,6 +912,84 @@ function initBrandsMarquee() {
       </div>
     `;
   });
+
+  // Manual navigation arrows controls
+  let resumeTimer = null;
+  let currentOffset = null;
+
+  function moveMarquee(direction) {
+    const track = document.querySelector(".brands-marquee-track");
+    if (!track) return;
+    const container = document.querySelector(".brands-marquee-container");
+    const speed = parseFloat(container?.dataset?.speed) || 42;
+    const singleGroupWidth = track.scrollWidth / 2;
+    if (singleGroupWidth <= 0) return;
+
+    const step = window.innerWidth < 768 ? 160 : 280;
+
+    if (currentOffset === null) {
+      const style = window.getComputedStyle(track);
+      const matrix = style.transform || style.webkitTransform;
+      if (matrix && matrix !== "none") {
+        const values = matrix.split('(')[1].split(')')[0].split(',');
+        currentOffset = parseFloat(values[4]) || 0;
+      } else {
+        currentOffset = 0;
+      }
+    }
+
+    if (direction === "prev" && (currentOffset + step > 0)) {
+      currentOffset -= singleGroupWidth;
+      track.style.transition = "none";
+      track.style.transform = `translateX(${currentOffset}px)`;
+      void track.offsetHeight;
+    } else if (direction === "next" && (currentOffset - step < -singleGroupWidth * 1.5)) {
+      currentOffset += singleGroupWidth;
+      track.style.transition = "none";
+      track.style.transform = `translateX(${currentOffset}px)`;
+      void track.offsetHeight;
+    }
+
+    if (direction === "next") {
+      currentOffset -= step;
+    } else {
+      currentOffset += step;
+    }
+
+    track.style.animation = "none";
+    track.style.transition = "transform 0.35s cubic-bezier(0.25, 1, 0.5, 1)";
+    track.style.transform = `translateX(${currentOffset}px)`;
+
+    clearTimeout(resumeTimer);
+    resumeTimer = setTimeout(() => {
+      let normalized = currentOffset % singleGroupWidth;
+      if (normalized > 0) {
+        normalized -= singleGroupWidth;
+      }
+      const progress = Math.abs(normalized) / singleGroupWidth;
+      const negativeDelay = -(progress * speed);
+
+      track.style.transition = "none";
+      track.style.transform = "";
+      track.style.animation = "";
+      track.style.animationDelay = `${negativeDelay}s`;
+      currentOffset = null;
+    }, 3500);
+  }
+
+  document.addEventListener("click", (e) => {
+    const prevBtn = e.target.closest(".js-brands-marquee-prev");
+    const nextBtn = e.target.closest(".js-brands-marquee-next");
+    if (prevBtn) {
+      e.preventDefault();
+      e.stopPropagation();
+      moveMarquee("prev");
+    } else if (nextBtn) {
+      e.preventDefault();
+      e.stopPropagation();
+      moveMarquee("next");
+    }
+  });
 }
 
 function initBrandsPage() {

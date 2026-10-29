@@ -38,7 +38,7 @@ Todo cambio visual debe implementarse también en su versión mobile (ver regla 
 ### Marcas
 
 - [ ] Corregir los logos de las marcas. El cliente compartió una carpeta de Google Drive con los logos oficiales; usar esos archivos.
-- [ ] Agregar botones de flecha a ambos lados del marquee de marcas en la home para desplazarlo manualmente. Hoy hay que esperar a que la marca buscada aparezca en pantalla para poder seleccionarla.
+- [x] Agregar botones de flecha a ambos lados del marquee de marcas en la home para desplazarlo manualmente. Hoy hay que esperar a que la marca buscada aparezca en pantalla para poder seleccionarla.
 
 ### Nosotros
 

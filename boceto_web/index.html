@@ -460,8 +460,16 @@
       </div>
 
       <!-- Infinite Brand Marquee (Dynamic via app.js & Migrable to Tiendanube) -->
-      <div class="brands-marquee-container js-brands-marquee" data-speed="42" data-direction="left" aria-label="Carrusel continuo de marcas oficiales">
-        <!-- Inyectado dinámicamente por initBrandsMarquee() con las 10 marcas oficiales -->
+      <div class="brands-marquee-wrapper">
+        <button type="button" class="brands-marquee-arrow brands-marquee-arrow-prev js-brands-marquee-prev" aria-label="Anterior" title="Anterior">
+          <i class="fa-solid fa-chevron-left" style="pointer-events: none;"></i>
+        </button>
+        <div class="brands-marquee-container js-brands-marquee" data-speed="42" data-direction="left" aria-label="Carrusel continuo de marcas oficiales">
+          <!-- Inyectado dinámicamente por initBrandsMarquee() con las 10 marcas oficiales -->
+        </div>
+        <button type="button" class="brands-marquee-arrow brands-marquee-arrow-next js-brands-marquee-next" aria-label="Siguiente" title="Siguiente">
+          <i class="fa-solid fa-chevron-right" style="pointer-events: none;"></i>
+        </button>
       </div>
 
       <div style="text-align: center; margin-top: 32px;">

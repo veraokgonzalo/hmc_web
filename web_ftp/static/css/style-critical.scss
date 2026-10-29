@@ -2700,6 +2700,61 @@ header.head-main.compress .logo-img-big {
   overflow: hidden;
 }
 
+.brands-marquee-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.brands-marquee-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 1px solid #E5E5E5;
+  color: #1F2937;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  padding: 0;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+
+  &:hover {
+    background: #3FAA47;
+    border-color: #3FAA47;
+    color: #FFFFFF;
+    box-shadow: 0 6px 16px rgba(63, 170, 71, 0.35);
+    transform: translateY(-50%) scale(1.08);
+  }
+
+  &:active {
+    transform: translateY(-50%) scale(0.96);
+  }
+
+  &:focus-visible {
+    outline: 2px solid #3FAA47;
+    outline-offset: 2px;
+  }
+}
+
+.brands-marquee-arrow-prev {
+  left: 0;
+}
+
+.brands-marquee-arrow-next {
+  right: 0;
+}
+
 .brands-marquee-container {
   position: relative;
   width: 100%;
@@ -2788,6 +2843,18 @@ header.head-main.compress .logo-img-big {
 }
 
 @media (max-width: 767.98px) {
+  .brands-marquee-arrow {
+    width: 38px;
+    height: 38px;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+  .brands-marquee-arrow-prev {
+    left: -4px;
+  }
+  .brands-marquee-arrow-next {
+    right: -4px;
+  }
   .brands-marquee-container {
     padding: 10px 0;
     -webkit-mask-image: linear-gradient(90deg, transparent, #000 24px, #000 calc(100% - 24px), transparent);
