@@ -364,7 +364,7 @@
 
                 {% include "static/js/external.js.tpl" %}
 
-                {# Specific store JS functions: product variants, cart, shipping, etc #}
+                {# Specific store JS functions: product variants, cart, shipping, etc (v=20261029-marcas-controls) #}
 
                 {% include "static/js/store.js.tpl" %}
             });

@@ -4805,6 +4805,7 @@ stream_videos.forEach(function(player){
     (function setupBrandsMarqueeControls() {
         var resumeTimer = null;
         var currentOffset = null;
+        var isHovered = false;
 
         function getTrack() {
             return document.querySelector(".brands-marquee-track");
@@ -4823,21 +4824,52 @@ stream_videos.forEach(function(player){
             return parseFloat(values[4]) || 0;
         }
 
-        function moveBrandsMarquee(direction) {
+        function freezeAtCurrentPosition() {
             var trackEl = getTrack();
             if (!trackEl) return;
+            if (currentOffset === null) {
+                currentOffset = getTrackOffset(trackEl);
+                trackEl.style.animation = "none";
+                trackEl.style.transition = "none";
+                trackEl.style.transform = "translateX(" + currentOffset + "px)";
+            }
+        }
 
+        function resumeMarquee() {
+            var trackEl = getTrack();
+            if (!trackEl) return;
             var containerEl = getContainer();
             var speed = parseFloat(containerEl ? containerEl.dataset.speed : 42) || 42;
             var singleGroupWidth = trackEl.scrollWidth / 2;
             if (singleGroupWidth <= 0) return;
 
+            if (currentOffset !== null) {
+                var normalized = currentOffset % singleGroupWidth;
+                if (normalized > 0) {
+                    normalized -= singleGroupWidth;
+                }
+                var progress = Math.abs(normalized) / singleGroupWidth;
+                var negativeDelay = -(progress * speed);
+
+                trackEl.style.transition = "none";
+                trackEl.style.transform = "";
+                trackEl.style.animation = "";
+                trackEl.style.animationDelay = negativeDelay + "s";
+                currentOffset = null;
+            }
+        }
+
+        function moveBrandsMarquee(direction) {
+            var trackEl = getTrack();
+            if (!trackEl) return;
+
+            var singleGroupWidth = trackEl.scrollWidth / 2;
+            if (singleGroupWidth <= 0) return;
+
+            freezeAtCurrentPosition();
+
             // Step size: ~1.5 cards depending on screen width
             var step = window.innerWidth < 768 ? 160 : 280;
-
-            if (currentOffset === null) {
-                currentOffset = getTrackOffset(trackEl);
-            }
 
             // Wrap backward if moving prev and reaching > 0 to avoid blank space on the left
             if (direction === "prev" && (currentOffset + step > 0)) {
@@ -4858,27 +4890,41 @@ stream_videos.forEach(function(player){
                 currentOffset += step;
             }
 
-            trackEl.style.animation = "none";
             trackEl.style.transition = "transform 0.35s cubic-bezier(0.25, 1, 0.5, 1)";
             trackEl.style.transform = "translateX(" + currentOffset + "px)";
 
+            // If not actively hovered, resume after inactivity timeout
             clearTimeout(resumeTimer);
-            resumeTimer = setTimeout(function() {
-                if (!trackEl) return;
-                var normalized = currentOffset % singleGroupWidth;
-                if (normalized > 0) {
-                    normalized -= singleGroupWidth;
-                }
-                var progress = Math.abs(normalized) / singleGroupWidth;
-                var negativeDelay = -(progress * speed);
-
-                trackEl.style.transition = "none";
-                trackEl.style.transform = "";
-                trackEl.style.animation = "";
-                trackEl.style.animationDelay = negativeDelay + "s";
-                currentOffset = null;
-            }, 3500);
+            if (!isHovered) {
+                resumeTimer = setTimeout(function() {
+                    resumeMarquee();
+                }, 3500);
+            }
         }
+
+        // Freeze when mouse enters wrapper or arrows
+        document.addEventListener("mouseenter", function(e) {
+            var target = e.target;
+            if (target && (target.closest && (target.closest(".brands-marquee-wrapper") || target.closest(".brands-marquee-arrow")))) {
+                isHovered = true;
+                clearTimeout(resumeTimer);
+                freezeAtCurrentPosition();
+            }
+        }, true);
+
+        // Resume when mouse leaves wrapper
+        document.addEventListener("mouseleave", function(e) {
+            var target = e.target;
+            if (target && target.classList && target.classList.contains("brands-marquee-wrapper")) {
+                isHovered = false;
+                clearTimeout(resumeTimer);
+                resumeTimer = setTimeout(function() {
+                    if (!isHovered) {
+                        resumeMarquee();
+                    }
+                }, 600);
+            }
+        }, true);
 
         document.addEventListener("click", function(e) {
             var prevBtn = e.target.closest(".js-brands-marquee-prev");

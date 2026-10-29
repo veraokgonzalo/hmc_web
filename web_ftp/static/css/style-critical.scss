@@ -2775,8 +2775,11 @@ header.head-main.compress .logo-img-big {
   animation-direction: reverse;
 }
 
+.brands-marquee-wrapper:hover .brands-marquee-track,
+.brands-marquee-wrapper:focus-within .brands-marquee-track,
 .brands-marquee-container:hover .brands-marquee-track,
-.brands-marquee-container:focus-within .brands-marquee-track {
+.brands-marquee-container:focus-within .brands-marquee-track,
+.brands-marquee-arrow:hover ~ .brands-marquee-container .brands-marquee-track {
   animation-play-state: paused;
 }
 
