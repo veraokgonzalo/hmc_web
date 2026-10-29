@@ -33,7 +33,7 @@
     <div class="header-utilities">
       <!-- Mobile Search Toggle Button -->
       <button type="button" class="utility-btn btn-mobile-search-toggle js-toggle-mobile-search d-lg-none" id="btnMobileSearchToggle" title="{{ 'Buscar productos' | translate }}" aria-label="{{ 'Abrir buscador' | translate }}">
-        <i class="fa-solid fa-magnifying-glass"></i>
+        <i class="fa-solid fa-magnifying-glass" style="pointer-events: none;"></i>
       </button>
 
       <!-- Account Link -->

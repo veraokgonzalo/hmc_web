@@ -200,6 +200,42 @@
             .cart-drawer.active {
                 display: block !important;
             }
+
+            .btn-mobile-search-toggle {
+                display: none;
+            }
+            @media (max-width: 991px) {
+                .btn-mobile-search-toggle {
+                    display: flex !important;
+                    align-items: center;
+                    justify-content: center;
+                    min-width: 44px;
+                    min-height: 44px;
+                    padding: 6px 8px;
+                    font-size: 1.15rem;
+                    color: #000000;
+                    border: none;
+                    background: transparent;
+                    cursor: pointer;
+                    border-radius: 8px;
+                }
+                .btn-mobile-search-toggle i {
+                    pointer-events: none !important;
+                }
+                .mobile-search-bar {
+                    display: none;
+                    background-color: #ffffff;
+                    border-top: 1px solid #E0E0E0;
+                    border-bottom: 2px solid var(--color-primary, #3FAA47);
+                    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.09);
+                    width: 100%;
+                    position: relative;
+                    z-index: 899;
+                }
+                .mobile-search-bar.active {
+                    display: block !important;
+                }
+            }
         </style>
 
         {# Critical CSS #}

@@ -3658,54 +3658,75 @@ stream_videos.forEach(function(player){
        ========================================================================== */
 
     // 1. Mobile Slide-Down Search Toggle
-    var $mobileSearchToggle = jQueryNuvem("#btnMobileSearchToggle");
-    var $mobileSearchBar = jQueryNuvem("#mobileSearchBar");
-    var $mobileSearchInput = jQueryNuvem("#mobileHeaderSearchInput");
-    var $mobileSearchCloseBtn = jQueryNuvem("#mobileSearchCloseBtn");
-    var $mobileSearchClearBtn = jQueryNuvem("#mobileSearchClearBtn");
+    var lastSearchToggleTime = 0;
 
     function toggleMobileSearch(forceState) {
-        var willOpen = typeof forceState === "boolean" ? forceState : !$mobileSearchBar.hasClass("active");
+        var $bar = jQueryNuvem("#mobileSearchBar");
+        var $btn = jQueryNuvem("#btnMobileSearchToggle, .js-toggle-mobile-search");
+        var $input = jQueryNuvem("#mobileHeaderSearchInput");
+        var willOpen = typeof forceState === "boolean" ? forceState : !$bar.hasClass("active");
+
         if (willOpen) {
-            $mobileSearchBar.addClass("active");
-            $mobileSearchToggle.addClass("active").html('<i class="fa-solid fa-xmark"></i>');
+            $bar.addClass("active");
+            $btn.addClass("active").html('<i class="fa-solid fa-xmark" style="pointer-events: none;"></i>');
             setTimeout(function() {
-                $mobileSearchInput.focus();
+                if ($input.length) $input.focus();
             }, 120);
         } else {
-            $mobileSearchBar.removeClass("active");
-            $mobileSearchToggle.removeClass("active").html('<i class="fa-solid fa-magnifying-glass"></i>');
-            jQueryNuvem("#mobileSearchDropdown").removeClass("active");
+            $bar.removeClass("active");
+            $btn.removeClass("active").html('<i class="fa-solid fa-magnifying-glass" style="pointer-events: none;"></i>');
+            var $dropdown = jQueryNuvem("#mobileSearchDropdown");
+            if ($dropdown.length) $dropdown.removeClass("active").hide();
         }
     }
 
-    $mobileSearchToggle.on("click", function(e) {
+    jQueryNuvem(document).on("click touchend", "#btnMobileSearchToggle, .js-toggle-mobile-search", function(e) {
+        var now = Date.now();
+        if (now - lastSearchToggleTime < 350) {
+            e.preventDefault();
+            return;
+        }
+        lastSearchToggleTime = now;
         e.preventDefault();
+        e.stopPropagation();
         toggleMobileSearch();
     });
 
-    $mobileSearchCloseBtn.on("click", function(e) {
+    jQueryNuvem(document).on("click", "#mobileSearchCloseBtn, .js-close-mobile-search", function(e) {
         e.preventDefault();
         toggleMobileSearch(false);
     });
 
-    $mobileSearchInput.on("input", function() {
+    jQueryNuvem(document).on("input", "#mobileHeaderSearchInput", function() {
+        var $clearBtn = jQueryNuvem("#mobileSearchClearBtn");
         if (jQueryNuvem(this).val().length > 0) {
-            $mobileSearchClearBtn.show();
+            $clearBtn.show();
         } else {
-            $mobileSearchClearBtn.hide();
+            $clearBtn.hide();
         }
     });
 
-    $mobileSearchClearBtn.on("click", function(e) {
+    jQueryNuvem(document).on("click", "#mobileSearchClearBtn, .js-empty-search", function(e) {
         e.preventDefault();
-        $mobileSearchInput.val("").focus();
-        $mobileSearchClearBtn.hide();
+        var $input = jQueryNuvem("#mobileHeaderSearchInput");
+        $input.val("").focus();
+        jQueryNuvem(this).hide();
+        var $dropdown = jQueryNuvem("#mobileSearchDropdown");
+        if ($dropdown.length) $dropdown.removeClass("active").hide();
     });
 
     jQueryNuvem(document).on("keydown", function(e) {
-        if (e.key === "Escape" && $mobileSearchBar.hasClass("active")) {
+        if (e.key === "Escape" && jQueryNuvem("#mobileSearchBar").hasClass("active")) {
             toggleMobileSearch(false);
+        }
+    });
+
+    jQueryNuvem(document).on("click", function(e) {
+        var $bar = jQueryNuvem("#mobileSearchBar");
+        if ($bar.hasClass("active")) {
+            if (!jQueryNuvem(e.target).closest("#mobileSearchBar, #btnMobileSearchToggle, .js-toggle-mobile-search").length) {
+                toggleMobileSearch(false);
+            }
         }
     });
 

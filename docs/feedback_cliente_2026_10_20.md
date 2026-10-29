@@ -33,7 +33,7 @@ Todo cambio visual debe implementarse también en su versión mobile (ver regla 
 
 ### Header (mobile)
 
-- [ ] **Bug:** el ícono de la lupa del header no responde al tocarlo en mobile.
+- [x] **Bug:** el ícono de la lupa del header no responde al tocarlo en mobile.
 
 ### Marcas
 
