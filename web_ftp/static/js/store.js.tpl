@@ -4806,10 +4806,17 @@ stream_videos.forEach(function(player){
         var resumeTimer = null;
         var currentOffset = null;
 
-        function getTrackOffset($track) {
-            var el = $track[0];
-            if (!el) return 0;
-            var style = window.getComputedStyle(el);
+        function getTrack() {
+            return document.querySelector(".brands-marquee-track");
+        }
+
+        function getContainer() {
+            return document.querySelector(".brands-marquee-container");
+        }
+
+        function getTrackOffset(trackEl) {
+            if (!trackEl) return 0;
+            var style = window.getComputedStyle(trackEl);
             var matrix = style.transform || style.webkitTransform;
             if (!matrix || matrix === "none") return 0;
             var values = matrix.split('(')[1].split(')')[0].split(',');
@@ -4817,12 +4824,11 @@ stream_videos.forEach(function(player){
         }
 
         function moveBrandsMarquee(direction) {
-            var $track = jQueryNuvem(".brands-marquee-track");
-            var trackEl = $track[0];
+            var trackEl = getTrack();
             if (!trackEl) return;
 
-            var $container = jQueryNuvem(".brands-marquee-container");
-            var speed = parseFloat($container.data("speed")) || 42;
+            var containerEl = getContainer();
+            var speed = parseFloat(containerEl ? containerEl.dataset.speed : 42) || 42;
             var singleGroupWidth = trackEl.scrollWidth / 2;
             if (singleGroupWidth <= 0) return;
 
@@ -4830,18 +4836,16 @@ stream_videos.forEach(function(player){
             var step = window.innerWidth < 768 ? 160 : 280;
 
             if (currentOffset === null) {
-                currentOffset = getTrackOffset($track);
+                currentOffset = getTrackOffset(trackEl);
             }
 
-            // If moving prev and adding step would produce empty space on the left (> 0),
-            // wrap backward by one full group instantaneously (invisible to user since groups are identical)
+            // Wrap backward if moving prev and reaching > 0 to avoid blank space on the left
             if (direction === "prev" && (currentOffset + step > 0)) {
                 currentOffset -= singleGroupWidth;
                 trackEl.style.transition = "none";
                 trackEl.style.transform = "translateX(" + currentOffset + "px)";
                 void trackEl.offsetHeight; // trigger reflow
             } else if (direction === "next" && (currentOffset - step < -singleGroupWidth * 1.5)) {
-                // If moving next and going beyond group 2 buffer, wrap forward by one group
                 currentOffset += singleGroupWidth;
                 trackEl.style.transition = "none";
                 trackEl.style.transform = "translateX(" + currentOffset + "px)";
@@ -4858,7 +4862,6 @@ stream_videos.forEach(function(player){
             trackEl.style.transition = "transform 0.35s cubic-bezier(0.25, 1, 0.5, 1)";
             trackEl.style.transform = "translateX(" + currentOffset + "px)";
 
-            // Resume smooth infinite marquee after 3.5s of inactivity
             clearTimeout(resumeTimer);
             resumeTimer = setTimeout(function() {
                 if (!trackEl) return;
@@ -4877,16 +4880,18 @@ stream_videos.forEach(function(player){
             }, 3500);
         }
 
-        jQueryNuvem(document).on("click", ".js-brands-marquee-prev", function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            moveBrandsMarquee("prev");
-        });
-
-        jQueryNuvem(document).on("click", ".js-brands-marquee-next", function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            moveBrandsMarquee("next");
+        document.addEventListener("click", function(e) {
+            var prevBtn = e.target.closest(".js-brands-marquee-prev");
+            var nextBtn = e.target.closest(".js-brands-marquee-next");
+            if (prevBtn) {
+                e.preventDefault();
+                e.stopPropagation();
+                moveBrandsMarquee("prev");
+            } else if (nextBtn) {
+                e.preventDefault();
+                e.stopPropagation();
+                moveBrandsMarquee("next");
+            }
         });
     })();
 
