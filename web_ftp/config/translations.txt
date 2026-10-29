@@ -4886,3 +4886,8 @@ es "(se aplica en el checkout)."
 pt "(aplicado no checkout)."
 en "(applied at checkout)."
 es_mx "(se aplica en el checkout)."
+
+es "Hay stock"
+pt "Em estoque"
+en "In stock"
+es_mx "Hay stock"

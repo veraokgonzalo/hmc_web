@@ -2257,7 +2257,11 @@ DOMContentLoaded.addEventOrExecute(() => {
 
 	    {% if settings.product_stock %}
 	        var stock = parent.find('.js-product-stock');
-	        stock.text(variant.stock).show();
+	        if (variant.available && (variant.stock === null || variant.stock > 0)) {
+	            stock.text('{{ "Hay stock" | translate }}').removeClass('text-danger').addClass('text-primary').show();
+	        } else {
+	            stock.text('{{ "Sin stock" | translate }}').removeClass('text-primary').addClass('text-danger').show();
+	        }
 	    {% endif %}
 
         {# Updates installments on list item and inside payment popup for Payments Apps #}
@@ -2367,6 +2371,19 @@ DOMContentLoaded.addEventOrExecute(() => {
         const quickshopButtonIcon = parent.find('.js-open-quickshop-icon');
         button.removeClass('cart').removeClass('contact').removeClass('nostock');
         var $product_shipping_calculator = parent.find("#product-shipping-container");
+
+        var $stockStatus = parent.find('.js-product-stock-status');
+        if ($stockStatus.length) {
+            if (variant.available && (variant.stock === null || variant.stock > 0)) {
+                $stockStatus.removeClass('nostock');
+                $stockStatus.find('.stock-pulse-dot').removeClass('nostock');
+                $stockStatus.find('.js-stock-status-text').text('{{ "Hay stock" | translate }}');
+            } else {
+                $stockStatus.addClass('nostock');
+                $stockStatus.find('.stock-pulse-dot').addClass('nostock');
+                $stockStatus.find('.js-stock-status-text').text('{{ "Sin stock" | translate }}');
+            }
+        }
 
         {# Update CTA wording and status #}
 

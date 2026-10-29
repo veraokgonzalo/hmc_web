@@ -23,12 +23,16 @@
                 </span>
             {% endif %}
         </div>
-        {% if product.has_stock %}
-            <div class="product-stock-status">
-                <span class="stock-pulse-dot"></span>
-                <span>{{ "Stock Disponible" | translate }}</span>
-            </div>
-        {% endif %}
+        <div class="product-stock-status js-product-stock-status {% if not product.has_stock %}nostock{% endif %}">
+            <span class="stock-pulse-dot {% if not product.has_stock %}nostock{% endif %}"></span>
+            <span class="js-stock-status-text">
+                {% if product.has_stock %}
+                    {{ "Hay stock" | translate }}
+                {% else %}
+                    {{ "Sin stock" | translate }}
+                {% endif %}
+            </span>
+        </div>
     </div>
 
     {# Subscription only detection #}

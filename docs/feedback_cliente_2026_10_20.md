@@ -15,7 +15,7 @@ Todo cambio visual debe implementarse también en su versión mobile (ver regla 
 
 ### Stock
 
-- [ ] Mostrar indicadores de stock **cualitativos** ("Hay stock" / "Sin stock") en lugar de cantidades.
+- [x] Mostrar indicadores de stock **cualitativos** ("Hay stock" / "Sin stock") en lugar de cantidades.
 
 ### Contacto y sucursal
 

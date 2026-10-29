@@ -340,7 +340,13 @@
                             </div>
                             {% if settings.product_item_stock and not reduced_item %}
                                 <div class="js-item-stock-container item-stock {% if settings.quick_shop %}col-grid col-auto my-2 {% if columns_mobile == 2 and not horizontal_item %}pl-0 pl-md-1{% else %}pl-2{% endif %}{% if not horizontal_item %} pr-md-3{% endif %}{% else %}mt-3 mb-1{% endif %}">
-                                    <span class="js-product-stock">{{ product.stock }}</span> {{ "en stock" | translate }}
+                                    <span class="js-product-stock font-weight-bold {% if product.has_stock %}text-primary{% else %}text-danger{% endif %}">
+                                        {% if product.has_stock %}
+                                            {{ "Hay stock" | translate }}
+                                        {% else %}
+                                            {{ "Sin stock" | translate }}
+                                        {% endif %}
+                                    </span>
                                 </div>
                             {% endif %}
                         </div>

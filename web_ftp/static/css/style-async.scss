@@ -6004,6 +6004,10 @@ footer {
   color: var(--color-primary-dark, #2e7d32);
   font-weight: 700;
   font-size: 0.85rem;
+
+  &.nostock {
+    color: #dc3545;
+  }
 }
 
 .stock-pulse-dot {
@@ -6012,6 +6016,11 @@ footer {
   background-color: var(--color-primary, #3FAA47);
   border-radius: 50%;
   box-shadow: 0 0 0 3px rgba(63, 170, 71, 0.2);
+
+  &.nostock {
+    background-color: #dc3545;
+    box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.2);
+  }
 }
 
 /* 2. CTAs: Buy Now & WhatsApp Advice */

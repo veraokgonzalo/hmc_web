@@ -30,8 +30,14 @@
         {% endblock input_append_content %}
     {% endembed %}
     {% if settings.product_stock %}
-        <div class="font-small py-2 text-center">
-            <span class="js-product-stock">{{ product.selected_or_first_available_variant.stock }}</span> {{ "en stock" | translate }}
+        <div class="font-small py-2 text-center js-product-stock-container">
+            <span class="js-product-stock font-weight-bold {% if product.selected_or_first_available_variant.has_stock %}text-primary{% else %}text-danger{% endif %}">
+                {% if product.selected_or_first_available_variant.has_stock %}
+                    {{ "Hay stock" | translate }}
+                {% else %}
+                    {{ "Sin stock" | translate }}
+                {% endif %}
+            </span>
         </div>
     {% endif %}
 </div>
