@@ -199,7 +199,7 @@
 					<i class="fa-solid fa-chevron-down"></i>
 				</div>
 				<div class="faq-answer">
-					{{ "Sí. Coordinamos envíos paletizados y asegurados a través de expresos y transportes de carga con seguimiento en tiempo real hasta tu obra o depósito. Superando los $300.000 el envío es gratis en productos seleccionados." | translate }}
+					{{ "Sí. Coordinamos envíos paletizados y asegurados a través de expresos y transportes de carga con seguimiento en tiempo real hasta tu obra o depósito." | translate }}
 				</div>
 			</div>
 
@@ -219,7 +219,7 @@
 					<i class="fa-solid fa-chevron-down"></i>
 				</div>
 				<div class="faq-answer">
-					{{ "Sí, somos distribuidores y centro de servicio oficial de STIHL, HONDA, HUSQVARNA, BOSCH, DEWALT y marcas asociadas. Disponemos de stock permanente de espadas, cadenas, bujías, filtros, cuchillas y lubricantes originales." | translate }}
+					{{ "Sí, somos distribuidores y centro de servicio oficial de Echo, Toro, Honda, Husqvarna, Sensei, Kohler, Briggs & Stratton y marcas asociadas. Disponemos de stock permanente de espadas, cadenas, bujías, filtros, cuchillas y lubricantes originales." | translate }}
 				</div>
 			</div>
 		</section>

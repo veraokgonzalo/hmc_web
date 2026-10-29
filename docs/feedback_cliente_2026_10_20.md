@@ -24,8 +24,8 @@ Todo cambio visual debe implementarse también en su versión mobile (ver regla 
 
 ### Preguntas frecuentes (contacto)
 
-- [ ] **"¿Cuentan con repuestos originales de las marcas que comercializan?"**: actualizar la respuesta con las marcas de las que HMC es efectivamente Service Oficial. Según `docs/feedback_cliente.md`: Echo, Toro, Honda, Husqvarna, Sensei, Kohler y Briggs & Stratton (a confirmar con el cliente).
-- [ ] **"¿Hacen envíos de generadores y maquinaria pesada a todo el país?"**: quitar la oración sobre envío gratis en compras mayores a $300.000. No hay envío gratis.
+- [x] **"¿Cuentan con repuestos originales de las marcas que comercializan?"**: actualizar la respuesta con las marcas de las que HMC es efectivamente Service Oficial. Según `docs/feedback_cliente.md`: Echo, Toro, Honda, Husqvarna, Sensei, Kohler y Briggs & Stratton (a confirmar con el cliente).
+- [x] **"¿Hacen envíos de generadores y maquinaria pesada a todo el país?"**: quitar la oración sobre envío gratis en compras mayores a $300.000. No hay envío gratis.
 
 ### Footer — Botón de arrepentimiento
 
