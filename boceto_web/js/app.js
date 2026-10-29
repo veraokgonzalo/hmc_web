@@ -990,16 +990,21 @@ function initBrandsMarquee() {
   document.addEventListener("click", (e) => {
     const prevBtn = e.target.closest(".js-brands-marquee-prev");
     const nextBtn = e.target.closest(".js-brands-marquee-next");
-    if (prevBtn) {
+    const btn = prevBtn || nextBtn;
+    if (btn) {
       e.preventDefault();
       e.stopPropagation();
-      moveMarquee("prev");
-    } else if (nextBtn) {
-      e.preventDefault();
-      e.stopPropagation();
-      moveMarquee("next");
+      if (btn.blur) btn.blur();
+      moveMarquee(prevBtn ? "prev" : "next");
     }
   });
+
+  document.addEventListener("touchend", (e) => {
+    const btn = e.target.closest(".brands-marquee-arrow");
+    if (btn && btn.blur) {
+      btn.blur();
+    }
+  }, { passive: true });
 }
 
 function initBrandsPage() {

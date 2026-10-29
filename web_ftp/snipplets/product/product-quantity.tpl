@@ -17,14 +17,14 @@
     data_component: 'adding-amount.value',
     input_aria_label: 'Cambiar cantidad' | translate } %}
         {% block input_prepend_content %}
-        <div class="form-quantity d-flex form-row m-0 align-items-center" data-component="product.quantity">
-            <span class="js-quantity-down form-quantity-icon btn icon-30px font-small" data-component="product.quantity.minus">
-                {% include "snipplets/svg/chevron-left.tpl" with {svg_custom_class: "icon-inline mt-2"} %}
+        <div class="form-quantity d-flex flex-nowrap form-row m-0 align-items-center" data-component="product.quantity">
+            <span class="js-quantity-down form-quantity-icon icon-30px font-small d-flex align-items-center justify-content-center" data-component="product.quantity.minus">
+                {% include "snipplets/svg/chevron-left.tpl" with {svg_custom_class: "icon-inline"} %}
             </span>
         {% endblock input_prepend_content %}
         {% block input_append_content %}
-            <span class="js-quantity-up form-quantity-icon btn icon-30px font-small" data-component="product.quantity.plus">
-                {% include "snipplets/svg/chevron-right.tpl" with {svg_custom_class: "icon-inline mt-2"} %}
+            <span class="js-quantity-up form-quantity-icon icon-30px font-small d-flex align-items-center justify-content-center" data-component="product.quantity.plus">
+                {% include "snipplets/svg/chevron-right.tpl" with {svg_custom_class: "icon-inline"} %}
             </span>
         </div>
         {% endblock input_append_content %}

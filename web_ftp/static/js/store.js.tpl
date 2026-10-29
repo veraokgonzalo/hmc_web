@@ -4910,13 +4910,15 @@ stream_videos.forEach(function(player){
             trackEl.style.transition = "transform 0.35s cubic-bezier(0.25, 1, 0.5, 1)";
             trackEl.style.transform = "translateX(" + currentOffset + "px)";
 
-            // If not actively hovered, resume after inactivity timeout
+            // Resume after inactivity timeout if mouse moves away or on touch devices
             clearTimeout(resumeTimer);
-            if (!isHovered) {
-                resumeTimer = setTimeout(function() {
+            resumeTimer = setTimeout(function() {
+                var wrapper = document.querySelector(".brands-marquee-wrapper");
+                if (!wrapper || !wrapper.matches(":hover")) {
+                    isHovered = false;
                     resumeMarquee();
-                }, 3500);
-            }
+                }
+            }, 2500);
         }
 
         // Freeze when mouse enters wrapper or arrows
@@ -4936,26 +4938,38 @@ stream_videos.forEach(function(player){
                 isHovered = false;
                 clearTimeout(resumeTimer);
                 resumeTimer = setTimeout(function() {
-                    if (!isHovered) {
+                    var wrapper = document.querySelector(".brands-marquee-wrapper");
+                    if (!wrapper || !wrapper.matches(":hover")) {
+                        isHovered = false;
                         resumeMarquee();
                     }
-                }, 600);
+                }, 400);
             }
         }, true);
 
         document.addEventListener("click", function(e) {
             var prevBtn = e.target.closest(".js-brands-marquee-prev");
             var nextBtn = e.target.closest(".js-brands-marquee-next");
-            if (prevBtn) {
+            var btn = prevBtn || nextBtn;
+            if (btn) {
                 e.preventDefault();
                 e.stopPropagation();
-                moveBrandsMarquee("prev");
-            } else if (nextBtn) {
-                e.preventDefault();
-                e.stopPropagation();
-                moveBrandsMarquee("next");
+                if (btn.blur) btn.blur();
+                moveBrandsMarquee(prevBtn ? "prev" : "next");
             }
         });
+
+        document.addEventListener("touchend", function(e) {
+            var btn = e.target.closest(".brands-marquee-arrow");
+            if (btn) {
+                if (btn.blur) btn.blur();
+                clearTimeout(resumeTimer);
+                resumeTimer = setTimeout(function() {
+                    isHovered = false;
+                    resumeMarquee();
+                }, 2000);
+            }
+        }, { passive: true });
     })();
 
 });
