@@ -46,11 +46,11 @@ Todo cambio visual debe implementarse también en su versión mobile (ver regla 
 
 ### Búsqueda
 
-- [ ] Al hacer una búsqueda no aparecen las categorías en la columna izquierda. Deben mostrarse igual que en el catálogo.
+- [x] Al hacer una búsqueda no aparecen las categorías en la columna izquierda. Deben mostrarse igual que en el catálogo.
 
 ### Filtros (mobile)
 
-- [ ] **Bug:** en el modal de filtros, al marcar el checkbox de una marca se deshabilitan todos los demás y no se pueden seleccionar varias marcas a la vez. Debe permitir selección múltiple.
+- [x] **Bug:** en el modal de filtros, al marcar el checkbox de una marca se deshabilitan todos los demás y no se pueden seleccionar varias marcas a la vez. Debe permitir selección múltiple.
 
 ## Configuración de la tienda (admin / integraciones)
 

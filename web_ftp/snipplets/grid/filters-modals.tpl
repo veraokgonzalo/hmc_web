@@ -63,7 +63,7 @@
 {% endif %}
 
 {% if has_filters_available %}
-	{% embed "snipplets/modal.tpl" with {modal_id: 'nav-filters', modal_class: 'filters', modal_body_class: 'h-100 p-0', modal_position: 'right', modal_position_desktop: 'right', modal_transition: 'slide', modal_header_title: true, modal_width: 'docked-md', modal_mobile_full_screen: true, modal_url: 'modal-fullscreen-filters'} %}
+	{% embed "snipplets/modal.tpl" with {modal_id: 'nav-filters', modal_class: 'filters', modal_body_class: 'h-100 p-0', modal_position: 'right', modal_position_desktop: 'right', modal_transition: 'slide', modal_header_title: true, modal_width: 'docked-md', modal_mobile_full_screen: true, modal_url: 'modal-fullscreen-filters', modal_footer: true, modal_fixed_footer: true, modal_footer_class: 'filters-modal-footer'} %}
 		{% block modal_head %}
 			{{'Filtros ' | translate }}
 		{% endblock %}
@@ -75,14 +75,16 @@
 						{% include "snipplets/grid/filters.tpl" with {applied_filters: true} %}
 					</div>
 				{% endif %}
-				{% if template == 'search' %}
-					{% include "snipplets/grid/categories-search.tpl" with {modal: true} %}
-				{% elseif filter_categories is not empty or is_real_cat %}
-					{% include "snipplets/grid/categories.tpl" with {modal: true} %}
-				{% endif %}
-				{% if product_filters is not empty %}
-					{% include "snipplets/grid/filters.tpl" with {modal: true} %}
-				{% endif %}
+				<div class="filters-modal-content-wrapper">
+					{% if template == 'search' %}
+						{% include "snipplets/grid/categories-search.tpl" with {modal: true} %}
+					{% elseif filter_categories is not empty or is_real_cat %}
+						{% include "snipplets/grid/categories.tpl" with {modal: true} %}
+					{% endif %}
+					{% if product_filters is not empty %}
+						{% include "snipplets/grid/filters.tpl" with {modal: true} %}
+					{% endif %}
+				</div>
 				<div class="js-filters-overlay filters-overlay" style="display: none;">
 					<div class="filters-updating-message">
 						<span class="js-applying-filter h5 mr-2" style="display: none;">{{ 'Aplicando filtro' | translate }}</span>
@@ -93,6 +95,17 @@
 					</div>
 				</div>
 			{% endif %}
+		{% endblock %}
+		{% block modal_foot %}
+			<div class="filters-modal-actions d-flex align-items-center justify-content-between w-100">
+				<button type="button" class="btn btn-outline-secondary js-modal-clear-filters font-weight-bold" style="min-width: 90px; height: 46px; border-radius: 8px;">
+					{{ 'Limpiar' | translate }}
+				</button>
+				<button type="button" class="btn btn-primary js-modal-apply-filters font-weight-bold flex-grow-1 ml-2" style="height: 46px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1rem;">
+					<span class="js-apply-filters-text">{{ 'Aplicar filtros' | translate }}</span>
+					<span class="js-modal-filter-count badge badge-light text-primary ml-2 font-weight-bold" style="display: none; border-radius: 12px; padding: 3px 8px;">0</span>
+				</button>
+			</div>
 		{% endblock %}
 	{% endembed %}
 {% endif %}

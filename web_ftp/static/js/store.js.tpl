@@ -1911,19 +1911,49 @@ DOMContentLoaded.addEventOrExecute(() => {
             });
         {% endif %}
 
+        function updateModalFilterCount() {
+            var $modal = jQueryNuvem("#nav-filters");
+            if (!$modal.length) return;
+            var totalChecked = $modal.find(".js-filter-checkbox [type=checkbox]:checked").length;
+            var $count = $modal.find(".js-modal-filter-count");
+            var $text = $modal.find(".js-apply-filters-text");
+            if (totalChecked > 0) {
+                $count.text(totalChecked).show();
+                $text.text("{{ 'Aplicar filtros' | translate }} (" + totalChecked + ")");
+            } else {
+                $count.hide();
+                $text.text("{{ 'Aplicar filtros' | translate }}");
+            }
+        }
+
         jQueryNuvem(document).on("click", ".js-apply-filter, .js-remove-filter", function(e) {
             e.preventDefault();
-            var filter_name = jQueryNuvem(this).attr('data-filter-name');
-            var filter_value = jQueryNuvem(this).attr('data-filter-value');
-            if(jQueryNuvem(this).hasClass("js-apply-filter")){
-                jQueryNuvem(this).find("[type=checkbox]").prop("checked", true);
+            var $this = jQueryNuvem(this);
+            var isModal = $this.closest("#nav-filters").length > 0;
+            var filter_name = $this.attr('data-filter-name');
+            var filter_value = $this.attr('data-filter-value');
+
+            // If inside mobile filter modal, allow multi-selection without reloading or blocking overlay
+            if (isModal && $this.hasClass("js-filter-checkbox")) {
+                var $cb = $this.find("[type=checkbox]");
+                var willBeChecked = !$cb.prop("checked");
+                $cb.prop("checked", willBeChecked);
+                $this.toggleClass("active font-weight-bold", willBeChecked);
+                $this.toggleClass("js-apply-filter js-remove-filter");
+                updateModalFilterCount();
+                return;
+            }
+
+            // Desktop sidebar or filter chips behavior
+            if($this.hasClass("js-apply-filter")){
+                $this.find("[type=checkbox]").prop("checked", true);
                 LS.urlAddParam(
                     filter_name,
                     filter_value,
                     true
                 );
             }else{
-                jQueryNuvem(this).find("[type=checkbox]").prop("checked", false);
+                $this.find("[type=checkbox]").prop("checked", false);
                 LS.urlRemoveParam(
                     filter_name,
                     filter_value
@@ -1932,17 +1962,82 @@ DOMContentLoaded.addEventOrExecute(() => {
 
             {# Toggle class to avoid adding double parameters in case of double click and show applying changes feedback #}
 
-            if (jQueryNuvem(this).hasClass("js-filter-checkbox")){
+            if ($this.hasClass("js-filter-checkbox")){
                 if (window.innerWidth < 768) {
                     jQueryNuvem(".js-filters-overlay").show();
-                    if(jQueryNuvem(this).hasClass("js-apply-filter")){
+                    if($this.hasClass("js-apply-filter")){
                         jQueryNuvem(".js-applying-filter").show();
                     }else{
                         jQueryNuvem(".js-removing-filter").show();
                     }
                 }
-                jQueryNuvem(this).toggleClass("js-apply-filter js-remove-filter");
+                $this.toggleClass("js-apply-filter js-remove-filter");
             }
+        });
+
+        // Initialize counter when opening filters modal
+        jQueryNuvem(document).on("click", "[data-toggle='#nav-filters'], .js-modal-open[data-toggle='#nav-filters']", function() {
+            setTimeout(updateModalFilterCount, 50);
+        });
+
+        // Clear all filters inside modal
+        jQueryNuvem(document).on("click", ".js-modal-clear-filters", function(e) {
+            e.preventDefault();
+            var $modal = jQueryNuvem("#nav-filters");
+            $modal.find(".js-filter-checkbox").each(function() {
+                var $el = jQueryNuvem(this);
+                $el.find("[type=checkbox]").prop("checked", false);
+                $el.removeClass("active font-weight-bold js-remove-filter").addClass("js-apply-filter");
+            });
+            updateModalFilterCount();
+        });
+
+        // Apply all filters inside modal
+        jQueryNuvem(document).on("click", ".js-modal-apply-filters", function(e) {
+            e.preventDefault();
+            var $modal = jQueryNuvem("#nav-filters");
+            var selectedByFilterName = {};
+
+            $modal.find(".js-filter-checkbox").each(function() {
+                var $label = jQueryNuvem(this);
+                var filterName = $label.attr("data-filter-name");
+                var filterValue = $label.attr("data-filter-value");
+                var isChecked = $label.find("[type=checkbox]").is(":checked");
+
+                if (filterName) {
+                    if (!selectedByFilterName[filterName]) {
+                        selectedByFilterName[filterName] = [];
+                    }
+                    if (isChecked && filterValue) {
+                        selectedByFilterName[filterName].push(filterValue);
+                    }
+                }
+            });
+
+            // Show loading feedback
+            jQueryNuvem(".js-filters-overlay").show();
+            jQueryNuvem(".js-applying-filter").show();
+            jQueryNuvem(".js-filtering-spinner").show();
+
+            var currentUrl = new URL(window.location.href);
+            var params = currentUrl.searchParams;
+
+            // Apply selected filter values combined with pipe |
+            Object.keys(selectedByFilterName).forEach(function(filterName) {
+                var values = selectedByFilterName[filterName];
+                if (values.length > 0) {
+                    params.set(filterName, values.join("|"));
+                } else {
+                    params.delete(filterName);
+                }
+            });
+
+            // Reset pagination to first page
+            params.delete("page");
+
+            // Format URL with literal | delimiter expected by Tiendanube
+            var queryStr = params.toString().replace(/%7C/g, "|");
+            window.location.href = currentUrl.pathname + (queryStr ? "?" + queryStr : "");
         });
 
         jQueryNuvem(document).on("click", ".js-remove-all-filters", function(e) {
