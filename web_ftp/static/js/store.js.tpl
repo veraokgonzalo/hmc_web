@@ -3753,73 +3753,90 @@ stream_videos.forEach(function(player){
        ========================================================================== */
 
     // 1. Mobile Slide-Down Search Toggle
-    var lastSearchToggleTime = 0;
-
     function toggleMobileSearch(forceState) {
-        var $bar = jQueryNuvem("#mobileSearchBar");
-        var $btn = jQueryNuvem("#btnMobileSearchToggle, .js-toggle-mobile-search");
-        var $input = jQueryNuvem("#mobileHeaderSearchInput");
-        var willOpen = typeof forceState === "boolean" ? forceState : !$bar.hasClass("active");
+        var bar = document.getElementById("mobileSearchBar");
+        var btn = document.querySelector("#btnMobileSearchToggle, .js-toggle-mobile-search");
+        var input = document.getElementById("mobileHeaderSearchInput");
+        if (!bar) return;
+        var willOpen = typeof forceState === "boolean" ? forceState : !bar.classList.contains("active");
 
         if (willOpen) {
-            $bar.addClass("active");
-            $btn.addClass("active").html('<i class="fa-solid fa-xmark" style="pointer-events: none;"></i>');
+            bar.classList.add("active");
+            if (btn) {
+                btn.classList.add("active");
+                btn.innerHTML = '<i class="fa-solid fa-xmark" style="pointer-events: none;"></i>';
+            }
             setTimeout(function() {
-                if ($input.length) $input.focus();
+                if (input) input.focus();
             }, 120);
         } else {
-            $bar.removeClass("active");
-            $btn.removeClass("active").html('<i class="fa-solid fa-magnifying-glass" style="pointer-events: none;"></i>');
-            var $dropdown = jQueryNuvem("#mobileSearchDropdown");
-            if ($dropdown.length) $dropdown.removeClass("active").hide();
+            bar.classList.remove("active");
+            if (btn) {
+                btn.classList.remove("active");
+                btn.innerHTML = '<i class="fa-solid fa-magnifying-glass" style="pointer-events: none;"></i>';
+            }
+            var dropdown = document.getElementById("mobileSearchDropdown");
+            if (dropdown) {
+                dropdown.classList.remove("active");
+                dropdown.style.display = "none";
+            }
         }
     }
 
-    jQueryNuvem(document).on("click touchend", "#btnMobileSearchToggle, .js-toggle-mobile-search", function(e) {
-        var now = Date.now();
-        if (now - lastSearchToggleTime < 350) {
+    document.addEventListener("click", function(e) {
+        var toggleBtn = e.target.closest("#btnMobileSearchToggle, .js-toggle-mobile-search");
+        if (toggleBtn) {
             e.preventDefault();
+            e.stopPropagation();
+            toggleMobileSearch();
             return;
         }
-        lastSearchToggleTime = now;
-        e.preventDefault();
-        e.stopPropagation();
-        toggleMobileSearch();
-    });
 
-    jQueryNuvem(document).on("click", "#mobileSearchCloseBtn, .js-close-mobile-search", function(e) {
-        e.preventDefault();
-        toggleMobileSearch(false);
-    });
-
-    jQueryNuvem(document).on("input", "#mobileHeaderSearchInput", function() {
-        var $clearBtn = jQueryNuvem("#mobileSearchClearBtn");
-        if (jQueryNuvem(this).val().length > 0) {
-            $clearBtn.show();
-        } else {
-            $clearBtn.hide();
-        }
-    });
-
-    jQueryNuvem(document).on("click", "#mobileSearchClearBtn, .js-empty-search", function(e) {
-        e.preventDefault();
-        var $input = jQueryNuvem("#mobileHeaderSearchInput");
-        $input.val("").focus();
-        jQueryNuvem(this).hide();
-        var $dropdown = jQueryNuvem("#mobileSearchDropdown");
-        if ($dropdown.length) $dropdown.removeClass("active").hide();
-    });
-
-    jQueryNuvem(document).on("keydown", function(e) {
-        if (e.key === "Escape" && jQueryNuvem("#mobileSearchBar").hasClass("active")) {
+        var closeBtn = e.target.closest("#mobileSearchCloseBtn, .js-close-mobile-search");
+        if (closeBtn) {
+            e.preventDefault();
             toggleMobileSearch(false);
+            return;
+        }
+
+        var clearBtn = e.target.closest("#mobileSearchClearBtn, .js-empty-search");
+        if (clearBtn) {
+            e.preventDefault();
+            var input = document.getElementById("mobileHeaderSearchInput");
+            if (input) {
+                input.value = "";
+                input.focus();
+            }
+            clearBtn.style.display = "none";
+            var dropdown = document.getElementById("mobileSearchDropdown");
+            if (dropdown) {
+                dropdown.classList.remove("active");
+                dropdown.style.display = "none";
+            }
+            return;
+        }
+
+        var bar = document.getElementById("mobileSearchBar");
+        if (bar && bar.classList.contains("active")) {
+            if (!e.target.closest("#mobileSearchBar, #btnMobileSearchToggle, .js-toggle-mobile-search")) {
+                toggleMobileSearch(false);
+            }
         }
     });
 
-    jQueryNuvem(document).on("click", function(e) {
-        var $bar = jQueryNuvem("#mobileSearchBar");
-        if ($bar.hasClass("active")) {
-            if (!jQueryNuvem(e.target).closest("#mobileSearchBar, #btnMobileSearchToggle, .js-toggle-mobile-search").length) {
+    document.addEventListener("input", function(e) {
+        if (e.target && e.target.id === "mobileHeaderSearchInput") {
+            var clearBtn = document.getElementById("mobileSearchClearBtn");
+            if (clearBtn) {
+                clearBtn.style.display = e.target.value.length > 0 ? "block" : "none";
+            }
+        }
+    });
+
+    document.addEventListener("keydown", function(e) {
+        if (e.key === "Escape") {
+            var bar = document.getElementById("mobileSearchBar");
+            if (bar && bar.classList.contains("active")) {
                 toggleMobileSearch(false);
             }
         }
