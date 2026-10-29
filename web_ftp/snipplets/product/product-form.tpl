@@ -69,6 +69,15 @@
                         container_classes: "mt-1 mb-2 font-small opacity-60",
                     })
                 }}
+                <div class="js-product-transfer-discount product-transfer-discount-box" {% if not product.display_price %}style="display:none;"{% endif %}>
+                    <span class="badge-transfer">
+                        <i class="fa-solid fa-percent mr-1"></i>5% OFF
+                    </span>
+                    <span class="transfer-text">
+                        {{ "pagando con" | translate }} <strong>{{ "Transferencia Bancaria" | translate }}</strong>:
+                        <span class="js-transfer-discount-price" data-product-price="{{ product.price }}">{{ (product.price * 0.95) | money }}</span>
+                    </span>
+                </div>
                 {{ component('payment-discount-price', {
                         visibility_condition: settings.payment_discount_price,
                         location: 'product',

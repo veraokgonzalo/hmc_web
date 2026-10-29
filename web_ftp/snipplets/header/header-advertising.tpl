@@ -11,6 +11,8 @@
           <span class="top-bar-marquee-sep">•</span>
           <span><i class="fa-solid fa-truck-ramp-box"></i> {{ 'Envíos a Todo el País' | translate }}</span>
           <span class="top-bar-marquee-sep">•</span>
+          <span><i class="fa-solid fa-building-columns"></i> {{ '5% OFF por Transferencia Bancaria' | translate }}</span>
+          <span class="top-bar-marquee-sep">•</span>
           <span><i class="fa-solid fa-credit-card"></i> {{ 'Todos los Medios de Pago' | translate }}</span>
           <span class="top-bar-marquee-sep">•</span>
           <span><i class="fa-solid fa-headset"></i> {{ 'Asesoramiento Técnico' | translate }}</span>
@@ -20,6 +22,8 @@
           <span><i class="fa-solid fa-shield-halved"></i> {{ 'Garantía y Servicio Oficial' | translate }}</span>
           <span class="top-bar-marquee-sep">•</span>
           <span><i class="fa-solid fa-truck-ramp-box"></i> {{ 'Envíos a Todo el País' | translate }}</span>
+          <span class="top-bar-marquee-sep">•</span>
+          <span><i class="fa-solid fa-building-columns"></i> {{ '5% OFF por Transferencia Bancaria' | translate }}</span>
           <span class="top-bar-marquee-sep">•</span>
           <span><i class="fa-solid fa-credit-card"></i> {{ 'Todos los Medios de Pago' | translate }}</span>
           <span class="top-bar-marquee-sep">•</span>

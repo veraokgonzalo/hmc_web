@@ -8,7 +8,7 @@ Todo cambio visual debe implementarse también en su versión mobile (ver regla 
 
 ### Promociones y precios
 
-- [ ] **Descuento del 5% por transferencia bancaria en todos los productos.** Comunicarlo en:
+- [x] **Descuento del 5% por transferencia bancaria en todos los productos.** Comunicarlo en:
   - el marquee de la topbar (`snipplets/header/header-advertising.tpl`), en ambas copias del track (la visible y la `aria-hidden`);
   - la ficha de producto, junto al precio;
   - el checkout.

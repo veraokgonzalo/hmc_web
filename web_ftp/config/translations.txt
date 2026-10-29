@@ -4876,3 +4876,13 @@ es "<a target='_blank' href='https://ayuda.tiendanube.com/es_AR/123465-cupones-y
 pt "<a target='_blank' href='https://atendimento.nuvemshop.com.br/cupons/como-criar-cupons-de-desconto' class='js-checkbox-help-link'>Mais sobre cupons de desconto</a>"
 en "<a target='_blank' href='https://ayuda.tiendanube.com/es_AR/123465-cupones-y-promociones/que-son-los-cupones-de-descuento' class='js-checkbox-help-link'>More about discount coupons</a>"
 es_mx "<a target='_blank' href='https://ayuda.tiendanube.com/es_MX/123465-cupones-y-promociones/que-son-los-cupones-de-descuento' class='js-checkbox-help-link'>Más sobre cupones de descuento</a>"
+
+es "5% OFF por Transferencia Bancaria"
+pt "5% OFF por Transferência Bancária"
+en "5% OFF via Bank Transfer"
+es_mx "5% OFF por Transferencia Bancaria"
+
+es "(se aplica en el checkout)."
+pt "(aplicado no checkout)."
+en "(applied at checkout)."
+es_mx "(se aplica en el checkout)."

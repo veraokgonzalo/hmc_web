@@ -178,3 +178,5 @@ new_block_title_en = Our Block
 new_block_title_pt = Nosso Bloco
 new_block_image_01_link = 
 new_block_image_02_link = 
+payment_discount_price = 1
+

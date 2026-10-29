@@ -2346,8 +2346,14 @@ DOMContentLoaded.addEventOrExecute(() => {
 
             parent.find('.js-price-without-taxes').text(variant.price_without_taxes);
             parent.find('.js-price-without-taxes-container').show();
+
+            if (variant.price_number && typeof LS !== "undefined" && LS.currency) {
+                var transferPrice = variant.price_number * 0.95;
+                parent.find('.js-transfer-discount-price').text(LS.currency.display_short + transferPrice.toLocaleString('de-DE', { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
+                parent.find('.js-product-transfer-discount').css('display', 'flex').show();
+            }
 	    } else {
-	        parent.find('.js-price-display, .js-price-without-taxes-container').hide();
+	        parent.find('.js-price-display, .js-price-without-taxes-container, .js-product-transfer-discount').hide();
 	    }
 
 	    if ((variant.compare_at_price_short) && !(parent.find(".js-price-display").css("display") == "none")) {

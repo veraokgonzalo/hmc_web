@@ -150,6 +150,10 @@
       {% set has_validation_messages = cart.checkout_enabled_validation_messages | length > 0 %}
       {% set should_show_checkout_button = cart.checkout_enabled and has_validation_messages == false %}
 
+      <div class="cart-payment-methods-callout">
+        <i class="fa-solid fa-building-columns text-primary mr-1"></i> <strong>{{ "5% de descuento" | translate }}</strong> {{ "pagando con" | translate }} <strong>{{ "Transferencia Bancaria" | translate }}</strong> {{ "(se aplica en el checkout)." | translate }}
+      </div>
+
       {% if cart_page %}
 
         {# Cart page CTA and minimum alert: Always render button to ensure it exists in DOM, control visibility via CSS/JS #}
