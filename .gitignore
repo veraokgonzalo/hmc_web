@@ -2,6 +2,8 @@ web_fork/.nuvem
 web_ftp/.nuvem
 assets/FOTOS/
 assets/VIDEOS/
+assets/marcas_oficiales_raw/
+assets/marcas/
 /hmcvideo_home.mp4
 __pycache__/
 *.pyc

@@ -865,16 +865,26 @@ const ALL_BRANDS_103 = REAL_CATALOG_BRANDS.map(b => b.name);
    0.2. Dynamic Brands Marquee Component (Configurable & Tiendanube-Ready)
    -------------------------------------------------------------------------- */
 const MARQUEE_BRANDS_DATA = [
-  { name: "HONDA", logo: "assets/images/brands/honda.svg", alt: "Honda Motores y Generadores" },
-  { name: "HUSQVARNA", logo: "assets/images/brands/husqvarna.svg", alt: "Husqvarna Maquinaria" },
-  { name: "ECHO", logo: "assets/images/brands/echo.svg", alt: "Echo Maquinaria de Poda" },
-  { name: "MOTORARG", logo: null, alt: "Motorarg" }, // TODO: falta logo real, usa wordmark de texto
-  { name: "HUNTER", logo: "assets/images/brands/hunter.png", alt: "Hunter Irrigation" },
-  { name: "TORO", logo: null, alt: "Toro" }, // TODO: falta logo real, usa wordmark de texto
+  { name: "ALPEN", logo: "assets/images/brands/alpen.png", alt: "Alpen Mechas y Herramientas" },
+  { name: "BEAR CAT", logo: "assets/images/brands/bear-cat.png", alt: "Crary Bear Cat Chipeadoras y Trituradoras" },
+  { name: "ECHO", logo: "assets/images/brands/echo.png", alt: "Echo Maquinaria de Poda y Jardín" },
+  { name: "FELCO", logo: "assets/images/brands/felco.png", alt: "Felco Swiss Made Tijeras de Poda" },
+  { name: "GARDENA", logo: "assets/images/brands/gardena.png", alt: "Gardena Jardinería y Riego" },
+  { name: "GREENWORKS", logo: "assets/images/brands/greenworks.png", alt: "Greenworks Herramientas a Batería" },
+  { name: "GRUPO RUMBO", logo: "assets/images/brands/grupo-rumbo.png", alt: "Grupo Rumbo Maquinarias" },
+  { name: "HUNTER", logo: "assets/images/brands/hunter.png", alt: "Hunter Sistemas de Riego" },
+  { name: "HUSQVARNA", logo: "assets/images/brands/husqvarna.png", alt: "Husqvarna Maquinaria Forestal y Jardín" },
+  { name: "METABO", logo: "assets/images/brands/metabo.png", alt: "Metabo Herramientas Eléctricas Profesionales" },
+  { name: "NIWA", logo: "assets/images/brands/niwa.png", alt: "Niwa Maquinaria para Bosque y Jardín" },
   { name: "OREGON", logo: "assets/images/brands/oregon.png", alt: "Oregon Cadenas y Espadas" },
-  { name: "KOHLER", logo: null, alt: "Kohler" }, // TODO: falta logo real, usa wordmark de texto
-  { name: "RAIN BIRD", logo: null, alt: "Rain Bird" }, // TODO: falta logo real, usa wordmark de texto
-  { name: "GARDENA", logo: "assets/images/brands/gardena.svg", alt: "Gardena Jardinería y Riego" }
+  { name: "PAMPA PRO", logo: "assets/images/brands/pampa-pro.png", alt: "Pampa Pro Equipos Profesionales" },
+  { name: "SENSEI", logo: "assets/images/brands/sensei.png", alt: "Sensei Motores y Generadores" },
+  { name: "SHIZEN", logo: "assets/images/brands/shizen.png", alt: "Shizen Maquinarias" },
+  { name: "TECMATER", logo: "assets/images/brands/tecmater.png", alt: "Tecmater Elementos de Seguridad y Trabajo" },
+  { name: "TECOMEC", logo: "assets/images/brands/tecomec.png", alt: "Tecomec Afiladoras y Repuestos" },
+  { name: "TORO", logo: "assets/images/brands/toro.png", alt: "Toro Cortadoras de Césped y Riego" },
+  { name: "TROY-BILT", logo: "assets/images/brands/troy-bilt.png", alt: "Troy-Bilt Cortacéspedes y Tractores" },
+  { name: "ZODIAC", logo: "assets/images/brands/zodiac.png", alt: "Zodiac Piscinas y Limpiafondos" }
 ];
 
 function initBrandsMarquee() {

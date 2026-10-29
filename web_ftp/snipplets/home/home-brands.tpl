@@ -4,27 +4,26 @@
 
 {% if not has_custom_brands %}
 	{% set default_brands = [
-		{'name': 'BOSCH', 'image': 'images/brands/bosch.svg', 'link': '/search/?q=BOSCH'},
-		{'name': 'DEWALT', 'image': 'images/brands/dewalt.svg', 'link': '/search/?q=DEWALT'},
-		{'name': 'HUSQVARNA', 'image': 'images/brands/husqvarna.svg', 'link': '/search/?q=HUSQVARNA'},
-		{'name': 'STIHL', 'image': 'images/brands/stihl.svg', 'link': '/search/?q=STIHL'},
-		{'name': 'EINHELL', 'image': 'images/brands/einhell.svg', 'link': '/search/?q=EINHELL'},
-		{'name': 'HONDA', 'image': 'images/brands/honda.svg', 'link': '/search/?q=HONDA'},
-		{'name': 'GARDENA', 'image': 'images/brands/gardena.svg', 'link': '/search/?q=GARDENA'},
-		{'name': 'NIWA', 'image': 'images/brands/niwa.svg', 'link': '/search/?q=NIWA'},
-		{'name': 'SENSEI', 'image': 'images/brands/sensei.png', 'link': '/search/?q=SENSEI'},
-		{'name': 'OREGON', 'image': 'images/brands/oregon.png', 'link': '/search/?q=OREGON'},
-		{'name': 'DOWEN PAGIO', 'image': 'images/brands/dowen-pagio.svg', 'link': '/search/?q=DOWEN+PAGIO'},
-		{'name': 'MAKITA', 'image': 'images/brands/makita.svg', 'link': '/search/?q=MAKITA'},
-		{'name': 'SHINDAIWA', 'image': 'images/brands/shindaiwa.svg', 'link': '/search/?q=SHINDAIWA'},
-		{'name': 'BAHCO', 'image': 'images/brands/bahco.svg', 'link': '/search/?q=BAHCO'},
-		{'name': 'STANLEY', 'image': 'images/brands/stanley.svg', 'link': '/search/?q=STANLEY'},
-		{'name': 'ECHO', 'image': 'images/brands/echo.svg', 'link': '/search/?q=ECHO'},
-		{'name': 'LUSQTOFF', 'image': 'images/brands/lusqtoff.svg', 'link': '/search/?q=LUSQTOFF'},
+		{'name': 'ALPEN', 'image': 'images/brands/alpen.png', 'link': '/search/?q=ALPEN'},
+		{'name': 'BEAR CAT', 'image': 'images/brands/bear-cat.png', 'link': '/search/?q=BEAR+CAT'},
+		{'name': 'ECHO', 'image': 'images/brands/echo.png', 'link': '/search/?q=ECHO'},
+		{'name': 'FELCO', 'image': 'images/brands/felco.png', 'link': '/search/?q=FELCO'},
+		{'name': 'GARDENA', 'image': 'images/brands/gardena.png', 'link': '/search/?q=GARDENA'},
+		{'name': 'GREENWORKS', 'image': 'images/brands/greenworks.png', 'link': '/search/?q=GREENWORKS'},
+		{'name': 'GRUPO RUMBO', 'image': 'images/brands/grupo-rumbo.png', 'link': '/search/?q=RUMBO'},
 		{'name': 'HUNTER', 'image': 'images/brands/hunter.png', 'link': '/search/?q=HUNTER'},
-		{'name': 'METABO', 'image': 'images/brands/metabo.svg', 'link': '/search/?q=METABO'},
-		{'name': 'DREMEL', 'image': 'images/brands/dremel.svg', 'link': '/search/?q=DREMEL'},
-		{'name': 'KARCHER', 'image': 'images/brands/karcher.svg', 'link': '/search/?q=KARCHER'}
+		{'name': 'HUSQVARNA', 'image': 'images/brands/husqvarna.png', 'link': '/search/?q=HUSQVARNA'},
+		{'name': 'METABO', 'image': 'images/brands/metabo.png', 'link': '/search/?q=METABO'},
+		{'name': 'NIWA', 'image': 'images/brands/niwa.png', 'link': '/search/?q=NIWA'},
+		{'name': 'OREGON', 'image': 'images/brands/oregon.png', 'link': '/search/?q=OREGON'},
+		{'name': 'PAMPA PRO', 'image': 'images/brands/pampa-pro.png', 'link': '/search/?q=PAMPA+PRO'},
+		{'name': 'SENSEI', 'image': 'images/brands/sensei.png', 'link': '/search/?q=SENSEI'},
+		{'name': 'SHIZEN', 'image': 'images/brands/shizen.png', 'link': '/search/?q=SHIZEN'},
+		{'name': 'TECMATER', 'image': 'images/brands/tecmater.png', 'link': '/search/?q=TECMATER'},
+		{'name': 'TECOMEC', 'image': 'images/brands/tecomec.png', 'link': '/search/?q=TECOMEC'},
+		{'name': 'TORO', 'image': 'images/brands/toro.png', 'link': '/search/?q=TORO'},
+		{'name': 'TROY-BILT', 'image': 'images/brands/troy-bilt.png', 'link': '/search/?q=TROY-BILT'},
+		{'name': 'ZODIAC', 'image': 'images/brands/zodiac.png', 'link': '/search/?q=ZODIAC'}
 	] %}
 	{% set brands_items = default_brands %}
 {% else %}
@@ -56,7 +55,7 @@
 											{% if has_custom_brands %}
 												<img src="{{ 'images/empty-placeholder.png' | static_url }}" data-src="{{ slide.image | static_url | settings_image_url('large') }}" class="lazyload" alt="{{ slide.name ? slide.name : ('Marca {1}' | translate(loop.index)) }}">
 											{% else %}
-												<img src="{{ slide.image | static_url }}" alt="{{ slide.name }}" loading="lazy">
+												<img src="{{ slide.image | static_url }}" alt="{{ slide.name }}">
 											{% endif %}
 									{% if slide_url %}
 										</a>
@@ -76,7 +75,7 @@
 											{% if has_custom_brands %}
 												<img src="{{ 'images/empty-placeholder.png' | static_url }}" data-src="{{ slide.image | static_url | settings_image_url('large') }}" class="lazyload" alt="">
 											{% else %}
-												<img src="{{ slide.image | static_url }}" alt="" loading="lazy">
+												<img src="{{ slide.image | static_url }}" alt="">
 											{% endif %}
 									{% if slide_url %}
 										</a>
