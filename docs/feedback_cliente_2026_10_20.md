@@ -19,8 +19,8 @@ Todo cambio visual debe implementarse también en su versión mobile (ver regla 
 
 ### Contacto y sucursal
 
-- [ ] Actualizar la dirección a **Av. Circunvalación Santiago Marzo (Norte) 171** en todos los lugares donde aparece (contacto, footer, sucursal, etc.).
-- [ ] Corregir el mapa de la sección de contacto para que muestre la nueva dirección.
+- [x] Actualizar la dirección a **Av. Circunvalación Santiago Marzo (Norte) 171** en todos los lugares donde aparece (contacto, footer, sucursal, etc.).
+- [x] Corregir el mapa de la sección de contacto para que muestre la nueva dirección.
 
 ### Preguntas frecuentes (contacto)
 

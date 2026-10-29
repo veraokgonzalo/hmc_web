@@ -142,14 +142,14 @@
 				<div class="branch-card about-branch-card">
 					<h4><i class="fa-solid fa-store text-primary mr-2"></i> {{ "Sucursal HMC HUB — Santa Rosa" | translate }}</h4>
 					<p class="about-branch-info">
-						<strong>{{ "Dirección:" | translate }}</strong> {{ store.address ? store.address : "Av. Santiago Marzo (Norte) 171, Santa Rosa, La Pampa, Argentina." }}
+						<strong>{{ "Dirección:" | translate }}</strong> {{ store.address ? store.address : "Av. Circunvalación Santiago Marzo (Norte) 171, Santa Rosa, La Pampa, Argentina." }}
 					</p>
 					<p class="about-branch-schedule">
 						<strong>{{ "Horarios:" | translate }}</strong> {{ "Lunes a Viernes de 8:30 a 12:30 hs. y de 15:30 a 19:30 hs. | Sábados de 8:30 a 13:00 hs." | translate }}
 					</p>
 					<div class="branch-map about-branch-map">
 						<iframe
-							src="https://www.google.com/maps?q=Av.+Santiago+Marzo+(Norte)+171,+Santa+Rosa,+La+Pampa,+Argentina&amp;output=embed"
+							src="https://www.google.com/maps?q=Av.+Circunvalaci%C3%B3n+Santiago+Marzo+(Norte)+171,+Santa+Rosa,+La+Pampa,+Argentina&amp;output=embed"
 							loading="lazy"
 							referrerpolicy="no-referrer-when-downgrade"
 							title="{{ 'Ubicación de la sucursal HMC HUB en Santa Rosa, La Pampa' | translate }}"

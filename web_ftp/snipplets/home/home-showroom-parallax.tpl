@@ -18,7 +18,7 @@
 
 			<div class="hmc-parallax-pills">
 				<span class="parallax-pill">
-					<i class="fa-solid fa-location-dot"></i> {{ store.address ? store.address : 'Av. Santiago Marzo (Norte) 171, Santa Rosa, La Pampa' }}
+					<i class="fa-solid fa-location-dot"></i> {{ store.address ? store.address : 'Av. Circunvalación Santiago Marzo (Norte) 171, Santa Rosa, La Pampa' }}
 				</span>
 			</div>
 
