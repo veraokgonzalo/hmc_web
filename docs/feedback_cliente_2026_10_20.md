@@ -29,7 +29,8 @@ Todo cambio visual debe implementarse también en su versión mobile (ver regla 
 
 ### Footer — Botón de arrepentimiento
 
-- [ ] **A consultar:** hoy el botón lleva a la página de contacto. ¿Es suficiente? La normativa argentina (Res. 424/2020) exige un acceso directo y fácil para que el cliente pueda arrepentirse de la compra, y que la tienda le informe un código de identificación de la solicitud. Evaluar un formulario o página dedicada en lugar del contacto genérico.
+- [x] **A consultar:** hoy el botón lleva a la página de contacto. ¿Es suficiente? La normativa argentina (Res. 424/2020) exige un acceso directo y fácil para que el cliente pueda arrepentirse de la compra, y que la tienda le informe un código de identificación de la solicitud. Evaluar un formulario o página dedicada en lugar del contacto genérico.
+- [ ] Crear una página que explique a los clientes el derecho de arrepentimiento.
 
 ### Header (mobile)
 
@@ -50,7 +51,9 @@ Todo cambio visual debe implementarse también en su versión mobile (ver regla 
 
 ### Filtros (mobile)
 
-- [x] **Bug:** en el modal de filtros, al marcar el checkbox de una marca se deshabilitan todos los demás y no se pueden seleccionar varias marcas a la vez. Debe permitir selección múltiple.
+- [ ] **Bug:** en el modal de filtros, al marcar el checkbox de una marca se deshabilitan todos los demás y no se pueden seleccionar varias marcas a la vez. Debe permitir selección múltiple.
+- [ ] **Bug:** el botón de limpiar filtros y aplicar filtros en Mobile no funcionan.
+- [ ] **Bug:** 
 
 ## Configuración de la tienda (admin / integraciones)
 
